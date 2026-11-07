@@ -283,7 +283,8 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 .terms dt { font-family: var(--display); font-weight: 700; }
 .terms dd { margin: 2px 0 0; font-size: .87rem; color: var(--muted); }
 .chainlist { padding-left: 1.4em; }
-.qhead { display: flex; justify-content: space-between; align-items: baseline; }
+.qhead { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.qhead .meta { white-space: nowrap; }
 .qsub { font-family: var(--display); font-size: 1.08rem; margin: 0; }
 .choice .kbd { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; border: 1px solid var(--hair); font-size: .7rem; color: var(--muted); margin-right: 10px; vertical-align: 1px; }
 textarea { width: 100%; border: 1px solid var(--hair); border-radius: 10px; padding: 10px 12px; font: inherit; font-size: .95rem; background: var(--surface); color: var(--ink); resize: vertical; }
@@ -293,6 +294,33 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
 .checkline input { width: 18px; height: 18px; accent-color: var(--bronze); margin-top: 1px; flex: none; }
 .result .row { margin-top: 8px; }
 @media (max-width: 560px) { .terms { grid-template-columns: 1fr; } .mhero { flex-direction: column; align-items: flex-start; } .stepper button { font-size: .78rem; } .mrow { padding: 11px 14px; gap: 10px; } }
+
+/* ---------- learn stories ---------- */
+.story-card { gap: 14px; }
+.story-big { font-family: var(--display); font-size: 1.25rem; line-height: 1.45; margin: 0; }
+.setup { margin: 0; font-size: 1rem; }
+.ev-title { font-family: var(--display); font-weight: 700; font-size: 1.4rem; margin: 0; line-height: 1.2; text-wrap: balance; }
+.pb.solo { background: var(--pill); color: var(--pill-ink); border-radius: 999px; padding: 3px 10px; font-size: .78rem; font-weight: 600; white-space: nowrap; }
+.mini { border-top: 1px dashed var(--hair); padding-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.mini-rail { list-style: none; margin: 0; padding: 0; position: relative; display: flex; flex-direction: column; gap: 6px; }
+.mini-rail::before { content: ""; position: absolute; left: 45px; top: 6px; bottom: 6px; width: 2px; background: var(--bronze); opacity: .6; }
+.mini-rail li { display: grid; grid-template-columns: 92px 1fr; align-items: center; gap: 8px; font-size: .85rem; color: var(--muted); }
+.mini-rail .pb { justify-self: center; position: relative; z-index: 1; background: var(--pill); color: var(--pill-ink); border-radius: 999px; padding: 1px 8px; font-size: .68rem; font-weight: 600; white-space: nowrap; }
+.mini-rail li.now { color: var(--ink); font-weight: 600; }
+.mini-rail li.now .pb { background: var(--bronze); }
+.flipcard { width: 100%; min-height: 180px; border-radius: 14px; border: 1px solid var(--hair); background: linear-gradient(180deg, var(--surface), #f6eedb); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 22px; text-align: center; box-shadow: var(--shadow); }
+.flipcard:hover { border-color: var(--bronze); }
+.flipcard .ft { font-family: var(--display); font-weight: 700; font-size: 1.8rem; line-height: 1.15; }
+.flipcard .fd { font-size: 1.05rem; max-width: 46ch; }
+.flipcard.flipped { animation: flipit .4s ease; cursor: default; }
+@keyframes flipit { 0% { transform: rotateY(0); } 50% { transform: rotateY(90deg); } 100% { transform: rotateY(0); } }
+.step small { color: var(--muted); font-family: var(--body); font-weight: 400; }
+#sy-picked { padding: 0; margin: 0; list-style: none; width: 100%; }
+#sy-picked .step { width: 100%; display: flex; gap: 10px; align-items: baseline; font-family: var(--body); font-weight: 500; font-size: .95rem; }
+#sy-picked .step i { font-style: normal; font-weight: 700; color: var(--bronze); min-width: 1.4em; }
+#sy-picked .step.right { border-color: var(--right); background: var(--right-soft); }
+#sy-picked .step.wrongpos { border-color: var(--wrong); background: var(--wrong-soft); }
+.verdict.neutral { background: #f6ead0; color: #6f4f16; border: 1px solid #d7b066; }
 
 [hidden] { display: none !important; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
@@ -369,6 +397,7 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
   <section id="v-mastery" class="section" hidden><div id="mastery-body" class="section" style="gap:18px"></div></section>
   <section id="v-mact" class="section" hidden><div id="mact-body" class="section" style="gap:20px"></div></section>
   <section id="v-mquiz" class="section" hidden><div id="mquiz-body" class="section" style="gap:14px"></div></section>
+  <section id="v-mstory" class="section" hidden><div id="mstory-body" class="section" style="gap:14px"></div></section>
 
   <!-- MAPS -->
   <section id="v-maps" class="section" hidden>
@@ -446,6 +475,7 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
 <script src="content.js"></script>
 <script src="maps.js"></script>
 <script src="mastery.js"></script>
+<script src="story.js"></script>
 <script>
 (() => {
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -531,12 +561,12 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
   const CHECK = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
   // ---------- views ----------
-  const views = ["setup", "game", "over", "chains", "maps", "dives", "dive", "people", "review", "mastery", "mact", "mquiz"];
+  const views = ["setup", "game", "over", "chains", "maps", "dives", "dive", "people", "review", "mastery", "mact", "mquiz", "mstory"];
   let lastTimelineView = "setup";
   function show(v) {
     views.forEach(x => $("v-" + x).hidden = x !== v);
     $("main").hidden = v === "game";
-    const tab = { chains: "chains", maps: "maps", dives: "dives", dive: "dives", people: "people", review: "review", mastery: "mastery", mact: "mastery", mquiz: "mastery" }[v] || "timeline";
+    const tab = { chains: "chains", maps: "maps", dives: "dives", dive: "dives", people: "people", review: "review", mastery: "mastery", mact: "mastery", mquiz: "mastery", mstory: "mastery" }[v] || "timeline";
     ["mastery", "timeline", "chains", "maps", "dives", "people", "review"].forEach(t => $("tab-" + t).setAttribute("aria-pressed", String(t === tab)));
     if (["setup","over"].includes(v)) lastTimelineView = v;
   }
@@ -1277,9 +1307,10 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
         form = "date";
       }
       if (form === "date") {
-        const near = EV.filter(x => x.id !== e.id && cmp(x, e) !== 0 && x.shown !== e.shown).sort((x, y) => Math.abs(fullKey(x) - fullKey(e)) - Math.abs(fullKey(y) - fullKey(e)));
-        const pool = shuffle(near.slice(0, 8));
-        const fw = fourWay(e, pool, x => x.shown);
+        const sameYearOK = EV.filter(x => x.id !== e.id && x.y === e.y && cmp(x, e) !== 0 && x.shown !== e.shown).length >= 3;
+        const near = EV.filter(x => x.id !== e.id && cmp(x, e) !== 0 && x.shown !== e.shown && (sameYearOK || x.y !== e.y)).sort((x, y) => Math.abs(fullKey(x) - fullKey(e)) - Math.abs(fullKey(y) - fullKey(e)));
+        const pool = shuffle(near.slice(0, 10));
+        const fw = fourWay(e, pool, sameYearOK ? (x => x.shown) : (x => x.y));
         return { tag: "Date", prompt: "When did this happen?", sub: e.title, choices: fw.list.map(x => x.shown), ans: fw.ans, explain: tail };
       }
       if (form === "place") {
@@ -1488,8 +1519,8 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     const a = ACT_ORDER.find(x => !actState(x).mastered);
     if (a) {
       const st = actState(a), cov = coverage(a), step = !st.learned ? "learn" : cov.pct < 0.7 ? "practice" : "check";
-      const text = { learn: "Start with the lesson: the big idea, key terms, events, and people.", practice: `Keep practicing. You've shown ${Math.round(cov.pct * 100)}% of this act so far.`, check: "You're ready. Pass the Mastery Check with 9 of 10." }[step];
-      return { kicker: st.learned || cov.k ? "Continue" : "Up next", title: `${actTag(a)}: ${ACTS[a].title}`, text, btn: { learn: "Open the lesson", practice: "Practice", check: "Take the Mastery Check" }[step], go: () => step === "practice" ? startPractice(a) : step === "check" ? startCheck(a) : openAct(a, "learn") };
+      const text = { learn: "Start with the story: predict, guess, flip, and order your way through the act in about 5 minutes.", practice: `Keep practicing. You've shown ${Math.round(cov.pct * 100)}% of this act so far.`, check: "You're ready. Pass the Mastery Check with 9 of 10." }[step];
+      return { kicker: st.learned || cov.k ? "Continue" : "Up next", title: `${actTag(a)}: ${ACTS[a].title}`, text, btn: { learn: (store.get("story", {})[a] || {}).i ? "Resume the story" : "Start the story", practice: "Practice", check: "Take the Mastery Check" }[step], go: () => step === "practice" ? startPractice(a) : step === "check" ? startCheck(a) : startStory(a) };
     }
     const u = UNITS.find(x => !(MS.units[x] && MS.units[x].passed));
     if (u) return { kicker: "Every act mastered", title: `Unit ${u} test`, text: "20 questions across the whole unit. Pass with 85%.", btn: "Start the unit test", go: () => startUnitTest(u) };
@@ -1522,8 +1553,184 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     document.querySelectorAll("#mastery-body [data-unit]").forEach(b => b.onclick = () => startUnitTest(+b.dataset.unit));
   }
 
+  // ---- Learn story: an interactive walkthrough of each act ----
+  const SY = { act: null, cards: [], i: 0, lock: 0, lockN: 0, picked: [], state: null };
+  function buildStory(a) {
+    const S = STORIES[a] || { p: [], w: [], h: [] }, L = LESSONS[a];
+    const evs = EV.filter(e => e.act === a).sort((x, y) => fullKey(x) - fullKey(y));
+    const anchors = new Set([...S.p.map(p => p[0]), ...S.w.map(w => w[0]), ...S.h.map(h => h[0])].filter(Boolean));
+    const key = evs.filter(e => anchors.has(e.title));
+    const rest = evs.filter(e => !anchors.has(e.title)), want = Math.min(evs.length, Math.max(6, key.length));
+    for (let k = 0; key.length < want && k < rest.length; k++) { const e = rest[Math.floor(k * rest.length / Math.max(1, want - anchors.size)) % rest.length]; if (!key.includes(e)) key.push(e); }
+    for (const e of rest) { if (key.length >= want) break; if (!key.includes(e)) key.push(e); }
+    key.sort((x, y) => fullKey(x) - fullKey(y));
+    const cards = [];
+    const ix = ACT_ORDER.indexOf(a);
+    if (ix > 0) { const prev = factsFor(ACT_ORDER[ix - 1]).filter(f => f.kind !== "dq"); if (prev.length) cards.push({ t: "warm", f: pickOne(prev), prevAct: ACT_ORDER[ix - 1] }); }
+    cards.push({ t: "big" });
+    const terms = L.terms.map((term, i) => ({ term, i })).slice(0, 3);
+    const forms = ["date", "what", "reveal"]; let formI = 0, termI = 0;
+    key.forEach((e, idx) => {
+      const preds = S.p.filter(p => p[0] === e.title);
+      preds.forEach(p => cards.push({ t: "predict", p }));
+      cards.push({ t: "event", e, form: preds.length ? "reveal" : forms[formI++ % forms.length] });
+      S.w.filter(w => w[0] === e.title).forEach(w => cards.push({ t: "why", w }));
+      S.h.filter(h => h[0] === e.title).forEach(h => cards.push({ t: "hook", h }));
+      if ((idx === 1 || idx === 3) && termI < terms.length) cards.push({ t: "term", ...terms[termI++], act: a });
+      if (idx === 3) { const seen = key.slice(0, 4); if (seen.length >= 3) cards.push({ t: "order", evs: seen.slice(-3) }); }
+    });
+    while (termI < terms.length) cards.push({ t: "term", ...terms[termI++], act: a });
+    S.h.filter(h => !h[0]).forEach(h => cards.push({ t: "hook", h }));
+    if (ACTS[a].chain && ACTS[a].chain.length >= 4) cards.push({ t: "chain" });
+    const pp = PP.filter(p => p.act === a); if (pp.length) cards.push({ t: "who", f: { key: "pp:" + pickOne(pp).name, kind: "pp", p: null, act: a } });
+    const lock = stratified(factsFor(a).filter(f => f.kind !== "pp"), 3);
+    lock.forEach((f, n) => cards.push({ t: "lock", f, n }));
+    cards.push({ t: "done" });
+    cards.forEach(c => { if (c.t === "who") c.f.p = PP.find(p => "pp:" + p.name === c.f.key); });
+    return cards;
+  }
+  function startStory(a, fromStart) {
+    const saved = store.get("story", {})[a];
+    SY.act = a; SY.cards = buildStory(a); SY.lock = 0; SY.lockN = 0;
+    SY.i = !fromStart && saved && saved.i < SY.cards.length - 1 ? saved.i : 0;
+    markActive(); show("mstory"); renderStory();
+  }
+  function saveStoryPos() { const all = store.get("story", {}); all[SY.act] = { i: SY.i, done: !!(all[SY.act] && all[SY.act].done) }; store.set("story", all); }
+  function storyNext() { SY.i++; saveStoryPos(); renderStory(); window.scrollTo({ top: 0, behavior: reduced() ? "auto" : "smooth" }); }
+  function seenEvents() { return SY.cards.slice(0, SY.i + 1).filter(c => c.t === "event").map(c => c.e); }
+  function miniRail(current) {
+    const seen = seenEvents().filter(e => e !== current || true).slice(-5);
+    if (seen.length < 2) return "";
+    return `<div class="mini"><div class="label">Your timeline so far</div><ol class="mini-rail">${seen.map(e => `<li class="${e === current ? "now" : ""}"><span class="pb">${esc(e.shown)}</span><span>${esc(e.title)}</span></li>`).join("")}</ol></div>`;
+  }
+  function renderStory() {
+    const a = SY.act, c = SY.cards[SY.i], n = SY.cards.length;
+    SY.state = { answered: false };
+    const head = `<button class="text-btn" id="sy-exit" style="align-self:flex-start">&larr; Save and exit</button>
+      <div class="qhead"><span class="label">Learn · ${esc(actTag(a))}: ${esc(ACTS[a].title)}</span><span class="meta">${SY.i + 1} of ${n}</span></div>
+      <div class="cov"><i style="width:${Math.round(SY.i / (n - 1) * 100)}%"></i></div>`;
+    let body = "";
+    const cont = (label = "Continue") => `<button class="go small" id="sy-next">${label}</button>`;
+    if (c.t === "warm") {
+      const q = makeQ(c.f, false); SY.state.q = q;
+      body = card("Remember?", `From ${actTag(c.prevAct)}: ${ACTS[c.prevAct].title}`, `<p class="q">${esc(q.prompt)}</p>${q.sub ? subHTML(q.sub) : ""}${choicesHTML(q.choices)}<div id="sy-after"></div>`);
+    } else if (c.t === "big") {
+      body = card("The story in one breath", "", `<p class="story-big">${esc(LESSONS[a].big)}</p><div class="angle"><div class="label">How it connects</div><p>${esc(LESSONS[a].connect)}</p></div>${cont("Let's go")}`);
+    } else if (c.t === "predict") {
+      const [, setup, q, ch, reveal] = c.p, sc = shuffleChoices(ch, 0); SY.state.sc = sc; SY.state.reveal = reveal;
+      body = card("Predict", "Guess first. Guessing before you learn something makes it stick better.", `<p class="setup">${esc(setup)}</p><p class="q">${esc(q)}</p>${choicesHTML(sc.list)}<div id="sy-after"></div>`);
+    } else if (c.t === "event") {
+      const e = c.e, place = PLACES[e.title] ? `<p class="meta" style="text-align:left">Where: ${esc(PLACES[e.title][2])}</p>` : "";
+      if (c.form === "date") {
+        const near = EV.filter(x => x.id !== e.id && x.y !== e.y).sort((x, y) => Math.abs(fullKey(x) - fullKey(e)) - Math.abs(fullKey(y) - fullKey(e)));
+        const fw = fourWay(e, shuffle(near.slice(0, 8)), x => x.y); const opts = fw.list.slice(0, 3); if (!opts.includes(e)) opts[0] = e;
+        const sh = shuffle(opts); SY.state.date = { list: sh.map(x => x.shown), ans: sh.indexOf(e), e, place };
+        body = card("Event · guess the date", "", `<h3 class="ev-title">${esc(e.title)}</h3><p class="q">When do you think this happened?</p>${choicesHTML(SY.state.date.list)}<div id="sy-after"></div>${miniRail(e)}`);
+      } else if (c.form === "what") {
+        const others = shuffle(EV.filter(x => x.act === e.act && x.id !== e.id)).slice(0, 2);
+        const opts = shuffle([e, ...others]); SY.state.what = { list: opts.map(x => x.blurb), ans: opts.indexOf(e), e, place };
+        body = card("Event · what did it do?", "", `<div class="row" style="justify-content:flex-start;gap:10px"><span class="pb solo">${esc(e.shown)}</span><h3 class="ev-title" style="margin:0">${esc(e.title)}</h3></div>${choicesHTML(SY.state.what.list)}<div id="sy-after"></div>${miniRail(e)}`);
+      } else {
+        body = card("Event", "", `<div class="row" style="justify-content:flex-start;gap:10px"><span class="pb solo">${esc(e.shown)}</span><h3 class="ev-title" style="margin:0">${esc(e.title)}</h3></div><div id="sy-reveal"><button class="text-btn" id="sy-show" style="align-self:flex-start">Tap to see what happened</button></div>${miniRail(e)}`);
+        SY.state.revealEv = { e, place };
+      }
+    } else if (c.t === "why") {
+      body = card("Why?", "Answer it in your head before you reveal it.", `<p class="q">${esc(c.w[1])}</p><div id="sy-after"><button class="go small" id="sy-why">Reveal the answer</button></div>`);
+    } else if (c.t === "hook") {
+      body = card("Memory hook", "", `<p class="story-big">${esc(c.h[1])}</p>${cont("Got it")}`);
+    } else if (c.t === "term") {
+      body = card("Key term · flip card", "Say the meaning out loud, then flip.", `<button class="flipcard" id="sy-flip" aria-label="Flip the card"><span class="label">Term</span><span class="ft">${esc(c.term[0])}</span><span class="meta">Tap to flip</span></button><div id="sy-after"></div>`);
+    } else if (c.t === "order") {
+      SY.picked = []; SY.state.order = shuffle(c.evs);
+      body = card("Order check", "Tap these in order, earliest first.", `<div class="choices" id="sy-pool"></div><div class="steps" id="sy-picked"></div><div id="sy-after"></div>`);
+    } else if (c.t === "chain") {
+      SY.picked = []; const ch = ACTS[a].chain; let order; do { order = shuffle(ch.map((_, i) => i)); } while (order.every((v, i) => v === i)); SY.state.order = order;
+      body = card("Build the chain", "Tap the causes and effects in order, first to last.", `<div class="choices" id="sy-pool"></div><ol class="steps" id="sy-picked"></ol><div id="sy-after"></div>`);
+    } else if (c.t === "who" || c.t === "lock") {
+      const q = makeQ(c.f, true); SY.state.q = q;
+      const tag = c.t === "who" ? "Who's who" : `Lock it in · ${c.n + 1} of 3`;
+      body = card(tag, c.t === "lock" && c.n === 0 ? "Three questions to lock this act in. These count toward your progress." : "", `<p class="q">${esc(q.prompt)}</p>${q.sub ? subHTML(q.sub) : ""}${choicesHTML(q.choices)}<div id="sy-after"></div>`);
+    } else if (c.t === "done") {
+      const st = actState(a); st.learned = true; saveMS();
+      const all = store.get("story", {}); all[a] = { i: 0, done: true }; store.set("story", all);
+      const cov = coverage(a);
+      SFX.play("win");
+      body = `<div class="result"><div class="label">Story complete</div><div class="big">${SY.lock} / ${SY.lockN || 3}</div><p class="hint">on the lock-in questions. You've already shown ${cov.k} of ${cov.n} facts in this act. Practice will cover the rest.</p><div class="row"><button class="go small" id="sy-prac">Start practicing</button><button class="text-btn" id="sy-sum">Read the summary</button></div></div>`;
+    }
+    $("mstory-body").innerHTML = head + body;
+    $("sy-exit").onclick = () => { saveStoryPos(); openAct(a, "learn"); };
+    bindStory(c);
+  }
+  const card = (tag, sub, inner) => `<div class="panel-card story-card"><div class="tagline">${esc(tag)}</div>${sub ? `<p class="hint" style="margin:0">${esc(sub)}</p>` : ""}${inner}</div>`;
+  const choicesHTML = list => `<div class="choices">${list.map((ch, i) => `<button class="choice" data-i="${i}"><span class="kbd">${i + 1}</span>${esc(ch)}</button>`).join("")}</div>`;
+  const subHTML = s => Array.isArray(s) ? `<ul class="clues">${s.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<p class="qsub">${esc(s)}</p>`;
+  function markChoices(i, ans) { document.querySelectorAll("#mstory-body .choice").forEach((b, j) => { b.disabled = true; if (j === ans) b.classList.add("right"); else if (j === i) b.classList.add("wrong"); }); }
+  function after(html) { $("sy-after").innerHTML = html + `<button class="go small" id="sy-next">Continue</button>`; $("sy-next").onclick = storyNext; $("sy-next").focus({ preventScroll: true }); }
+  function bindStory(c) {
+    const nx = $("sy-next"); if (nx) nx.onclick = storyNext;
+    const on = (id, fn) => { const b = $(id); if (b) b.onclick = fn; };
+    on("sy-prac", () => startPractice(SY.act));
+    on("sy-sum", () => { MA.summary = true; openAct(SY.act, "learn"); });
+    const choose = fn => document.querySelectorAll("#mstory-body .choice").forEach(b => b.onclick = () => { if (SY.state.answered) return; SY.state.answered = true; fn(+b.dataset.i); });
+    if (c.t === "warm" || c.t === "who" || c.t === "lock") choose(i => {
+      const q = SY.state.q, ok = i === q.ans; markChoices(i, q.ans); SFX.play(ok ? "right" : "wrong");
+      record(c.f.key, ok); saveMS();
+      if (c.t === "lock") { SY.lockN++; if (ok) SY.lock++; }
+      after(`<div class="verdict inline ${ok ? "ok" : "bad"}">${ok ? "Correct." : "Not quite."} ${esc(q.explain)}</div>`);
+    });
+    if (c.t === "predict") choose(i => {
+      const { sc, reveal } = SY.state, ok = i === sc.ans; markChoices(i, sc.ans); SFX.play(ok ? "right" : "flip");
+      after(`<div class="verdict inline ${ok ? "ok" : "neutral"}">${ok ? "Good call." : "Here's what really happened."} ${esc(reveal)}</div>`);
+    });
+    if (c.t === "event" && SY.state.date) choose(i => {
+      const d = SY.state.date, ok = i === d.ans; markChoices(i, d.ans); SFX.play(ok ? "right" : "flip"); record("ev:" + d.e.id, ok); saveMS();
+      after(`<div class="verdict inline ${ok ? "ok" : "neutral"}">${ok ? "Nice guess." : `It was ${esc(d.e.shown)}.`} ${esc(d.e.blurb)}</div>${d.place}`);
+    });
+    if (c.t === "event" && SY.state.what) choose(i => {
+      const d = SY.state.what, ok = i === d.ans; markChoices(i, d.ans); SFX.play(ok ? "right" : "flip"); record("ev:" + d.e.id, ok); saveMS();
+      after(`<div class="verdict inline ${ok ? "ok" : "neutral"}">${ok ? "Right." : "Not this time."} ${esc(d.e.blurb)}</div>${d.place}`);
+    });
+    on("sy-show", () => { const { e, place } = SY.state.revealEv; SFX.play("flip"); $("sy-reveal").innerHTML = `<p class="story-big" style="margin:0">${esc(e.blurb)}</p>${place}<button class="go small" id="sy-next">Continue</button>`; $("sy-next").onclick = storyNext; });
+    on("sy-why", () => { SFX.play("flip"); $("sy-after").innerHTML = `<div class="model"><div class="label">Answer</div>${esc(c.w[2])}</div><p class="meta" style="text-align:left">Did you have it?</p><div class="row" style="justify-content:flex-start"><button class="go small" id="sy-next">I had it</button><button class="text-btn" id="sy-next2">Not quite, but now I do</button></div>`; $("sy-next").onclick = storyNext; $("sy-next2").onclick = storyNext; });
+    on("sy-flip", () => {
+      const f = $("sy-flip"); if (f.classList.contains("flipped")) return;
+      SFX.play("flip"); f.classList.add("flipped");
+      f.innerHTML = `<span class="label">${esc(c.term[0])}</span><span class="fd">${esc(c.term[1])}</span>`;
+      $("sy-after").innerHTML = `<p class="meta" style="text-align:left">Did you know it?</p><div class="row" style="justify-content:flex-start"><button class="go small" id="sy-knew">I knew it</button><button class="text-btn" id="sy-not">Not yet</button></div>`;
+      const key = `tm:${c.act}:${c.i}`;
+      $("sy-knew").onclick = () => { record(key, true); saveMS(); SFX.play("right"); storyNext(); };
+      $("sy-not").onclick = () => { record(key, false); saveMS(); storyNext(); };
+    });
+    if (c.t === "order" || c.t === "chain") {
+      const isChain = c.t === "chain", ch = ACTS[SY.act].chain;
+      const items = isChain ? SY.state.order.map(i => ({ id: i, label: ch[i] })) : SY.state.order.map(e => ({ id: e.id, label: e.title, e }));
+      const correct = isChain ? ch.map((_, i) => i) : [...c.evs].sort((x, y) => fullKey(x) - fullKey(y)).map(e => e.id);
+      const draw = (checked) => {
+        $("sy-pool").innerHTML = items.filter(x => !SY.picked.includes(x.id)).map(x => `<button class="choice" data-id="${x.id}">${esc(x.label)}</button>`).join("");
+        $("sy-picked").innerHTML = SY.picked.map((id, pos) => { const x = items.find(y => y.id === id); const cls = checked ? (correct[pos] === id ? " right" : " wrongpos") : ""; const extra = checked && !isChain && x.e ? ` <small>(${esc(x.e.shown)})</small>` : ""; return `<button class="step${cls}" data-id="${id}"><i>${pos + 1}</i><span>${esc(x.label)}${extra}</span></button>`; }).join("");
+        if (!checked) {
+          document.querySelectorAll("#sy-pool .choice").forEach(b => b.onclick = () => { SY.picked.push(+b.dataset.id); SFX.play("tap"); draw(false); if (SY.picked.length === items.length) check(); });
+          document.querySelectorAll("#sy-picked .step").forEach(b => b.onclick = () => { SY.picked = SY.picked.filter(x => x !== +b.dataset.id); draw(false); });
+        }
+      };
+      const check = () => {
+        draw(true);
+        const right = SY.picked.filter((id, pos) => correct[pos] === id).length, all = right === items.length;
+        SFX.play(all ? "right" : "wrong");
+        const fix = all ? "" : `<div class="model"><div class="label">Correct order</div><ol class="bul" style="padding-left:1.3em;gap:3px">${correct.map(id => { const x = items.find(y => y.id === id); return `<li>${esc(x.label)}${x.e ? ` <small>(${esc(x.e.shown)})</small>` : ""}</li>`; }).join("")}</ol></div>`;
+        after(`<div class="verdict inline ${all ? "ok" : "bad"}">${all ? "All in order." : `${right} of ${items.length} in the right spot.`}</div>${fix}`);
+      };
+      draw(false);
+    }
+  }
+  document.addEventListener("keydown", e => {
+    if ($("v-mstory").hidden || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.target && /^(TEXTAREA|INPUT|SELECT)$/.test(e.target.tagName)) return;
+    if (/^[1-4]$/.test(e.key) && SY.state && !SY.state.answered) { const b = document.querySelectorAll("#mstory-body .choices .choice")[+e.key - 1]; if (b && !b.disabled && !b.dataset.id) { e.preventDefault(); b.click(); } }
+  });
+
   // ---- act page ----
-  const MA = { act: null, step: "learn" };
+  const MA = { act: null, step: "learn", summary: false };
   function defaultStep(a) { const st = actState(a), cov = coverage(a); if (st.slip) return "practice"; if (!st.learned) return "learn"; if (st.mastered) return st.saq ? "check" : "write"; return cov.pct < 0.7 ? "practice" : "check"; }
   function openAct(a, step) { MA.act = a; MA.step = step || defaultStep(a); renderAct(); show("mact"); window.scrollTo({ top: 0 }); }
   function renderAct() {
@@ -1539,7 +1746,16 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     $("ma-back").onclick = openMasteryHome;
     document.querySelectorAll("#mact-body .stepper button").forEach(b => b.onclick = () => { MA.step = b.dataset.step; renderAct(); });
     const box = $("ma-step");
-    if (MA.step === "learn") box.innerHTML = learnHTML(a), bindLearn(a);
+    if (MA.step === "learn") {
+      const sv = store.get("story", {})[a] || {}, mid = sv.i > 0 && !sv.done;
+      box.innerHTML = `<div class="panel-card story-launch"><div class="tagline">Interactive lesson · about 5 minutes</div><h3>${sv.done ? "You've played this story" : mid ? "Pick up where you left off" : "Learn it as a story"}</h3>
+        <p class="hint">Predict what happens next, guess dates, flip term cards, put events and causes in order, then lock it in with 3 questions. Guessing first makes it stick.</p>
+        <div class="row" style="justify-content:flex-start"><button class="go small" id="ma-story">${mid ? `Resume at card ${sv.i + 1}` : sv.done ? "Play it again" : "Start the story"}</button>${mid ? `<button class="text-btn" id="ma-restart">Start over</button>` : ""}<button class="text-btn" id="ma-sumtoggle">${MA.summary ? "Hide the summary" : "Read the summary"}</button></div></div>` + (MA.summary ? learnHTML(a) : "");
+      $("ma-story").onclick = () => startStory(a, !mid);
+      if ($("ma-restart")) $("ma-restart").onclick = () => startStory(a, true);
+      $("ma-sumtoggle").onclick = () => { MA.summary = !MA.summary; renderAct(); };
+      if (MA.summary) bindLearn(a);
+    }
     else if (MA.step === "practice") {
       const w = factsFor(a).filter(x => weak(x.key)).length, fresh = factsFor(a).filter(x => !MS.items[x.key]).length;
       box.innerHTML = `<div class="panel-card"><h3>Practice</h3><p class="hint">Rounds of 10 questions in mixed formats: dates, order, places, people, terms, and cause and effect. Misses come back a few questions later until you get them. Each round targets what you haven't shown yet.</p>
