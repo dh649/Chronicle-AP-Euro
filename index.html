@@ -33,7 +33,7 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 button:focus-visible, select:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; border-radius: 6px; }
 .wrap { max-width: 620px; margin: 0 auto; padding: 36px 20px 80px; display: flex; flex-direction: column; gap: 28px; }
 
-header.site { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+header.site { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
 h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 9vw, 3.4rem); line-height: 1; margin: 0; letter-spacing: -.02em; }
 h1 span { font-style: italic; font-weight: 500; color: var(--bronze); }
 .sub { color: var(--muted); font-size: .95rem; margin: 0; }
@@ -236,6 +236,12 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 .review-btn { font-size: .8rem; color: var(--bronze); font-weight: 600; text-align: left; }
 @media (max-width: 560px) { .players, .pgrid { grid-template-columns: 1fr; } .seg.three button, .seg.five button { font-size: .82rem; padding: 8px 4px; } }
 
+.sound-btn { width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; color: var(--muted); justify-self: end; }
+.sound-btn:hover { color: var(--ink); }
+.sound-btn .mute { display: none; }
+.sound-btn.off .wave { display: none; }
+.sound-btn.off .mute { display: inline; }
+.site-sound { position: absolute; top: -20px; right: -8px; }
 [hidden] { display: none !important; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 @media (max-width: 760px) {
@@ -252,6 +258,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 <body>
 <div class="wrap" id="main">
   <header class="site">
+    <button class="sound-btn site-sound" aria-label="Sound on" title="Sound"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="mute" d="M17 9l5 6M22 9l-5 6"/></svg></button>
     <h1>Chronicle <span>AP Euro</span></h1>
     <p class="sub">Put history in order, straight from your readings.</p>
     <nav aria-label="Modes">
@@ -356,7 +363,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   <div class="gbar">
     <button id="quit" aria-label="End run">&larr;</button>
     <div class="gtitle" id="gtitle">AP Euro</div>
-    <span></span>
+    <button class="sound-btn" aria-label="Sound on" title="Sound"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="mute" d="M17 9l5 6M22 9l-5 6"/></svg></button>
   </div>
   <div class="statbar">
     <div class="stats">
@@ -372,7 +379,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     <div class="dock-inner">
       <span class="dragpill">Drag to place</span>
       <div class="current enter" id="current"></div>
-      <div class="dock-note">Or tap a spot on the line.</div>
+      <div class="dock-note">Or tap a spot on the line. The unit and act show after you place it.</div>
     </div>
   </div>
 </section>
@@ -404,6 +411,59 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     set(k, v) { try { localStorage.setItem("chronicle-" + k, JSON.stringify(v)); } catch {} }
   };
 
+
+  // ---------- sound (synthesized with Web Audio, no files) ----------
+  const SFX = (() => {
+    let ctx = null, on = store.get("sound", true);
+    const ac = () => {
+      if (!ctx) { const C = window.AudioContext || window.webkitAudioContext; if (!C) return null; try { ctx = new C(); } catch { return null; } }
+      if (ctx.state === "suspended") ctx.resume().catch(() => {});
+      return ctx;
+    };
+    function tone(c, f, t, dur, o = {}) {
+      const osc = c.createOscillator(), g = c.createGain(), vol = o.vol ?? 0.12;
+      osc.type = o.type || "sine"; osc.frequency.setValueAtTime(f, t);
+      if (o.slide) osc.frequency.exponentialRampToValueAtTime(o.slide, t + dur);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + (o.attack || 0.006));
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      osc.connect(g).connect(c.destination); osc.start(t); osc.stop(t + dur + 0.02);
+    }
+    function noise(c, t, dur, o = {}) {
+      const len = Math.max(1, Math.floor(c.sampleRate * dur)), buf = c.createBuffer(1, len, c.sampleRate), d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
+      const src = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+      src.buffer = buf; f.type = "bandpass"; f.frequency.value = o.freq || 2400; f.Q.value = o.q || 0.9; g.gain.value = o.vol ?? 0.06;
+      src.connect(f).connect(g).connect(c.destination); src.start(t);
+    }
+    const S = {
+      tap:    (c, t) => tone(c, 900, t, .045, { type: "triangle", vol: .035 }),
+      pick:   (c, t) => tone(c, 480, t, .09, { type: "triangle", vol: .07, slide: 720 }),
+      deal:   (c, t) => noise(c, t, .14, { vol: .05, freq: 2800 }),
+      flip:   (c, t) => noise(c, t, .07, { vol: .045, freq: 3600 }),
+      drop:   (c, t) => tone(c, 300, t, .08, { vol: .08, slide: 180 }),
+      right:  (c, t) => { tone(c, 659, t, .14, { vol: .11 }); tone(c, 988, t + .08, .24, { vol: .11 }); },
+      wrong:  (c, t) => { tone(c, 220, t, .28, { type: "sawtooth", vol: .045, slide: 150 }); tone(c, 110, t, .22, { vol: .09 }); },
+      streak: (c, t) => [784, 988, 1175, 1568].forEach((f, i) => tone(c, f, t + i * .06, .2, { type: "triangle", vol: .07 })),
+      win:    (c, t) => [523, 659, 784, 1047].forEach((f, i) => tone(c, f, t + i * .11, .4, { vol: .1 })),
+      lose:   (c, t) => [392, 330, 262].forEach((f, i) => tone(c, f, t + i * .17, .32, { type: "triangle", vol: .08 })),
+      pin:    (c, t) => tone(c, 1300, t, .07, { vol: .07, slide: 650 })
+    };
+    function play(name, delay = 0) {
+      if (!on || !S[name]) return;
+      const c = ac(); if (!c) return;
+      try { S[name](c, c.currentTime + 0.01 + delay); } catch {}
+    }
+    function sync() { document.querySelectorAll(".sound-btn").forEach(b => { b.classList.toggle("off", !on); b.setAttribute("aria-label", on ? "Sound on. Tap to mute." : "Sound off. Tap to turn on."); }); }
+    function toggle() { on = !on; store.set("sound", on); sync(); if (on) play("tap"); }
+    return { play, toggle, sync };
+  })();
+  document.querySelectorAll(".sound-btn").forEach(b => b.onclick = e => { e.stopPropagation(); SFX.toggle(); });
+  SFX.sync();
+  // A soft tick for ordinary taps across the app; outcomes get their own sounds.
+  document.addEventListener("click", e => {
+    const b = e.target.closest && e.target.closest("nav button, .seg button, .act, .unit-head button, .chip, .dive-card, .text-btn, .go, .zoom button, .step, .gbar button:not(.sound-btn), .review-btn, .chain-track .node");
+    if (b && !b.disabled) SFX.play("tap");
+  }, true);
   const $ = id => document.getElementById(id);
   const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
@@ -485,6 +545,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     $("gtitle").textContent = G.title;
     show("game");
     renderGame();
+    SFX.play("deal");
     requestAnimationFrame(() => { const el = document.getElementById("ev-" + first.id); el && el.scrollIntoView({ block: "center" }); });
   }
   $("start").onclick = () => startGame(EV.filter(e => selected.has(e.act)));
@@ -500,7 +561,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     renderStats();
     const c = G.current, cur = $("current");
     cur.classList.remove("enter", "lifted"); void cur.offsetWidth; cur.classList.add("enter");
-    cur.innerHTML = `<div class="tag">${actTag(c.act)} · ${esc(c.pages)}</div><h3>${esc(c.title)}</h3><p>${esc(c.blurb)}</p>`;
+    cur.innerHTML = `<h3>${esc(c.title)}</h3><p>${esc(c.blurb)}</p>`;
     $("current").parentElement.parentElement.hidden = G.done;
 
     // Later events on top, earlier at the bottom.
@@ -561,7 +622,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
           if (Math.hypot(ev.clientX - e.clientX, ev.clientY - e.clientY) < 6) return;
           ghost = card.cloneNode(true); ghost.removeAttribute("id"); ghost.classList.remove("enter");
           ghost.classList.add("ghost"); ghost.style.width = r.width + "px";
-          document.body.appendChild(ghost); card.classList.add("lifted");
+          document.body.appendChild(ghost); card.classList.add("lifted"); SFX.play("pick");
           scrolling = requestAnimationFrame(tick);
         }
         ghost.style.transform = `translate(${ev.clientX - offX}px, ${ev.clientY - offY}px) rotate(-1.5deg)`;
@@ -609,11 +670,13 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     store.set("missed", missedList);
     G.lastId = c.id; G.lastOk = ok;
     if (G.key) { const b = store.get("best", {}); if (G.score > (b[G.key] || 0)) { b[G.key] = G.score; store.set("best", b); } }
-    if (G.lives <= 0 || !G.deck.length) G.done = true; else G.current = G.deck.pop();
+    SFX.play(ok ? "right" : "wrong");
+    if (ok && G.score % 5 === 0) SFX.play("streak", 0.32);
+    if (G.lives <= 0 || !G.deck.length) G.done = true; else { G.current = G.deck.pop(); SFX.play("deal", 0.45); }
     renderGame();
     const el = document.getElementById("ev-" + c.id);
     if (el) el.scrollIntoView({ block: "center", behavior: reduced() ? "auto" : "smooth" });
-    if (G.done) setTimeout(endGame, 1400);
+    if (G.done) setTimeout(() => { SFX.play(G.lives > 0 ? "win" : "lose"); endGame(); }, 1400);
   }
 
   function endGame() {
@@ -715,6 +778,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     const steps = ACTS[chain.act].chain;
     const right = chain.picked.filter((i, pos) => i === pos).length;
     $("chain-result").textContent = right === steps.length ? `All ${right} in order.` : `${right} of ${steps.length} in the right spot.`;
+    SFX.play(right === steps.length ? "win" : right >= steps.length / 2 ? "right" : "wrong");
     renderChain();
   };
 
@@ -862,6 +926,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     $("map-panel").querySelectorAll(".chip").forEach(b => b.onclick = () => selectTerr(b.dataset.k, true));
   }
   function selectTerr(k, zoom) {
+    SFX.play("flip");
     M.sel = k; clearMarks(); markTerr(k, "sel");
     if (zoom) { const t = MD.eras[M.era].t.find(x => x[0] === k); if (t && M.view.w > MD.W * 0.75) zoomTo(t[2], t[3], MD.W * 0.6); }
     renderExplore();
@@ -894,6 +959,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     const want = F.queue[F.i]; F.busy = true;
     clearMarks();
     let fb;
+    SFX.play(k === want ? "right" : "wrong");
     if (k === want) { F.score++; markTerr(want, "good"); fb = ["ok", `Yes, that's ${esc(keyLabel(M.era, want))}.`]; dropPile("missedTerr", M.era + "|" + want); }
     else {
       if (k) markTerr(k, "bad"); markTerr(want, "hint"); F.misses.push(want); addPile("missedTerr", M.era + "|" + want);
@@ -917,7 +983,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   function showPinCard() {
     const Pn = M.pin;
     if (Pn.i >= Pn.queue.length) return pinSummary();
-    const e = Pn.queue[Pn.i]; Pn.answered = false;
+    const e = Pn.queue[Pn.i]; Pn.answered = false; SFX.play("deal");
     const era = nearestEra(e.y);
     if (era !== M.era) setEra(era); else { $("map-pins").innerHTML = ""; clearMarks(); }
     M.view = { x: 0, y: 0, w: MD.W, h: MD.H }; applyView();
@@ -932,6 +998,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     const pts = Math.max(0, Math.round(100 * (1 - d / 600)));
     Pn.total += pts; Pn.results.push({ e, d, pts, place });
     const close = d <= 150;
+    SFX.play("pin"); SFX.play(close ? "right" : pts > 0 ? "drop" : "wrong", 0.15);
     if (close) dropPile("missed", e.id); else addPile("missed", e.id);
     const [tx, ty] = fwd(lat, lon), s = M.view.w / MD.W;
     $("map-pins").innerHTML = `<line class="pinline" x1="${pt[0]}" y1="${pt[1]}" x2="${tx}" y2="${ty}"/><circle class="pin-guess" cx="${pt[0]}" cy="${pt[1]}" r="${7 * s}"/><circle class="pin-true" cx="${tx}" cy="${ty}" r="${7 * s}"/>`;
@@ -942,6 +1009,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   }
   function pinSummary() {
     const Pn = M.pin;
+    SFX.play(Pn.total >= Pn.queue.length * 60 ? "win" : "drop");
     $("map-pins").innerHTML = ""; clearMarks();
     $("map-panel").innerHTML = `<div class="tagline">Where did it happen?</div><h3>${Pn.total} of ${Pn.queue.length * 100} points</h3>` +
       `<ul class="list">${Pn.results.map(r => `<li><span class="d">${r.d} km</span><span class="t">${esc(r.e.title)}</span><span class="b">${esc(r.place)}</span><span class="m">${actTag(r.e.act)} · ${esc(r.e.pages)}</span></li>`).join("")}</ul>` +
@@ -986,6 +1054,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   function renderDiveQ() {
     const d = DQ.dive, box = $("dive-quiz");
     if (DQ.i >= DQ.order.length) {
+      if (DQ.score === DQ.order.length) SFX.play("win");
       if (DQ.full) { const b = store.get("diveBest", {}); b[d.id] = Math.max(b[d.id] || 0, DQ.score); store.set("diveBest", b); }
       box.innerHTML = `<div class="label">Quiz done</div><div class="q">${DQ.score} of ${DQ.order.length} right</div><p class="hint">${DQ.score === DQ.order.length ? "Nice. You've got this one." : "Missed questions are saved in Review."}</p><div class="row" style="justify-content:flex-start"><button class="go small" id="dq-again">Take it again</button><button class="text-btn" id="dq-list">All deep dives</button></div>`;
       $("dq-again").onclick = () => startDiveQuiz(); $("dq-list").onclick = () => { renderDiveList(); show("dives"); };
@@ -999,6 +1068,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   function answerDiveQ(i) {
     const { qi, sc, why } = DQ.cur, d = DQ.dive, ok = i === sc.ans, key = d.id + ":" + qi;
     document.querySelectorAll("#dive-quiz .choice").forEach((b, j) => { b.disabled = true; if (j === sc.ans) b.classList.add("right"); else if (j === i) b.classList.add("wrong"); });
+    SFX.play(ok ? "right" : "wrong");
     if (ok) { DQ.score++; dropPile("missedQ", key); } else addPile("missedQ", key);
     $("dq-after").innerHTML = `<p class="explain"><b>${ok ? "Right." : "Not quite."}</b> ${esc(why)}</p><button class="go small" id="dq-next">${DQ.i + 1 < DQ.order.length ? "Next question" : "Finish"}</button>`;
     $("dq-next").onclick = () => { DQ.i++; renderDiveQ(); };
@@ -1041,6 +1111,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   function renderWho() {
     const Q = Pe.q, box = $("people-body");
     if (Q.i >= Q.queue.length) {
+      if (!Q.misses.length && !Q.cheered) { Q.cheered = true; SFX.play("win"); }
       box.innerHTML = `<div class="panel-card"><div class="label">Who am I?</div><h3>${Q.score} of ${Q.queue.length * 3} points</h3>` +
         (Q.misses.length ? `<p class="hint">Saved to Review: ${Q.misses.map(esc).join(", ")}.</p>` : `<p class="hint">No misses. Nice.</p>`) +
         `<div class="row" style="justify-content:flex-start"><button class="go small" id="who-again">Play again</button></div></div>`;
@@ -1054,7 +1125,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
       `<ul class="clues">${clues.map(c => `<li>${esc(c)}</li>`).join("")}</ul>` +
       (Q.shown < 3 && !Q.done ? `<button class="text-btn" id="who-clue" style="align-self:flex-start">Show another clue (worth ${3 - Q.shown} instead of ${4 - Q.shown})</button>` : "") +
       `<div class="choices">${Q.choices.map((c, i) => `<button class="choice" data-i="${i}">${esc(c.name)}</button>`).join("")}</div><div id="who-after"></div></div>`;
-    if ($("who-clue")) $("who-clue").onclick = () => { Q.shown++; renderWho(); };
+    if ($("who-clue")) $("who-clue").onclick = () => { Q.shown++; SFX.play("flip"); renderWho(); };
     box.querySelectorAll(".choice").forEach(b => b.onclick = () => answerWho(+b.dataset.i));
   }
   function answerWho(i) {
@@ -1063,6 +1134,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     document.querySelectorAll("#people-body .choice").forEach((b, j) => { b.disabled = true; if (Q.choices[j].name === p.name) b.classList.add("right"); else if (j === i) b.classList.add("wrong"); });
     if ($("who-clue")) $("who-clue").remove();
     const pts = ok ? 4 - Q.shown : 0; Q.score += pts;
+    SFX.play(ok ? "right" : "wrong");
     if (ok) dropPile("missedPeople", p.name); else { addPile("missedPeople", p.name); Q.misses.push(p.name); }
     $("who-after").innerHTML = `<div class="verdict ${ok ? "ok" : "bad"} inline">${ok ? `Right, +${pts}.` : "Not quite."} ${esc(p.name)}: ${esc(p.role)}.<span>${actTag(p.act)} · ${esc(p.pages)}</span></div><button class="go small" id="who-next">${Q.i + 1 < Q.queue.length ? "Next person" : "See results"}</button>`;
     $("who-next").onclick = () => { Q.i++; Q.shown = 1; Q.done = false; renderWho(); };
