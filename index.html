@@ -37,8 +37,8 @@ header.site { display: flex; flex-direction: column; align-items: center; gap: 1
 h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 9vw, 3.4rem); line-height: 1; margin: 0; letter-spacing: -.02em; }
 h1 span { font-style: italic; font-weight: 500; color: var(--bronze); }
 .sub { color: var(--muted); font-size: .95rem; margin: 0; }
-nav { display: flex; gap: 22px; }
-nav button { font-size: .92rem; font-weight: 500; color: var(--muted); padding: 4px 0; border-bottom: 2px solid transparent; }
+nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 20px; max-width: 100%; }
+nav button { white-space: nowrap; font-size: .92rem; font-weight: 500; color: var(--muted); padding: 4px 0; border-bottom: 2px solid transparent; }
 nav button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--bronze); }
 
 .section { display: flex; flex-direction: column; gap: 18px; }
@@ -114,6 +114,7 @@ nav button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--
 .verdict.ok { background: var(--right-soft); color: var(--right); border: 1px solid var(--right); }
 .verdict.bad { background: var(--wrong-soft); color: var(--wrong); border: 1px solid var(--wrong); }
 .verdict span { display: block; color: var(--muted); font-size: .8rem; }
+.verdict.inline { position: static; width: 100%; margin: 0; align-self: stretch; text-align: left; }
 .game .track { flex: 1; min-height: calc(100svh - 300px); padding: 18px 0 10px; }
 .dock { position: sticky; bottom: 0; z-index: 5; background: var(--page); display: flex; justify-content: center; padding: 0 16px 16px; }
 .dock-inner { width: min(380px, 100%); border-top: 1px solid var(--hair); padding-top: 18px; position: relative; display: flex; flex-direction: column; align-items: center; }
@@ -156,6 +157,85 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 .chain-dock .go, .chain-dock .meta { width: min(380px, 100%); }
 .empty { color: var(--muted); font-size: .88rem; border: 1.5px dashed var(--hair); border-radius: 10px; padding: 12px 14px; }
 
+
+/* ---------- shared bits for new modes ---------- */
+.go.small { width: auto; padding: 10px 18px; font-size: .92rem; }
+.seg.three { grid-template-columns: repeat(3, 1fr); }
+.seg.five { grid-template-columns: repeat(5, 1fr); }
+.seg button:disabled { opacity: .45; cursor: not-allowed; }
+.tagline { font-size: .72rem; color: var(--bronze); letter-spacing: .02em; }
+.panel-card { background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.panel-card h3 { font-family: var(--display); font-weight: 700; font-size: 1.3rem; line-height: 1.2; margin: 0; text-wrap: balance; }
+.chiprow { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 1px solid var(--hair); background: var(--page); border-radius: 999px; padding: 4px 11px; font-size: .82rem; }
+.chip:hover, .chip.on { border-color: var(--bronze); }
+.chip.on { background: #f1e3c2; }
+.sel-box { border-left: 3px solid var(--bronze); padding: 2px 0 2px 12px; }
+.sel-box p { margin: 4px 0 0; }
+.subhead { font-family: var(--display); font-weight: 700; font-size: 1.1rem; margin: 8px 0 0; }
+
+/* maps */
+.full { width: min(980px, calc(100vw - 32px)); position: relative; left: 50%; transform: translateX(-50%); }
+.mapwrap { border: 1px solid var(--hair); border-radius: 12px; overflow: hidden; background: #dce3de; }
+#map { display: block; width: 100%; aspect-ratio: 1000 / 780; touch-action: none; user-select: none; -webkit-user-select: none; cursor: pointer; }
+#map.panning { cursor: grabbing; }
+#map .sea { fill: #dce3de; }
+#map .land { fill: #e7decb; stroke: #b8a88a; stroke-width: .5; vector-effect: non-scaling-stroke; }
+#map .t { stroke: #b4a17e; stroke-width: .6; vector-effect: non-scaling-stroke; transition: fill .2s; }
+#map .t.key { stroke: #9a7a45; stroke-width: .9; }
+#map .t:hover { filter: brightness(.95); }
+#map .t.sel { fill: #dcb874; stroke: var(--ink); stroke-width: 1.8; }
+#map .t.good { fill: #b7d5bb; stroke: var(--right); stroke-width: 1.8; }
+#map .t.bad { fill: #ecbcb2; stroke: var(--wrong); stroke-width: 1.8; }
+#map .t.hint { fill: #e5c682; stroke: var(--bronze); stroke-width: 2; }
+#map text { font-family: var(--body); font-weight: 600; fill: #4a3c2c; paint-order: stroke; stroke: #f6f1e7; stroke-linejoin: round; text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
+#map .pin-true { fill: var(--right); stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
+#map .pin-guess { fill: var(--wrong); stroke: #fff; stroke-width: 2; vector-effect: non-scaling-stroke; }
+#map .pinline { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; }
+.zoom { position: absolute; right: 10px; top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.zoom button { width: 34px; height: 34px; border-radius: 8px; background: var(--surface); border: 1px solid var(--hair); font-size: 1.1rem; line-height: 1; box-shadow: var(--shadow); }
+
+/* deep dives */
+.dive-card { text-align: left; background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; box-shadow: var(--shadow); transition: border-color .15s; }
+.dive-card:hover { border-color: var(--bronze); }
+.dive-card h3 { font-family: var(--display); font-weight: 700; font-size: 1.15rem; line-height: 1.25; margin: 0; text-wrap: balance; }
+.dive-card p { margin: 0; color: var(--muted); font-size: .88rem; }
+.dive-title { font-family: var(--display); font-weight: 700; font-size: clamp(1.7rem, 6vw, 2.2rem); line-height: 1.1; margin: 4px 0 10px; text-wrap: balance; }
+.lede { font-size: 1.02rem; margin: 0; }
+.dsec { display: flex; flex-direction: column; gap: 10px; }
+.bul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 6px; }
+.players { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; }
+.players div { background: var(--surface); border: 1px solid var(--hair); border-radius: 8px; padding: 9px 12px; }
+.players dt { font-family: var(--display); font-weight: 700; }
+.players dd { margin: 0; font-size: .85rem; color: var(--muted); }
+.seq { list-style: none; margin: 0; padding: 0; position: relative; display: flex; flex-direction: column; gap: 10px; }
+.seq::before { content: ""; position: absolute; left: 52px; top: 8px; bottom: 8px; width: 2px; background: var(--bronze); }
+.seq li { display: grid; grid-template-columns: 106px 1fr; align-items: center; gap: 10px; position: relative; }
+.seq .pb { justify-self: center; position: relative; z-index: 1; background: var(--pill); color: var(--pill-ink); border-radius: 999px; padding: 2px 9px; font-size: .72rem; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.seq li span:last-child { background: var(--surface); border: 1px solid var(--hair); border-radius: 8px; padding: 8px 12px; font-size: .9rem; }
+.angle { border-left: 3px solid var(--bronze); background: var(--surface); padding: 12px 16px; border-radius: 0 10px 10px 0; }
+.angle p { margin: 6px 0 0; }
+.quizbox { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--hair); padding-top: 22px; }
+.q { font-family: var(--display); font-weight: 700; font-size: 1.2rem; line-height: 1.3; margin: 0; }
+.choices { display: flex; flex-direction: column; gap: 8px; }
+.choice { text-align: left; background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 11px 14px; font-size: .95rem; transition: border-color .15s; }
+.choice:hover:not(:disabled) { border-color: var(--bronze); }
+.choice.right { border-color: var(--right); background: var(--right-soft); }
+.choice.wrong { border-color: var(--wrong); background: var(--wrong-soft); }
+.choice:disabled { cursor: default; color: var(--ink); }
+.explain { font-size: .92rem; margin: 0; }
+
+/* people */
+.clues { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 6px; font-family: var(--display); font-size: 1.08rem; }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pcard { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.pcard h4 { font-family: var(--display); font-weight: 700; margin: 0; font-size: 1.05rem; }
+.pcard .role { font-size: .85rem; color: var(--bronze); }
+.pcard ul { margin: 0; padding-left: 1.1em; font-size: .85rem; color: var(--muted); }
+.pcard .m { font-size: .74rem; color: var(--muted); }
+.review-btn { font-size: .8rem; color: var(--bronze); font-weight: 600; text-align: left; }
+@media (max-width: 560px) { .players, .pgrid { grid-template-columns: 1fr; } .seg.three button, .seg.five button { font-size: .82rem; padding: 8px 4px; } }
+
 [hidden] { display: none !important; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 @media (max-width: 760px) {
@@ -177,6 +257,9 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     <nav aria-label="Modes">
       <button id="tab-timeline" aria-pressed="true">Timeline</button>
       <button id="tab-chains" aria-pressed="false">Chains</button>
+      <button id="tab-maps" aria-pressed="false">Maps</button>
+      <button id="tab-dives" aria-pressed="false">Deep Dives</button>
+      <button id="tab-people" aria-pressed="false">People</button>
       <button id="tab-review" aria-pressed="false">Review</button>
     </nav>
   </header>
@@ -222,12 +305,49 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     </div>
   </section>
 
+  <!-- MAPS -->
+  <section id="v-maps" class="section" hidden>
+    <p class="hint" style="text-align:center">Five snapshots of Europe across the course. Explore each one, test yourself on where the states were, or pin events where they happened.</p>
+    <div class="seg five" id="era-tabs" role="group" aria-label="Map year"></div>
+    <div class="seg three" role="group" aria-label="Map mode">
+      <button id="mm-explore" aria-pressed="true">Explore</button>
+      <button id="mm-find" aria-pressed="false">Find it</button>
+      <button id="mm-pin" aria-pressed="false">Pin events</button>
+    </div>
+    <div class="full mapwrap">
+      <svg id="map" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Historical map of Europe"></svg>
+      <div class="zoom"><button id="zoom-in" aria-label="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out">&minus;</button><button id="zoom-reset" aria-label="Reset the map view">&#8634;</button></div>
+    </div>
+    <div class="panel-card" id="map-panel"></div>
+    <p class="meta">Drag to move, pinch or scroll to zoom. Borders are approximate, from historical-basemaps by André Ourednik (GPL-3.0).</p>
+  </section>
+
+  <!-- DEEP DIVES -->
+  <section id="v-dives" class="section" hidden>
+    <p class="hint" style="text-align:center">The big, complicated events broken down: causes, key players, how it unfolded, results, and why it matters. Each one ends with a quick quiz.</p>
+    <div id="dives-list" class="section" style="gap:12px"></div>
+  </section>
+  <section id="v-dive" class="section" hidden>
+    <button class="text-btn" id="dive-back" style="align-self:flex-start">&larr; All deep dives</button>
+    <div id="dive-body" class="section" style="gap:24px"></div>
+  </section>
+
+  <!-- PEOPLE -->
+  <section id="v-people" class="section" hidden>
+    <p class="hint" style="text-align:center">The key figures from your notes. Guess who from the clues, or browse them act by act. "My acts" uses the acts you picked in Timeline.</p>
+    <div class="seg" role="group" aria-label="People mode"><button id="pt-quiz" aria-pressed="true">Who am I?</button><button id="pt-browse" aria-pressed="false">Browse</button></div>
+    <div class="row" style="justify-content:space-between">
+      <div class="seg" role="group" aria-label="Which people" style="min-width:220px"><button id="ps-mine" aria-pressed="true">My acts</button><button id="ps-all" aria-pressed="false">All units</button></div>
+      <span class="meta" id="people-scope-note"></span>
+    </div>
+    <div id="people-body" class="section" style="gap:12px"></div>
+  </section>
+
   <!-- REVIEW -->
   <section id="v-review" class="section" hidden>
-    <p class="hint" style="text-align:center">Every card you miss lands here with its pages. Get it right in a drill and it leaves the pile.</p>
-    <button class="go" id="drill">Drill these cards</button>
-    <div id="review-list"></div>
-    <button class="text-btn" id="clear" style="align-self:center">Clear the pile</button>
+    <p class="hint" style="text-align:center">Everything you miss in any mode lands here with its pages. Get it right later and it leaves the pile.</p>
+    <div id="review-list" class="section" style="gap:28px"></div>
+    <button class="text-btn" id="clear" style="align-self:center">Clear everything</button>
   </section>
 </div>
 
@@ -258,6 +378,8 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 </section>
 
 <script src="data.js"></script>
+<script src="content.js"></script>
+<script src="maps.js"></script>
 <script>
 (() => {
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -290,18 +412,21 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   const CHECK = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
   // ---------- views ----------
-  const views = ["setup", "game", "over", "chains", "review"];
+  const views = ["setup", "game", "over", "chains", "maps", "dives", "dive", "people", "review"];
   let lastTimelineView = "setup";
   function show(v) {
     views.forEach(x => $("v-" + x).hidden = x !== v);
     $("main").hidden = v === "game";
-    const tab = v === "chains" ? "chains" : v === "review" ? "review" : "timeline";
-    ["timeline", "chains", "review"].forEach(t => $("tab-" + t).setAttribute("aria-pressed", String(t === tab)));
+    const tab = { chains: "chains", maps: "maps", dives: "dives", dive: "dives", people: "people", review: "review" }[v] || "timeline";
+    ["timeline", "chains", "maps", "dives", "people", "review"].forEach(t => $("tab-" + t).setAttribute("aria-pressed", String(t === tab)));
     if (["setup","over"].includes(v)) lastTimelineView = v;
   }
   $("tab-timeline").onclick = () => show(lastTimelineView);
   $("tab-chains").onclick = () => { show("chains"); if (!chain.order) newChain(); };
   $("tab-review").onclick = () => { renderReview(); show("review"); };
+  $("tab-maps").onclick = () => { show("maps"); openMaps(); };
+  $("tab-dives").onclick = () => { renderDiveList(); show("dives"); };
+  $("tab-people").onclick = () => { show("people"); renderPeople(); };
 
   // ---------- setup ----------
   let selected = new Set(store.get("acts", ["4.1","4.2","4.3","4.4"]));
@@ -515,18 +640,28 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   // ---------- review ----------
   function renderReview() {
     const evs = store.get("missed", []).map(id => EV[id]).filter(Boolean);
-    $("review-list").innerHTML = evs.length ? listHTML(evs) : `<div class="empty" style="text-align:center">Nothing here yet. Cards you miss in Timeline show up here.</div>`;
-    $("drill").disabled = evs.length < 2;
-    $("drill").textContent = evs.length >= 2 ? `Drill these ${evs.length} cards` : "Drill these cards";
-    $("clear").hidden = !evs.length;
+    const ppl = store.get("missedPeople", []).map(n => byName[n]).filter(Boolean);
+    const terr = store.get("missedTerr", []).map(s => { const [y, k] = s.split("|"); const t = ERAS[y] && ERAS[y].t[k]; return t ? { y, k, label: t[0], note: t[1] } : null; }).filter(Boolean);
+    const qs = store.get("missedQ", []).map(s => { const [id, qi] = s.split(":"); const d = DIVES.find(x => x.id === id); return d && d.quiz[+qi] ? { d, q: d.quiz[+qi] } : null; }).filter(Boolean);
+    const total = evs.length + ppl.length + terr.length + qs.length;
+    let h = total ? "" : `<div class="empty" style="text-align:center">Nothing here yet. Anything you miss in Timeline, Maps, Deep Dives, or People shows up here.</div>`;
+    if (evs.length) h += `<div class="section" style="gap:10px"><div class="label">Events · ${evs.length}</div>${evs.length >= 2 ? `<button class="go" id="drill">Drill these ${evs.length} events on the timeline</button>` : ""}${listHTML(evs)}</div>`;
+    if (ppl.length) h += `<div class="section" style="gap:10px"><div class="label">People · ${ppl.length}</div><button class="go" id="drill-people">Quiz me on these people</button><div class="pgrid">${ppl.map(p => `<div class="pcard"><h4>${esc(p.name)}</h4><div class="role">${esc(p.role)}</div><ul>${p.clues.map(c => `<li>${esc(c)}</li>`).join("")}</ul><div class="m">${actTag(p.act)} · ${esc(p.pages)}</div></div>`).join("")}</div></div>`;
+    if (terr.length) h += `<div class="section" style="gap:10px"><div class="label">Map regions · ${terr.length}</div><ul class="list">${terr.map((r, i) => `<li><span class="d">${r.y}</span><span class="t">${esc(r.label)}</span><span class="b">${esc(r.note)}</span><button class="review-btn" data-terr="${i}">Show me on the ${r.y} map</button></li>`).join("")}</ul></div>`;
+    if (qs.length) h += `<div class="section" style="gap:10px"><div class="label">Deep dive questions · ${qs.length}</div><ul class="list">${qs.map((x, i) => `<li><span class="d">Q</span><span class="t">${esc(x.q[0])}</span><span class="b">Answer: ${esc(x.q[1][x.q[2]])}. ${esc(x.q[3])}</span><button class="review-btn" data-dive="${x.d.id}">Open ${esc(x.d.title)}</button></li>`).join("")}</ul></div>`;
+    $("review-list").innerHTML = h;
+    $("clear").hidden = !total;
+    if ($("drill")) $("drill").onclick = startDrill;
+    if ($("drill-people")) $("drill-people").onclick = () => { Pe.tab = "quiz"; show("people"); startWho(ppl); renderPeople(); };
+    document.querySelectorAll("[data-terr]").forEach(b => b.onclick = () => { const r = terr[+b.dataset.terr]; show("maps"); openMaps(); setEra(+r.y); setMapMode("explore"); selectTerr(r.k, true); window.scrollTo({ top: 0 }); });
+    document.querySelectorAll("[data-dive]").forEach(b => b.onclick = () => openDive(b.dataset.dive));
   }
   function startDrill() {
     const evs = store.get("missed", []).map(id => EV[id]).filter(Boolean);
     if (evs.length < 2) { renderReview(); show("review"); return; }
     startGame(evs, { drill: true, lives: Math.max(3, Math.ceil(evs.length / 3)) });
   }
-  $("drill").onclick = startDrill;
-  $("clear").onclick = () => { store.set("missed", []); renderReview(); };
+  $("clear").onclick = () => { ["missed", "missedPeople", "missedTerr", "missedQ"].forEach(k => store.set(k, [])); renderReview(); };
 
   // ---------- chains ----------
   const chain = { act: null, order: null, picked: [], checked: false };
@@ -582,6 +717,360 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     $("chain-result").textContent = right === steps.length ? `All ${right} in order.` : `${right} of ${steps.length} in the right spot.`;
     renderChain();
   };
+
+  // ================= shared =================
+  const shuffleChoices = (choices, ans) => { const idx = shuffle(choices.map((_, i) => i)); return { list: idx.map(i => choices[i]), ans: idx.indexOf(ans) }; };
+  const pile = (k) => store.get(k, []);
+  const addPile = (k, v) => { const p = pile(k); if (!p.includes(v)) { p.push(v); store.set(k, p); } };
+  const dropPile = (k, v) => store.set(k, pile(k).filter(x => x !== v));
+  const byTitle = Object.fromEntries(EV.map(e => [e.title, e]));
+  const actLabel = a => `${actTag(a)}: ${ACTS[a].title}`;
+
+  // ================= MAPS =================
+  const MD = MAPDATA, ERA_YEARS = [1500, 1650, 1715, 1783, 1815];
+  const PAL = ["#eadfc8", "#e0d1b2", "#d8cfb4", "#e6d4bd", "#dccab0", "#e8dcc2", "#d5c9ae", "#e3d8c6"];
+  const hash = s => { let h = 7; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; };
+  const PJ = MD.proj, RAD = Math.PI / 180;
+  function fwd(lat, lon) {
+    const l = (lon - PJ.lon0) * RAD, f = lat * RAD, f0 = PJ.lat0 * RAD;
+    const k = Math.sqrt(2 / (1 + Math.sin(f0) * Math.sin(f) + Math.cos(f0) * Math.cos(f) * Math.cos(l)));
+    return [PJ.tx + PJ.k * k * Math.cos(f) * Math.sin(l), PJ.ty - PJ.k * k * (Math.cos(f0) * Math.sin(f) - Math.sin(f0) * Math.cos(f) * Math.cos(l))];
+  }
+  function inv(x, y) {
+    const X = (x - PJ.tx) / PJ.k, Y = (PJ.ty - y) / PJ.k, rho = Math.hypot(X, Y), f0 = PJ.lat0 * RAD;
+    if (rho < 1e-9) return [PJ.lat0, PJ.lon0];
+    const c = 2 * Math.asin(Math.min(1, rho / 2));
+    const lat = Math.asin(Math.cos(c) * Math.sin(f0) + Y * Math.sin(c) * Math.cos(f0) / rho);
+    const lon = PJ.lon0 * RAD + Math.atan2(X * Math.sin(c), rho * Math.cos(f0) * Math.cos(c) - Y * Math.sin(f0) * Math.sin(c));
+    return [lat / RAD, lon / RAD];
+  }
+  function km(a, b) {
+    const dLat = (b[0] - a[0]) * RAD, dLon = (b[1] - a[1]) * RAD;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(a[0] * RAD) * Math.cos(b[0] * RAD) * Math.sin(dLon / 2) ** 2;
+    return 2 * 6371 * Math.asin(Math.sqrt(h));
+  }
+  const nearestEra = y => ERA_YEARS.reduce((best, e) => Math.abs(e - y) < Math.abs(best - y) ? e : best, ERA_YEARS[0]);
+  const M = { era: 1500, mode: "explore", view: { x: 0, y: 0, w: MD.W, h: MD.H }, sel: null, find: null, pin: null, built: false };
+  const keyLabel = (era, k) => (ERAS[era].t[k] || [k])[0];
+
+  function drawMap() {
+    const era = MD.eras[M.era], cur = ERAS[M.era].t;
+    let h = `<rect x="-3000" y="-3000" width="7000" height="7000" class="sea"/><path class="land" d="${era.land}"/>`;
+    era.t.forEach(([k, d]) => { h += `<path class="t${cur[k] ? " key" : ""}" data-k="${esc(k)}" d="${d}" fill="${PAL[hash(k) % PAL.length]}"/>`; });
+    h += `<g id="map-labels"></g><g id="map-pins"></g>`;
+    $("map").innerHTML = h;
+    renderLabels();
+    applyView();
+  }
+  function renderLabels() {
+    const g = $("map-labels"); if (!g) return;
+    if (M.mode === "find") { g.innerHTML = ""; return; }
+    const cur = ERAS[M.era].t;
+    g.innerHTML = MD.eras[M.era].t.filter(([k]) => cur[k]).map(([k, , x, y]) => `<text x="${x}" y="${y}" data-k="${esc(k)}">${esc(cur[k][0])}</text>`).join("");
+  }
+  function applyView() {
+    const v = M.view, s = v.w / MD.W;
+    $("map").setAttribute("viewBox", `${v.x} ${v.y} ${v.w} ${v.h}`);
+    const fs = 12 * s;
+    document.querySelectorAll("#map-labels text").forEach(t => { t.style.fontSize = fs + "px"; t.style.strokeWidth = (3 * s) + "px"; });
+    document.querySelectorAll("#map-pins circle").forEach(c => c.setAttribute("r", 7 * s));
+  }
+  function clampView(v) {
+    v.w = Math.min(MD.W, Math.max(MD.W / 10, v.w)); v.h = v.w * MD.H / MD.W;
+    v.x = Math.min(MD.W - v.w * 0.6, Math.max(-v.w * 0.4, v.x));
+    v.y = Math.min(MD.H - v.h * 0.6, Math.max(-v.h * 0.4, v.y));
+    return v;
+  }
+  function zoomAt(pt, base, factor) {
+    const w = Math.min(MD.W, Math.max(MD.W / 10, base.w * factor)), s = w / base.w;
+    M.view = clampView({ x: pt[0] - (pt[0] - base.x) * s, y: pt[1] - (pt[1] - base.y) * s, w, h: w * MD.H / MD.W });
+    applyView();
+  }
+  function zoomTo(x, y, w) { M.view = clampView({ x: x - w / 2, y: y - w * MD.H / MD.W / 2, w, h: w * MD.H / MD.W }); applyView(); }
+  $("zoom-in").onclick = () => zoomAt([M.view.x + M.view.w / 2, M.view.y + M.view.h / 2], { ...M.view }, 0.7);
+  $("zoom-out").onclick = () => zoomAt([M.view.x + M.view.w / 2, M.view.y + M.view.h / 2], { ...M.view }, 1 / 0.7);
+  $("zoom-reset").onclick = () => { M.view = { x: 0, y: 0, w: MD.W, h: MD.H }; applyView(); };
+
+  (function mapGestures() {
+    const svg = $("map"), pts = new Map(); let start = null, moved = false;
+    const toSvg = (cx, cy) => { const r = svg.getBoundingClientRect(); return [M.view.x + (cx - r.left) / r.width * M.view.w, M.view.y + (cy - r.top) / r.height * M.view.h]; };
+    svg.addEventListener("pointerdown", e => {
+      svg.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]);
+      if (pts.size === 1) { start = { cx: e.clientX, cy: e.clientY, view: { ...M.view } }; moved = false; }
+      else if (pts.size === 2) { const [a, b] = [...pts.values()]; start = { pinch: Math.hypot(a[0] - b[0], a[1] - b[1]) || 1, mid: toSvg((a[0] + b[0]) / 2, (a[1] + b[1]) / 2), view: { ...M.view } }; moved = true; }
+    });
+    svg.addEventListener("pointermove", e => {
+      if (!pts.has(e.pointerId) || !start) return;
+      pts.set(e.pointerId, [e.clientX, e.clientY]);
+      const r = svg.getBoundingClientRect();
+      if (pts.size === 1 && !start.pinch) {
+        const dx = e.clientX - start.cx, dy = e.clientY - start.cy;
+        if (!moved && Math.hypot(dx, dy) < 6) return;
+        moved = true; svg.classList.add("panning");
+        M.view = clampView({ ...start.view, x: start.view.x - dx / r.width * start.view.w, y: start.view.y - dy / r.height * start.view.h }); applyView();
+      } else if (pts.size === 2 && start.pinch) {
+        const [a, b] = [...pts.values()]; zoomAt(start.mid, start.view, start.pinch / (Math.hypot(a[0] - b[0], a[1] - b[1]) || 1));
+      }
+    });
+    const end = e => {
+      const tap = pts.size === 1 && !moved && e.type === "pointerup";
+      pts.delete(e.pointerId); svg.classList.remove("panning");
+      if (!pts.size) { start = null; if (tap) mapTap(toSvg(e.clientX, e.clientY), e.clientX, e.clientY); }
+      else { const [p] = [...pts.values()]; start = { cx: p[0], cy: p[1], view: { ...M.view } }; }
+    };
+    svg.addEventListener("pointerup", end); svg.addEventListener("pointercancel", end);
+    svg.addEventListener("wheel", e => { e.preventDefault(); zoomAt(toSvg(e.clientX, e.clientY), { ...M.view }, Math.exp(e.deltaY * 0.0015)); }, { passive: false });
+  })();
+
+  function markTerr(k, cls, on = true) { document.querySelectorAll(`#map path.t`).forEach(p => { if (p.dataset.k === k) p.classList.toggle(cls, on); }); }
+  function clearMarks() { document.querySelectorAll("#map path.t").forEach(p => p.classList.remove("sel", "good", "bad", "hint")); }
+
+  function mapTap(pt, cx, cy) {
+    const hit = document.elementFromPoint(cx, cy);
+    const k = hit && hit.closest && hit.closest("path.t") ? hit.closest("path.t").dataset.k : null;
+    if (M.mode === "explore") { if (k) selectTerr(k); }
+    else if (M.mode === "find") findTap(k);
+    else if (M.mode === "pin") pinTap(pt);
+  }
+
+  function setMapMode(mode) {
+    M.mode = mode; M.find = null; M.pin = null;
+    ["explore", "find", "pin"].forEach(m => $("mm-" + m).setAttribute("aria-pressed", String(m === mode)));
+    document.querySelectorAll("#era-tabs button").forEach(b => b.disabled = mode === "pin");
+    $("map-pins") && ($("map-pins").innerHTML = "");
+    clearMarks(); renderLabels();
+    if (mode === "explore") renderExplore();
+    if (mode === "find") startFind();
+    if (mode === "pin") startPin();
+  }
+  function setEra(y) {
+    M.era = y; M.sel = null;
+    document.querySelectorAll("#era-tabs button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.y === y)));
+    drawMap();
+  }
+
+  // Explore
+  function renderExplore() {
+    const er = ERAS[M.era];
+    let h = `<div class="tagline">${esc(er.units)}</div><h3>${esc(er.title)}</h3><p class="hint">${esc(er.sub)}. Tap any territory, or pick one below.</p>`;
+    if (M.sel) {
+      const n = er.t[M.sel];
+      h += `<div class="sel-box"><div class="label">${esc(n ? n[0] : M.sel)}</div><p>${esc(n ? n[1] : "Not one of the key territories for this era.")}</p></div>`;
+    }
+    h += `<div class="chiprow">${Object.entries(er.t).map(([k, v]) => `<button class="chip${k === M.sel ? " on" : ""}" data-k="${esc(k)}">${esc(v[0])}</button>`).join("")}</div>`;
+    $("map-panel").innerHTML = h;
+    $("map-panel").querySelectorAll(".chip").forEach(b => b.onclick = () => selectTerr(b.dataset.k, true));
+  }
+  function selectTerr(k, zoom) {
+    M.sel = k; clearMarks(); markTerr(k, "sel");
+    if (zoom) { const t = MD.eras[M.era].t.find(x => x[0] === k); if (t && M.view.w > MD.W * 0.75) zoomTo(t[2], t[3], MD.W * 0.6); }
+    renderExplore();
+  }
+
+  // Find it
+  function startFind(only) {
+    const keys = only || shuffle(Object.keys(ERAS[M.era].t));
+    M.find = { queue: keys, i: 0, score: 0, misses: [], busy: false };
+    renderFind();
+  }
+  function renderFind(feedback) {
+    const F = M.find, er = ERAS[M.era];
+    if (F.i >= F.queue.length) {
+      $("map-panel").innerHTML = `<div class="tagline">${esc(er.title)}</div><h3>${F.score} of ${F.queue.length} found</h3>` +
+        (F.misses.length ? `<p class="hint">Look these up in Explore: ${F.misses.map(k => esc(keyLabel(M.era, k))).join(", ")}.</p>` : `<p class="hint">Perfect. Try another era.</p>`) +
+        `<div class="row" style="justify-content:flex-start"><button class="go small" id="find-again">Go again</button><button class="text-btn" id="find-explore">Explore this map</button></div>`;
+      $("find-again").onclick = () => { clearMarks(); startFind(); };
+      $("find-explore").onclick = () => setMapMode("explore");
+      return;
+    }
+    const k = F.queue[F.i];
+    $("map-panel").innerHTML = `<div class="tagline">${esc(er.title)} · ${F.i + 1} of ${F.queue.length} · ${F.score} found</div><h3>Tap: ${esc(keyLabel(M.era, k))}</h3>` +
+      (feedback ? `<div class="verdict ${feedback[0]} inline">${feedback[1]}</div>` : `<p class="hint">Labels are hidden. Zoom in for small states.</p>`) +
+      `<div class="row" style="justify-content:flex-start"><button class="text-btn" id="find-skip">Show me</button></div>`;
+    $("find-skip").onclick = () => findTap(null, true);
+  }
+  function findTap(k, giveUp) {
+    const F = M.find; if (!F || F.busy || F.i >= F.queue.length) return;
+    const want = F.queue[F.i]; F.busy = true;
+    clearMarks();
+    let fb;
+    if (k === want) { F.score++; markTerr(want, "good"); fb = ["ok", `Yes, that's ${esc(keyLabel(M.era, want))}.`]; dropPile("missedTerr", M.era + "|" + want); }
+    else {
+      if (k) markTerr(k, "bad"); markTerr(want, "hint"); F.misses.push(want); addPile("missedTerr", M.era + "|" + want);
+      fb = ["bad", k ? `That's ${esc(keyLabel(M.era, k))}. ${esc(keyLabel(M.era, want))} is highlighted.` : `${esc(keyLabel(M.era, want))} is highlighted.`];
+      const t = MD.eras[M.era].t.find(x => x[0] === want); if (t && M.view.w > MD.W * 0.75) zoomTo(t[2], t[3], MD.W * 0.7);
+    }
+    renderFind(fb);
+    setTimeout(() => { F.i++; F.busy = false; clearMarks(); renderFind(); }, k === want ? 900 : 1900);
+  }
+
+  // Where did it happen?
+  function pinPool() {
+    const mine = EV.filter(e => PLACES[e.title] && selected.has(e.act));
+    return mine.length >= 4 ? { pool: mine, note: "" } : { pool: EV.filter(e => PLACES[e.title]), note: "Your selected acts have few mapped events, so this round uses all units." };
+  }
+  function startPin(only) {
+    const { pool, note } = only ? { pool: only, note: "" } : pinPool();
+    M.pin = { queue: shuffle(pool).slice(0, 10), i: 0, total: 0, results: [], note, answered: false };
+    showPinCard();
+  }
+  function showPinCard() {
+    const Pn = M.pin;
+    if (Pn.i >= Pn.queue.length) return pinSummary();
+    const e = Pn.queue[Pn.i]; Pn.answered = false;
+    const era = nearestEra(e.y);
+    if (era !== M.era) setEra(era); else { $("map-pins").innerHTML = ""; clearMarks(); }
+    M.view = { x: 0, y: 0, w: MD.W, h: MD.H }; applyView();
+    $("map-panel").innerHTML = `<div class="tagline">Card ${Pn.i + 1} of ${Pn.queue.length} · ${Pn.total} points · showing the ${era} map</div>` +
+      `<h3>${esc(e.title)}</h3><p class="hint">${esc(e.shown)} · ${actTag(e.act)}. Tap where it happened.</p>` + (Pn.note && Pn.i === 0 ? `<p class="hint">${Pn.note}</p>` : "");
+  }
+  function pinTap(pt) {
+    const Pn = M.pin; if (!Pn || Pn.answered || Pn.i >= Pn.queue.length) return;
+    Pn.answered = true;
+    const e = Pn.queue[Pn.i], [lat, lon, place] = PLACES[e.title];
+    const guess = inv(pt[0], pt[1]), d = Math.round(km(guess, [lat, lon]));
+    const pts = Math.max(0, Math.round(100 * (1 - d / 600)));
+    Pn.total += pts; Pn.results.push({ e, d, pts, place });
+    const close = d <= 150;
+    if (close) dropPile("missed", e.id); else addPile("missed", e.id);
+    const [tx, ty] = fwd(lat, lon), s = M.view.w / MD.W;
+    $("map-pins").innerHTML = `<line class="pinline" x1="${pt[0]}" y1="${pt[1]}" x2="${tx}" y2="${ty}"/><circle class="pin-guess" cx="${pt[0]}" cy="${pt[1]}" r="${7 * s}"/><circle class="pin-true" cx="${tx}" cy="${ty}" r="${7 * s}"/>`;
+    $("map-panel").innerHTML = `<div class="tagline">Card ${Pn.i + 1} of ${Pn.queue.length} · ${Pn.total} points</div>` +
+      `<h3>${esc(e.title)}</h3><div class="verdict ${close ? "ok" : "bad"} inline">${d} km away · +${pts}<span>${esc(place)}</span></div>` +
+      `<p class="hint">${esc(e.blurb)} ${esc(e.shown)} · ${esc(e.pages)}</p><div class="row" style="justify-content:flex-start"><button class="go small" id="pin-next">${Pn.i + 1 < Pn.queue.length ? "Next card" : "See results"}</button></div>`;
+    $("pin-next").onclick = () => { Pn.i++; showPinCard(); };
+  }
+  function pinSummary() {
+    const Pn = M.pin;
+    $("map-pins").innerHTML = ""; clearMarks();
+    $("map-panel").innerHTML = `<div class="tagline">Where did it happen?</div><h3>${Pn.total} of ${Pn.queue.length * 100} points</h3>` +
+      `<ul class="list">${Pn.results.map(r => `<li><span class="d">${r.d} km</span><span class="t">${esc(r.e.title)}</span><span class="b">${esc(r.place)}</span><span class="m">${actTag(r.e.act)} · ${esc(r.e.pages)}</span></li>`).join("")}</ul>` +
+      `<div class="row" style="justify-content:flex-start"><button class="go small" id="pin-again">Play another round</button></div><p class="hint">Anything more than 150 km off goes to Review.</p>`;
+    $("pin-again").onclick = () => startPin();
+  }
+
+  $("era-tabs").innerHTML = ERA_YEARS.map(y => `<button data-y="${y}" aria-pressed="${y === M.era}">${y}</button>`).join("");
+  document.querySelectorAll("#era-tabs button").forEach(b => b.onclick = () => { setEra(+b.dataset.y); setMapMode(M.mode === "pin" ? "explore" : M.mode); });
+  ["explore", "find", "pin"].forEach(m => $("mm-" + m).onclick = () => setMapMode(m));
+  function openMaps() { if (!M.built) { M.built = true; setEra(M.era); setMapMode("explore"); } }
+
+  // ================= DEEP DIVES =================
+  const DQ = { dive: null, order: [], i: 0, score: 0, cur: null };
+  function renderDiveList() {
+    const best = store.get("diveBest", {});
+    $("dives-list").innerHTML = [2, 3, 4].map(u => {
+      const ds = DIVES.filter(d => d.act.startsWith(u + "."));
+      return `<div class="label">Unit ${u}</div>` + ds.map(d => `<button class="dive-card" data-id="${d.id}"><span class="tagline">${actTag(d.act)} · ${esc(d.pages)}</span><h3>${esc(d.title)}</h3><p>${esc(d.overview.split(". ")[0])}.</p><span class="meta" style="text-align:left">${best[d.id] != null ? `Best quiz score: ${best[d.id]} of ${d.quiz.length}` : `${d.quiz.length}-question quiz`}</span></button>`).join("");
+    }).join("");
+    $("dives-list").querySelectorAll(".dive-card").forEach(b => b.onclick = () => openDive(b.dataset.id));
+  }
+  function openDive(id) {
+    const d = DIVES.find(x => x.id === id); DQ.dive = d;
+    $("dive-body").innerHTML = `
+      <div><div class="tagline">${actLabel(d.act)} · ${esc(d.pages)}</div><h2 class="dive-title">${esc(d.title)}</h2><p class="lede">${esc(d.overview)}</p></div>
+      <div class="dsec"><div class="label">Causes</div><ul class="bul">${d.causes.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>
+      <div class="dsec"><div class="label">Key players</div><dl class="players">${d.players.map(([n, r]) => `<div><dt>${esc(n)}</dt><dd>${esc(r)}</dd></div>`).join("")}</dl></div>
+      <div class="dsec"><div class="label">How it unfolded</div><ol class="seq">${d.seq.map(([dt, t]) => `<li><span class="pb">${esc(dt)}</span><span>${esc(t)}</span></li>`).join("")}</ol></div>
+      <div class="dsec"><div class="label">Results</div><ul class="bul">${d.outcomes.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>
+      <div class="angle"><div class="label">Why it matters</div><p>${esc(d.angle)}</p></div>
+      <div class="quizbox" id="dive-quiz"><button class="go" id="dive-start">Quiz me on this (${d.quiz.length} questions)</button></div>`;
+    $("dive-start").onclick = () => startDiveQuiz();
+    show("dive"); window.scrollTo({ top: 0 });
+  }
+  function startDiveQuiz(only) {
+    const d = DQ.dive;
+    DQ.order = only || shuffle(d.quiz.map((_, i) => i)); DQ.i = 0; DQ.score = 0; DQ.full = !only;
+    renderDiveQ();
+    $("dive-quiz").scrollIntoView({ block: "start", behavior: reduced() ? "auto" : "smooth" });
+  }
+  function renderDiveQ() {
+    const d = DQ.dive, box = $("dive-quiz");
+    if (DQ.i >= DQ.order.length) {
+      if (DQ.full) { const b = store.get("diveBest", {}); b[d.id] = Math.max(b[d.id] || 0, DQ.score); store.set("diveBest", b); }
+      box.innerHTML = `<div class="label">Quiz done</div><div class="q">${DQ.score} of ${DQ.order.length} right</div><p class="hint">${DQ.score === DQ.order.length ? "Nice. You've got this one." : "Missed questions are saved in Review."}</p><div class="row" style="justify-content:flex-start"><button class="go small" id="dq-again">Take it again</button><button class="text-btn" id="dq-list">All deep dives</button></div>`;
+      $("dq-again").onclick = () => startDiveQuiz(); $("dq-list").onclick = () => { renderDiveList(); show("dives"); };
+      return;
+    }
+    const qi = DQ.order[DQ.i], [q, choices, ans, why] = d.quiz[qi];
+    const sc = shuffleChoices(choices, ans); DQ.cur = { qi, sc, why };
+    box.innerHTML = `<div class="label">Question ${DQ.i + 1} of ${DQ.order.length}</div><p class="q">${esc(q)}</p><div class="choices">${sc.list.map((c, i) => `<button class="choice" data-i="${i}">${esc(c)}</button>`).join("")}</div><div id="dq-after"></div>`;
+    box.querySelectorAll(".choice").forEach(b => b.onclick = () => answerDiveQ(+b.dataset.i));
+  }
+  function answerDiveQ(i) {
+    const { qi, sc, why } = DQ.cur, d = DQ.dive, ok = i === sc.ans, key = d.id + ":" + qi;
+    document.querySelectorAll("#dive-quiz .choice").forEach((b, j) => { b.disabled = true; if (j === sc.ans) b.classList.add("right"); else if (j === i) b.classList.add("wrong"); });
+    if (ok) { DQ.score++; dropPile("missedQ", key); } else addPile("missedQ", key);
+    $("dq-after").innerHTML = `<p class="explain"><b>${ok ? "Right." : "Not quite."}</b> ${esc(why)}</p><button class="go small" id="dq-next">${DQ.i + 1 < DQ.order.length ? "Next question" : "Finish"}</button>`;
+    $("dq-next").onclick = () => { DQ.i++; renderDiveQ(); };
+  }
+  $("dive-back").onclick = () => { renderDiveList(); show("dives"); };
+
+  // ================= PEOPLE =================
+  const PP = PEOPLE.map(([name, act, role, clues, pages]) => ({ name, act, role, clues, pages }));
+  const byName = Object.fromEntries(PP.map(p => [p.name, p]));
+  const Pe = { tab: "quiz", scope: "mine", q: null };
+  function peoplePool() {
+    if (Pe.scope === "all") return PP;
+    const mine = PP.filter(p => selected.has(p.act));
+    return mine.length >= 4 ? mine : PP;
+  }
+  function renderPeople() {
+    $("pt-quiz").setAttribute("aria-pressed", String(Pe.tab === "quiz"));
+    $("pt-browse").setAttribute("aria-pressed", String(Pe.tab === "browse"));
+    $("ps-mine").setAttribute("aria-pressed", String(Pe.scope === "mine"));
+    $("ps-all").setAttribute("aria-pressed", String(Pe.scope === "all"));
+    const pool = peoplePool();
+    $("people-scope-note").textContent = Pe.scope === "mine" ? (pool === PP ? "Your selected acts have few people, so this uses everyone." : `${pool.length} people from your selected acts (${selTitle()}).`) : `All ${PP.length} people.`;
+    if (Pe.tab === "browse") {
+      const acts = [...new Set(pool.map(p => p.act))].sort();
+      $("people-body").innerHTML = acts.map(a => `<div class="subhead">${actLabel(a)}</div><div class="pgrid">${pool.filter(p => p.act === a).map(p => `<div class="pcard"><h4>${esc(p.name)}</h4><div class="role">${esc(p.role)}</div><ul>${p.clues.map(c => `<li>${esc(c)}</li>`).join("")}</ul><div class="m">${esc(p.pages)}</div></div>`).join("")}</div>`).join("");
+    } else if (!Pe.q) startWho();
+    else renderWho();
+  }
+  function startWho(only) {
+    const pool = only || peoplePool();
+    Pe.q = { queue: shuffle(pool).slice(0, 10), i: 0, score: 0, shown: 1, done: false, misses: [], drill: !!only };
+    renderWho();
+  }
+  function whoChoices(p) {
+    const others = shuffle(PP.filter(x => x.name !== p.name));
+    const same = others.filter(x => x.act === p.act), unit = others.filter(x => x.act[0] === p.act[0] && x.act !== p.act);
+    const pick = [...same, ...unit, ...others].filter((x, i, arr) => arr.indexOf(x) === i).slice(0, 3);
+    return shuffle([p, ...pick]);
+  }
+  function renderWho() {
+    const Q = Pe.q, box = $("people-body");
+    if (Q.i >= Q.queue.length) {
+      box.innerHTML = `<div class="panel-card"><div class="label">Who am I?</div><h3>${Q.score} of ${Q.queue.length * 3} points</h3>` +
+        (Q.misses.length ? `<p class="hint">Saved to Review: ${Q.misses.map(esc).join(", ")}.</p>` : `<p class="hint">No misses. Nice.</p>`) +
+        `<div class="row" style="justify-content:flex-start"><button class="go small" id="who-again">Play again</button></div></div>`;
+      $("who-again").onclick = () => startWho();
+      return;
+    }
+    const p = Q.queue[Q.i];
+    if (!Q.choices || Q.choicesFor !== p.name) { Q.choices = whoChoices(p); Q.choicesFor = p.name; }
+    const clues = [...p.clues, `Role: ${p.role}`].slice(0, Q.shown);
+    box.innerHTML = `<div class="panel-card"><div class="tagline">${Q.drill ? "Review drill" : "Who am I?"} · ${Q.i + 1} of ${Q.queue.length} · ${Q.score} points</div>` +
+      `<ul class="clues">${clues.map(c => `<li>${esc(c)}</li>`).join("")}</ul>` +
+      (Q.shown < 3 && !Q.done ? `<button class="text-btn" id="who-clue" style="align-self:flex-start">Show another clue (worth ${3 - Q.shown} instead of ${4 - Q.shown})</button>` : "") +
+      `<div class="choices">${Q.choices.map((c, i) => `<button class="choice" data-i="${i}">${esc(c.name)}</button>`).join("")}</div><div id="who-after"></div></div>`;
+    if ($("who-clue")) $("who-clue").onclick = () => { Q.shown++; renderWho(); };
+    box.querySelectorAll(".choice").forEach(b => b.onclick = () => answerWho(+b.dataset.i));
+  }
+  function answerWho(i) {
+    const Q = Pe.q, p = Q.queue[Q.i], ok = Q.choices[i].name === p.name;
+    Q.done = true;
+    document.querySelectorAll("#people-body .choice").forEach((b, j) => { b.disabled = true; if (Q.choices[j].name === p.name) b.classList.add("right"); else if (j === i) b.classList.add("wrong"); });
+    if ($("who-clue")) $("who-clue").remove();
+    const pts = ok ? 4 - Q.shown : 0; Q.score += pts;
+    if (ok) dropPile("missedPeople", p.name); else { addPile("missedPeople", p.name); Q.misses.push(p.name); }
+    $("who-after").innerHTML = `<div class="verdict ${ok ? "ok" : "bad"} inline">${ok ? `Right, +${pts}.` : "Not quite."} ${esc(p.name)}: ${esc(p.role)}.<span>${actTag(p.act)} · ${esc(p.pages)}</span></div><button class="go small" id="who-next">${Q.i + 1 < Q.queue.length ? "Next person" : "See results"}</button>`;
+    $("who-next").onclick = () => { Q.i++; Q.shown = 1; Q.done = false; renderWho(); };
+  }
+  $("pt-quiz").onclick = () => { Pe.tab = "quiz"; renderPeople(); };
+  $("pt-browse").onclick = () => { Pe.tab = "browse"; renderPeople(); };
+  $("ps-mine").onclick = () => { Pe.scope = "mine"; Pe.q = null; renderPeople(); };
+  $("ps-all").onclick = () => { Pe.scope = "all"; Pe.q = null; renderPeople(); };
 
   syncSetup();
   show("setup");
