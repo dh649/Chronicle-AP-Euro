@@ -256,3 +256,92 @@ const E = [
 [4,4,"1796-05","Babeuf's Conspiracy of Equals","Demands equal property; Babeuf is executed.","pp. 388–390"],
 [4,4,"1799-11-09","18 Brumaire: Napoleon's coup","The army overthrows the Directory.","pp. 388–390"]
 ];
+
+// ---------- Unit 1: Renaissance and Reformation ----------
+// Written from standard AP Euro coverage, NOT from Dylan's notes or textbook pages.
+const U1 = "Not from your notes";
+Object.assign(ACTS, {
+  "1.1": { title: "The Italian Renaissance", pages: U1, general: true,
+    chain: ["Italian city-states grow rich from trade and banking", "Wealthy patrons fund scholars and artists", "Humanists revive classical learning", "New art and ideas celebrate human potential", "Italy's divided states compete and fight", "France and Spain invade Italy (from 1494)", "The Sack of Rome (1527) ends the High Renaissance there"] },
+  "1.2": { title: "Printing and the Northern Renaissance", pages: U1, general: true,
+    chain: ["Gutenberg's press makes books cheap", "Humanist ideas spread north", "Christian humanists like Erasmus call for church reform", "Critiques of corruption reach a wide reading public", "The ground is prepared for the Reformation"] },
+  "1.3": { title: "The New Monarchies", pages: U1, general: true,
+    chain: ["The Hundred Years' War and the Wars of the Roses weaken old nobles", "Kings raise new taxes and build standing armies", "Royal courts and bureaucracies replace noble power", "Monarchs gain control over their national churches", "Centralized states can fund exploration and wars"] },
+  "1.4": { title: "Luther and the Protestant Reformation", pages: U1, general: true,
+    chain: ["Church corruption and indulgence sales anger reformers", "Luther posts the Ninety-Five Theses", "Printing spreads his ideas across Germany", "Luther is excommunicated and outlawed at Worms", "German princes protect him", "Lutheran churches form under the princes' control", "Zwingli and Calvin lead a second wave of reform", "The Peace of Augsburg lets princes choose their region's religion"] },
+  "1.5": { title: "The English Reformation", pages: U1, general: true,
+    chain: ["Henry VIII wants a male heir", "The pope refuses to annul his marriage", "Parliament breaks with Rome: the Act of Supremacy", "Monasteries are dissolved and their lands sold", "Edward VI pushes Protestant reform", "Mary I restores Catholicism", "Elizabeth I settles a moderate Protestant church"] },
+  "1.6": { title: "The Catholic Reformation", pages: U1, general: true,
+    chain: ["Protestantism spreads across northern Europe", "Reformers inside the Church push for renewal", "The Jesuits are founded", "The Inquisition and the Index fight heresy", "The Council of Trent reaffirms doctrine and fixes abuses", "Catholicism wins back ground in parts of Europe"] }
+});
+E.push(
+// 1.1
+[1,1,"1341","Petrarch crowned poet laureate","The 'father of humanism' revives classical Latin and the study of ancient authors.",U1],
+[1,1,"1434","Cosimo de' Medici takes control of Florence","The banking family runs the republic from behind the scenes and funds art and learning.",U1],
+[1,1,"1440","Valla exposes the Donation of Constantine","Humanist text criticism proves a document behind papal power was a forgery.",U1],
+[1,1,"1453-05","Fall of Constantinople","The Ottomans take the Byzantine capital, and Greek scholars and manuscripts reach Italy.",U1],
+[1,1,"1454","Peace of Lodi","Milan, Venice, Florence, Naples, and the Papal States agree to a balance of power in Italy.",U1],
+[1,1,"1469","Lorenzo de' Medici takes power","'The Magnificent' makes Florence a center of Renaissance art and learning.",U1],
+[1,1,"1486","Pico's Oration on the Dignity of Man","Humans can shape their own nature, a bold statement of Renaissance individualism.",U1],
+[1,1,"1494","French invasion of Italy","Charles VIII invades, the Medici are expelled, and Italy becomes a battleground.",U1],
+[1,1,"1498-05","Savonarola executed","The friar who ruled Florence and burned 'vanities' is put to death.",U1],
+[1,1,"1504","Michelangelo's David completed","A symbol of republican Florence and of classical ideals.",U1],
+[1,1,"1512","Sistine Chapel ceiling completed","Michelangelo's papal commission shows Rome's power as a patron.",U1],
+[1,1,"1513","Machiavelli writes The Prince","Rulers should judge actions by results, not by Christian morality.",U1],
+[1,1,"1527-05","Sack of Rome","Charles V's unpaid troops plunder Rome, ending the High Renaissance there.",U1],
+[1,1,"1528","Castiglione's Book of the Courtier","A guide to the ideal, well-rounded gentleman.",U1],
+// 1.2
+[1,2,"1405","Christine de Pizan's Book of the City of Ladies","Defends women's abilities and virtue against male writers' attacks.",U1],
+[1,2,"1434","Van Eyck's Arnolfini Portrait","Flemish oil painting shows the North's detailed realism.",U1],
+[1,2,"1455","Gutenberg Bible printed","Movable-type printing in Mainz makes books faster and cheaper to produce.",U1],
+[1,2,"1476","Caxton brings printing to England","England's first printing press opens at Westminster.",U1],
+[1,2,"1511","Erasmus's The Praise of Folly","Satire mocking corrupt clergy and empty religious practices.",U1],
+[1,2,"1516-03","Erasmus's Greek New Testament","A corrected text from the original sources: 'back to the sources' applied to Scripture.",U1],
+[1,2,"1516-12","More's Utopia","An imaginary ideal society used to criticize Europe's greed and injustice.",U1],
+// 1.3
+[1,3,"1453-10","Hundred Years' War ends","France drives England out of nearly all its French lands, strengthening the French crown.",U1],
+[1,3,"1455","Wars of the Roses begin","The noble houses of York and Lancaster fight for England's throne.",U1],
+[1,3,"1461","Louis XI becomes king of France","The 'Spider King' expands royal power and the crown's lands.",U1],
+[1,3,"1469-10","Ferdinand and Isabella marry","Uniting Aragon and Castile, the core of a Spanish monarchy.",U1],
+[1,3,"1478","Spanish Inquisition established","A royal-controlled church court enforcing Catholic orthodoxy, especially among converts.",U1],
+[1,3,"1485-08","Battle of Bosworth Field","Henry VII wins and founds the Tudor dynasty, ending the Wars of the Roses.",U1],
+[1,3,"1492-01","Fall of Granada","The last Muslim kingdom in Iberia falls, completing the Reconquista.",U1],
+[1,3,"1492-03","Jews expelled from Spain","The Alhambra Decree orders Jews to convert or leave.",U1],
+[1,3,"1516","Concordat of Bologna","The pope lets the French king appoint bishops and abbots.",U1],
+[1,3,"1519-06","Charles V elected Holy Roman Emperor","Already king of Spain, he now rules a huge Habsburg empire.",U1],
+// 1.4
+[1,4,"1517-10-31","Luther's Ninety-Five Theses","Luther attacks the sale of indulgences in Wittenberg.",U1],
+[1,4,"1519-07","Leipzig Debate","Against Johann Eck, Luther denies that popes and church councils cannot err.",U1],
+[1,4,"1520","Luther's reform pamphlets","To the Christian Nobility and other works spread his ideas through print.",U1],
+[1,4,"1521-01","Luther excommunicated","The pope formally expels Luther from the Church.",U1],
+[1,4,"1521-04","Diet of Worms","Luther refuses to recant before Charles V and is declared an outlaw.",U1],
+[1,4,"1523","Zwingli's reforms in Zurich","The city adopts Zwingli's reforms, starting the Swiss Reformation.",U1],
+[1,4,"1524","German Peasants' War","Peasants cite Luther's ideas to demand rights; Luther sides with the princes.",U1,"1524–25"],
+[1,4,"1529-10","Marburg Colloquy","Luther and Zwingli split over the meaning of the Eucharist.",U1],
+[1,4,"1530","Augsburg Confession","Melanchthon's statement of Lutheran beliefs.",U1],
+[1,4,"1531","Schmalkaldic League formed","Lutheran princes ally against Charles V.",U1],
+[1,4,"1534","Anabaptists seize Münster","Radicals set up a short-lived kingdom, crushed by Catholic and Lutheran forces.",U1,"1534–35"],
+[1,4,"1536","Calvin's Institutes of the Christian Religion","The systematic statement of Calvinist theology, including predestination.",U1],
+[1,4,"1541","Calvin settles in Geneva","Geneva becomes a model Reformed city and a training ground for missionaries.",U1],
+// 1.5
+[1,5,"1527","Henry VIII seeks an annulment","He wants to end his marriage to Catherine of Aragon, who has no surviving son.",U1],
+[1,5,"1533","Henry marries Anne Boleyn","Parliament cuts off appeals to Rome so the annulment can be granted in England.",U1],
+[1,5,"1534-11","Act of Supremacy","Makes the king Supreme Head of the Church of England.",U1],
+[1,5,"1535-07","Thomas More executed","He refuses to accept Henry as head of the Church.",U1],
+[1,5,"1536","Dissolution of the monasteries begins","Henry seizes monastic lands, enriching the crown and the gentry who buy them.",U1],
+[1,5,"1547-01","Edward VI becomes king","Under his advisers England moves firmly toward Protestantism.",U1],
+[1,5,"1549","Book of Common Prayer","Cranmer's English prayer book becomes the standard for worship.",U1],
+[1,5,"1553-07","Mary I takes the throne","She restores Catholicism and marries Philip II of Spain.",U1],
+[1,5,"1555","Marian persecutions","Around 300 Protestants are burned, earning her the name 'Bloody Mary.'",U1,"1555–58"],
+[1,5,"1559","Elizabethan Settlement","New Acts of Supremacy and Uniformity create a moderate Protestant church.",U1],
+[1,5,"1563","Thirty-Nine Articles","Define the doctrine of the Church of England.",U1],
+// 1.6
+[1,6,"1534-08","Loyola and companions take vows","The founding of what becomes the Society of Jesus.",U1],
+[1,6,"1535","Ursulines founded","Angela Merici's order educates girls.",U1],
+[1,6,"1540-09","Jesuits approved by the pope","Paul III approves the Society of Jesus.",U1],
+[1,6,"1542","Roman Inquisition established","A papal court to stop the spread of Protestant ideas in Italy.",U1],
+[1,6,"1545-12","Council of Trent opens","Called by Paul III to answer Protestantism and reform the Church.",U1],
+[1,6,"1559","Index of Prohibited Books","The Church publishes a list of books Catholics may not read.",U1],
+[1,6,"1562","Teresa of Ávila's first reformed convent","A mystic leads a strict reform of the Carmelite order.",U1],
+[1,6,"1563-12","Council of Trent closes","It reaffirms Catholic doctrine and orders reforms like seminaries for priests.",U1]
+);

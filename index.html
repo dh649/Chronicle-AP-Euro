@@ -242,6 +242,58 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 .sound-btn.off .wave { display: none; }
 .sound-btn.off .mute { display: inline; }
 .site-sound { position: absolute; top: -20px; right: -8px; }
+/* ---------- mastery ---------- */
+.mhero { background: var(--surface); border: 1px solid var(--hair); border-radius: 14px; padding: 18px 20px; display: flex; justify-content: space-between; gap: 18px; align-items: center; flex-wrap: wrap; }
+.mhero .big { font-size: 3rem; }
+.mhero .big small { font-size: 1rem; color: var(--muted); font-family: var(--body); font-weight: 500; }
+.mgrid { display: flex; flex-direction: column; gap: 6px; }
+.mg-row { display: flex; align-items: center; gap: 5px; }
+.mg-u { font-size: .7rem; font-weight: 600; color: var(--muted); width: 22px; }
+.sq { width: 16px; height: 16px; border-radius: 4px; background: var(--hair); }
+.sq.st-learning { background: #ead9b0; }
+.sq.st-ready { background: #d7b066; }
+.sq.st-mastered { background: var(--right); }
+.sq.st-due { background: #c98a2e; }
+.sq.st-slipping { background: var(--wrong); }
+.mg-badge { color: var(--bronze); font-size: .9rem; margin-left: 2px; }
+.pill-st { font-size: .72rem; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; border: 1px solid var(--hair); color: var(--muted); background: var(--page); }
+.pill-st.st-learning { border-color: #d7b066; color: #8d6522; }
+.pill-st.st-ready { background: #f3e3bd; border-color: #d7b066; color: #6f4f16; }
+.pill-st.st-mastered { background: var(--right-soft); border-color: var(--right); color: var(--right); }
+.pill-st.st-due { background: #f6e3c4; border-color: #c98a2e; color: #8a5a14; }
+.pill-st.st-slipping { background: var(--wrong-soft); border-color: var(--wrong); color: var(--wrong); }
+.upnext { background: var(--surface); border: 1px solid var(--hair); border-left: 4px solid var(--bronze); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+.upnext h3 { font-family: var(--display); font-weight: 700; font-size: 1.35rem; margin: 0; line-height: 1.2; text-wrap: balance; }
+.upnext .hint { margin: 0 0 6px; }
+.mrow { width: 100%; display: flex; align-items: center; gap: 14px; padding: 11px 18px; text-align: left; border-top: 1px solid var(--hair); }
+.mrow:hover { background: var(--page); }
+.mrow .num { flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--hair); display: grid; place-items: center; font-size: .78rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.mrow .name { flex: 1; display: flex; flex-direction: column; gap: 3px; font-size: .95rem; min-width: 0; }
+.mrow .name small { color: var(--muted); font-size: .78rem; }
+.cov { height: 6px; background: var(--hair); border-radius: 3px; overflow: hidden; }
+.cov i { display: block; height: 100%; background: var(--bronze); border-radius: 3px; transition: width .4s; }
+.cov.thin { height: 4px; max-width: 180px; width: 100%; }
+.utest { display: flex; align-items: center; gap: 12px; padding: 12px 18px 14px; border-top: 1px solid var(--hair); flex-wrap: wrap; }
+.stepper { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.stepper button { border: 1px solid var(--hair); background: var(--surface); border-radius: 10px; padding: 9px 4px; font-size: .85rem; font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--muted); }
+.stepper button[aria-current="step"] { border-color: var(--bronze); color: var(--ink); background: #f6ead0; }
+.stepper .sn { width: 22px; height: 22px; border-radius: 50%; background: var(--page); border: 1px solid var(--hair); display: grid; place-items: center; font-size: .75rem; font-weight: 700; }
+.terms { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; }
+.terms div { background: var(--surface); border: 1px solid var(--hair); border-radius: 8px; padding: 9px 12px; }
+.terms dt { font-family: var(--display); font-weight: 700; }
+.terms dd { margin: 2px 0 0; font-size: .87rem; color: var(--muted); }
+.chainlist { padding-left: 1.4em; }
+.qhead { display: flex; justify-content: space-between; align-items: baseline; }
+.qsub { font-family: var(--display); font-size: 1.08rem; margin: 0; }
+.choice .kbd { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 5px; border: 1px solid var(--hair); font-size: .7rem; color: var(--muted); margin-right: 10px; vertical-align: 1px; }
+textarea { width: 100%; border: 1px solid var(--hair); border-radius: 10px; padding: 10px 12px; font: inherit; font-size: .95rem; background: var(--surface); color: var(--ink); resize: vertical; }
+textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
+.model { background: var(--right-soft); border: 1px solid #bcd9c4; border-radius: 10px; padding: 10px 14px; font-size: .92rem; display: flex; flex-direction: column; gap: 4px; }
+.checkline { display: flex; gap: 10px; align-items: flex-start; font-size: .9rem; cursor: pointer; }
+.checkline input { width: 18px; height: 18px; accent-color: var(--bronze); margin-top: 1px; flex: none; }
+.result .row { margin-top: 8px; }
+@media (max-width: 560px) { .terms { grid-template-columns: 1fr; } .mhero { flex-direction: column; align-items: flex-start; } .stepper button { font-size: .78rem; } .mrow { padding: 11px 14px; gap: 10px; } }
+
 [hidden] { display: none !important; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 @media (max-width: 760px) {
@@ -262,6 +314,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     <h1>Chronicle <span>AP Euro</span></h1>
     <p class="sub">Put history in order, straight from your readings.</p>
     <nav aria-label="Modes">
+      <button id="tab-mastery" aria-pressed="false">Mastery</button>
       <button id="tab-timeline" aria-pressed="true">Timeline</button>
       <button id="tab-chains" aria-pressed="false">Chains</button>
       <button id="tab-maps" aria-pressed="false">Maps</button>
@@ -311,6 +364,11 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
       <div class="meta"><span id="chain-result"></span> <button class="text-btn" id="chain-shuffle">Reshuffle</button></div>
     </div>
   </section>
+
+  <!-- MASTERY -->
+  <section id="v-mastery" class="section" hidden><div id="mastery-body" class="section" style="gap:18px"></div></section>
+  <section id="v-mact" class="section" hidden><div id="mact-body" class="section" style="gap:20px"></div></section>
+  <section id="v-mquiz" class="section" hidden><div id="mquiz-body" class="section" style="gap:14px"></div></section>
 
   <!-- MAPS -->
   <section id="v-maps" class="section" hidden>
@@ -387,6 +445,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 <script src="data.js"></script>
 <script src="content.js"></script>
 <script src="maps.js"></script>
+<script src="mastery.js"></script>
 <script>
 (() => {
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -472,19 +531,20 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   const CHECK = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
   // ---------- views ----------
-  const views = ["setup", "game", "over", "chains", "maps", "dives", "dive", "people", "review"];
+  const views = ["setup", "game", "over", "chains", "maps", "dives", "dive", "people", "review", "mastery", "mact", "mquiz"];
   let lastTimelineView = "setup";
   function show(v) {
     views.forEach(x => $("v-" + x).hidden = x !== v);
     $("main").hidden = v === "game";
-    const tab = { chains: "chains", maps: "maps", dives: "dives", dive: "dives", people: "people", review: "review" }[v] || "timeline";
-    ["timeline", "chains", "maps", "dives", "people", "review"].forEach(t => $("tab-" + t).setAttribute("aria-pressed", String(t === tab)));
+    const tab = { chains: "chains", maps: "maps", dives: "dives", dive: "dives", people: "people", review: "review", mastery: "mastery", mact: "mastery", mquiz: "mastery" }[v] || "timeline";
+    ["mastery", "timeline", "chains", "maps", "dives", "people", "review"].forEach(t => $("tab-" + t).setAttribute("aria-pressed", String(t === tab)));
     if (["setup","over"].includes(v)) lastTimelineView = v;
   }
   $("tab-timeline").onclick = () => show(lastTimelineView);
   $("tab-chains").onclick = () => { show("chains"); if (!chain.order) newChain(); };
   $("tab-review").onclick = () => { renderReview(); show("review"); };
   $("tab-maps").onclick = () => { show("maps"); openMaps(); };
+  $("tab-mastery").onclick = () => openMasteryHome();
   $("tab-dives").onclick = () => { renderDiveList(); show("dives"); };
   $("tab-people").onclick = () => { show("people"); renderPeople(); };
 
@@ -493,7 +553,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   let lives = store.get("lives", 3);
   function renderUnits() {
     const box = $("units"); box.innerHTML = "";
-    [2,3,4].forEach(u => {
+    [1,2,3,4].forEach(u => {
       const acts = Object.keys(ACTS).filter(k => k.startsWith(u + "."));
       const allOn = acts.every(a => selected.has(a));
       const card = document.createElement("div"); card.className = "unit";
@@ -512,7 +572,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   }
   const selKey = () => [...selected].sort().join(",") + "|" + lives;
   function selTitle() {
-    const parts = [2,3,4].map(u => {
+    const parts = [1,2,3,4].map(u => {
       const acts = Object.keys(ACTS).filter(k => k.startsWith(u + "."));
       const on = acts.filter(a => selected.has(a)).map(a => a.split(".")[1]);
       if (!on.length) return null;
@@ -728,7 +788,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 
   // ---------- chains ----------
   const chain = { act: null, order: null, picked: [], checked: false };
-  const chainActs = Object.keys(ACTS).filter(k => ACTS[k].chain);
+  const chainActs = Object.keys(ACTS).filter(k => ACTS[k].chain).sort((a, b) => { const [ua, aa] = a.split(".").map(Number), [ub, ab] = b.split(".").map(Number); return ua - ub || aa - ab; });
   $("chain-act").innerHTML = chainActs.map(k => `<option value="${k}">${actTag(k)}: ${esc(ACTS[k].title)}</option>`).join("");
   $("chain-act").onchange = () => newChain($("chain-act").value);
   $("chain-shuffle").onclick = () => newChain(chain.act);
@@ -1026,7 +1086,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   const DQ = { dive: null, order: [], i: 0, score: 0, cur: null };
   function renderDiveList() {
     const best = store.get("diveBest", {});
-    $("dives-list").innerHTML = [2, 3, 4].map(u => {
+    $("dives-list").innerHTML = [1, 2, 3, 4].map(u => {
       const ds = DIVES.filter(d => d.act.startsWith(u + "."));
       return `<div class="label">Unit ${u}</div>` + ds.map(d => `<button class="dive-card" data-id="${d.id}"><span class="tagline">${actTag(d.act)} · ${esc(d.pages)}</span><h3>${esc(d.title)}</h3><p>${esc(d.overview.split(". ")[0])}.</p><span class="meta" style="text-align:left">${best[d.id] != null ? `Best quiz score: ${best[d.id]} of ${d.quiz.length}` : `${d.quiz.length}-question quiz`}</span></button>`).join("");
     }).join("");
@@ -1143,6 +1203,400 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   $("pt-browse").onclick = () => { Pe.tab = "browse"; renderPeople(); };
   $("ps-mine").onclick = () => { Pe.scope = "mine"; Pe.q = null; renderPeople(); };
   $("ps-all").onclick = () => { Pe.scope = "all"; Pe.q = null; renderPeople(); };
+
+  // ================= MASTERY =================
+  const ACT_ORDER = Object.keys(ACTS).sort((a, b) => { const [ua, aa] = a.split(".").map(Number), [ub, ab] = b.split(".").map(Number); return ua - ub || aa - ab; });
+  const UNITS = [...new Set(ACT_ORDER.map(a => +a.split(".")[0]))];
+  const DAY = 86400000, INTERVALS = [0, 3, 7, 14, 30, 60];
+  const MS = Object.assign({ acts: {}, items: {}, units: {}, days: [] }, store.get("mastery", {}));
+  const saveMS = () => store.set("mastery", MS);
+  const actState = a => (MS.acts[a] = MS.acts[a] || { learned: false, mastered: false, slip: false, stage: 0, due: 0, saq: false, best: 0 });
+  const pickOne = arr => arr[Math.floor(Math.random() * arr.length)];
+  const localDay = (t = Date.now()) => { const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+  function markActive() { const d = localDay(); if (MS.days[MS.days.length - 1] !== d) { MS.days.push(d); MS.days = MS.days.slice(-120); saveMS(); } }
+  function dayStreak() {
+    const set = new Set(MS.days); let n = 0, t = Date.now();
+    if (!set.has(localDay(t))) t -= DAY;
+    while (set.has(localDay(t))) { n++; t -= DAY; }
+    return n;
+  }
+  const fmtDue = t => { const days = Math.round((t - Date.now()) / DAY); return days <= 0 ? "now" : days === 1 ? "tomorrow" : `in ${days} days`; };
+  const ALL_TERMS = ACT_ORDER.flatMap(a => (LESSONS[a] ? LESSONS[a].terms : []).map((t, i) => ({ a, t, i })));
+
+  // ---- facts: the things you have to know for each act ----
+  const FACT_CACHE = {};
+  function factsFor(act) {
+    if (FACT_CACHE[act]) return FACT_CACHE[act];
+    const f = [];
+    EV.filter(e => e.act === act).forEach(e => f.push({ key: "ev:" + e.id, kind: "ev", e, act }));
+    PP.filter(p => p.act === act).forEach(p => f.push({ key: "pp:" + p.name, kind: "pp", p, act }));
+    (LESSONS[act] ? LESSONS[act].terms : []).forEach((t, i) => f.push({ key: `tm:${act}:${i}`, kind: "tm", t, i, act }));
+    const ch = ACTS[act].chain;
+    if (ch && ch.length >= 4) ch.slice(0, -1).forEach((s, i) => f.push({ key: `ch:${act}:${i}`, kind: "ch", ch, i, act }));
+    DIVES.filter(d => d.act === act).forEach(d => d.quiz.forEach((q, qi) => f.push({ key: `dq:${d.id}:${qi}`, kind: "dq", d, qi, act })));
+    return (FACT_CACHE[act] = f);
+  }
+  const known = k => !!(MS.items[k] && MS.items[k].ok);
+  const weak = k => !!(MS.items[k] && !MS.items[k].ok);
+  function coverage(act) { const f = factsFor(act), k = f.filter(x => known(x.key)).length; return { k, n: f.length, pct: f.length ? k / f.length : 0 }; }
+  function record(key, ok) { const it = MS.items[key] || (MS.items[key] = { r: 0, w: 0 }); ok ? it.r++ : it.w++; it.ok = ok; it.t = Date.now(); }
+  function status(a) {
+    const st = actState(a), cov = coverage(a);
+    if (st.slip) return "slipping";
+    if (st.mastered) return st.due <= Date.now() ? "due" : "mastered";
+    if (cov.pct >= 0.7) return "ready";
+    if (st.learned || cov.k > 0) return "learning";
+    return "new";
+  }
+  const ST_LABEL = { new: "Not started", learning: "Learning", ready: "Ready for the check", mastered: "Mastered", due: "Review due", slipping: "Slipping" };
+  const pill = s => `<span class="pill-st st-${s}">${ST_LABEL[s]}</span>`;
+
+  // ---- question builders ----
+  const shortPlace = s => s.split(/,| \(| where /)[0];
+  function evPool(e) { return [...shuffle(EV.filter(x => x.act === e.act && x.id !== e.id)), ...shuffle(EV.filter(x => x.u === e.u && x.act !== e.act)), ...shuffle(EV.filter(x => x.u !== e.u))]; }
+  function fourWay(correct, pool, keyFn = x => x) {
+    const out = [correct], seen = new Set([keyFn(correct)]);
+    for (const x of pool) { const k = keyFn(x); if (!seen.has(k)) { seen.add(k); out.push(x); } if (out.length === 4) break; }
+    const order = shuffle(out.map((_, i) => i));
+    return { list: order.map(i => out[i]), ans: order.indexOf(0) };
+  }
+  function makeQ(f, hard) {
+    const tag = { ev: "Event", pp: "Person", tm: "Key term", ch: "Cause and effect", dq: "Deep dive", xo: "Across the unit" }[f.kind];
+    if (f.kind === "xo") {
+      const [a, b] = f.pair, first = cmp(a, b) < 0 ? a : b, two = shuffle([a, b]);
+      return { tag, prompt: "Which happened first?", choices: two.map(x => x.title), ans: two.indexOf(first), explain: `${a.title}: ${a.shown}. ${b.title}: ${b.shown}.` };
+    }
+    if (f.kind === "ev") {
+      const e = f.e, forms = hard ? ["date", "date", "first", "desc"] : ["date", "desc", "first", "desc"];
+      if (PLACES[e.title]) forms.push("place");
+      let form = pickOne(forms);
+      const tail = `${e.title}: ${e.shown}. ${e.blurb}`;
+      if (form === "first") {
+        const o = evPool(e).find(x => cmp(x, e) !== 0 && x.shown !== e.shown);
+        if (o) { const two = shuffle([e, o]), first = cmp(e, o) < 0 ? e : o; return { tag: "Order", prompt: "Which happened first?", choices: two.map(x => x.title), ans: two.indexOf(first), explain: `${e.title}: ${e.shown}. ${o.title}: ${o.shown}.` }; }
+        form = "date";
+      }
+      if (form === "date") {
+        const near = EV.filter(x => x.id !== e.id && cmp(x, e) !== 0 && x.shown !== e.shown).sort((x, y) => Math.abs(fullKey(x) - fullKey(e)) - Math.abs(fullKey(y) - fullKey(e)));
+        const pool = shuffle(near.slice(0, 8));
+        const fw = fourWay(e, pool, x => x.shown);
+        return { tag: "Date", prompt: "When did this happen?", sub: e.title, choices: fw.list.map(x => x.shown), ans: fw.ans, explain: tail };
+      }
+      if (form === "place") {
+        const correct = shortPlace(PLACES[e.title][2]);
+        const others = shuffle(Object.entries(PLACES).filter(([t]) => t !== e.title).map(([, p]) => shortPlace(p[2])));
+        const fw = fourWay(correct, others);
+        return { tag: "Place", prompt: "Where did this happen?", sub: e.title, choices: fw.list, ans: fw.ans, explain: `${PLACES[e.title][2]}. ${tail}` };
+      }
+      const fw = fourWay(e, evPool(e), x => x.title);
+      return { tag, prompt: "Which event is this?", sub: e.blurb, choices: fw.list.map(x => x.title), ans: fw.ans, explain: `${e.title} (${e.shown}).` };
+    }
+    if (f.kind === "pp") {
+      const p = f.p;
+      if (hard || Math.random() < 0.6) {
+        const ch = whoChoices(p);
+        return { tag, prompt: "Who am I?", sub: p.clues, choices: ch.map(x => x.name), ans: ch.indexOf(p), explain: `${p.name}: ${p.role}.` };
+      }
+      const pool = [...shuffle(PP.filter(x => x.act === p.act && x !== p)), ...shuffle(PP.filter(x => x.act[0] === p.act[0] && x.act !== p.act)), ...shuffle(PP.filter(x => x.act[0] !== p.act[0]))];
+      const fw = fourWay(p, pool, x => x.clues[0]);
+      return { tag, prompt: `Which describes ${p.name}?`, choices: fw.list.map(x => x.clues[0]), ans: fw.ans, explain: `${p.name}: ${p.role}. ${p.clues.join(". ")}.` };
+    }
+    if (f.kind === "tm") {
+      const t = f.t, unit = f.act[0];
+      const pool = [...shuffle(ALL_TERMS.filter(x => x.a === f.act && x.i !== f.i)), ...shuffle(ALL_TERMS.filter(x => x.a[0] === unit && x.a !== f.act)), ...shuffle(ALL_TERMS.filter(x => x.a[0] !== unit))].map(x => x.t);
+      const fw = fourWay(t, pool, x => x[0]);
+      if (Math.random() < 0.5) return { tag, prompt: "Which term matches this definition?", sub: t[1], choices: fw.list.map(x => x[0]), ans: fw.ans, explain: `${t[0]}: ${t[1]}` };
+      return { tag, prompt: `What does "${t[0]}" mean?`, choices: fw.list.map(x => x[1]), ans: fw.ans, explain: `${t[0]}: ${t[1]}` };
+    }
+    if (f.kind === "ch") {
+      const ch = f.ch, nextStep = ch[f.i + 1];
+      const pool = [...shuffle(ch.filter((_, j) => j !== f.i && j !== f.i + 1)), ...shuffle(ACT_ORDER.filter(a => a !== f.act && ACTS[a].chain).flatMap(a => ACTS[a].chain))];
+      const fw = fourWay(nextStep, pool);
+      return { tag, prompt: "What comes right after this step?", sub: ch[f.i], choices: fw.list, ans: fw.ans, explain: `${ch[f.i]} → ${nextStep}.` };
+    }
+    const [q, choices, ans, why] = f.d.quiz[f.qi], sc = shuffleChoices(choices, ans);
+    return { tag: `${tag}: ${f.d.title}`, prompt: q, choices: sc.list, ans: sc.ans, explain: why };
+  }
+
+  // ---- building question sets ----
+  function practiceQueue(act, only) {
+    const f = only || factsFor(act);
+    const weakF = shuffle(f.filter(x => weak(x.key))), fresh = shuffle(f.filter(x => !MS.items[x.key])), knownF = shuffle(f.filter(x => known(x.key)));
+    const q = [...weakF.slice(0, 4)];
+    for (const x of fresh) { if (q.length >= 8) break; q.push(x); }
+    for (const x of [...knownF, ...weakF, ...fresh]) { if (q.length >= 10) break; if (!q.includes(x)) q.push(x); }
+    return shuffle(q.slice(0, only ? only.length : 10));
+  }
+  function stratified(f, n) {
+    const by = k => shuffle(f.filter(x => x.kind === k));
+    const q = [...by("ev").slice(0, Math.ceil(n * 0.4)), ...by("pp").slice(0, Math.ceil(n * 0.2)), ...by("tm").slice(0, Math.ceil(n * 0.2)), ...shuffle([...by("ch"), ...by("dq")]).slice(0, Math.ceil(n * 0.2))];
+    for (const x of shuffle(f)) { if (q.length >= n) break; if (!q.includes(x)) q.push(x); }
+    return shuffle(q.slice(0, n));
+  }
+  function reviewQueue(act) {
+    const f = factsFor(act), w = shuffle(f.filter(x => weak(x.key)));
+    const q = w.slice(0, 2); for (const x of shuffle(f)) { if (q.length >= 5) break; if (!q.includes(x)) q.push(x); }
+    return shuffle(q);
+  }
+  function unitQueue(u) {
+    const acts = ACT_ORDER.filter(a => a.startsWith(u + ".")), per = acts.length >= 6 ? 3 : 4, q = [];
+    acts.forEach(a => q.push(...stratified(factsFor(a), per)));
+    const evs = EV.filter(e => e.u === u);
+    for (let tries = 0; q.length < 20 && tries < 200; tries++) {
+      const [a, b] = shuffle(evs).slice(0, 2);
+      if (a && b && a.act !== b.act && cmp(a, b) !== 0) q.push({ key: `xo:${a.id}:${b.id}`, kind: "xo", pair: [a, b], act: a.act });
+    }
+    return shuffle(q);
+  }
+  function mixedQueue() {
+    const acts = ACT_ORDER.filter(a => actState(a).mastered || status(a) === "slipping");
+    const f = acts.flatMap(factsFor), w = shuffle(f.filter(x => weak(x.key)));
+    const q = w.slice(0, 5); for (const x of shuffle(f)) { if (q.length >= 12) break; if (!q.includes(x)) q.push(x); }
+    return shuffle(q);
+  }
+
+  // ---- quiz runner (practice, check, review, unit test, mixed) ----
+  const QZ = { c: null };
+  const QZ_NAMES = { practice: "Practice", check: "Mastery Check", review: "Quick review", unit: "Unit test", mixed: "Mixed review" };
+  function runQuiz(c) {
+    Object.assign(c, { i: 0, first: {}, missed: [], reask: {}, done: false });
+    if (c.act) c.covBefore = coverage(c.act).k;
+    QZ.c = c; markActive(); show("mquiz"); window.scrollTo({ top: 0 }); nextQ();
+  }
+  function nextQ() {
+    const c = QZ.c;
+    if (c.i >= c.queue.length) return finishQuiz();
+    const f = c.queue[c.i];
+    c.cur = makeQ(f, c.type !== "practice" && c.type !== "mixed"); c.cur.fact = f; c.answered = false;
+    renderQ();
+  }
+  function quizBack() { const c = QZ.c; return c.act ? `<button class="text-btn" id="qz-back" style="align-self:flex-start">&larr; ${esc(actTag(c.act))}: ${esc(ACTS[c.act].title)}</button>` : `<button class="text-btn" id="qz-back" style="align-self:flex-start">&larr; Mastery</button>`; }
+  function bindBack() { const b = $("qz-back"); if (b) b.onclick = () => { const c = QZ.c; c && c.act ? openAct(c.act) : openMasteryHome(); }; }
+  function renderQ() {
+    const c = QZ.c, q = c.cur, total = c.queue.length;
+    const title = c.type === "unit" ? `Unit ${c.unit} test` : c.act ? `${QZ_NAMES[c.type]} · ${actTag(c.act)}` : QZ_NAMES[c.type];
+    const sub = Array.isArray(q.sub) ? `<ul class="clues">${q.sub.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : q.sub ? `<p class="qsub">${esc(q.sub)}</p>` : "";
+    $("mquiz-body").innerHTML = `${quizBack()}
+      <div class="qhead"><span class="label">${esc(title)}</span><span class="meta">${Math.min(c.i + 1, total)} of ${total}</span></div>
+      <div class="cov"><i style="width:${Math.round(c.i / total * 100)}%"></i></div>
+      <div class="panel-card qcard"><div class="tagline">${esc(q.tag)}</div><p class="q">${esc(q.prompt)}</p>${sub}
+        <div class="choices">${q.choices.map((ch, i) => `<button class="choice" data-i="${i}"><span class="kbd">${i + 1}</span>${esc(ch)}</button>`).join("")}</div>
+        <div id="qz-after"></div></div>`;
+    bindBack();
+    document.querySelectorAll("#mquiz-body .choice").forEach(b => b.onclick = () => answerQ(+b.dataset.i));
+  }
+  function answerQ(i) {
+    const c = QZ.c; if (!c || c.answered) return;
+    c.answered = true;
+    const q = c.cur, f = q.fact, ok = i === q.ans;
+    document.querySelectorAll("#mquiz-body .choice").forEach((b, j) => { b.disabled = true; if (j === q.ans) b.classList.add("right"); else if (j === i) b.classList.add("wrong"); });
+    SFX.play(ok ? "right" : "wrong");
+    if (f.kind !== "xo") record(f.key, ok);
+    if (!(f.key in c.first)) c.first[f.key] = ok;
+    if (!ok) {
+      if (!c.missed.some(m => m.f.key === f.key)) c.missed.push({ f, q });
+      if (f.kind === "ev") addPile("missed", f.e.id);
+      if (f.kind === "pp") addPile("missedPeople", f.p.name);
+      if (f.kind === "dq") addPile("missedQ", `${f.d.id}:${f.qi}`);
+      if (c.type === "practice" && (c.reask[f.key] || 0) < 2) { c.reask[f.key] = (c.reask[f.key] || 0) + 1; c.queue.splice(Math.min(c.queue.length, c.i + 3), 0, f); }
+    }
+    saveMS();
+    const again = !ok && c.type === "practice" ? `<span>You'll see this one again in a moment.</span>` : "";
+    $("qz-after").innerHTML = `<div class="verdict inline ${ok ? "ok" : "bad"}">${ok ? "Correct." : "Not quite."} ${esc(q.explain)}${again}</div><button class="go small" id="qz-next">${c.i + 1 < c.queue.length ? "Next" : "See results"}</button>`;
+    $("qz-next").onclick = () => { c.i++; nextQ(); };
+    $("qz-next").focus({ preventScroll: true });
+  }
+  document.addEventListener("keydown", e => {
+    if ($("v-mquiz").hidden || !QZ.c || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.target && /^(TEXTAREA|INPUT|SELECT)$/.test(e.target.tagName)) return;
+    const c = QZ.c;
+    if (!c.answered && /^[1-4]$/.test(e.key)) { const i = +e.key - 1; if (c.cur && i < c.cur.choices.length) { e.preventDefault(); answerQ(i); } }
+  });
+
+  function missedList(c) {
+    if (!c.missed.length) return "";
+    return `<div class="label">Go over these</div><ul class="list">${c.missed.map(({ f, q }) => `<li><span class="d">${esc(f.act ? f.act : "")}</span><span class="t">${esc(q.prompt)}${q.sub && !Array.isArray(q.sub) ? ` ${esc(q.sub)}` : ""}</span><span class="b">Answer: ${esc(q.choices[q.ans])}</span><span class="m">${esc(q.explain)}</span></li>`).join("")}</ul>`;
+  }
+  function finishQuiz() {
+    const c = QZ.c, st = c.act ? actState(c.act) : null;
+    const firstRight = Object.values(c.first).filter(Boolean).length, asked = Object.keys(c.first).length;
+    let head = "", body = "", buttons = "", big = `${firstRight} / ${asked}`;
+    if (c.type === "practice") {
+      const cov = coverage(c.act);
+      head = "Practice round done";
+      body = `<p class="hint">${firstRight} of ${asked} right on the first try. You've now shown ${cov.k} of ${cov.n} facts in this act (${Math.round(cov.pct * 100)}%), up from ${c.covBefore}.</p>` +
+        (cov.pct >= 0.7 && !st.mastered ? `<p class="hint"><b>You're ready for the Mastery Check.</b></p>` : cov.pct < 0.7 ? `<p class="hint">Keep practicing until you reach 70% to unlock a confident Mastery Check.</p>` : "");
+      buttons = `<button class="go small" id="r-more">Practice another round</button>` + (st.mastered ? "" : `<button class="${cov.pct >= 0.7 ? "go" : "text-btn"} small" id="r-check">Take the Mastery Check</button>`);
+      SFX.play(firstRight === asked ? "win" : "drop");
+    } else if (c.type === "check") {
+      const pass = firstRight >= 9; st.best = Math.max(st.best || 0, firstRight);
+      if (pass) { const wasMastered = st.mastered; st.mastered = true; st.slip = false; st.stage = 1; st.due = Date.now() + INTERVALS[1] * DAY; if (!wasMastered) st.masteredAt = Date.now(); }
+      head = pass ? "Act mastered" : "Not yet";
+      body = pass ? `<p class="hint">${firstRight} of 10. This act is mastered. It will come back for a quick review ${fmtDue(st.due)} to make sure it sticks.</p>${st.saq ? "" : `<p class="hint">Finish it off with the writing practice.</p>`}`
+        : `<p class="hint">${firstRight} of 10. You need 9 to master the act. Practice the ones you missed and try again.</p>`;
+      buttons = pass ? (st.saq ? `<button class="go small" id="r-home">Back to Mastery</button>` : `<button class="go small" id="r-write">Do the writing practice</button><button class="text-btn" id="r-home">Back to Mastery</button>`)
+        : `<button class="go small" id="r-missed">Practice what I missed</button><button class="text-btn" id="r-learn">Reread the lesson</button>`;
+      SFX.play(pass ? "win" : "lose");
+    } else if (c.type === "review") {
+      const pass = firstRight >= 4;
+      if (pass) { st.stage = Math.min(INTERVALS.length - 1, (st.stage || 1) + 1); st.due = Date.now() + INTERVALS[st.stage] * DAY; }
+      else { st.mastered = false; st.slip = true; st.stage = 0; }
+      head = pass ? "Still mastered" : "This act slipped";
+      body = pass ? `<p class="hint">${firstRight} of 5. Next review ${fmtDue(st.due)}. Each pass spaces the reviews further apart.</p>` : `<p class="hint">${firstRight} of 5. Practice what you missed, then retake the Mastery Check to get it back.</p>`;
+      buttons = pass ? `<button class="go small" id="r-home">Back to Mastery</button>` : `<button class="go small" id="r-missed">Practice what I missed</button><button class="text-btn" id="r-home">Back to Mastery</button>`;
+      SFX.play(pass ? "win" : "lose");
+    } else if (c.type === "unit") {
+      const pass = firstRight / asked >= 0.85, prev = MS.units[c.unit] || {};
+      MS.units[c.unit] = { passed: pass || !!prev.passed, best: Math.max(prev.best || 0, firstRight), of: asked, at: pass ? Date.now() : prev.at };
+      head = pass ? `Unit ${c.unit} complete` : `Unit ${c.unit} test: not yet`;
+      body = pass ? `<p class="hint">${firstRight} of ${asked}. You've mastered ${UNIT_NAMES[c.unit]}.</p>` : `<p class="hint">${firstRight} of ${asked}. You need ${Math.ceil(asked * 0.85)} to pass. The misses below show which acts to brush up on.</p>`;
+      buttons = `<button class="go small" id="r-home">Back to Mastery</button>`;
+      SFX.play(pass ? "win" : "lose");
+    } else {
+      head = "Mixed review done";
+      body = `<p class="hint">${firstRight} of ${asked} right. Anything you missed is now marked weak, so practice and reviews will bring it back.</p>`;
+      buttons = `<button class="go small" id="r-again">Another mixed round</button><button class="text-btn" id="r-home">Back to Mastery</button>`;
+      SFX.play(firstRight === asked ? "win" : "drop");
+    }
+    saveMS();
+    $("mquiz-body").innerHTML = `${quizBack()}<div class="result"><div class="label">${esc(head)}</div><div class="big">${big}</div>${body}<div class="row">${buttons}</div></div>${missedList(c)}`;
+    bindBack();
+    const on = (id, fn) => { const b = $(id); if (b) b.onclick = fn; };
+    on("r-more", () => startPractice(c.act));
+    on("r-check", () => startCheck(c.act));
+    on("r-home", openMasteryHome);
+    on("r-write", () => openAct(c.act, "write"));
+    on("r-learn", () => openAct(c.act, "learn"));
+    on("r-again", startMixed);
+    on("r-missed", () => runQuiz({ type: "practice", act: c.act, queue: practiceQueue(c.act, shuffle(c.missed.map(m => m.f))) }));
+  }
+  const startPractice = a => runQuiz({ type: "practice", act: a, queue: practiceQueue(a) });
+  const startCheck = a => runQuiz({ type: "check", act: a, queue: stratified(factsFor(a), 10) });
+  const startReview = a => runQuiz({ type: "review", act: a, queue: reviewQueue(a) });
+  const startUnitTest = u => runQuiz({ type: "unit", unit: u, queue: unitQueue(u) });
+  const startMixed = () => runQuiz({ type: "mixed", queue: mixedQueue() });
+
+  // ---- home ----
+  function upNext() {
+    const due = ACT_ORDER.filter(a => ["due", "slipping"].includes(status(a))).sort((a, b) => (actState(a).due || 0) - (actState(b).due || 0));
+    if (due.length) {
+      const a = due[0];
+      return status(a) === "slipping"
+        ? { kicker: "This act slipped", title: `${actTag(a)}: ${ACTS[a].title}`, text: "Practice what you missed, then retake the Mastery Check.", btn: "Get it back", go: () => openAct(a, "practice") }
+        : { kicker: `Review due · ${due.length} waiting`, title: `${actTag(a)}: ${ACTS[a].title}`, text: "A 5-question check to make sure it stuck.", btn: "Start the review", go: () => startReview(a) };
+    }
+    const a = ACT_ORDER.find(x => !actState(x).mastered);
+    if (a) {
+      const st = actState(a), cov = coverage(a), step = !st.learned ? "learn" : cov.pct < 0.7 ? "practice" : "check";
+      const text = { learn: "Start with the lesson: the big idea, key terms, events, and people.", practice: `Keep practicing. You've shown ${Math.round(cov.pct * 100)}% of this act so far.`, check: "You're ready. Pass the Mastery Check with 9 of 10." }[step];
+      return { kicker: st.learned || cov.k ? "Continue" : "Up next", title: `${actTag(a)}: ${ACTS[a].title}`, text, btn: { learn: "Open the lesson", practice: "Practice", check: "Take the Mastery Check" }[step], go: () => step === "practice" ? startPractice(a) : step === "check" ? startCheck(a) : openAct(a, "learn") };
+    }
+    const u = UNITS.find(x => !(MS.units[x] && MS.units[x].passed));
+    if (u) return { kicker: "Every act mastered", title: `Unit ${u} test`, text: "20 questions across the whole unit. Pass with 85%.", btn: "Start the unit test", go: () => startUnitTest(u) };
+    return { kicker: "Everything mastered", title: "Keep it fresh", text: "Reviews will come back on schedule. Meanwhile, a mixed round keeps everything sharp.", btn: "Mixed review", go: startMixed };
+  }
+  function openMasteryHome() { renderMasteryHome(); show("mastery"); window.scrollTo({ top: 0 }); }
+  function renderMasteryHome() {
+    const sts = Object.fromEntries(ACT_ORDER.map(a => [a, status(a)]));
+    const nMastered = ACT_ORDER.filter(a => ["mastered", "due"].includes(sts[a])).length;
+    const dueN = ACT_ORDER.filter(a => ["due", "slipping"].includes(sts[a])).length;
+    const nx = upNext(), streak = dayStreak();
+    const squares = UNITS.map(u => `<div class="mg-row"><span class="mg-u">U${u}</span>${ACT_ORDER.filter(a => a.startsWith(u + ".")).map(a => `<span class="sq st-${sts[a]}" title="${esc(actTag(a))}: ${ST_LABEL[sts[a]]}"></span>`).join("")}${MS.units[u] && MS.units[u].passed ? `<span class="mg-badge" title="Unit test passed">★</span>` : ""}</div>`).join("");
+    let h = `<p class="hint" style="text-align:center">Go act by act through Units 1 to 4: learn it, practice until you know it, pass the Mastery Check, then write. Mastered acts come back for quick reviews so they stick.</p><div class="mhero"><div><div class="label">Course mastery</div><div class="big">${nMastered}<small> / ${ACT_ORDER.length} acts</small></div>
+        <div class="meta" style="text-align:left">${streak ? `${streak}-day streak` : "Study today to start a streak"}${dueN ? ` · ${dueN} act${dueN > 1 ? "s" : ""} to review` : ""}</div></div>
+        <div class="mgrid" aria-label="Progress by act">${squares}</div></div>
+      <div class="upnext"><div class="tagline">${esc(nx.kicker)}</div><h3>${esc(nx.title)}</h3><p class="hint">${esc(nx.text)}</p><button class="go small" id="m-go">${esc(nx.btn)}</button></div>`;
+    h += UNITS.map(u => {
+      const acts = ACT_ORDER.filter(a => a.startsWith(u + ".")), all = acts.every(a => actState(a).mastered), ut = MS.units[u];
+      return `<div class="unit"><div class="unit-head"><span class="label">Unit ${u} · ${esc(UNIT_NAMES[u] || "")}</span></div>
+        ${u === 1 ? `<p class="hint" style="padding:0 18px 6px">Written from standard AP Euro coverage, not from your notes. Upload your Unit 1 pages to Drive to swap them in.</p>` : ""}
+        ${acts.map(a => { const s = sts[a], cov = coverage(a), st = actState(a); return `<button class="mrow" data-act="${a}"><span class="num">${a}</span><span class="name">${esc(ACTS[a].title)}<small>${s === "mastered" ? `Next review ${fmtDue(st.due)}` : `${Math.round(cov.pct * 100)}% shown`}${st.saq ? " · writing ★" : ""}</small><span class="cov thin"><i style="width:${Math.round(cov.pct * 100)}%"></i></span></span>${pill(s)}</button>`; }).join("")}
+        <div class="utest">${ut && ut.passed ? `<span class="pill-st st-mastered">Unit test passed · ${ut.best}/${ut.of}</span><button class="text-btn" data-unit="${u}">Retake</button>` : `<button class="go small" data-unit="${u}" ${all ? "" : "disabled"}>Unit ${u} test</button><span class="meta">${all ? "20 questions, pass with 85%" : `Master all ${acts.length} acts to unlock`}</span>`}</div></div>`;
+    }).join("");
+    if (nMastered >= 2) h += `<button class="go" id="m-mixed">Mixed review across everything I've mastered</button>`;
+    h += `<p class="meta">Progress is saved in this browser.</p>`;
+    $("mastery-body").innerHTML = h;
+    $("m-go").onclick = nx.go;
+    if ($("m-mixed")) $("m-mixed").onclick = startMixed;
+    document.querySelectorAll("#mastery-body .mrow").forEach(b => b.onclick = () => openAct(b.dataset.act));
+    document.querySelectorAll("#mastery-body [data-unit]").forEach(b => b.onclick = () => startUnitTest(+b.dataset.unit));
+  }
+
+  // ---- act page ----
+  const MA = { act: null, step: "learn" };
+  function defaultStep(a) { const st = actState(a), cov = coverage(a); if (st.slip) return "practice"; if (!st.learned) return "learn"; if (st.mastered) return st.saq ? "check" : "write"; return cov.pct < 0.7 ? "practice" : "check"; }
+  function openAct(a, step) { MA.act = a; MA.step = step || defaultStep(a); renderAct(); show("mact"); window.scrollTo({ top: 0 }); }
+  function renderAct() {
+    const a = MA.act, st = actState(a), cov = coverage(a), s = status(a), L = LESSONS[a];
+    const steps = [["learn", "Learn", st.learned], ["practice", "Practice", cov.pct >= 0.7], ["check", "Check", st.mastered], ["write", "Write", st.saq]];
+    let h = `<button class="text-btn" id="ma-back" style="align-self:flex-start">&larr; Mastery</button>
+      <div><div class="tagline">${esc(actLabel(a))} · ${esc(ACTS[a].pages)}</div><h2 class="dive-title">${esc(ACTS[a].title)}</h2>
+      <div class="row" style="justify-content:flex-start;gap:10px">${pill(s)}<span class="meta">${cov.k} of ${cov.n} facts shown (${Math.round(cov.pct * 100)}%)${st.mastered ? ` · next review ${fmtDue(st.due)}` : ""}</span></div>
+      <div class="cov" style="margin-top:10px"><i style="width:${Math.round(cov.pct * 100)}%"></i></div></div>
+      <div class="stepper" role="tablist">${steps.map(([k, label, done], i) => `<button data-step="${k}" ${MA.step === k ? 'aria-current="step"' : ""}><span class="sn">${done ? "✓" : i + 1}</span>${label}</button>`).join("")}</div>
+      <div id="ma-step" class="section" style="gap:22px"></div>`;
+    $("mact-body").innerHTML = h;
+    $("ma-back").onclick = openMasteryHome;
+    document.querySelectorAll("#mact-body .stepper button").forEach(b => b.onclick = () => { MA.step = b.dataset.step; renderAct(); });
+    const box = $("ma-step");
+    if (MA.step === "learn") box.innerHTML = learnHTML(a), bindLearn(a);
+    else if (MA.step === "practice") {
+      const w = factsFor(a).filter(x => weak(x.key)).length, fresh = factsFor(a).filter(x => !MS.items[x.key]).length;
+      box.innerHTML = `<div class="panel-card"><h3>Practice</h3><p class="hint">Rounds of 10 questions in mixed formats: dates, order, places, people, terms, and cause and effect. Misses come back a few questions later until you get them. Each round targets what you haven't shown yet.</p>
+        <p class="meta" style="text-align:left">${fresh} facts not tried yet · ${w} to fix · ${cov.k} shown</p>
+        <div class="row" style="justify-content:flex-start"><button class="go small" id="ma-prac">Start a practice round</button>${w ? `<button class="text-btn" id="ma-weak">Only the ${w} I've missed</button>` : ""}</div></div>`;
+      $("ma-prac").onclick = () => startPractice(a);
+      if ($("ma-weak")) $("ma-weak").onclick = () => runQuiz({ type: "practice", act: a, queue: practiceQueue(a, shuffle(factsFor(a).filter(x => weak(x.key))).slice(0, 12)) });
+    } else if (MA.step === "check") {
+      box.innerHTML = st.mastered && !st.slip
+        ? `<div class="panel-card"><h3>Mastered</h3><p class="hint">Best check score: ${st.best} of 10. The next quick review is ${fmtDue(st.due)}. You can review early any time.</p><div class="row" style="justify-content:flex-start"><button class="go small" id="ma-review">Review now</button><button class="text-btn" id="ma-check">Retake the full check</button></div></div>`
+        : `<div class="panel-card"><h3>Mastery Check</h3><p class="hint">10 questions, harder formats, no second chances. Score 9 or better to master the act. After that it comes back for quick reviews after 3, 7, 14, then 30 days.</p>
+          ${cov.pct < 0.7 ? `<p class="hint"><b>Heads up:</b> you've shown ${Math.round(cov.pct * 100)}% of this act. Practicing to 70% first gives you a much better shot.</p>` : ""}
+          ${st.best ? `<p class="meta" style="text-align:left">Best so far: ${st.best} of 10</p>` : ""}<div class="row" style="justify-content:flex-start"><button class="go small" id="ma-check">Start the Mastery Check</button></div></div>`;
+      if ($("ma-check")) $("ma-check").onclick = () => startCheck(a);
+      if ($("ma-review")) $("ma-review").onclick = () => startReview(a);
+    } else box.innerHTML = writeHTML(a), bindWrite(a);
+  }
+  function learnHTML(a) {
+    const L = LESSONS[a], evs = EV.filter(e => e.act === a).sort((x, y) => fullKey(x) - fullKey(y)), pp = PP.filter(p => p.act === a), ch = ACTS[a].chain, dv = DIVES.filter(d => d.act === a);
+    return `<p class="lede">${esc(L.big)}</p>
+      <div class="angle"><div class="label">How it connects</div><p>${esc(L.connect)}</p></div>
+      <div class="dsec"><div class="label">Key terms</div><dl class="terms">${L.terms.map(([t, d]) => `<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join("")}</dl></div>
+      <div class="dsec"><div class="label">Key events</div><ol class="seq">${evs.map(e => `<li><span class="pb">${esc(e.shown)}</span><span><b>${esc(e.title)}</b><br>${esc(e.blurb)}</span></li>`).join("")}</ol></div>
+      ${ch ? `<div class="dsec"><div class="label">Cause and effect</div><ol class="bul chainlist">${ch.map(s => `<li>${esc(s)}</li>`).join("")}</ol></div>` : ""}
+      ${pp.length ? `<div class="dsec"><div class="label">Key people</div><div class="pgrid">${pp.map(p => `<div class="pcard"><h4>${esc(p.name)}</h4><div class="role">${esc(p.role)}</div><ul>${p.clues.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>`).join("")}</div></div>` : ""}
+      <div class="dsec"><div class="label">Go deeper</div><div class="chiprow">${dv.map(d => `<button class="chip" data-dive="${d.id}">Deep dive: ${esc(d.title)}</button>`).join("")}<button class="chip" id="ma-map">See it on the map</button></div></div>
+      <button class="go" id="ma-start">I've read this. Start practicing</button>`;
+  }
+  function bindLearn(a) {
+    document.querySelectorAll("#ma-step [data-dive]").forEach(b => b.onclick = () => openDive(b.dataset.dive));
+    $("ma-map").onclick = () => { const ys = EV.filter(e => e.act === a).map(e => e.y).sort((x, y) => x - y); show("maps"); openMaps(); setEra(nearestEra(ys[Math.floor(ys.length / 2)] || 1500)); setMapMode("explore"); window.scrollTo({ top: 0 }); };
+    $("ma-start").onclick = () => { actState(a).learned = true; saveMS(); startPractice(a); };
+  }
+  function writeHTML(a) {
+    const L = LESSONS[a], d = store.get("saq", {})[a] || { text: ["", "", ""], shown: false, checks: {} }, st = actState(a);
+    const checks = [...L.saq.q.map((_, i) => `p${i}`), "evidence", "explain"];
+    const checkLabel = { evidence: "I used specific evidence: a name, a date, or an event.", explain: "I explained how or why, not just what happened." };
+    return `<div class="panel-card"><h3>Short-answer practice</h3><p class="hint">Answer all three parts in two or three sentences each, like an AP short-answer question. Then compare your answers with the models and check off what you covered.</p></div>
+      ${L.saq.q.map((q, i) => `<div class="dsec"><div class="label">Part ${"ABC"[i]}</div><p class="qsub" style="margin:0">${esc(q)}</p><textarea id="saq-${i}" rows="4" placeholder="Your answer">${esc(d.text[i] || "")}</textarea>
+        ${d.shown ? `<div class="model"><div class="label">Model answer</div>${esc(L.saq.model[i])}</div><label class="checkline"><input type="checkbox" data-ck="p${i}" ${d.checks["p" + i] ? "checked" : ""}> My answer makes this point (or an equally strong one).</label>` : ""}</div>`).join("")}
+      ${d.shown ? `<div class="dsec"><div class="label">Overall</div>${["evidence", "explain"].map(k => `<label class="checkline"><input type="checkbox" data-ck="${k}" ${d.checks[k] ? "checked" : ""}> ${checkLabel[k]}</label>`).join("")}</div>
+        <div class="${st.saq ? "verdict inline ok" : "meta"}" id="saq-status" style="${st.saq ? "" : "text-align:left"}">${st.saq ? "Writing done ★ You can keep improving it any time." : `Check off all ${checks.length} boxes to finish this step.`}</div>`
+        : `<button class="go" id="saq-show">Compare with the model answers</button><p class="meta" id="saq-need" style="text-align:left">Write at least a sentence for each part first.</p>`}`;
+  }
+  function bindWrite(a) {
+    const save = () => { const all = store.get("saq", {}), d = all[a] || { text: ["", "", ""], shown: false, checks: {} }; d.text = [0, 1, 2].map(i => $("saq-" + i) ? $("saq-" + i).value : ""); all[a] = d; store.set("saq", all); return { all, d }; };
+    [0, 1, 2].forEach(i => { const t = $("saq-" + i); if (t) t.oninput = save; });
+    if ($("saq-show")) $("saq-show").onclick = () => { const { all, d } = save();
+      if (d.text.some(x => x.trim().length < 15)) { $("saq-need").textContent = "Each part needs a real answer (a sentence or more) before you compare."; $("saq-need").style.color = "var(--wrong)"; SFX.play("wrong"); return; }
+      d.shown = true; all[a] = d; store.set("saq", all); markActive(); SFX.play("flip"); renderAct(); };
+    document.querySelectorAll("#ma-step [data-ck]").forEach(cb => cb.onchange = () => {
+      const { all, d } = save(); d.checks[cb.dataset.ck] = cb.checked; all[a] = d; store.set("saq", all);
+      const need = [...LESSONS[a].saq.q.map((_, i) => `p${i}`), "evidence", "explain"];
+      const st = actState(a), was = st.saq; st.saq = need.every(k => d.checks[k]); saveMS();
+      if (st.saq && !was) { SFX.play("win"); renderAct(); } else if (!st.saq && was) renderAct();
+    });
+  }
 
   syncSetup();
   show("setup");
