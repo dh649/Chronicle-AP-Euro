@@ -6,67 +6,53 @@
 <title>Chronicle AP Euro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,650;1,6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Quiet page, one ink, one accent. A thin vertical rule is the timeline; everything else gets out of the way. */
-  --page: #f5f6f8;
-  --surface: #ffffff;
-  --ink: #18202e;
-  --muted: #6a7282;
-  --hair: #e2e5eb;
-  --accent: #2b4fb3;
-  --accent-soft: #e9eefb;
-  --right: #23825a;
-  --right-soft: #e5f3ec;
-  --wrong: #c24130;
-  --wrong-soft: #fbeae7;
+  /* Parchment page, one bronze rule for time. Later events climb toward AFTER, earlier ones sink toward BEFORE. */
+  --page: #f3eee4;
+  --surface: #fffcf6;
+  --ink: #2b2219;
+  --muted: #7a6b58;
+  --hair: #d8cab3;
+  --bronze: #8d6522;
+  --pill: #3b3025;
+  --pill-ink: #f6f1e7;
+  --right: #3d7a50;
+  --right-soft: #e4efe3;
+  --wrong: #a53d2f;
+  --wrong-soft: #f6e2dc;
   --display: "Newsreader", Georgia, serif;
   --body: "Instrument Sans", system-ui, -apple-system, sans-serif;
-  --shadow: 0 1px 2px rgba(16,24,40,.05), 0 8px 24px -12px rgba(16,24,40,.18);
+  --shadow: 0 1px 2px rgba(60,40,15,.06);
   color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --page: #12151b; --surface: #1b1f27; --ink: #e8eaef; --muted: #959cab; --hair: #2b303b;
-    --accent: #8ea8f0; --accent-soft: #232c45; --right: #5cc497; --right-soft: #1b3229; --wrong: #ef7d6b; --wrong-soft: #3a211e;
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px -12px rgba(0,0,0,.6);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --page: #12151b; --surface: #1b1f27; --ink: #e8eaef; --muted: #959cab; --hair: #2b303b;
-  --accent: #8ea8f0; --accent-soft: #232c45; --right: #5cc497; --right-soft: #1b3229; --wrong: #ef7d6b; --wrong-soft: #3a211e;
-  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 28px -12px rgba(0,0,0,.6);
-  color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
 button { font: inherit; color: inherit; cursor: pointer; background: none; border: 0; padding: 0; }
-button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; border-radius: 6px; }
 .wrap { max-width: 620px; margin: 0 auto; padding: 36px 20px 80px; display: flex; flex-direction: column; gap: 28px; }
 
-header { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
-h1 { font-family: var(--display); font-weight: 650; font-size: clamp(2.6rem, 9vw, 3.4rem); line-height: 1; margin: 0; letter-spacing: -.02em; }
-h1 span { font-style: italic; font-weight: 500; color: var(--accent); }
+header.site { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(2.6rem, 9vw, 3.4rem); line-height: 1; margin: 0; letter-spacing: -.02em; }
+h1 span { font-style: italic; font-weight: 500; color: var(--bronze); }
 .sub { color: var(--muted); font-size: .95rem; margin: 0; }
 nav { display: flex; gap: 22px; }
 nav button { font-size: .92rem; font-weight: 500; color: var(--muted); padding: 4px 0; border-bottom: 2px solid transparent; }
-nav button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+nav button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--bronze); }
 
-h2 { font-family: var(--display); font-weight: 500; font-size: 1.45rem; line-height: 1.2; margin: 0; text-wrap: balance; }
 .section { display: flex; flex-direction: column; gap: 18px; }
 .hint { color: var(--muted); font-size: .92rem; margin: 0; }
-.label { font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.label { font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 
 /* act picker */
-.unit { background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+.unit { background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
 .unit-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px 6px; }
-.unit-head button { font-size: .82rem; color: var(--accent); font-weight: 500; }
+.unit-head button { font-size: .82rem; color: var(--bronze); font-weight: 500; }
 .act { width: 100%; display: flex; align-items: center; gap: 14px; padding: 11px 18px; text-align: left; border-top: 1px solid var(--hair); }
 .act:first-of-type { border-top: 0; }
 .act .box { flex: none; width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--hair); display: grid; place-items: center; transition: background .15s, border-color .15s; }
-.act[aria-pressed="true"] .box { background: var(--accent); border-color: var(--accent); }
+.act[aria-pressed="true"] .box { background: var(--pill); border-color: var(--pill); }
 .act .box svg { opacity: 0; }
 .act[aria-pressed="true"] .box svg { opacity: 1; }
 .act .name { flex: 1; font-size: .95rem; }
@@ -77,87 +63,115 @@ h2 { font-family: var(--display); font-weight: 500; font-size: 1.45rem; line-hei
 .controls { display: flex; flex-direction: column; gap: 14px; align-items: stretch; }
 .seg { display: grid; grid-template-columns: 1fr 1fr; background: var(--hair); border-radius: 10px; padding: 3px; }
 .seg button { padding: 8px; border-radius: 8px; font-size: .9rem; font-weight: 500; color: var(--muted); }
-.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(16,24,40,.1); }
-.go { background: var(--ink); color: var(--page); border-radius: 12px; padding: 14px 20px; font-weight: 600; font-size: 1rem; width: 100%; transition: transform .1s; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(60,40,15,.12); }
+.go { background: var(--pill); color: var(--pill-ink); border-radius: 10px; padding: 14px 20px; font-weight: 600; font-size: 1rem; width: 100%; transition: transform .1s; }
 .go:active { transform: scale(.99); }
 .go:disabled { opacity: .35; cursor: not-allowed; }
 .text-btn { color: var(--muted); font-size: .9rem; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 .meta { color: var(--muted); font-size: .88rem; text-align: center; font-variant-numeric: tabular-nums; }
 
-/* game */
-.hud { display: flex; justify-content: space-between; align-items: center; font-size: .88rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-.hud b { color: var(--ink); font-weight: 600; font-size: 1.1rem; margin-left: 4px; }
-.lives { display: inline-flex; gap: 6px; }
+/* ---------- shared track look (Timeline + Chains) ---------- */
+.track { display: flex; flex-direction: column; padding: 4px 0; }
+.rail { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
+.rail::before { content: ""; position: absolute; left: 50%; top: 26px; bottom: 26px; width: 2px; margin-left: -1px; background: var(--bronze); }
+.mid { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 14px 0; }
+.cap { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: .7rem; font-weight: 600; letter-spacing: .2em; color: var(--muted); }
+.cap::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--bronze); }
+.cap.bottom { flex-direction: column-reverse; }
+.node { position: relative; z-index: 1; width: min(340px, 88%); margin: 14px 0; }
+.node .pillbadge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: var(--pill); color: var(--pill-ink); border-radius: 999px; padding: 2px 11px; font-size: .78rem; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; transition: background .3s; }
+.node .body { background: var(--surface); border: 1px solid var(--hair); border-radius: 8px; padding: 16px 14px 12px; box-shadow: var(--shadow); transition: border-color .3s, background .3s; }
+.node h4 { font-family: var(--display); font-weight: 700; font-size: 1rem; line-height: 1.25; margin: 0 0 3px; }
+.node p { margin: 0; font-size: .8rem; color: var(--muted); line-height: 1.45; }
+.node .actline { margin-top: 6px; font-size: .7rem; color: var(--bronze); letter-spacing: .02em; }
+.node.ok .pillbadge { background: var(--right); }
+.node.ok .body { border-color: var(--right); background: var(--right-soft); }
+.node.bad .pillbadge, .node.miss .pillbadge { background: var(--wrong); }
+.node.bad .body { border-color: var(--wrong); background: var(--wrong-soft); }
+.node.pop { animation: pop .35s ease-out; }
+@keyframes pop { from { transform: scale(.96); opacity: .4; } to { transform: none; opacity: 1; } }
+
+.gap { position: relative; z-index: 2; width: min(340px, 88%); height: 26px; display: flex; align-items: center; justify-content: center; }
+.gap .ind { position: absolute; left: 0; right: 0; top: 50%; border-top: 2px dashed var(--bronze); opacity: 0; transition: opacity .12s; }
+.gap .ind::after { content: "Place here"; position: absolute; left: 50%; top: -12px; transform: translateX(-50%); background: var(--page); color: var(--bronze); font-size: .74rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--bronze); }
+.gap:hover .ind, .gap:focus-visible .ind, .gap.hot .ind { opacity: 1; }
+.gap:focus-visible { outline: none; }
+
+/* ---------- game screen ---------- */
+.game { min-height: 100svh; display: flex; flex-direction: column; }
+.gbar { position: sticky; top: 0; z-index: 5; background: var(--page); border-bottom: 1px solid var(--hair); display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; height: 46px; padding: 0 8px; }
+.gbar button { font-size: 1.15rem; height: 36px; border-radius: 8px; color: var(--ink); }
+.gbar .gtitle { text-align: center; font-family: var(--display); font-weight: 700; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stats { position: fixed; top: 58px; right: 16px; z-index: 6; background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 8px 14px; display: flex; flex-direction: column; align-items: center; min-width: 108px; box-shadow: var(--shadow); }
+.stat { display: flex; flex-direction: column; align-items: center; padding: 4px 0; }
+.stat + .stat { border-top: 1px solid var(--hair); }
+.stat span { font-size: .6rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.stat b { font-size: 1.1rem; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.lives { display: inline-flex; gap: 5px; padding: 5px 0 2px; }
 .life { width: 9px; height: 9px; border-radius: 50%; background: var(--wrong); }
-.life.spent { background: var(--hair); }
-
-.draw { position: sticky; top: 0; z-index: 3; background: var(--page); padding: 12px 0 10px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 10px 12px -10px var(--page); }
-.card { background: var(--surface); border-radius: 14px; padding: 18px 20px; box-shadow: var(--shadow); text-align: center; }
-.card .tag { font-size: .75rem; color: var(--muted); letter-spacing: .02em; }
-.card h3 { font-family: var(--display); font-weight: 650; font-size: 1.4rem; line-height: 1.2; margin: 4px 0 6px; text-wrap: balance; }
-.card p { margin: 0 auto; font-size: .92rem; color: var(--muted); max-width: 44ch; }
-.card.enter { animation: deal .25s ease-out; }
-@keyframes deal { from { transform: translateY(-6px); opacity: 0; } to { transform: none; opacity: 1; } }
-
-.verdict { font-size: .88rem; text-align: center; padding: 8px 12px; border-radius: 10px; }
-.verdict.ok { background: var(--right-soft); color: var(--right); }
-.verdict.bad { background: var(--wrong-soft); color: var(--wrong); }
-.verdict span { display: block; color: var(--muted); font-size: .82rem; }
-
-.timeline { position: relative; display: flex; flex-direction: column; padding: 6px 0; }
-.timeline::before { content: ""; position: absolute; left: 76px; top: 0; bottom: 0; width: 2px; background: var(--hair); border-radius: 2px; }
-.slot { position: relative; height: 34px; width: 100%; display: flex; align-items: center; }
-.slot::after { content: "+"; position: absolute; left: 66px; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 1.5px solid var(--hair); color: var(--muted); display: grid; place-items: center; font-size: 15px; line-height: 1; transition: all .15s; }
-.slot .slot-label { margin-left: 100px; font-size: .82rem; color: var(--accent); opacity: 0; transition: opacity .15s; }
-.slot:hover::after, .slot:focus-visible::after { background: var(--accent); border-color: var(--accent); color: #fff; transform: scale(1.12); }
-.slot:hover .slot-label, .slot:focus-visible .slot-label { opacity: 1; }
-.ev { display: grid; grid-template-columns: 64px 1fr; gap: 24px; align-items: baseline; padding: 4px 0; position: relative; }
-.ev::before { content: ""; position: absolute; left: 73px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%; background: var(--ink); }
-.ev .date { text-align: right; font-size: .8rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; line-height: 1.25; }
-.ev .t { font-size: .95rem; padding: 6px 10px; margin-left: -10px; border-radius: 8px; }
-.ev .t small { display: block; font-size: .75rem; color: var(--muted); }
-.ev.just-ok .t { background: var(--right-soft); }
-.ev.just-ok::before { background: var(--right); }
-.ev.just-bad .t { background: var(--wrong-soft); }
-.ev.just-bad::before, .ev.miss::before { background: var(--wrong); }
+.life.spent { background: transparent; border: 1.5px solid var(--hair); }
+.verdict { position: sticky; top: 52px; z-index: 4; align-self: center; width: min(420px, calc(100% - 32px)); margin: 6px auto 0; font-size: .85rem; text-align: center; padding: 8px 12px; border-radius: 10px; }
+.verdict.ok { background: var(--right-soft); color: var(--right); border: 1px solid var(--right); }
+.verdict.bad { background: var(--wrong-soft); color: var(--wrong); border: 1px solid var(--wrong); }
+.verdict span { display: block; color: var(--muted); font-size: .8rem; }
+.game .track { flex: 1; min-height: calc(100svh - 300px); padding: 18px 0 10px; }
+.dock { position: sticky; bottom: 0; z-index: 5; background: var(--page); display: flex; justify-content: center; padding: 0 16px 16px; }
+.dock-inner { width: min(380px, 100%); border-top: 1px solid var(--hair); padding-top: 18px; position: relative; display: flex; flex-direction: column; align-items: center; }
+.dock .dragpill { position: absolute; top: 18px; left: 50%; transform: translate(-50%, -50%); z-index: 2; background: var(--pill); color: var(--pill-ink); border-radius: 999px; padding: 3px 11px; font-size: .72rem; font-weight: 600; white-space: nowrap; }
+.current { width: 100%; background: var(--surface); border: 1px solid var(--hair); border-radius: 8px; padding: 18px 16px 14px; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; box-shadow: var(--shadow); }
+.current .tag { font-size: .7rem; color: var(--bronze); letter-spacing: .02em; margin-bottom: 2px; }
+.current h3 { font-family: var(--display); font-weight: 700; font-size: 1.35rem; line-height: 1.2; margin: 0 0 6px; text-wrap: balance; }
+.current p { margin: 0; font-size: .88rem; color: var(--muted); }
+.current.lifted { opacity: .35; }
+.current.enter { animation: deal .25s ease-out; }
+@keyframes deal { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
+.ghost { position: fixed; left: 0; top: 0; z-index: 50; pointer-events: none; cursor: grabbing; box-shadow: 0 18px 36px -12px rgba(60,40,15,.35); margin: 0; }
+.dock-note { font-size: .74rem; color: var(--muted); margin-top: 8px; text-align: center; }
 
 /* end of run */
-.result { background: var(--surface); border-radius: 16px; box-shadow: var(--shadow); padding: 28px 22px; text-align: center; display: flex; flex-direction: column; gap: 6px; align-items: center; }
-.big { font-family: var(--display); font-weight: 650; font-size: 4rem; line-height: 1; font-variant-numeric: tabular-nums; }
-.list { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; background: var(--surface); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+.result { background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; padding: 28px 22px; text-align: center; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.big { font-family: var(--display); font-weight: 700; font-size: 4rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.list { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; overflow: hidden; }
 .list li { display: grid; grid-template-columns: 70px 1fr; gap: 0 14px; padding: 13px 18px; border-top: 1px solid var(--hair); }
 .list li:first-child { border-top: 0; }
 .list .d { font-size: .8rem; font-weight: 600; color: var(--muted); padding-top: 2px; grid-row: span 3; font-variant-numeric: tabular-nums; }
 .list .t { font-weight: 500; font-size: .95rem; }
 .list .b { font-size: .88rem; color: var(--muted); }
-.list .m { font-size: .76rem; color: var(--accent); margin-top: 2px; }
+.list .m { font-size: .76rem; color: var(--bronze); margin-top: 2px; }
 .row { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
 
 /* chains */
 .select-wrap { position: relative; }
-select { width: 100%; appearance: none; background: var(--surface); color: var(--ink); border: 0; box-shadow: var(--shadow); border-radius: 12px; padding: 12px 40px 12px 16px; font: inherit; font-size: .95rem; }
+select { width: 100%; appearance: none; background: var(--surface); color: var(--ink); border: 1px solid var(--hair); border-radius: 10px; padding: 12px 40px 12px 16px; font: inherit; font-size: .95rem; }
 .select-wrap::after { content: ""; position: absolute; right: 18px; top: 50%; width: 7px; height: 7px; border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
-.steps { display: flex; flex-direction: column; gap: 8px; }
-.step { text-align: left; background: var(--surface); border-radius: 10px; padding: 11px 14px; font-size: .92rem; display: flex; gap: 12px; align-items: baseline; box-shadow: 0 1px 2px rgba(16,24,40,.06); border: 1.5px solid transparent; transition: border-color .15s; }
-.step:hover { border-color: var(--hair); }
-.step i { font-style: normal; font-weight: 600; font-size: .8rem; color: var(--accent); min-width: 1.2em; font-variant-numeric: tabular-nums; }
-.step.right { border-color: var(--right); background: var(--right-soft); }
-.step.wrongpos { border-color: var(--wrong); background: var(--wrong-soft); }
-.step .fix { margin-left: auto; font-size: .76rem; color: var(--wrong); white-space: nowrap; font-weight: 500; }
+.chain-track { min-height: 300px; }
+.chain-track .node { cursor: pointer; }
+.chain-track .node .fix { display: block; margin-top: 4px; font-size: .74rem; font-weight: 600; color: var(--wrong); }
+.chain-empty { position: relative; z-index: 1; background: var(--page); color: var(--muted); font-size: .85rem; padding: 6px 12px; margin: 40px 0; }
+.chain-dock { border-top: 1px solid var(--hair); padding-top: 18px; position: relative; display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.chain-dock .dragpill { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: var(--pill); color: var(--pill-ink); border-radius: 999px; padding: 3px 11px; font-size: .72rem; font-weight: 600; white-space: nowrap; }
+.step { width: min(380px, 100%); text-align: left; background: var(--surface); border: 1px solid var(--hair); border-radius: 8px; padding: 11px 14px; font-family: var(--display); font-weight: 700; font-size: .98rem; box-shadow: var(--shadow); transition: border-color .15s, transform .1s; }
+.step:hover { border-color: var(--bronze); }
+.step:active { transform: scale(.99); }
+.chain-dock .go, .chain-dock .meta { width: min(380px, 100%); }
 .empty { color: var(--muted); font-size: .88rem; border: 1.5px dashed var(--hair); border-radius: 10px; padding: 12px 14px; }
-.pool-label { display: flex; justify-content: space-between; align-items: baseline; }
 
 [hidden] { display: none !important; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
-@media (max-width: 420px) {
-  .timeline::before { left: 62px; } .slot::after { left: 52px; } .slot .slot-label { margin-left: 84px; }
-  .ev { grid-template-columns: 52px 1fr; } .ev::before { left: 59px; }
+@media (max-width: 760px) {
+  .stats { position: static; flex-direction: row; justify-content: center; gap: 0; border-radius: 0; border-width: 0 0 1px; box-shadow: none; padding: 4px 8px; background: var(--page); min-width: 0; }
+  .stat { flex-direction: row; gap: 6px; padding: 2px 14px; align-items: center; }
+  .stat + .stat { border-top: 0; border-left: 1px solid var(--hair); }
+  .stat b { font-size: .95rem; }
+  .lives { padding: 0; }
+  .statbar { position: sticky; top: 46px; z-index: 5; }
+  .verdict { top: 82px; }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
+<div class="wrap" id="main">
+  <header class="site">
     <h1>Chronicle <span>AP Euro</span></h1>
     <p class="sub">Put history in order, straight from your readings.</p>
     <nav aria-label="Modes">
@@ -169,7 +183,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 
   <!-- TIMELINE SETUP -->
   <section id="v-setup" class="section">
-    <p class="hint" style="text-align:center">Place each event where it belongs. A miss costs a life, and the card still lands in its real spot so you see why.</p>
+    <p class="hint" style="text-align:center">Drag each event onto the timeline where it belongs. A miss costs a life, and the card still lands in its real spot so you see why.</p>
     <div id="units" class="section" style="gap:14px"></div>
     <div class="controls">
       <div class="seg" role="group" aria-label="Lives">
@@ -179,20 +193,6 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
       <button class="go" id="start">Start</button>
       <div class="meta" id="deck-count"></div>
     </div>
-  </section>
-
-  <!-- TIMELINE GAME -->
-  <section id="v-game" hidden>
-    <div class="draw">
-      <div class="hud">
-        <span>Streak<b id="score">0</b></span>
-        <span class="lives" id="seals" aria-label="Lives left"></span>
-        <span><span id="left">0</span> left · <button class="text-btn" id="quit">End</button></span>
-      </div>
-      <div class="card enter" id="current" aria-live="polite"></div>
-      <div class="verdict" id="verdict" hidden></div>
-    </div>
-    <div class="timeline" id="timeline"></div>
   </section>
 
   <!-- GAME OVER -->
@@ -211,18 +211,15 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 
   <!-- CHAINS -->
   <section id="v-chains" class="section" hidden>
-    <p class="hint" style="text-align:center">Rebuild each act's "Main Chain to Remember" from your notes. Tap steps in order; tap a placed step to undo.</p>
+    <p class="hint" style="text-align:center">Rebuild each act's "Main Chain to Remember" from your notes. The first cause sits at the bottom and the chain climbs from there. Tap a placed step to send it back.</p>
     <div class="select-wrap"><select id="chain-act" aria-label="Act"></select></div>
-    <div class="section" style="gap:10px">
-      <div class="label">Your order</div>
-      <div class="steps" id="chain-pick"></div>
+    <div class="track chain-track" id="chain-track"></div>
+    <div class="chain-dock">
+      <span class="dragpill" id="chain-pill">Tap the next step</span>
+      <div class="section" id="chain-pool" style="gap:8px; width:100%; align-items:center"></div>
+      <button class="go" id="chain-check" disabled>Check my order</button>
+      <div class="meta"><span id="chain-result"></span> <button class="text-btn" id="chain-shuffle">Reshuffle</button></div>
     </div>
-    <div class="section" style="gap:10px">
-      <div class="pool-label"><span class="label">Steps</span><button class="text-btn" id="chain-shuffle">Reshuffle</button></div>
-      <div class="steps" id="chain-pool"></div>
-    </div>
-    <button class="go" id="chain-check" disabled>Check my order</button>
-    <div class="meta" id="chain-result"></div>
   </section>
 
   <!-- REVIEW -->
@@ -233,6 +230,32 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     <button class="text-btn" id="clear" style="align-self:center">Clear the pile</button>
   </section>
 </div>
+
+<!-- TIMELINE GAME (full screen) -->
+<section id="v-game" class="game" hidden>
+  <div class="gbar">
+    <button id="quit" aria-label="End run">&larr;</button>
+    <div class="gtitle" id="gtitle">AP Euro</div>
+    <span></span>
+  </div>
+  <div class="statbar">
+    <div class="stats">
+      <div class="stat"><span>Streak</span><b id="score">0</b></div>
+      <div class="stat"><span>Best</span><b id="best">0</b></div>
+      <div class="stat"><span>Lives</span><span class="lives" id="seals" aria-label="Lives left"></span></div>
+      <div class="stat"><span>Left</span><b id="left">0</b></div>
+    </div>
+  </div>
+  <div class="verdict" id="verdict" hidden aria-live="polite"></div>
+  <div class="track" id="track"></div>
+  <div class="dock">
+    <div class="dock-inner">
+      <span class="dragpill">Drag to place</span>
+      <div class="current enter" id="current"></div>
+      <div class="dock-note">Or tap a spot on the line.</div>
+    </div>
+  </div>
+</section>
 
 <script src="data.js"></script>
 <script>
@@ -263,16 +286,18 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const actTag = act => { const [u, a] = act.split("."); return `Unit ${u}, Act ${a}`; };
+  const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
   const CHECK = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-  // ---------- tabs ----------
+  // ---------- views ----------
   const views = ["setup", "game", "over", "chains", "review"];
   let lastTimelineView = "setup";
   function show(v) {
     views.forEach(x => $("v-" + x).hidden = x !== v);
+    $("main").hidden = v === "game";
     const tab = v === "chains" ? "chains" : v === "review" ? "review" : "timeline";
     ["timeline", "chains", "review"].forEach(t => $("tab-" + t).setAttribute("aria-pressed", String(t === tab)));
-    if (["setup","game","over"].includes(v)) lastTimelineView = v;
+    if (["setup","over"].includes(v)) lastTimelineView = v;
   }
   $("tab-timeline").onclick = () => show(lastTimelineView);
   $("tab-chains").onclick = () => { show("chains"); if (!chain.order) newChain(); };
@@ -301,6 +326,15 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     });
   }
   const selKey = () => [...selected].sort().join(",") + "|" + lives;
+  function selTitle() {
+    const parts = [2,3,4].map(u => {
+      const acts = Object.keys(ACTS).filter(k => k.startsWith(u + "."));
+      const on = acts.filter(a => selected.has(a)).map(a => a.split(".")[1]);
+      if (!on.length) return null;
+      return on.length === acts.length ? `Unit ${u}` : `Unit ${u} · Act${on.length > 1 ? "s" : ""} ${on.join(", ")}`;
+    }).filter(Boolean);
+    return parts.join(" + ");
+  }
   function syncSetup() {
     store.set("acts", [...selected]); store.set("lives", lives);
     renderUnits();
@@ -320,39 +354,108 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     const deck = shuffle(pool);
     const first = deck.pop();
     G = { deck, line: [first], current: deck.pop(), score: 0, lives: opts.lives ?? lives, maxLives: opts.lives ?? lives,
-          missed: [], drill: !!opts.drill, key: opts.drill ? null : selKey(), lastId: null, lastOk: null, done: false };
+          missed: [], drill: !!opts.drill, key: opts.drill ? null : selKey(), lastId: null, lastOk: null, done: false,
+          title: opts.drill ? "Review drill" : selTitle() };
     $("verdict").hidden = true;
+    $("gtitle").textContent = G.title;
     show("game");
     renderGame();
-    window.scrollTo({ top: 0 });
+    requestAnimationFrame(() => { const el = document.getElementById("ev-" + first.id); el && el.scrollIntoView({ block: "center" }); });
   }
   $("start").onclick = () => startGame(EV.filter(e => selected.has(e.act)));
 
-  function renderGame() {
+  function renderStats() {
     $("score").textContent = G.score;
+    $("best").textContent = G.key ? (store.get("best", {})[G.key] || 0) : "–";
     $("left").textContent = G.deck.length + (G.done ? 0 : 1);
     $("seals").innerHTML = Array.from({length: G.maxLives}, (_, i) => `<span class="life${i >= G.lives ? " spent" : ""}"></span>`).join("");
-    const c = G.current, cur = $("current");
-    cur.classList.remove("enter"); void cur.offsetWidth; cur.classList.add("enter");
-    cur.innerHTML = `<div class="tag">${actTag(c.act)} · ${esc(c.pages)}</div><h3>${esc(c.title)}</h3><p>${esc(c.blurb)}</p>`;
-    const tl = $("timeline"); tl.innerHTML = "";
-    const slot = i => {
-      const b = document.createElement("button"); b.className = "slot"; b.disabled = G.done;
-      b.innerHTML = `<span class="slot-label">Place here</span>`;
-      b.setAttribute("aria-label", i === 0 ? "Place before the first event" : `Place after ${G.line[i-1].title}`);
-      b.onclick = () => place(i); return b;
-    };
-    tl.appendChild(slot(0));
-    G.line.forEach((e, i) => {
-      const d = document.createElement("div");
-      const missed = G.missed.some(m => m.id === e.id);
-      d.className = "ev" + (e.id === G.lastId ? (G.lastOk ? " just-ok" : " just-bad") : missed ? " miss" : "");
-      d.id = "ev-" + e.id;
-      d.innerHTML = `<span class="date">${esc(e.shown)}</span><span class="t">${esc(e.title)}<small>${actTag(e.act)}</small></span>`;
-      tl.appendChild(d);
-      tl.appendChild(slot(i + 1));
-    });
   }
+
+  function renderGame() {
+    renderStats();
+    const c = G.current, cur = $("current");
+    cur.classList.remove("enter", "lifted"); void cur.offsetWidth; cur.classList.add("enter");
+    cur.innerHTML = `<div class="tag">${actTag(c.act)} · ${esc(c.pages)}</div><h3>${esc(c.title)}</h3><p>${esc(c.blurb)}</p>`;
+    $("current").parentElement.parentElement.hidden = G.done;
+
+    // Later events on top, earlier at the bottom.
+    $("track").innerHTML = `<div class="rail"><div class="cap">AFTER</div><div class="mid" id="track-mid"></div><div class="cap bottom">BEFORE</div></div>`;
+    const tr = $("track-mid");
+    const gap = i => {
+      const b = document.createElement("button"); b.className = "gap"; b.dataset.i = i; b.disabled = G.done;
+      b.innerHTML = `<span class="ind"></span>`;
+      b.setAttribute("aria-label", i === G.line.length ? "Place after the latest event" : i === 0 ? "Place before the earliest event" : `Place between ${G.line[i-1].title} and ${G.line[i].title}`);
+      b.onclick = () => place(i);
+      return b;
+    };
+    for (let k = G.line.length; k >= 0; k--) {
+      tr.appendChild(gap(k));
+      if (k > 0) {
+        const e = G.line[k - 1];
+        const n = document.createElement("div");
+        const missed = G.missed.some(m => m.id === e.id);
+        n.className = "node" + (e.id === G.lastId ? (G.lastOk ? " ok pop" : " bad pop") : missed ? " miss" : "");
+        n.id = "ev-" + e.id;
+        n.innerHTML = `<span class="pillbadge">${esc(e.shown)}</span><div class="body"><h4>${esc(e.title)}</h4><p>${esc(e.blurb)}</p><div class="actline">${actTag(e.act)} · ${esc(e.pages)}</div></div>`;
+        tr.appendChild(n);
+      }
+    }
+
+  }
+
+  // Drag the dealt card onto a gap. Tapping a gap works too.
+  (function setupDrag() {
+    const card = $("current");
+    card.addEventListener("pointerdown", e => {
+      if (!G || G.done || e.button > 0) return;
+      e.preventDefault();
+      const r = card.getBoundingClientRect();
+      const offX = e.clientX - r.left, offY = e.clientY - r.top;
+      let ghost = null, target = null, py = e.clientY, scrolling = 0;
+      const dockTop = () => card.closest(".dock").getBoundingClientRect().top;
+      function pick(y) {
+        let best = null, bd = Infinity;
+        if (y < dockTop() + 10) {
+          document.querySelectorAll("#track-mid .gap").forEach(g => {
+            const gr = g.getBoundingClientRect(); const d = Math.abs((gr.top + gr.bottom) / 2 - y);
+            if (d < bd) { bd = d; best = g; }
+          });
+        }
+        if (best !== target) { target && target.classList.remove("hot"); best && best.classList.add("hot"); target = best; }
+      }
+      function tick() {
+        if (!ghost) return;
+        const top = 120, bottom = dockTop() - 30;
+        const v = py < top ? -Math.min(18, (top - py) / 4 + 4) : py > bottom ? Math.min(18, (py - bottom) / 4 + 4) : 0;
+        if (v) { window.scrollBy(0, v); pick(py); }
+        scrolling = requestAnimationFrame(tick);
+      }
+      function move(ev) {
+        py = ev.clientY;
+        if (!ghost) {
+          if (Math.hypot(ev.clientX - e.clientX, ev.clientY - e.clientY) < 6) return;
+          ghost = card.cloneNode(true); ghost.removeAttribute("id"); ghost.classList.remove("enter");
+          ghost.classList.add("ghost"); ghost.style.width = r.width + "px";
+          document.body.appendChild(ghost); card.classList.add("lifted");
+          scrolling = requestAnimationFrame(tick);
+        }
+        ghost.style.transform = `translate(${ev.clientX - offX}px, ${ev.clientY - offY}px) rotate(-1.5deg)`;
+        pick(ev.clientY);
+      }
+      function up() {
+        window.removeEventListener("pointermove", move);
+        window.removeEventListener("pointerup", up);
+        window.removeEventListener("pointercancel", up);
+        cancelAnimationFrame(scrolling);
+        if (ghost) ghost.remove();
+        card.classList.remove("lifted");
+        if (target) { const i = +target.dataset.i; target.classList.remove("hot"); place(i); }
+      }
+      window.addEventListener("pointermove", move);
+      window.addEventListener("pointerup", up);
+      window.addEventListener("pointercancel", up);
+    });
+  })();
 
   function place(i) {
     if (G.done) return;
@@ -369,28 +472,28 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     if (ok) {
       G.score++;
       v.className = "verdict ok";
-      v.innerHTML = `Correct: ${esc(c.title)} was ${esc(c.shown)}.<span>${esc(c.pages)}</span>`;
+      v.innerHTML = `Correct: ${esc(c.title)}, ${esc(c.shown)}.<span>${esc(c.pages)}</span>`;
       if (G.drill) missedList = missedList.filter(id => id !== c.id);
     } else {
       G.lives--;
       G.missed.push(c);
       v.className = "verdict bad";
-      v.innerHTML = `${esc(c.title)} was ${esc(c.shown)}.<span>${esc(c.blurb)} Reread ${esc(c.pages)}.</span>`;
+      v.innerHTML = `${esc(c.title)} was ${esc(c.shown)}.<span>Reread ${esc(c.pages)}.</span>`;
       if (!missedList.includes(c.id)) missedList.push(c.id);
     }
     store.set("missed", missedList);
     G.lastId = c.id; G.lastOk = ok;
     if (G.key) { const b = store.get("best", {}); if (G.score > (b[G.key] || 0)) { b[G.key] = G.score; store.set("best", b); } }
-    if (G.lives <= 0 || !G.deck.length) { G.done = true; renderGame(); setTimeout(endGame, 900); return; }
-    G.current = G.deck.pop();
+    if (G.lives <= 0 || !G.deck.length) G.done = true; else G.current = G.deck.pop();
     renderGame();
     const el = document.getElementById("ev-" + c.id);
-    if (el) el.scrollIntoView({ block: "center", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    if (el) el.scrollIntoView({ block: "center", behavior: reduced() ? "auto" : "smooth" });
+    if (G.done) setTimeout(endGame, 1400);
   }
 
   function endGame() {
     if (!G) return;
-    const cleared = G.lives > 0 && !G.deck.length && G.done;
+    const cleared = G.lives > 0 && !G.deck.length && G.done && G.line.length > 1 && !G.quit;
     $("final").textContent = G.score;
     $("over-title").textContent = cleared ? (G.missed.length ? "Deck cleared" : "Perfect run") : G.lives <= 0 ? "Out of lives" : "Run ended";
     const best = G.key ? (store.get("best", {})[G.key] || G.score) : null;
@@ -402,7 +505,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   }
   $("again").onclick = () => G && G.drill ? startDrill() : $("start").onclick();
   $("change").onclick = () => show("setup");
-  $("quit").onclick = () => { G.done = true; endGame(); };
+  $("quit").onclick = () => { if (G) { G.done = true; G.quit = true; } endGame(); };
 
   function listHTML(evs) {
     return `<ul class="list">${evs.slice().sort((a, b) => fullKey(a) - fullKey(b)).map(e =>
@@ -442,24 +545,32 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
   }
   function renderChain() {
     const steps = ACTS[chain.act].chain;
-    const pool = $("chain-pool"), pick = $("chain-pick");
-    pool.innerHTML = ""; pick.innerHTML = "";
+    const pool = $("chain-pool");
+    $("chain-track").innerHTML = `<div class="rail"><div class="cap">LAST</div><div class="mid" id="chain-mid"></div><div class="cap bottom">FIRST</div></div>`;
+    const tr = $("chain-mid");
+    if (!chain.picked.length) tr.insertAdjacentHTML("beforeend", `<div class="chain-empty">Tap the step that comes first</div>`);
+    for (let pos = chain.picked.length - 1; pos >= 0; pos--) {
+      const i = chain.picked[pos];
+      const n = document.createElement("div");
+      let cls = "node", fix = "";
+      if (chain.checked) { if (i === pos) cls += " ok"; else { cls += " bad"; fix = `<span class="fix">Belongs at #${i + 1}</span>`; } }
+      n.className = cls;
+      n.innerHTML = `<span class="pillbadge">#${pos + 1}</span><div class="body"><h4>${esc(steps[i])}</h4>${fix}</div>`;
+      n.setAttribute("role", "button"); n.tabIndex = 0;
+      const undo = () => { if (chain.checked) return; chain.picked.splice(pos, 1); renderChain(); };
+      n.onclick = undo; n.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); undo(); } };
+      tr.appendChild(n);
+    }
+
+
+    pool.innerHTML = "";
     const left = chain.order.filter(i => !chain.picked.includes(i));
     left.forEach(i => {
-      const b = document.createElement("button"); b.className = "step"; b.innerHTML = `<span>${esc(steps[i])}</span>`;
+      const b = document.createElement("button"); b.className = "step"; b.textContent = steps[i];
       b.onclick = () => { if (chain.checked) return; chain.picked.push(i); renderChain(); };
       pool.appendChild(b);
     });
-    if (!left.length) pool.innerHTML = `<div class="empty">All steps placed.</div>`;
-    if (!chain.picked.length) pick.innerHTML = `<div class="empty">Tap the step that comes first.</div>`;
-    chain.picked.forEach((i, pos) => {
-      const b = document.createElement("button");
-      let cls = "step", fix = "";
-      if (chain.checked) { if (i === pos) cls += " right"; else { cls += " wrongpos"; fix = `<span class="fix">goes #${i + 1}</span>`; } }
-      b.className = cls; b.innerHTML = `<i>${pos + 1}</i><span>${esc(steps[i])}</span>${fix}`;
-      b.onclick = () => { if (chain.checked) return; chain.picked.splice(pos, 1); renderChain(); };
-      pick.appendChild(b);
-    });
+    $("chain-pill").textContent = chain.checked ? "Checked" : left.length ? `Tap step #${chain.picked.length + 1}` : "All steps placed";
     $("chain-check").disabled = chain.picked.length !== steps.length;
     $("chain-check").textContent = chain.checked ? "Try again" : "Check my order";
   }
@@ -468,7 +579,7 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
     chain.checked = true;
     const steps = ACTS[chain.act].chain;
     const right = chain.picked.filter((i, pos) => i === pos).length;
-    $("chain-result").textContent = right === steps.length ? `All ${right} in order.` : `${right} of ${steps.length} in the right spot. Red steps show where they belong.`;
+    $("chain-result").textContent = right === steps.length ? `All ${right} in order.` : `${right} of ${steps.length} in the right spot.`;
     renderChain();
   };
 
