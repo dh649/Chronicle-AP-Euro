@@ -1797,7 +1797,7 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
 
   const ET = {
     units: new Set(store.get("etUnits", [...new Set([...selected].map(a => +a.split(".")[0]))].sort())),
-    mode: store.get("etMode", "full"), typed: store.get("etTyped", true), study: false, run: null
+    mode: store.get("etMode", "full"), typed: store.get("etTyped", true), chrono: store.get("etChrono", false), study: false, run: null
   };
   if (!ET.units.size) ET.units.add(4);
   const etStats = () => store.get("bigStats", {});
@@ -1827,6 +1827,9 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
         <p class="meta" style="margin:0">${{ quick: "20 events, weighted toward the ones you haven't nailed.", full: "Every big event once, in a random format.", brutal: "Every event three ways: what happened, a true-or-false detail, and naming it from a description." }[ET.mode]}</p></div>
       <div class="section" style="gap:8px"><div class="label">Answers</div>
         <div class="seg" role="group" aria-label="Answer style"><button data-typed="1" aria-pressed="${ET.typed}">Some typed</button><button data-typed="0" aria-pressed="${!ET.typed}">All multiple choice</button></div></div>
+      <div class="section" style="gap:8px"><div class="label">Order</div>
+        <div class="seg" role="group" aria-label="Question order"><button data-chrono="0" aria-pressed="${!ET.chrono}">Random</button><button data-chrono="1" aria-pressed="${ET.chrono}">Chronological</button></div>
+        ${ET.chrono ? `<p class="meta" style="margin:0">Events go in date order, earliest first.${ET.mode === "brutal" ? " Brutal runs through the timeline three times." : ""}</p>` : ""}</div>
       <button class="go" id="et-start" ${n ? "" : "disabled"}>${n ? `Start · ${n} questions` : "Pick at least one unit"}</button>
       <button class="text-btn" id="et-study" style="align-self:center">${ET.study ? "Hide the study list" : "Study the events first"}</button>
       <div id="et-studybox" class="section" style="gap:16px">${ET.study ? etStudyHTML() : ""}</div>`;
@@ -1834,10 +1837,11 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     $("et-all").onclick = () => { if (ET.units.size === 4) ET.units.clear(); else [1, 2, 3, 4].forEach(u => ET.units.add(u)); saveET(); renderETSetup(); };
     document.querySelectorAll("#et-body [data-mode]").forEach(b => b.onclick = () => { ET.mode = b.dataset.mode; saveET(); renderETSetup(); });
     document.querySelectorAll("#et-body [data-typed]").forEach(b => b.onclick = () => { ET.typed = b.dataset.typed === "1"; saveET(); renderETSetup(); });
+    document.querySelectorAll("#et-body [data-chrono]").forEach(b => b.onclick = () => { ET.chrono = b.dataset.chrono === "1"; saveET(); renderETSetup(); });
     $("et-start").onclick = () => startET(etEvents(), ET.mode);
     $("et-study").onclick = () => { ET.study = !ET.study; renderETSetup(); };
   }
-  function saveET() { store.set("etUnits", [...ET.units]); store.set("etMode", ET.mode); store.set("etTyped", ET.typed); }
+  function saveET() { store.set("etUnits", [...ET.units]); store.set("etMode", ET.mode); store.set("etTyped", ET.typed); store.set("etChrono", ET.chrono); }
   function etStudyHTML() {
     const evs = etEvents(); if (!evs.length) return "";
     const acts = [...new Set(evs.map(b => b.act))];
@@ -1892,7 +1896,13 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     } else {
       plan = events.map(b => ({ b, type: Math.random() < 0.5 ? pickOne(nameSide()) : pickOne(contentSide(b)) }));
     }
-    const queue = etSpread(shuffle(plan)).map(p => makeETQ(p.b, p.type));
+    let ordered;
+    if (ET.chrono) { // date order; events asked more than once go through the timeline again in a later pass
+      const seen = new Map();
+      ordered = plan.map(p => { const pass = seen.get(p.b) || 0; seen.set(p.b, pass + 1); return { ...p, pass }; })
+        .sort((x, y) => x.pass - y.pass || fullKey(x.b.e) - fullKey(y.b.e) || x.b.e.id - y.b.e.id);
+    } else ordered = etSpread(shuffle(plan));
+    const queue = ordered.map(p => makeETQ(p.b, p.type));
     ET.run = { queue, i: 0, right: 0, log: [], answered: false, label: label || { quick: "Quick test", full: "Full test", brutal: "Brutal test", relink: "Retest" }[mode] };
     SFX.play("deal");
     renderETQ(); show("etquiz"); window.scrollTo({ top: 0 });
