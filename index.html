@@ -141,20 +141,30 @@ nav button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--
 .list .m { font-size: .76rem; color: var(--bronze); margin-top: 2px; }
 .row { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
 
-/* chains */
 .select-wrap { position: relative; }
 select { width: 100%; appearance: none; background: var(--surface); color: var(--ink); border: 1px solid var(--hair); border-radius: 10px; padding: 12px 40px 12px 16px; font: inherit; font-size: .95rem; }
 .select-wrap::after { content: ""; position: absolute; right: 18px; top: 50%; width: 7px; height: 7px; border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
-.chain-track { min-height: 300px; }
-.chain-track .node { cursor: pointer; }
-.chain-track .node .fix { display: block; margin-top: 4px; font-size: .74rem; font-weight: 600; color: var(--wrong); }
-.chain-empty { position: relative; z-index: 1; background: var(--page); color: var(--muted); font-size: .85rem; padding: 6px 12px; margin: 40px 0; }
-.chain-dock { border-top: 1px solid var(--hair); padding-top: 18px; position: relative; display: flex; flex-direction: column; gap: 8px; align-items: center; }
-.chain-dock .dragpill { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: var(--pill); color: var(--pill-ink); border-radius: 999px; padding: 3px 11px; font-size: .72rem; font-weight: 600; white-space: nowrap; }
 .step { width: min(380px, 100%); text-align: left; background: var(--surface); border: 1px solid var(--hair); border-radius: 8px; padding: 11px 14px; font-family: var(--display); font-weight: 700; font-size: .98rem; box-shadow: var(--shadow); transition: border-color .15s, transform .1s; }
 .step:hover { border-color: var(--bronze); }
 .step:active { transform: scale(.99); }
-.chain-dock .go, .chain-dock .meta { width: min(380px, 100%); }
+/* event test */
+.ecard { background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; text-align: left; }
+.ecard h4 { margin: 0; font-family: var(--display); font-size: 1.08rem; }
+.ec-head { display: flex; flex-direction: column; gap: 2px; }
+.ecard .meta { text-align: left; }
+.ecard p { margin: 0; font-size: .94rem; line-height: 1.5; }
+.ec-row { display: grid; grid-template-columns: 84px 1fr; gap: 10px; font-size: .88rem; line-height: 1.45; }
+.ec-row .label { padding-top: 2px; }
+.ec-row ul { margin: 0; padding-left: 1.1em; }
+.ec-row.trap li { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--wrong); }
+@media (max-width: 560px) { .ec-row { grid-template-columns: 1fr; gap: 2px; } }
+.etq-desc { margin: 0; font-size: 1.02rem; line-height: 1.55; }
+.etq-input { width: 100%; border: 1px solid var(--hair); border-radius: 10px; padding: 12px 14px; font: inherit; font-size: 1rem; background: var(--surface); color: var(--ink); }
+.etq-input:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
+details.et-act { background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; padding: 0 16px; }
+details.et-act[open] { padding-bottom: 14px; }
+details.et-act > summary { cursor: pointer; padding: 12px 0; font-size: .95rem; }
+details.et-act .ecard { border-color: var(--hair); background: var(--page); }
 .empty { color: var(--muted); font-size: .88rem; border: 1.5px dashed var(--hair); border-radius: 10px; padding: 12px 14px; }
 
 
@@ -344,7 +354,7 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     <nav aria-label="Modes">
       <button id="tab-mastery" aria-pressed="false">Mastery</button>
       <button id="tab-timeline" aria-pressed="true">Timeline</button>
-      <button id="tab-chains" aria-pressed="false">Chains</button>
+      <button id="tab-etest" aria-pressed="false">Event Test</button>
       <button id="tab-maps" aria-pressed="false">Maps</button>
       <button id="tab-dives" aria-pressed="false">Deep Dives</button>
       <button id="tab-people" aria-pressed="false">People</button>
@@ -380,19 +390,9 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     <div id="over-missed" class="section" style="gap:10px"></div>
   </section>
 
-  <!-- CHAINS -->
-  <section id="v-chains" class="section" hidden>
-    <p class="hint" style="text-align:center">Rebuild each act's "Main Chain to Remember" from your notes. The first cause sits at the bottom and the chain climbs from there. Tap a placed step to send it back.</p>
-    <div class="select-wrap"><select id="chain-act" aria-label="Act"></select></div>
-    <div class="track chain-track" id="chain-track"></div>
-    <div class="chain-dock">
-      <span class="dragpill" id="chain-pill">Tap the next step</span>
-      <div class="section" id="chain-pool" style="gap:8px; width:100%; align-items:center"></div>
-      <button class="go" id="chain-check" disabled>Check my order</button>
-      <div class="meta"><span id="chain-result"></span> <button class="text-btn" id="chain-shuffle">Reshuffle</button></div>
-    </div>
-  </section>
-
+  <!-- EVENT TEST -->
+  <section id="v-etest" class="section" hidden><div id="et-body" class="section" style="gap:18px"></div></section>
+  <section id="v-etquiz" class="section" hidden><div id="etq-body" class="section" style="gap:14px"></div></section>
   <!-- MASTERY -->
   <section id="v-mastery" class="section" hidden><div id="mastery-body" class="section" style="gap:18px"></div></section>
   <section id="v-mact" class="section" hidden><div id="mact-body" class="section" style="gap:20px"></div></section>
@@ -476,6 +476,7 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
 <script src="maps.js"></script>
 <script src="mastery.js"></script>
 <script src="story.js"></script>
+<script src="bigevents.js"></script>
 <script>
 (() => {
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -550,7 +551,7 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
   SFX.sync();
   // A soft tick for ordinary taps across the app; outcomes get their own sounds.
   document.addEventListener("click", e => {
-    const b = e.target.closest && e.target.closest("nav button, .seg button, .act, .unit-head button, .chip, .dive-card, .text-btn, .go, .zoom button, .step, .gbar button:not(.sound-btn), .review-btn, .chain-track .node");
+    const b = e.target.closest && e.target.closest("nav button, .seg button, .act, .unit-head button, .chip, .dive-card, .text-btn, .go, .zoom button, .step, .gbar button:not(.sound-btn), .review-btn");
     if (b && !b.disabled) SFX.play("tap");
   }, true);
   const $ = id => document.getElementById(id);
@@ -561,17 +562,16 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
   const CHECK = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
   // ---------- views ----------
-  const views = ["setup", "game", "over", "chains", "maps", "dives", "dive", "people", "review", "mastery", "mact", "mquiz", "mstory"];
+  const views = ["setup", "game", "over", "etest", "etquiz", "maps", "dives", "dive", "people", "review", "mastery", "mact", "mquiz", "mstory"];
   let lastTimelineView = "setup";
   function show(v) {
     views.forEach(x => $("v-" + x).hidden = x !== v);
     $("main").hidden = v === "game";
-    const tab = { chains: "chains", maps: "maps", dives: "dives", dive: "dives", people: "people", review: "review", mastery: "mastery", mact: "mastery", mquiz: "mastery", mstory: "mastery" }[v] || "timeline";
-    ["mastery", "timeline", "chains", "maps", "dives", "people", "review"].forEach(t => $("tab-" + t).setAttribute("aria-pressed", String(t === tab)));
+    const tab = { etest: "etest", etquiz: "etest", maps: "maps", dives: "dives", dive: "dives", people: "people", review: "review", mastery: "mastery", mact: "mastery", mquiz: "mastery", mstory: "mastery" }[v] || "timeline";
+    ["mastery", "timeline", "etest", "maps", "dives", "people", "review"].forEach(t => $("tab-" + t).setAttribute("aria-pressed", String(t === tab)));
     if (["setup","over"].includes(v)) lastTimelineView = v;
   }
   $("tab-timeline").onclick = () => show(lastTimelineView);
-  $("tab-chains").onclick = () => { show("chains"); if (!chain.order) newChain(); };
   $("tab-review").onclick = () => { renderReview(); show("review"); };
   $("tab-maps").onclick = () => { show("maps"); openMaps(); };
   $("tab-mastery").onclick = () => openMasteryHome();
@@ -815,62 +815,6 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     startGame(evs, { drill: true, lives: Math.max(3, Math.ceil(evs.length / 3)) });
   }
   $("clear").onclick = () => { ["missed", "missedPeople", "missedTerr", "missedQ"].forEach(k => store.set(k, [])); renderReview(); };
-
-  // ---------- chains ----------
-  const chain = { act: null, order: null, picked: [], checked: false };
-  const chainActs = Object.keys(ACTS).filter(k => ACTS[k].chain).sort((a, b) => { const [ua, aa] = a.split(".").map(Number), [ub, ab] = b.split(".").map(Number); return ua - ub || aa - ab; });
-  $("chain-act").innerHTML = chainActs.map(k => `<option value="${k}">${actTag(k)}: ${esc(ACTS[k].title)}</option>`).join("");
-  $("chain-act").onchange = () => newChain($("chain-act").value);
-  $("chain-shuffle").onclick = () => newChain(chain.act);
-  function newChain(act) {
-    chain.act = act || chainActs.find(k => selected.has(k)) || chainActs[0];
-    $("chain-act").value = chain.act;
-    const steps = ACTS[chain.act].chain;
-    let order; do { order = shuffle(steps.map((_, i) => i)); } while (order.every((v, i) => v === i));
-    chain.order = order; chain.picked = []; chain.checked = false;
-    $("chain-result").textContent = "";
-    renderChain();
-  }
-  function renderChain() {
-    const steps = ACTS[chain.act].chain;
-    const pool = $("chain-pool");
-    $("chain-track").innerHTML = `<div class="rail"><div class="cap">LAST</div><div class="mid" id="chain-mid"></div><div class="cap bottom">FIRST</div></div>`;
-    const tr = $("chain-mid");
-    if (!chain.picked.length) tr.insertAdjacentHTML("beforeend", `<div class="chain-empty">Tap the step that comes first</div>`);
-    for (let pos = chain.picked.length - 1; pos >= 0; pos--) {
-      const i = chain.picked[pos];
-      const n = document.createElement("div");
-      let cls = "node", fix = "";
-      if (chain.checked) { if (i === pos) cls += " ok"; else { cls += " bad"; fix = `<span class="fix">Belongs at #${i + 1}</span>`; } }
-      n.className = cls;
-      n.innerHTML = `<span class="pillbadge">#${pos + 1}</span><div class="body"><h4>${esc(steps[i])}</h4>${fix}</div>`;
-      n.setAttribute("role", "button"); n.tabIndex = 0;
-      const undo = () => { if (chain.checked) return; chain.picked.splice(pos, 1); renderChain(); };
-      n.onclick = undo; n.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); undo(); } };
-      tr.appendChild(n);
-    }
-
-
-    pool.innerHTML = "";
-    const left = chain.order.filter(i => !chain.picked.includes(i));
-    left.forEach(i => {
-      const b = document.createElement("button"); b.className = "step"; b.textContent = steps[i];
-      b.onclick = () => { if (chain.checked) return; chain.picked.push(i); renderChain(); };
-      pool.appendChild(b);
-    });
-    $("chain-pill").textContent = chain.checked ? "Checked" : left.length ? `Tap step #${chain.picked.length + 1}` : "All steps placed";
-    $("chain-check").disabled = chain.picked.length !== steps.length;
-    $("chain-check").textContent = chain.checked ? "Try again" : "Check my order";
-  }
-  $("chain-check").onclick = () => {
-    if (chain.checked) { newChain(chain.act); return; }
-    chain.checked = true;
-    const steps = ACTS[chain.act].chain;
-    const right = chain.picked.filter((i, pos) => i === pos).length;
-    $("chain-result").textContent = right === steps.length ? `All ${right} in order.` : `${right} of ${steps.length} in the right spot.`;
-    SFX.play(right === steps.length ? "win" : right >= steps.length / 2 ? "right" : "wrong");
-    renderChain();
-  };
 
   // ================= shared =================
   const shuffleChoices = (choices, ans) => { const idx = shuffle(choices.map((_, i) => i)); return { list: idx.map(i => choices[i]), ans: idx.indexOf(ans) }; };
@@ -1813,6 +1757,229 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
       if (st.saq && !was) { SFX.play("win"); renderAct(); } else if (!st.saq && was) renderAct();
     });
   }
+
+  // ================= event test =================
+  // Links each big event's NAME to what actually HAPPENED: name -> content and content -> name, mixed.
+  const ET_STOP = new Set("the of and a an in on to for by its his her their with from into at as is s new first becomes takes".split(" "));
+  const ET_KEEP = new Set("france french england english spain spanish britain british austria italy rome paris europe king war peace treaty battle edict act declared begins ends established".split(" "));
+  const BX = BIG.map(([title, what, who, result, truths, traps]) => {
+    const e = byTitle[title];
+    return e && { title, what, who, result, truths, traps, e, act: e.act, unit: +e.act.split(".")[0] };
+  }).filter(Boolean);
+  const etNorm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/ninety[- ]five/g, "95");
+  const etTokens = s => (etNorm(s).match(/[a-z0-9]+/g) || []).filter(w => !ET_STOP.has(w));
+  const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // Hide the event's own name inside its description so "name this event" can't be read off the text.
+  function etMask(b, text) {
+    const words = (b.title.match(/[\p{L}\p{N}]+/gu) || []).filter(w => w.length >= 3 && !ET_STOP.has(w.toLowerCase()) && !ET_KEEP.has(w.toLowerCase()));
+    return words.reduce((out, w) => out.replace(new RegExp(`(^|[^\\p{L}])${reEsc(w)}(?=$|[^\\p{L}])`, "giu"), "$1____"), text);
+  }
+  function lev(a, b) {
+    const d = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  }
+  const tokHit = (u, t) => u === t || (u.length >= 4 && t.startsWith(u)) || (!/^\d+$/.test(t) && t.length >= 5 && lev(u, t) <= (t.length >= 8 ? 2 : 1));
+  function titleScore(input, title) {
+    const T = etTokens(title), U = etTokens(input);
+    if (!T.length || !U.length) return 0;
+    const hit = T.filter(t => U.some(u => tokHit(u, t))).length;
+    const extra = U.filter(u => !T.some(t => tokHit(u, t))).length;
+    return hit / T.length - Math.max(0, extra - 1) * 0.1; // one extra word (e.g. "storming") is free
+  }
+  // Right if it matches this event at least halfway AND no other event's name fits better.
+  function etJudge(input, b) {
+    const s = titleScore(input, b.title);
+    if (s < 0.5) return false;
+    return BX.every(x => x === b || titleScore(input, x.title) <= s + 1e-9);
+  }
+
+  const ET = {
+    units: new Set(store.get("etUnits", [...new Set([...selected].map(a => +a.split(".")[0]))].sort())),
+    mode: store.get("etMode", "full"), typed: store.get("etTyped", true), study: false, run: null
+  };
+  if (!ET.units.size) ET.units.add(4);
+  const etStats = () => store.get("bigStats", {});
+  const solid = (st, b) => (st[b.title] || [0, 0, 0])[2] >= 2;
+  const etEvents = () => BX.filter(b => ET.units.has(b.unit));
+  const nameSide = () => ET.typed ? ["name", "typed"] : ["name"];
+  // "Who" only works when the person isn't named in the event title (no asking who was behind "Calonne's reform plan").
+  const whoAsk = b => b.who.filter(n => !etTokens(n).some(w => w.length >= 4 && etTokens(b.title).includes(w)));
+  const contentSide = b => ["what", "true", "false", "result", ...(whoAsk(b).length ? ["who"] : [])];
+
+  function etCount() {
+    const n = etEvents().length;
+    return ET.mode === "quick" ? Math.min(20, n) : ET.mode === "brutal" ? n * 3 : n;
+  }
+  function renderETSetup() {
+    const st = etStats();
+    const unitRows = [1, 2, 3, 4].map(u => {
+      const evs = BX.filter(b => b.unit === u), s = evs.filter(b => solid(st, b)).length;
+      return `<button class="act" data-u="${u}" aria-pressed="${ET.units.has(u)}"><span class="box">${CHECK}</span><span class="name">Unit ${u} · ${esc(UNIT_NAMES[u] || "")}<small>${evs.length} big events · ${s ? `${s} nailed` : "none nailed yet"}</small></span><span class="n">${s}/${evs.length}</span></button>`;
+    }).join("");
+    const n = etCount();
+    $("et-body").innerHTML = `
+      <p class="hint" style="text-align:center">A hard test on the big events of each act. Some questions give you the name and ask what really happened; others describe the event and make you name it. "Nailed" means you got an event right twice in a row.</p>
+      <div class="unit"><div class="unit-head"><span class="label">Units</span><button id="et-all">${ET.units.size === 4 ? "Clear" : "Select all"}</button></div>${unitRows}</div>
+      <div class="section" style="gap:8px"><div class="label">Length</div>
+        <div class="seg three" role="group" aria-label="Test length">${[["quick", "Quick 20"], ["full", "Every event"], ["brutal", "Brutal ×3"]].map(([k, l]) => `<button data-mode="${k}" aria-pressed="${ET.mode === k}">${l}</button>`).join("")}</div>
+        <p class="meta" style="margin:0">${{ quick: "20 events, weighted toward the ones you haven't nailed.", full: "Every big event once, in a random format.", brutal: "Every event three ways: what happened, a true-or-false detail, and naming it from a description." }[ET.mode]}</p></div>
+      <div class="section" style="gap:8px"><div class="label">Answers</div>
+        <div class="seg" role="group" aria-label="Answer style"><button data-typed="1" aria-pressed="${ET.typed}">Some typed</button><button data-typed="0" aria-pressed="${!ET.typed}">All multiple choice</button></div></div>
+      <button class="go" id="et-start" ${n ? "" : "disabled"}>${n ? `Start · ${n} questions` : "Pick at least one unit"}</button>
+      <button class="text-btn" id="et-study" style="align-self:center">${ET.study ? "Hide the study list" : "Study the events first"}</button>
+      <div id="et-studybox" class="section" style="gap:16px">${ET.study ? etStudyHTML() : ""}</div>`;
+    document.querySelectorAll("#et-body [data-u]").forEach(b => b.onclick = () => { const u = +b.dataset.u; ET.units.has(u) ? ET.units.delete(u) : ET.units.add(u); saveET(); renderETSetup(); });
+    $("et-all").onclick = () => { if (ET.units.size === 4) ET.units.clear(); else [1, 2, 3, 4].forEach(u => ET.units.add(u)); saveET(); renderETSetup(); };
+    document.querySelectorAll("#et-body [data-mode]").forEach(b => b.onclick = () => { ET.mode = b.dataset.mode; saveET(); renderETSetup(); });
+    document.querySelectorAll("#et-body [data-typed]").forEach(b => b.onclick = () => { ET.typed = b.dataset.typed === "1"; saveET(); renderETSetup(); });
+    $("et-start").onclick = () => startET(etEvents(), ET.mode);
+    $("et-study").onclick = () => { ET.study = !ET.study; renderETSetup(); };
+  }
+  function saveET() { store.set("etUnits", [...ET.units]); store.set("etMode", ET.mode); store.set("etTyped", ET.typed); }
+  function etStudyHTML() {
+    const evs = etEvents(); if (!evs.length) return "";
+    const acts = [...new Set(evs.map(b => b.act))];
+    return acts.map(a => `<details class="et-act"><summary><span class="label">${esc(actTag(a))}</span> ${esc(ACTS[a].title)} <span class="meta">· ${evs.filter(b => b.act === a).length}</span></summary><div class="section" style="gap:10px">${evs.filter(b => b.act === a).map(b => etCard(b)).join("")}</div></details>`).join("");
+  }
+  function etCard(b) {
+    return `<div class="ecard"><div class="ec-head"><h4>${esc(b.title)}</h4><span class="meta">${esc(b.e.shown)} · ${esc(actTag(b.act))}</span></div>
+      <p>${esc(b.what)}</p>
+      ${b.who.length ? `<div class="ec-row"><span class="label">Who</span><span>${esc(b.who.join(", "))}</span></div>` : ""}
+      <div class="ec-row"><span class="label">Led to</span><span>${esc(b.result)}</span></div>
+      <div class="ec-row"><span class="label">Key facts</span><ul>${b.truths.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>
+      <div class="ec-row trap"><span class="label">Not true</span><ul>${b.traps.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div></div>`;
+  }
+
+  // ---- building a test ----
+  function etOthers(b) {
+    return [...shuffle(BX.filter(x => x !== b && x.act === b.act)), ...shuffle(BX.filter(x => x.act !== b.act && x.unit === b.unit)), ...shuffle(BX.filter(x => x.unit !== b.unit))];
+  }
+  function etWhoPool(b) {
+    const out = new Set(b.who), names = [];
+    const add = n => { if (!out.has(n)) { out.add(n); names.push(n); } };
+    const fromAct = (pred) => shuffle([...PP.filter(p => pred(p.act)).map(p => p.name), ...BX.filter(x => pred(x.act)).flatMap(x => x.who)]).forEach(add);
+    fromAct(a => a === b.act); fromAct(a => a.startsWith(b.unit + ".")); fromAct(() => true);
+    return names;
+  }
+  function makeETQ(b, type) {
+    const mc = (kind, head, right, wrong, headIsText) => { const sc = shuffleChoices([right, ...wrong], 0); return { b, type, kind, head, headIsText, choices: sc.list, ans: sc.ans }; };
+    const o = etOthers(b);
+    if (type === "what") return mc("What actually happened?", b.title, b.what, o.slice(0, 3).map(x => x.what));
+    if (type === "result") return mc("What did it lead to?", b.title, b.result, o.slice(0, 3).map(x => x.result));
+    if (type === "true") return mc("Which of these is true?", b.title, pickOne(b.truths), b.traps);
+    if (type === "false") return mc("Which of these is NOT true?", b.title, pickOne(b.traps), b.truths);
+    if (type === "who") return mc("Who was central to it?", b.title, pickOne(whoAsk(b)), etWhoPool(b).slice(0, 3));
+    if (type === "name") return mc("Name this event", etMask(b, b.what), b.title, o.slice(0, 3).map(x => x.title), true);
+    return { b, type: "typed", kind: "Type the event's name", head: etMask(b, b.what), headIsText: true };
+  }
+  function etSpread(qs) { // keep the same event from showing up back to back
+    for (let i = 1; i < qs.length; i++) if (qs[i].b === qs[i - 1].b) { const j = qs.findIndex((q, k) => k > i && q.b !== qs[i - 1].b && (!qs[k + 1] || qs[k + 1].b !== qs[i].b)); if (j > 0) [qs[i], qs[j]] = [qs[j], qs[i]]; }
+    return qs;
+  }
+  function startET(events, mode, label) {
+    if (!events.length) return;
+    const st = etStats();
+    let plan;
+    if (mode === "quick") {
+      const pick = events.map(b => ({ b, k: ((st[b.title] || [0, 0, 0])[2]) + Math.random() * 1.5 })).sort((x, y) => x.k - y.k).slice(0, 20).map(x => x.b);
+      plan = pick.map(b => ({ b, type: Math.random() < 0.5 ? pickOne(nameSide()) : pickOne(contentSide(b)) }));
+    } else if (mode === "brutal") {
+      plan = events.flatMap(b => [{ b, type: pickOne(["what", "result"]) }, { b, type: pickOne(["true", "false", ...(whoAsk(b).length ? ["who"] : [])]) }, { b, type: pickOne(nameSide()) }]);
+    } else if (mode === "relink") { // retest misses: both directions for each
+      plan = events.flatMap(b => [{ b, type: pickOne(contentSide(b)) }, { b, type: pickOne(nameSide()) }]);
+    } else {
+      plan = events.map(b => ({ b, type: Math.random() < 0.5 ? pickOne(nameSide()) : pickOne(contentSide(b)) }));
+    }
+    const queue = etSpread(shuffle(plan)).map(p => makeETQ(p.b, p.type));
+    ET.run = { queue, i: 0, right: 0, log: [], answered: false, label: label || { quick: "Quick test", full: "Full test", brutal: "Brutal test", relink: "Retest" }[mode] };
+    SFX.play("deal");
+    renderETQ(); show("etquiz"); window.scrollTo({ top: 0 });
+  }
+
+  // ---- taking it ----
+  function renderETQ() {
+    const R = ET.run, q = R.queue[R.i], n = R.queue.length;
+    R.answered = false;
+    const head = q.headIsText ? `<p class="etq-desc">${esc(q.head)}</p>` : `<p class="q">${esc(q.head)}</p>`;
+    const body = q.type === "typed"
+      ? `<form id="etq-form" class="section" style="gap:10px" autocomplete="off"><input id="etq-in" class="etq-input" placeholder="Event name" aria-label="Event name" autocapitalize="off" spellcheck="false"><div class="row" style="gap:14px"><button class="go small" type="submit">Check</button><button class="text-btn" type="button" id="etq-idk">I don't know</button></div></form>`
+      : `<div class="choices">${q.choices.map((ch, i) => `<button class="choice" data-i="${i}"><span class="kbd">${i + 1}</span>${esc(ch)}</button>`).join("")}</div>`;
+    $("etq-body").innerHTML = `<button class="text-btn" id="etq-quit" style="align-self:flex-start">&larr; End test</button>
+      <div class="qhead"><span class="label">${esc(q.kind)}</span><span class="meta">${R.i + 1} of ${n} · ${R.right} right</span></div>
+      <div class="panel-card">${head}${body}</div><div id="etq-after" class="section" style="gap:12px"></div>`;
+    $("etq-quit").onclick = () => R.log.length ? etResults() : (renderETSetup(), show("etest"));
+    if (q.type === "typed") {
+      $("etq-form").onsubmit = e => { e.preventDefault(); const v = $("etq-in").value.trim(); if (v) etAnswer(etJudge(v, q.b), v); };
+      $("etq-idk").onclick = () => etAnswer(false, "");
+      setTimeout(() => { const el = $("etq-in"); if (el && matchMedia("(pointer:fine)").matches) el.focus(); }, 30);
+    } else {
+      document.querySelectorAll("#etq-body .choice").forEach(b => b.onclick = () => etAnswer(+b.dataset.i === q.ans, +b.dataset.i));
+    }
+  }
+  function etRecord(b, ok) {
+    const st = etStats(), s = st[b.title] || [0, 0, 0];
+    st[b.title] = ok ? [s[0] + 1, s[1], s[2] + 1] : [s[0], s[1] + 1, 0];
+    store.set("bigStats", st);
+    if (ok) return; addPile("missed", b.e.id);
+  }
+  function etAnswer(ok, pickedOrText) {
+    const R = ET.run, q = R.queue[R.i];
+    if (R.answered) return; R.answered = true;
+    if (q.type === "typed") { $("etq-in").disabled = true; document.querySelectorAll("#etq-form button").forEach(b => b.disabled = true); }
+    else document.querySelectorAll("#etq-body .choice").forEach((b, j) => { b.disabled = true; if (j === q.ans) b.classList.add("right"); else if (j === pickedOrText) b.classList.add("wrong"); });
+    const entry = { q, ok }; R.log.push(entry);
+    if (ok) R.right++;
+    etRecord(q.b, ok);
+    SFX.play(ok ? "right" : "wrong");
+    let msg;
+    if (q.type === "typed") msg = ok ? `Right: ${q.b.title}.` : pickedOrText ? `It was ${q.b.title}. You wrote "${pickedOrText}".` : `It was ${q.b.title}.`;
+    else if (q.type === "false") msg = ok ? "Right, that one is false." : `The false one: "${q.choices[q.ans]}"`;
+    else msg = ok ? "Correct." : q.type === "name" ? `It was ${q.b.title}.` : "Not quite. Here's the real story.";
+    const over = q.type === "typed" && !ok && pickedOrText ? ` <button class="text-btn" id="etq-over">I had it right</button>` : "";
+    const last = R.i + 1 >= R.queue.length;
+    $("etq-after").innerHTML = `<div class="verdict inline ${ok ? "ok" : "bad"}">${esc(msg)}${over}</div>${etCard(q.b)}<button class="go small" id="etq-next">${last ? "See results" : "Next"}</button>`;
+    if ($("etq-over")) $("etq-over").onclick = () => {
+      entry.ok = true; R.right++;
+      const st = etStats(), s = st[q.b.title]; st[q.b.title] = [s[0] + 1, Math.max(0, s[1] - 1), 1]; store.set("bigStats", st);
+      if (!R.log.some(x => x !== entry && x.q.b === q.b && !x.ok)) dropPile("missed", q.b.e.id);
+      const v = document.querySelector("#etq-after .verdict"); v.className = "verdict inline ok"; v.textContent = `Counted as right: ${q.b.title}.`;
+      document.querySelector("#etq-body .qhead .meta").textContent = `${R.i + 1} of ${R.queue.length} · ${R.right} right`;
+      SFX.play("right");
+    };
+    $("etq-next").onclick = etNext;
+    document.querySelector("#etq-body .qhead .meta").textContent = `${R.i + 1} of ${R.queue.length} · ${R.right} right`;
+    if (matchMedia("(pointer:fine)").matches) $("etq-next").focus({ preventScroll: true });
+    $("etq-after").scrollIntoView({ block: "nearest", behavior: reduced() ? "auto" : "smooth" });
+  }
+  function etNext() {
+    const R = ET.run; R.i++;
+    if (R.i >= R.queue.length) return etResults();
+    SFX.play("flip"); renderETQ(); window.scrollTo({ top: 0, behavior: reduced() ? "auto" : "smooth" });
+  }
+  document.addEventListener("keydown", e => {
+    if ($("v-etquiz").hidden || !ET.run || e.target.tagName === "INPUT") return;
+    const R = ET.run;
+    if (!R.answered && /^[1-4]$/.test(e.key)) { const b = document.querySelectorAll("#etq-body .choice")[+e.key - 1]; if (b && !b.disabled) { e.preventDefault(); b.click(); } }
+  });
+
+  function etResults() {
+    const R = ET.run, n = R.log.length, pct = n ? Math.round(100 * R.right / n) : 0;
+    const head = pct >= 90 ? "You know these cold" : pct >= 75 ? "Solid" : pct >= 50 ? "Getting there" : "Keep at it";
+    const missedEv = [...new Set(R.log.filter(x => !x.ok).map(x => x.q.b))].sort((a, b) => fullKey(a.e) - fullKey(b.e));
+    const units = [...new Set(R.log.map(x => x.q.b.unit))].sort();
+    const byUnit = units.map(u => { const L = R.log.filter(x => x.q.b.unit === u); return `<li><span class="d">Unit ${u}</span><span class="t">${L.filter(x => x.ok).length} of ${L.length} right</span><span class="b">${esc(UNIT_NAMES[u] || "")}</span></li>`; }).join("");
+    $("etq-body").innerHTML = `<div class="result"><div class="label">${esc(R.label)} · ${esc(head)}</div><div class="big">${pct}%</div><div class="meta">${R.right} of ${n} right${n < R.queue.length ? ` · ended early (${R.queue.length - n} skipped)` : ""}</div>
+      <div class="row" style="flex-direction:column; align-items:stretch; width:min(340px,100%); margin-top:10px">${missedEv.length ? `<button class="go" id="etr-retest">Retest my ${missedEv.length} miss${missedEv.length === 1 ? "" : "es"}</button>` : ""}<button class="${missedEv.length ? "text-btn" : "go"}" id="etr-new">New test</button></div></div>
+      ${units.length > 1 ? `<div class="label">By unit</div><ul class="list">${byUnit}</ul>` : ""}
+      ${missedEv.length ? `<div class="label">Go over these · they're also in your Review pile</div><div class="section" style="gap:10px">${missedEv.map(b => etCard(b)).join("")}</div>` : ""}`;
+    if ($("etr-retest")) $("etr-retest").onclick = () => startET(missedEv, "relink", "Retest");
+    $("etr-new").onclick = () => { renderETSetup(); show("etest"); window.scrollTo({ top: 0 }); };
+    SFX.play(pct >= 75 ? "win" : "lose");
+    window.scrollTo({ top: 0 });
+  }
+  $("tab-etest").onclick = () => { renderETSetup(); show("etest"); };
 
   syncSetup();
   show("setup");
