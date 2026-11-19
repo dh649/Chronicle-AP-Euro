@@ -147,6 +147,15 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 .step { width: min(380px, 100%); text-align: left; background: var(--surface); border: 1px solid var(--hair); border-radius: 8px; padding: 11px 14px; font-family: var(--display); font-weight: 700; font-size: .98rem; box-shadow: var(--shadow); transition: border-color .15s, transform .1s; }
 .step:hover { border-color: var(--bronze); }
 .step:active { transform: scale(.99); }
+/* notes in Learn */
+.notes { display: flex; flex-direction: column; gap: 8px; }
+details.nsec { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 0 14px; }
+details.nsec > summary { cursor: pointer; padding: 11px 0; font-weight: 500; font-size: .95rem; }
+details.nsec[open] { padding-bottom: 12px; }
+details.nsec ul { margin: 0; padding-left: 1.15em; display: flex; flex-direction: column; gap: 5px; font-size: .92rem; line-height: 1.5; }
+details.nsec li.sub { margin-left: 1.1em; list-style: circle; }
+details.nsec li.nh { list-style: none; margin-left: -1.15em; font-weight: 600; margin-top: 4px; }
+details.nsec li.wc { list-style: none; margin-left: -1.15em; margin-top: 4px; padding: 6px 10px; border-left: 3px solid var(--bronze); background: var(--page); border-radius: 4px; }
 /* event test */
 .ecard { background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; text-align: left; }
 .ecard h4 { margin: 0; font-family: var(--display); font-size: 1.08rem; }
@@ -478,6 +487,14 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
 <script src="story.js"></script>
 <script src="bigevents.js"></script>
 <script src="unit5.js"></script>
+<script src="notesdata.js"></script>
+<script src="nq_u2a.js"></script>
+<script src="nq_u2b.js"></script>
+<script src="nq_u3a.js"></script>
+<script src="nq_u3b.js"></script>
+<script src="nq_u4a.js"></script>
+<script src="nq_u4b.js"></script>
+<script src="nq_u5.js"></script>
 <script>
 (() => {
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -1204,6 +1221,11 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
 
   // ---- facts: the things you have to know for each act ----
   const FACT_CACHE = {};
+  const secName = h => h.replace(/\s*\([^)]*\d[^)]*\)\s*$/, "").trim();
+  function noteSection(act, start) { return (NOTES[act] || []).find(([h]) => h.toLowerCase().startsWith(start.toLowerCase())); }
+  function noteChanges(act) {
+    return (NOTES[act] || []).flatMap(([h, bl]) => bl.filter(([, x]) => /^What changed\s*:/i.test(x)).map(([, x]) => [secName(h), x.replace(/^What changed\s*:\s*/i, "")]));
+  }
   function factsFor(act) {
     if (FACT_CACHE[act]) return FACT_CACHE[act];
     const f = [];
@@ -1213,6 +1235,10 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     const ch = ACTS[act].chain;
     if (ch && ch.length >= 4) ch.slice(0, -1).forEach((s, i) => f.push({ key: `ch:${act}:${i}`, kind: "ch", ch, i, act }));
     DIVES.filter(d => d.act === act).forEach(d => d.quiz.forEach((q, qi) => f.push({ key: `dq:${d.id}:${qi}`, kind: "dq", d, qi, act })));
+    // Straight from Dylan's notes: hand-written section questions, Main Characters, and "What changed" lines.
+    (NQ[act] || []).forEach((r, i) => f.push({ key: `nq:${act}:${i}`, kind: "nq", r, act }));
+    (NCHAR[act] || []).forEach((c, i) => f.push({ key: `nc:${act}:${i}`, kind: "nc", c, act }));
+    noteChanges(act).forEach((w, i) => f.push({ key: `nw:${act}:${i}`, kind: "nw", w, act }));
     return (FACT_CACHE[act] = f);
   }
   const known = k => !!(MS.items[k] && MS.items[k].ok);
@@ -1281,6 +1307,23 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
       const fw = fourWay(p, pool, x => x.clues[0]);
       return { tag, prompt: `Which describes ${p.name}?`, choices: fw.list.map(x => x.clues[0]), ans: fw.ans, explain: `${p.name}: ${p.role}. ${p.clues.join(". ")}.` };
     }
+    if (f.kind === "nq") {
+      const [sec, q, right, ...wrong] = f.r, sc = shuffleChoices([right, ...wrong], 0), s = noteSection(f.act, sec);
+      return { tag: `Your notes: ${s ? secName(s[0]) : sec}`, prompt: q, choices: sc.list, ans: sc.ans, explain: right + "." };
+    }
+    if (f.kind === "nc") {
+      const [name, desc] = f.c, unit = f.act.split(".")[0];
+      const pool = [...shuffle((NCHAR[f.act] || []).filter(x => x !== f.c)), ...shuffle(Object.entries(NCHAR).filter(([a]) => a !== f.act && a.split(".")[0] === unit).flatMap(([, v]) => v)), ...shuffle(Object.entries(NCHAR).filter(([a]) => a.split(".")[0] !== unit).flatMap(([, v]) => v))];
+      if (hard || Math.random() < 0.5) { const fw = fourWay(f.c, pool, x => x[0]); return { tag: "Your notes: Main Characters", prompt: "Who is this?", sub: desc, choices: fw.list.map(x => x[0]), ans: fw.ans, explain: `${name}: ${desc}.` }; }
+      const fw = fourWay(f.c, pool, x => x[1]);
+      return { tag: "Your notes: Main Characters", prompt: `Which describes ${name}?`, choices: fw.list.map(x => x[1]), ans: fw.ans, explain: `${name}: ${desc}.` };
+    }
+    if (f.kind === "nw") {
+      const [sec, change] = f.w, unit = f.act.split(".")[0];
+      const pool = [...shuffle(noteChanges(f.act).filter(x => x !== f.w)), ...shuffle(ACT_ORDER.filter(a => a !== f.act && a.split(".")[0] === unit).flatMap(noteChanges)), ...shuffle(ACT_ORDER.filter(a => a.split(".")[0] !== unit).flatMap(noteChanges))];
+      const fw = fourWay(f.w, pool, x => x[1]);
+      return { tag: "Your notes: What changed", prompt: "What changed because of this part of the act?", sub: sec, choices: fw.list.map(x => x[1]), ans: fw.ans, explain: `${sec}: ${change}` };
+    }
     if (f.kind === "tm") {
       const t = f.t, unit = f.act[0];
       const pool = [...shuffle(ALL_TERMS.filter(x => x.a === f.act && x.i !== f.i)), ...shuffle(ALL_TERMS.filter(x => x.a[0] === unit && x.a !== f.act)), ...shuffle(ALL_TERMS.filter(x => x.a[0] !== unit))].map(x => x.t);
@@ -1309,7 +1352,9 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
   }
   function stratified(f, n) {
     const by = k => shuffle(f.filter(x => x.kind === k));
-    const q = [...by("ev").slice(0, Math.ceil(n * 0.4)), ...by("pp").slice(0, Math.ceil(n * 0.2)), ...by("tm").slice(0, Math.ceil(n * 0.2)), ...shuffle([...by("ch"), ...by("dq")]).slice(0, Math.ceil(n * 0.2))];
+    const notes = shuffle([...by("nq"), ...by("nq"), ...by("nc"), ...by("nw")]).filter((x, i, a) => a.indexOf(x) === i);
+    const q = notes.length ? [...notes.slice(0, Math.ceil(n * 0.5)), ...by("ev").slice(0, Math.ceil(n * 0.2)), ...shuffle([...by("pp"), ...by("tm")]).slice(0, Math.ceil(n * 0.2)), ...shuffle([...by("ch"), ...by("dq")]).slice(0, Math.ceil(n * 0.1))]
+      : [...by("ev").slice(0, Math.ceil(n * 0.4)), ...by("pp").slice(0, Math.ceil(n * 0.2)), ...by("tm").slice(0, Math.ceil(n * 0.2)), ...shuffle([...by("ch"), ...by("dq")]).slice(0, Math.ceil(n * 0.2))];
     for (const x of shuffle(f)) { if (q.length >= n) break; if (!q.includes(x)) q.push(x); }
     return shuffle(q.slice(0, n));
   }
@@ -1726,7 +1771,9 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
   }
   function learnHTML(a) {
     const L = LESSONS[a], evs = EV.filter(e => e.act === a).sort((x, y) => fullKey(x) - fullKey(y)), pp = PP.filter(p => p.act === a), ch = ACTS[a].chain, dv = DIVES.filter(d => d.act === a);
-    return `<p class="lede">${esc(L.big)}</p>
+    const N = NOTES[a];
+    const notesHTML = N ? `<div class="dsec"><div class="label">Your notes · Khare + Harris</div><div class="notes">${N.map(([h, bl], i) => `<details class="nsec"${/^Main (Chain|Idea)/.test(h) ? " open" : ""}><summary>${esc(h)}</summary><ul>${bl.map(([ind, x]) => ind < 0 ? `<li class="nh">${esc(x)}</li>` : `<li class="${ind ? "sub" : ""}${/^What changed\s*:/i.test(x) ? " wc" : ""}">${esc(x)}</li>`).join("")}</ul></details>`).join("")}</div></div>` : "";
+    return `<p class="lede">${esc(L.big)}</p>${notesHTML}
       <div class="angle"><div class="label">How it connects</div><p>${esc(L.connect)}</p></div>
       <div class="dsec"><div class="label">Key terms</div><dl class="terms">${L.terms.map(([t, d]) => `<div><dt>${esc(t)}</dt><dd>${esc(d)}</dd></div>`).join("")}</dl></div>
       <div class="dsec"><div class="label">Key events</div><ol class="seq">${evs.map(e => `<li><span class="pb">${esc(e.shown)}</span><span><b>${esc(e.title)}</b><br>${esc(e.blurb)}</span></li>`).join("")}</ol></div>
