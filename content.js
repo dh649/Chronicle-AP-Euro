@@ -223,9 +223,9 @@ const DIVES = [
   outcomes: ["The north becomes the Dutch Republic, a rich Protestant trading power.", "The Catholic south stays Spanish (later Belgium).", "Spain is drained by the war and repeated bankruptcies."],
   angle: "A religious fight that was also about taxes, local rights, and centralization. That mix of religion and politics runs through every war in this unit.",
   quiz: [
-    ["Why did Alba's crackdown backfire?", ["His harsh repression hardened Dutch resistance", "The pope ordered him to stop", "France invaded Spain in response", "Most Dutch converted to Catholicism"], 0, "The Council of Blood turned more of the Netherlands against Spain."],
-    ["What did the Union of Utrecht (1579) do?", ["United the Protestant northern provinces", "Ended the Thirty Years' War", "Gave Gibraltar to Britain", "Returned the south to France"], 0, "The northern provinces banded together, while the Catholic south drifted back to Spain."],
-    ["Which English ruler supported the Dutch rebels?", ["Elizabeth I", "James I", "Mary I", "Charles I"], 0, "Elizabeth backed the rebels and let Drake attack Spanish ships, one reason Philip sent the Armada."],
+    ["Why did Alba's crackdown backfire?", ["His harsh repression hardened Dutch resistance", "The pope ordered him to stop the executions", "France invaded Spain to protect the Dutch rebels", "Most Dutch converted to Catholicism to avoid him"], 0, "The Council of Blood turned more of the Netherlands against Spain."],
+    ["What did the Union of Utrecht (1579) do?", ["United the Protestant northern provinces", "Ended the Thirty Years' War in the Empire", "Gave the southern provinces back to Spain", "Made the Netherlands a part of France"], 0, "The northern provinces banded together, while the Catholic south drifted back to Spain."],
+    ["Which English ruler supported the Dutch rebels?", ["Elizabeth I", "James I", "Mary I", "Henry VIII"], 0, "Elizabeth backed the rebels and let Drake attack Spanish ships, one reason Philip sent the Armada."],
     ["When did Spain formally recognize Dutch independence?", ["1648", "1579", "1588", "1598"], 0, "Recognition came with the Peace of Westphalia in 1648, though the north was effectively independent long before."],
     ["What was the Spanish Fury?", ["Unpaid Spanish troops sacking Antwerp", "Philip II's navy attacking England", "A Calvinist riot against churches", "Spain's bankruptcy of 1557"], 0, "The 1576 sack of Antwerp united Dutch provinces against Spain."]
   ] },
@@ -237,10 +237,10 @@ const DIVES = [
   outcomes: ["The Edict of Nantes keeps France Catholic but protects Huguenots.", "The politique approach wins: stability over religious uniformity.", "It sets up royal centralization under Richelieu and Louis XIV, who revokes the edict in 1685."],
   angle: "The politique turn: rulers learn that wrecking the state over religion is political suicide.",
   quiz: [
-    ["What is a politique?", ["A ruler who puts political stability ahead of religious uniformity", "A Huguenot minister", "A member of the Parlement of Paris", "A Catholic who refuses to obey the pope"], 0, "Henry IV is the model politique."],
+    ["What is a politique?", ["A ruler who puts stability ahead of religious unity", "A Huguenot minister trained by Calvin in Geneva", "A noble judge sitting in the Parlement of Paris", "A Catholic who obeys the king but not the pope"], 0, "Henry IV is the model politique."],
     ["Who were the main victims of the St. Bartholomew's Day Massacre?", ["Huguenots", "Jesuits", "The Guise family", "Spanish soldiers"], 0, "Thousands of Huguenots were killed in 1572."],
-    ["Why did Henry IV convert to Catholicism?", ["To win acceptance from Catholic Paris and most of France", "Because the pope excommunicated him", "To marry a Spanish princess", "To join the Holy League against England"], 0, "He traded his faith for political acceptance."],
-    ["What did the Edict of Nantes do?", ["Kept France Catholic but gave Huguenots limited rights", "Made France officially Calvinist", "Expelled all Huguenots", "Ended the Thirty Years' War"], 0, "It was a compromise, not full equality."],
+    ["Why did Henry IV convert to Catholicism?", ["To win over Catholic Paris and France", "Because the pope excommunicated him", "To marry a Spanish princess", "To lead the Holy League in a war on England"], 0, "He traded his faith for political acceptance."],
+    ["What did the Edict of Nantes do?", ["Kept France Catholic but tolerated Huguenots", "Made France officially Calvinist under Henry IV", "Expelled all Huguenots who refused to convert", "Gave Huguenots full equality with Catholics"], 0, "It was a compromise, not full equality."],
     ["Which family led the militant Catholic side?", ["The Guise", "The Bourbons", "The Habsburgs", "The Medici"], 0, "The Guise led the Catholics; the Bourbons were tied to the Huguenots."]
   ] },
 { id: "30yw", title: "The Thirty Years' War", act: "2.3", pages: "pp. 156–166",
@@ -251,10 +251,10 @@ const DIVES = [
   outcomes: ["Calvinism is recognized.", "German princes gain power and the empire stays divided.", "Dutch and Swiss independence are recognized; France and Sweden gain.", "About a third of the German population dies."],
   angle: "The turning point from wars of religion to wars of state interest, and the start of a system of sovereign states.",
   quiz: [
-    ["What event started the war?", ["The Defenestration of Prague", "The Edict of Restitution", "The Battle of Lützen", "The Peace of Augsburg"], 0, "Bohemian Protestants threw Ferdinand's officials out a window in 1618."],
-    ["Why did Catholic France fight on the Protestant side?", ["To weaken the Habsburgs", "Because Richelieu converted", "To win Bohemia for itself", "Because the pope asked it to"], 0, "Politics now outweighed religion."],
-    ["What did the Edict of Restitution order?", ["Protestant-held church lands returned to Catholics", "Toleration for Calvinists", "Bohemia's independence", "A peace conference at Münster"], 0, "Ferdinand's overreach in 1629 pushed Protestants (and Sweden) to fight on."],
-    ["Which was NOT a result of the Peace of Westphalia?", ["The emperor gained control over the German princes", "Calvinism was recognized", "Dutch independence was recognized", "German princes gained power"], 0, "The opposite happened: the princes got stronger and the emperor weaker."],
+    ["What event started the war?", ["The Defenestration of Prague", "The Edict of Restitution", "The Battle of White Mountain", "The Peace of Augsburg"], 0, "Bohemian Protestants threw Ferdinand's officials out a window in 1618."],
+    ["Why did Catholic France fight on the Protestant side?", ["To weaken the Habsburgs", "Because Richelieu converted", "To win the Bohemian crown for itself", "Because the pope asked France to fight"], 0, "Politics now outweighed religion."],
+    ["What did the Edict of Restitution order?", ["Church lands returned to Catholics", "Toleration for Calvinists", "Bohemia's independence from the Habsburg crown", "A peace conference at Münster and Osnabrück"], 0, "Ferdinand's overreach in 1629 pushed Protestants (and Sweden) to fight on."],
+    ["Which was NOT a result of the Peace of Westphalia?", ["The emperor gained control over the German princes", "Calvinism was recognized alongside Lutheranism", "Dutch independence was formally recognized", "German princes gained near sovereignty in the Empire"], 0, "The opposite happened: the princes got stronger and the emperor weaker."],
     ["Who was killed at the Battle of Lützen?", ["Gustavus Adolphus", "Wallenstein", "Frederick V", "Christian IV"], 0, "Sweden won, but lost its king."]
   ] },
 { id: "england", title: "King vs. Parliament: Civil War to Glorious Revolution", act: "2.4", pages: "pp. 167–179",
@@ -265,11 +265,11 @@ const DIVES = [
   outcomes: ["The Bill of Rights limits royal power.", "England becomes a constitutional, parliamentary monarchy.", "Protestant succession is secured, and Catholics are barred from the throne."],
   angle: "England's path to limited monarchy is the classic contrast to French absolutism, a favorite compare-and-contrast question.",
   quiz: [
-    ["What did the Petition of Right (1628) challenge?", ["Taxes without Parliament's consent and imprisonment without cause", "The Catholic Mass", "Scottish independence", "The king's right to declare war"], 0, "It was Parliament's push back against Charles I."],
+    ["What did the Petition of Right (1628) challenge?", ["Taxes without Parliament and jailing without cause", "The Catholic Mass and the bishops' power", "The Scots' demand for their own church", "The king's right to declare war without Parliament"], 0, "It was Parliament's push back against Charles I."],
     ["Who were the Roundheads?", ["Supporters of Parliament", "Supporters of the king", "Scottish Presbyterians", "Irish Catholics"], 0, "Cavaliers backed the king; Roundheads backed Parliament."],
-    ["What triggered the Glorious Revolution?", ["James II's open favoring of Catholics", "Charles I's execution", "The Gunpowder Plot", "Cromwell's death"], 0, "Parliament feared Catholic absolutism and invited William and Mary."],
-    ["What did the Restoration of 1660 do?", ["Brought back the monarchy with Parliament still powerful", "Made Cromwell king", "Created a Catholic England", "Abolished Parliament"], 0, "Charles II returned, but kings could no longer ignore Parliament."],
-    ["Which contrast is the main takeaway of this act?", ["England limits the king while France strengthens him", "England and France both become republics", "Both become absolute monarchies", "France limits the king while England strengthens him"], 0, "England goes parliamentary; France goes absolutist."]
+    ["What triggered the Glorious Revolution?", ["James II's open favoring of Catholics", "Charles I's execution", "The Gunpowder Plot to blow up Parliament", "Cromwell's death and the fall of the Protectorate"], 0, "Parliament feared Catholic absolutism and invited William and Mary."],
+    ["What did the Restoration of 1660 do?", ["Brought back a king, with Parliament still strong", "Made Cromwell's son king with the army's support", "Made England Catholic under Charles II's brother", "Abolished Parliament and brought back absolutism"], 0, "Charles II returned, but kings could no longer ignore Parliament."],
+    ["Which contrast is the main takeaway of this act?", ["England limits the king; France strengthens him", "England and France both become republics", "Both become absolute monarchies after civil war", "France limits the king while England strengthens him"], 0, "England goes parliamentary; France goes absolutist."]
   ] },
 { id: "louis", title: "Louis XIV and French Absolutism", act: "2.5", pages: "pp. 179–188",
   overview: "Scarred by the Fronde, Louis XIV makes the monarchy dominant in war, religion, and the economy. His wars expand France but trigger coalitions against it, and his reign shows both the strength and the cost of absolutism.",
@@ -279,10 +279,10 @@ const DIVES = [
   outcomes: ["A centralized monarchy that controls war, religion, and the economy, though nobles and parlements survive.", "Repeated coalitions establish the balance of power.", "The Huguenot exodus hurts the economy.", "Huge debts become a long-term cause of 1789."],
   angle: "Absolutism's strengths and costs. Versailles was a tool to tame the nobles, and the balance of power was the result of Louis's wars.",
   quiz: [
-    ["How did Versailles strengthen Louis XIV?", ["Nobles competed there for royal favor, making them dependent on him", "It housed the Parlement of Paris", "It was a fortress against the Dutch", "It was where taxes were collected"], 0, "Court life kept nobles busy and dependent."],
-    ["What does 'balance of power' mean?", ["States form coalitions to stop any one power from dominating", "The king and Parliament share power", "Catholics and Protestants get equal rights", "France and Spain share one king"], 0, "Every time Louis grew stronger, a coalition formed against him."],
-    ["What happened after Louis revoked the Edict of Nantes?", ["About a quarter million Huguenots fled France", "France became Protestant", "The pope excommunicated Louis", "Spain declared war"], 0, "Many were skilled workers, so the economy suffered."],
-    ["How did the War of the Spanish Succession end?", ["Philip V kept Spain, but France and Spain could never unite", "France annexed Spain", "Austria took the Spanish throne", "Spain became a republic"], 0, "Utrecht (1713) and Rastatt (1714) kept the crowns apart."],
+    ["How did Versailles strengthen Louis XIV?", ["Nobles competed there for his favor and grew dependent", "It housed the Parlement of Paris under the king's eye", "It was a fortress built to stop a Dutch invasion", "It was where nobles collected the taille for the crown"], 0, "Court life kept nobles busy and dependent."],
+    ["What does 'balance of power' mean?", ["Coalitions form to stop any one state from dominating", "The king and Parliament share power over taxes and war", "Catholics and Protestants get equal rights within a state", "France and Spain agree to share a single royal family"], 0, "Every time Louis grew stronger, a coalition formed against him."],
+    ["What happened after Louis revoked the Edict of Nantes?", ["About a quarter million Huguenots fled France", "Most of France's Catholics became Protestant", "The pope excommunicated Louis for his cruelty", "Spain declared war to defend the Huguenots"], 0, "Many were skilled workers, so the economy suffered."],
+    ["How did the War of the Spanish Succession end?", ["Philip V kept Spain, but it could never unite with France", "France annexed Spain, and Louis became king of both", "Austria's Archduke Charles took the Spanish throne", "Spain was split between France, Austria, and Britain"], 0, "Utrecht (1713) and Rastatt (1714) kept the crowns apart."],
     ["Who argued that kings are appointed by God?", ["Bossuet", "Locke", "Colbert", "Montesquieu"], 0, "Bossuet defended divine right; Locke argued the opposite."]
   ] },
 { id: "peter", title: "Peter the Great and the Rise of Russia", act: "2.6", pages: "pp. 190–200",
@@ -293,11 +293,11 @@ const DIVES = [
   outcomes: ["Russia gains the Baltic coast and great-power status.", "The Holy Synod puts the Orthodox Church under state control.", "The Table of Ranks ties status to service to the state.", "Westernization is imposed from the top."],
   angle: "Compare the three eastern models: Prussia builds a military state, Russia westernizes by force, and Poland stays weak because of the liberum veto.",
   quiz: [
-    ["What was the Table of Ranks?", ["A system tying status to service in the military or bureaucracy", "A list of Peter's victories", "A tax on beards", "A Russian peace treaty"], 0, "It made service, not just birth, the path to status."],
-    ["What happened at Poltava (1709)?", ["Russia decisively defeated Sweden", "Sweden captured Moscow", "The Ottomans defeated Russia", "Peter signed peace with Poland"], 0, "It ended Sweden's time as a great power."],
-    ["Why did Peter build St. Petersburg?", ["As a western-facing capital on the Baltic", "To escape the plague in Moscow", "As a fortress against the Ottomans", "To house the Orthodox patriarch"], 0, "It symbolized his westernizing program."],
-    ["What did the Holy Synod do?", ["Put the Orthodox Church under state control", "Elected the tsar", "Ran the army", "Abolished serfdom"], 0, "Peter subordinated the church to the state."],
-    ["Why did Poland fail to build a strong state?", ["The liberum veto let one noble block any action", "It had no nobility", "The pope ruled it", "It was too small"], 0, "Weak central authority left Poland open to foreign influence."]
+    ["What was the Table of Ranks?", ["A ladder tying status to state or army service", "A list of Peter's victories over Sweden", "A tax on nobles who refused to cut their beards", "A ranking of Russia's provinces by tax paid"], 0, "It made service, not just birth, the path to status."],
+    ["What happened at Poltava (1709)?", ["Russia crushed Sweden", "Sweden captured Moscow", "The Ottomans defeated Russia", "Peter signed peace with Poland"], 0, "It ended Sweden's time as a great power."],
+    ["Why did Peter build St. Petersburg?", ["As a western-facing capital on the Baltic", "To escape the plague and riots in Moscow", "As a fortress against the Ottoman Turks", "To house the Orthodox patriarch near Rome"], 0, "It symbolized his westernizing program."],
+    ["What did the Holy Synod do?", ["Put the Church under the state", "Elected each new tsar from the nobility", "Ran the army and the Table of Ranks", "Abolished serfdom on Church estates"], 0, "Peter subordinated the church to the state."],
+    ["Why did Poland fail to build a strong state?", ["The liberum veto let one noble block anything", "It had no nobility to run the government", "The pope ruled it through Polish bishops", "Its kings refused to raise any army at all"], 0, "Weak central authority left Poland open to foreign influence."]
   ] },
 { id: "7yw", title: "Austrian Succession and the Seven Years' War", act: "3.2", pages: "pp. 291–294",
   overview: "Two linked wars mix European rivalries with a global fight for colonies. Prussia keeps Silesia and becomes a great power, Britain beats France overseas, and everyone ends up deep in debt.",
@@ -307,11 +307,11 @@ const DIVES = [
   outcomes: ["Prussia keeps Silesia and becomes a great power.", "Britain gains Canada and dominance in India.", "France is humiliated and broke.", "War debts lead to colonial taxes and, eventually, revolutions."],
   angle: "Debt from these wars is a root cause of both the American and the French Revolutions.",
   quiz: [
-    ["What was the Diplomatic Revolution?", ["France and Austria allied, and Britain sided with Prussia", "Prussia and Austria united", "Britain and France allied against Spain", "Russia joined the Grand Alliance"], 0, "Old enemies switched partners in 1756."],
-    ["What saved Frederick II in 1762?", ["Russia's new ruler Peter III pulled out of the war", "Britain sent an army to Berlin", "France switched sides", "Maria Theresa died"], 0, "Peter III admired Frederick."],
+    ["What was the Diplomatic Revolution?", ["France and Austria allied; Britain backed Prussia", "Prussia and Austria united against France", "Britain and France allied against Spain", "Russia and Sweden joined the Grand Alliance"], 0, "Old enemies switched partners in 1756."],
+    ["What saved Frederick II in 1762?", ["Peter III took Russia out of the war", "Britain landed an army to defend Berlin", "France switched sides and invaded Austria", "Maria Theresa died, and Austria made peace"], 0, "Peter III admired Frederick."],
     ["Who gained Canada in 1763?", ["Britain", "France", "Spain", "Prussia"], 0, "The Treaty of Paris gave Britain Canada and French land east of the Mississippi."],
-    ["Why do these wars matter for 1789?", ["They left France deep in debt", "They made France a republic", "They gave France Silesia", "They ended the monarchy in Spain"], 0, "Debt is the money problem behind the French Revolution."],
-    ["How did Maria Theresa keep most of her lands?", ["With support from Hungary", "By marrying Frederick II", "By giving up Austria", "With help from the Ottomans"], 0, "Hungarian support saved the Habsburg monarchy."]
+    ["Why do these wars matter for 1789?", ["They left France deep in debt", "They made France a republic", "They gave France Silesia and new taxes", "They ended royal power over the parlements"], 0, "Debt is the money problem behind the French Revolution."],
+    ["How did Maria Theresa keep most of her lands?", ["With support from Hungary", "By marrying Frederick II", "By giving up Bohemia in exchange for peace", "With money and troops from the Ottomans"], 0, "Hungarian support saved the Habsburg monarchy."]
   ] },
 { id: "scirev", title: "The Scientific Revolution", act: "3.3", pages: "pp. 202–211, 221, 224–226",
   overview: "Over about 150 years, thinkers replace an Earth-centered universe and ancient authority with a sun-centered system governed by mathematical laws, and with new methods for finding truth.",
@@ -321,11 +321,11 @@ const DIVES = [
   outcomes: ["By the 1700s heliocentrism is accepted.", "The universe is seen as a predictable machine.", "New methods (empiricism and deduction) challenge scholasticism.", "Scientific societies prepare the way for the Enlightenment."],
   angle: "Authority shifts from ancient texts and the Church toward observation and reason, the foundation for the Enlightenment.",
   quiz: [
-    ["How do Bacon and Descartes differ?", ["Bacon reasons from evidence (induction); Descartes from first principles (deduction)", "Bacon was a priest; Descartes an astronomer", "Bacon supported Ptolemy; Descartes opposed him", "There is no difference"], 0, "Both challenged scholasticism, but from opposite directions."],
-    ["What did Kepler show?", ["Planets move in elliptical orbits", "The Earth is the center of the universe", "Gravity explains falling objects", "Jupiter has moons"], 0, "He used Brahe's observations."],
-    ["What happened to Galileo in 1633?", ["He was forced to recant and put under house arrest", "He was burned at the stake", "He became the pope's astronomer", "He fled to England"], 0, "His Dialogue led to his trial."],
-    ["Why did Newton's Principia matter?", ["The same laws explained motion on Earth and in the heavens", "It proved the Earth was flat", "It defended Ptolemy", "It founded the Royal Society"], 0, "It unified heaven and earth under one set of laws."],
-    ["Why wasn't Copernicus's model more accurate at first?", ["It still used circular orbits and epicycles", "He had no math", "He placed the moon at the center", "The Church changed his data"], 0, "Kepler's ellipses fixed that."]
+    ["How do Bacon and Descartes differ?", ["Bacon reasons from evidence (induction); Descartes from first principles (deduction)", "Bacon was a priest who trusted Scripture; Descartes an astronomer who trusted the telescope", "Bacon defended Ptolemy's model; Descartes defended Copernicus's model of the heavens", "Bacon relied on ancient authority; Descartes relied on observing nature through experiments"], 0, "Both challenged scholasticism, but from opposite directions."],
+    ["What did Kepler show?", ["Planets move in elliptical orbits", "The Earth is the center of the universe", "Gravity pulls falling objects to Earth", "The moon has mountains and craters"], 0, "He used Brahe's observations."],
+    ["What happened to Galileo in 1633?", ["He had to recant and live under house arrest", "He was burned at the stake as a heretic", "He became the pope's official astronomer", "He fled to Protestant England for safety"], 0, "His Dialogue led to his trial."],
+    ["Why did Newton's Principia matter?", ["One set of laws explained Earth and the heavens", "It proved that the planets move in perfect circles", "It defended Ptolemy's model against Copernicus", "It founded the Royal Society and its journal"], 0, "It unified heaven and earth under one set of laws."],
+    ["Why wasn't Copernicus's model more accurate at first?", ["It still used circular orbits and epicycles", "He had no math to check his predictions", "He placed the moon at the center of orbits", "The Church secretly changed his star data"], 0, "Kepler's ellipses fixed that."]
   ] },
 { id: "amrev", title: "The American Revolution and Europe", act: "3.6", pages: "pp. 295–301",
   overview: "Britain wins the Seven Years' War but is left with huge debts and tries to make the colonies pay. Colonial resistance becomes independence, and the American example of government by consent echoes across Europe.",
@@ -335,10 +335,10 @@ const DIVES = [
   outcomes: ["The United States becomes independent.", "It shows government can work without kings or hereditary nobles.", "Reform pressure grows in Britain.", "France's war debt deepens, setting up 1789."],
   angle: "Ideas and debt cross the Atlantic both ways: Locke shapes the Americans, and the American example and French debts shape the French Revolution.",
   quiz: [
-    ["What did the Declaratory Act (1766) say?", ["Parliament could still legislate for the colonies", "The colonies were independent", "Tea would no longer be taxed", "Boston's port was closed"], 0, "Parliament repealed the Stamp Act but kept its claim to power."],
+    ["What did the Declaratory Act (1766) say?", ["Parliament could still make laws for the colonies", "The colonies could pass their own tax laws", "Tea would no longer be taxed in America", "Boston's port was closed until it paid"], 0, "Parliament repealed the Stamp Act but kept its claim to power."],
     ["What was Paine's main argument in Common Sense?", ["Only independence made sense", "The colonies should elect members of Parliament", "Britain should lower taxes", "The colonies should join France"], 0, "He called it absurd for an island to rule a continent."],
     ["When did France formally ally with the Americans?", ["1778", "1776", "1781", "1783"], 0, "Franklin's diplomacy brought France in; Spain followed in 1779."],
-    ["Why did the Wilkes affair matter to Americans?", ["They saw it as proof of a conspiracy against liberty", "Wilkes led the Continental Army", "Wilkes wrote the Declaration of Independence", "It ended the Stamp Act"], 0, "Colonists read British politics as a threat to everyone's liberties."],
+    ["Why did the Wilkes affair matter to Americans?", ["They saw it as a plot against liberty", "Wilkes led colonial troops in the war", "Wilkes wrote the first draft of the Declaration", "It ended the Stamp Act and the tea tax"], 0, "Colonists read British politics as a threat to everyone's liberties."],
     ["How did the American Revolution affect France?", ["It deepened France's war debt", "It made France a republic right away", "It gave France Canada back", "It ended French support for Spain"], 0, "Debt from the war helped trigger the crisis of 1789."]
   ] },
 { id: "road89", title: "The Road to 1789", act: "4.1", pages: "pp. 353–360",
@@ -349,10 +349,10 @@ const DIVES = [
   outcomes: ["The National Constituent Assembly now shares power with the king.", "Voting by order is dead, so the Third Estate dominates.", "Nobles who wanted power for themselves triggered a revolution against privilege."],
   angle: "The revolution starts as a fiscal crisis plus a political deadlock. Know the chain from debt to the Tennis Court Oath.",
   quiz: [
-    ["What was France's real money problem?", ["It couldn't tax the nation's wealth because nobles and clergy were exempt", "Its debt was the largest in Europe", "It had no colonies", "It had already stopped paying the army"], 0, "The debt was manageable; the tax system wasn't."],
-    ["What did the Assembly of Notables (1787) do?", ["Rejected Calonne's plan and called for the Estates General", "Approved a land tax", "Abolished the parlements", "Declared France a republic"], 0, "Nobles hoped the Estates General would give them more power."],
-    ["Why did doubling the Third matter?", ["The Third Estate could win if voting was by head", "It doubled taxes on peasants", "It gave nobles two votes each", "It removed the clergy"], 0, "Voting by order would still let nobles and clergy win 2–1."],
-    ["What was the Tennis Court Oath?", ["A vow not to separate until France had a constitution", "The king's promise to lower bread prices", "An oath of loyalty to Louis XVI", "A pledge to declare war on Austria"], 0, "Locked out of their hall, deputies met at a tennis court on June 20, 1789."],
+    ["What was France's real money problem?", ["Nobles and clergy were exempt, so the wealth couldn't be taxed", "Its debt was the largest in Europe, larger than Britain's or Spain's", "It had lost all of its colonies and the trade that came with them", "It had already stopped paying the army and the royal officials"], 0, "The debt was manageable; the tax system wasn't."],
+    ["What did the Assembly of Notables (1787) do?", ["Rejected Calonne's plan; asked for the Estates General", "Approved Calonne's land tax on all property", "Abolished the parlements and the nobles' courts", "Declared France a constitutional monarchy"], 0, "Nobles hoped the Estates General would give them more power."],
+    ["Why did doubling the Third matter?", ["The Third could win if votes were by head", "It doubled the taxes paid by the peasants", "It gave each noble two votes in the Estates", "It removed the clergy from the Estates General"], 0, "Voting by order would still let nobles and clergy win 2–1."],
+    ["What was the Tennis Court Oath?", ["A vow to stay together until France had a constitution", "The king's promise to lower bread prices", "An oath of loyalty to Louis XVI and the queen", "A vow to declare war on Austria and Prussia"], 0, "Locked out of their hall, deputies met at a tennis court on June 20, 1789."],
     ["Who wrote 'What Is the Third Estate?'", ["Abbé Sieyès", "Necker", "Lafayette", "Robespierre"], 0, "Sieyès answered: everything."]
   ] },
 { id: "rev89", title: "Revolution of 1789 and Rebuilding France", act: "4.2", pages: "pp. 360–372",
@@ -363,11 +363,11 @@ const DIVES = [
   outcomes: ["The old social order ends; careers are open to talent.", "Power shifts from noble birth to property (active vs. passive citizens).", "The Church crisis turns many Catholics against the revolution.", "The king is exposed as a counterrevolutionary."],
   angle: "Know the journées: crowds, not just assemblies, drive the revolution, and every reform creates new enemies.",
   quiz: [
-    ["What happened on the Night of August 4?", ["Nobles and clergy gave up their privileges", "The Bastille was stormed", "The king fled Paris", "France declared war"], 0, "Feudal dues, tithes, and tax exemptions ended."],
-    ["What did the Women's March on Versailles achieve?", ["It forced the royal family to move to Paris", "It won women the vote", "It overthrew the king", "It ended the Great Fear"], 0, "Louis accepted the decrees and moved to the Tuileries."],
-    ["Why was the Civil Constitution of the Clergy the Assembly's biggest blunder?", ["It forced Catholics to choose between their faith and the revolution", "It made the pope head of France", "It raised taxes on peasants", "It restored the Jesuits"], 0, "Most clergy refused the oath, splitting the country."],
-    ["What were assignats?", ["Bonds backed by seized Church land, used as money", "Lists of grievances", "Royal tax collectors", "Revolutionary courts"], 0, "Overprinting caused inflation."],
-    ["What did the Flight to Varennes reveal?", ["The king was the chief counterrevolutionary", "The Assembly wanted a republic", "Austria had invaded", "The army supported the king"], 0, "It put the constitutional monarchy in doubt."]
+    ["What happened on the Night of August 4?", ["Nobles and clergy gave up their privileges", "The Bastille was stormed by Paris crowds", "The king tried to flee Paris in disguise", "France declared war on Austria and Prussia"], 0, "Feudal dues, tithes, and tax exemptions ended."],
+    ["What did the Women's March on Versailles achieve?", ["It forced the royal family to move to Paris", "It won women the right to vote in elections", "It overthrew the king and declared a republic", "It ended the Great Fear in the countryside"], 0, "Louis accepted the decrees and moved to the Tuileries."],
+    ["Why was the Civil Constitution of the Clergy the Assembly's biggest blunder?", ["It made Catholics choose between faith and revolution", "It made the pope the head of the French state", "It raised taxes on peasants to pay the clergy", "It brought back the Jesuits to run the schools"], 0, "Most clergy refused the oath, splitting the country."],
+    ["What were assignats?", ["Paper money backed by seized Church land", "Lists of grievances sent to the Estates General", "Royal tax collectors who farmed out the taille", "Revolutionary courts set up to try the king"], 0, "Overprinting caused inflation."],
+    ["What did the Flight to Varennes reveal?", ["The king opposed the revolution", "The Assembly wanted a republic", "Austria had invaded eastern France", "The army fully supported the king"], 0, "It put the constitutional monarchy in doubt."]
   ] },
 { id: "terror", title: "War, Republic, and the Terror", act: "4.3", pages: "pp. 372–385",
   overview: "War with Europe radicalizes the revolution. The monarchy falls, the king is executed, and the Jacobin Mountain uses terror and total war to defend the republic, until the Terror turns on its own leaders.",
@@ -377,11 +377,11 @@ const DIVES = [
   outcomes: ["More than 25,000 victims of the Terror.", "The first total war: the whole nation mobilized.", "Conservative backlash across Europe; Poland is partitioned out of existence.", "Robespierre's fall ends the radical phase."],
   angle: "War and ideology feed each other: the Terror is defended as virtue, and the revolution starts devouring its own.",
   quiz: [
-    ["Why did both the Girondists and the king want war in 1792?", ["Girondists thought it would protect the revolution; the king hoped defeat would restore him", "Both wanted to conquer Spain", "Both wanted to help Poland", "Both were forced by Britain"], 0, "They wanted war for opposite reasons."],
-    ["What was the levée en masse?", ["A mass draft mobilizing the whole nation for war", "A tax on the rich", "A list of enemies of the people", "A new calendar"], 0, "It's called the first total war."],
-    ["How did Robespierre justify terror?", ["Virtue without terror is powerless; terror without virtue is fatal", "Terror would please the king", "The pope demanded it", "It was needed to win elections"], 0, "Terror was framed as a form of virtue."],
-    ["Who did the sans-culottes want controlled?", ["Prices, through price ceilings", "The army", "The Church", "Foreign trade"], 0, "Food and inflation drove them."],
-    ["Why didn't the sans-culottes save Robespierre?", ["He had executed their leaders and backed capping wages", "They were all in prison", "They supported the king", "They had left Paris"], 0, "He had lost his base."]
+    ["Why did both the Girondists and the king want war in 1792?", ["Girondists to spread the revolution; the king to be rescued by defeat", "Both wanted to conquer Spain and seize its American colonies", "Both wanted to help Poland resist a Russian partition", "Both were pushed into it by British threats against French trade"], 0, "They wanted war for opposite reasons."],
+    ["What was the levée en masse?", ["A draft of the whole nation for war", "A tax on the rich to pay for the war", "A list of enemies of the people to arrest", "A new calendar that started at Year I"], 0, "It's called the first total war."],
+    ["How did Robespierre justify terror?", ["Virtue without terror is powerless", "Terror would save the king", "The pope demanded it to punish the Revolution's enemies", "It was needed to win the next elections for the Jacobins"], 0, "Terror was framed as a form of virtue."],
+    ["Who did the sans-culottes want controlled?", ["Prices", "The army", "The Church's land", "Foreign merchants"], 0, "Food and inflation drove them."],
+    ["Why didn't the sans-culottes save Robespierre?", ["He had killed their leaders and capped wages", "They were all in prison after the Hébertists fell", "They supported the king and wanted him back", "They had left Paris to fight on the borders"], 0, "He had lost his base."]
   ] },
 { id: "directory", title: "Thermidor and the Directory", act: "4.4", pages: "pp. 385–390",
   overview: "After Robespierre falls, a backlash puts property owners back in charge. The Directory rejects both monarchy and democracy, but with no popular base it leans on the army, and a young general takes over in 1799.",
@@ -391,11 +391,11 @@ const DIVES = [
   outcomes: ["A property-based republic; the Old Regime is gone for good.", "Peasants own their land without paying anyone back.", "Women have less freedom after 1795 than before 1789.", "The army becomes the real power, setting up Napoleon."],
   angle: "The revolution swings back toward order. Its lasting results (property, nationhood, citizen soldiers) outlive its radical phase.",
   quiz: [
-    ["What was the 'white terror'?", ["Attacks on former Jacobins and terrorists after Thermidor", "Royalist executions of priests", "Napoleon's crackdown in 1799", "The September Massacres"], 0, "The violence turned against the radicals."],
-    ["What did the Constitution of the Year III create?", ["A five-man Directory and a two-house legislature", "A constitutional monarchy", "Direct democracy", "A dictatorship under Napoleon"], 0, "It rejected both monarchy and democracy."],
-    ["What did Napoleon do on 13 Vendémiaire (1795)?", ["Broke a royalist uprising with a 'whiff of grapeshot'", "Overthrew the Directory", "Invaded Italy", "Executed Robespierre"], 0, "It made his name."],
-    ["What did Babeuf's Conspiracy of Equals demand?", ["More democracy and equal property", "Return of the king", "War with Britain", "End of the metric system"], 0, "Later socialists saw him as a hero."],
-    ["Why did the Directory depend on the army?", ["It had no popular support and faced enemies on all sides", "The constitution put generals in charge", "Britain required it", "The sans-culottes ran it"], 0, "That dependence led to 18 Brumaire."]
+    ["What was the 'white terror'?", ["Revenge attacks on ex-Jacobins after Thermidor", "Royalist executions of priests in the Vendée", "Napoleon's crackdown on his rivals in 1799", "The September Massacres of prisoners in 1792"], 0, "The violence turned against the radicals."],
+    ["What did the Constitution of the Year III create?", ["A five-man Directory and two houses", "A constitutional monarchy with a royal veto", "A direct democracy run by the Paris sections", "A dictatorship under three elected consuls"], 0, "It rejected both monarchy and democracy."],
+    ["What did Napoleon do on 13 Vendémiaire (1795)?", ["Crushed a royalist rising with cannon fire", "Overthrew the Directory", "Invaded Italy and defeated the Austrians at Lodi", "Arrested Robespierre and sent him to the guillotine"], 0, "It made his name."],
+    ["What did Babeuf's Conspiracy of Equals demand?", ["More democracy and equal property", "Return of the king and the Church", "War with Britain to win back trade", "Lower taxes for nobles and merchants"], 0, "Later socialists saw him as a hero."],
+    ["Why did the Directory depend on the army?", ["It had no popular support and faced enemies on all sides", "The constitution put generals in charge of the government", "Britain required a strong army as a condition of peace", "The sans-culottes controlled the legislature and the courts"], 0, "That dependence led to 18 Brumaire."]
   ] }
 ];
 
@@ -550,11 +550,11 @@ DIVES.unshift(
   outcomes: ["Humanism spreads north and shapes education for centuries.", "New techniques like linear perspective and realism transform art.", "Secular, practical political thinking (Machiavelli).", "Italy's disunity invites French and Spanish domination."],
   angle: "Know the difference: the Italian Renaissance was more secular, civic, and classical, while the Northern Renaissance focused on reforming Christianity.",
   quiz: [
-    ["What was humanism?", ["The study of classical texts to shape well-rounded citizens", "A belief that humans are naturally evil", "A movement to abolish the Church", "A banking system used by the Medici"], 0, "Humanists studied grammar, rhetoric, poetry, history, and moral philosophy."],
-    ["What did Machiavelli argue in The Prince?", ["Rulers should judge actions by results, not Christian morality", "Kings rule by divine right", "Power should belong to the people", "Rulers should always try to be loved"], 0, "He said it is safer to be feared than loved if a ruler can't be both."],
-    ["Why did the Peace of Lodi (1454) matter?", ["It set up a balance of power among the major Italian states", "It united Italy under the pope", "It ended the Hundred Years' War", "It expelled the Medici"], 0, "It kept a rough peace in Italy until the French invasion of 1494."],
-    ["What ended the High Renaissance in Rome?", ["The Sack of Rome by Charles V's troops in 1527", "The Fall of Constantinople", "The Council of Trent", "Savonarola's rise to power"], 0, "Unpaid imperial troops plundered the city."],
-    ["How did patronage shape Renaissance art?", ["Wealthy patrons paid for and shaped the art that was made", "Artists were paid by elected governments", "Most art was made for sale at markets", "The Church banned most art"], 0, "Works often glorified the patron, the city, or the Church."]
+    ["What was humanism?", ["The study of classical texts to shape well-rounded citizens", "A belief that people are sinful and should withdraw from civic life", "A movement to replace Latin scholarship with local folk traditions", "A Medici banking practice of lending money to city governments"], 0, "Humanists studied grammar, rhetoric, poetry, history, and moral philosophy."],
+    ["What did Machiavelli argue in The Prince?", ["Rulers should judge actions by results, not Christian morality", "Kings rule by divine right and answer only to God for their acts", "Power should belong to the people through elected city councils", "Rulers should always try to be loved, because fear breeds revolt"], 0, "He said it is safer to be feared than loved if a ruler can't be both."],
+    ["Why did the Peace of Lodi (1454) matter?", ["It balanced power among the big Italian states", "It united Italy under the pope", "It ended the Hundred Years' War between England and France", "It expelled the Medici and made Florence a republic"], 0, "It kept a rough peace in Italy until the French invasion of 1494."],
+    ["What ended the High Renaissance in Rome?", ["The Sack of Rome by Charles V's troops in 1527", "The Fall of Constantinople in 1453", "The Council of Trent's ban on nude figures in church art", "Savonarola's bonfire of the vanities"], 0, "Unpaid imperial troops plundered the city."],
+    ["How did patronage shape Renaissance art?", ["Wealthy patrons paid for and shaped the art that was made", "Artists worked mostly for elected governments that set the themes", "Most art was made in advance and sold to strangers at markets", "The Church banned most art except plain images of the saints"], 0, "Works often glorified the patron, the city, or the Church."]
   ] },
 { id: "luther", title: "Luther and the Protestant Reformation", act: "1.4", pages: "Not from your notes",
   overview: "A monk's protest against indulgences in 1517 grows into a movement that splits Western Christianity. Printing spreads Luther's ideas, German princes protect him, and new Protestant churches emerge: Lutheran, Reformed (Zwingli and Calvin), and radical.",
@@ -566,8 +566,8 @@ DIVES.unshift(
   quiz: [
     ["What was Luther's main target in the Ninety-Five Theses?", ["The sale of indulgences", "The Church's use of Latin", "Priests being allowed to marry", "The Council of Trent"], 0, "He argued indulgences could not buy forgiveness."],
     ["What does sola fide mean?", ["Salvation by faith alone", "Scripture alone is authority", "Faith plus good works", "The pope cannot err"], 0, "Luther taught that faith, not works, saves."],
-    ["How did Luther respond to the German Peasants' War?", ["He sided with the princes against the rebels", "He led the peasants", "He stayed neutral", "He fled to Rome"], 0, "He feared social chaos and depended on princes' protection."],
-    ["Why did Luther and Zwingli split at Marburg (1529)?", ["They disagreed about the Eucharist", "They disagreed about indulgences", "Zwingli supported the pope", "Luther joined the Anabaptists"], 0, "Luther believed Christ was really present; Zwingli saw it as symbolic."],
+    ["How did Luther respond to the German Peasants' War?", ["He sided with the princes", "He led the peasants", "He stayed neutral and refused to comment", "He fled to Rome to ask the pope for help"], 0, "He feared social chaos and depended on princes' protection."],
+    ["Why did Luther and Zwingli split at Marburg (1529)?", ["They disagreed about the Eucharist", "They disagreed about the sale of indulgences", "Zwingli wanted to stay loyal to the pope", "Luther refused to sign anything Zwingli wrote"], 0, "Luther believed Christ was really present; Zwingli saw it as symbolic."],
     ["Which belief is most associated with Calvin?", ["Predestination", "Transubstantiation", "Papal infallibility", "Selling indulgences"], 0, "God has already chosen who will be saved."]
   ] },
 { id: "engref", title: "Henry VIII and the English Reformation", act: "1.5", pages: "Not from your notes",
@@ -578,11 +578,11 @@ DIVES.unshift(
   outcomes: ["The monarch heads the Church of England.", "Monastic lands enrich the crown and the gentry.", "Elizabeth's moderate Protestant 'middle way.'", "Catholic–Protestant tension shapes English politics for the next century (Unit 2)."],
   angle: "A top-down Reformation, driven by the monarch and Parliament rather than by a popular religious protest like Luther's in Germany.",
   quiz: [
-    ["What started Henry VIII's break with Rome?", ["The pope's refusal to annul his marriage", "Henry's conversion to Lutheranism", "A Protestant uprising in London", "The Spanish Armada"], 0, "He needed a male heir and wanted to end his marriage to Catherine of Aragon."],
-    ["What did the Act of Supremacy (1534) do?", ["Made the king head of the Church of England", "Restored Catholicism", "Created Parliament", "Ended the Wars of the Roses"], 0, "Parliament made Henry Supreme Head of the English church."],
+    ["What started Henry VIII's break with Rome?", ["The pope's refusal to annul his marriage", "Henry's conversion to Lutheranism", "A Protestant uprising in London against the bishops", "The pope's demand for a new Church tax"], 0, "He needed a male heir and wanted to end his marriage to Catherine of Aragon."],
+    ["What did the Act of Supremacy (1534) do?", ["Made the king head of the Church of England", "Restored Catholicism and the authority of the pope", "Created Parliament and gave it control over taxes", "Closed the monasteries but left the pope in charge"], 0, "Parliament made Henry Supreme Head of the English church."],
     ["Who restored Catholicism in England in 1553?", ["Mary I", "Elizabeth I", "Edward VI", "Anne Boleyn"], 0, "She also burned about 300 Protestants."],
-    ["What was the Elizabethan Settlement?", ["A moderate Protestant church that kept some Catholic traditions", "A full return to Catholicism", "An alliance with Spain", "A Calvinist theocracy"], 0, "It's often called a 'middle way.'"],
-    ["Why is the English Reformation called top-down?", ["It was driven by the monarch and Parliament", "It began with peasant revolts", "It was led by the pope", "It spread from Geneva"], 0, "Politics and dynasty drove it more than popular theology."]
+    ["What was the Elizabethan Settlement?", ["A moderate Protestant church with some Catholic ways", "A full return to Catholicism", "An alliance with Spain sealed by Elizabeth's marriage to Philip", "A strict Calvinist church that banned all Catholic traditions"], 0, "It's often called a 'middle way.'"],
+    ["Why is the English Reformation called top-down?", ["It was driven by the monarch and Parliament", "It began with peasant revolts against the bishops", "It was ordered and directed by the pope in Rome", "It spread from Geneva through Calvinist preachers"], 0, "Politics and dynasty drove it more than popular theology."]
   ] },
 { id: "catref", title: "The Catholic Reformation", act: "1.6", pages: "Not from your notes",
   overview: "The Catholic Church answers Protestantism by reforming itself and fighting back. New orders like the Jesuits, the Council of Trent, the Inquisition, and the Index revive Catholicism and win back ground in parts of Europe.",
@@ -592,11 +592,11 @@ DIVES.unshift(
   outcomes: ["Catholic doctrine is reaffirmed: faith and works, seven sacraments, and the authority of tradition.", "Reforms like seminaries improve the clergy.", "Jesuit schools and missions spread Catholicism worldwide.", "Europe's religious divide hardens, leading into the wars of religion."],
   angle: "Trent reformed Church practice but reaffirmed doctrine, so there was no compromise with Protestants. That sets up Unit 2's religious wars.",
   quiz: [
-    ["What did the Council of Trent do?", ["Reaffirmed Catholic doctrine and reformed abuses", "Accepted salvation by faith alone", "Allowed priests to marry", "United Catholics and Lutherans"], 0, "It clarified doctrine and fixed abuses like poorly trained priests."],
-    ["What were the Jesuits known for?", ["Education, missions, and loyalty to the pope", "Living as isolated hermits", "Supporting Luther", "Running the Spanish army"], 0, "They founded schools and sent missionaries worldwide."],
-    ["What was the Index of Prohibited Books?", ["A list of books Catholics were forbidden to read", "A catalog of the Vatican library", "A list of Protestant churches", "A tax record"], 0, "It was first issued in 1559."],
+    ["What did the Council of Trent do?", ["Reaffirmed Catholic doctrine and reformed abuses", "Accepted salvation by faith alone", "Allowed priests to marry and ended the sale of offices", "United Catholics and Lutherans under a shared creed"], 0, "It clarified doctrine and fixed abuses like poorly trained priests."],
+    ["What were the Jesuits known for?", ["Education, missions, and loyalty to the pope", "Living as isolated hermits who avoided politics", "Secretly spreading Luther's writings in Spain", "Running the Spanish army and its colonial forts"], 0, "They founded schools and sent missionaries worldwide."],
+    ["What was the Index of Prohibited Books?", ["A list of books Catholics were forbidden to read", "A catalog of every book held in the Vatican library", "A list of Protestant churches the Inquisition watched", "A record of the taxes owed by printers to the pope"], 0, "It was first issued in 1559."],
     ["Who called the Council of Trent?", ["Pope Paul III", "Martin Luther", "Ignatius of Loyola", "Henry VIII"], 0, "He also approved the Jesuits in 1540."],
-    ["Why didn't Trent reunite Western Christians?", ["It reaffirmed the doctrines Protestants rejected", "Protestants won its debates", "It was cancelled", "The pope refused to attend"], 0, "No compromise meant the split hardened."]
+    ["Why didn't Trent reunite Western Christians?", ["It reaffirmed the doctrines Protestants rejected", "Protestants won most of its debates on doctrine", "It was cancelled after only one short session", "The pope refused to attend or accept its decrees"], 0, "No compromise meant the split hardened."]
   ] }
 );
 

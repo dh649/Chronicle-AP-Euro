@@ -147,6 +147,20 @@ select { width: 100%; appearance: none; background: var(--surface); color: var(-
 .step { width: min(380px, 100%); text-align: left; background: var(--surface); border: 1px solid var(--hair); border-radius: 8px; padding: 11px 14px; font-family: var(--display); font-weight: 700; font-size: .98rem; box-shadow: var(--shadow); transition: border-color .15s, transform .1s; }
 .step:hover { border-color: var(--bronze); }
 .step:active { transform: scale(.99); }
+/* match */
+.mt-clock { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 1.1rem; min-width: 4.5em; text-align: right; }
+.mt-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.mt-grid.wide { grid-template-columns: repeat(5, 1fr); }
+.mt-tile { min-height: 96px; padding: 10px; border-radius: 12px; border: 1px solid var(--hair); background: var(--surface); color: var(--ink); font: inherit; font-size: .86rem; line-height: 1.35; cursor: pointer; text-align: center; display: flex; align-items: center; justify-content: center; transition: transform .12s, background .15s, border-color .15s, opacity .25s; }
+.mt-tile.name { font-family: var(--display); font-size: 1rem; font-weight: 600; }
+.mt-tile:hover { border-color: var(--bronze); }
+.mt-tile.sel { border-color: var(--bronze); box-shadow: 0 0 0 2px var(--bronze) inset; transform: translateY(-2px); }
+.mt-tile.ok { background: var(--right-soft); border-color: var(--right); }
+.mt-tile.bad { background: var(--wrong-soft); border-color: var(--wrong); animation: mtshake .35s; }
+.mt-tile.gone { opacity: 0; visibility: hidden; transition: opacity .25s, visibility 0s .25s; }
+@keyframes mtshake { 0%, 100% { transform: none; } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+@media (max-width: 760px) { .mt-grid, .mt-grid.wide { grid-template-columns: repeat(2, 1fr); gap: 8px; } .mt-tile { min-height: 72px; font-size: .82rem; } .mt-tile.name { font-size: .95rem; } }
+@media (prefers-reduced-motion: reduce) { .mt-tile, .mt-tile.gone { transition: none; animation: none; } }
 /* version marker */
 .version { position: fixed; right: 10px; bottom: 8px; z-index: 1; font-size: 11px; letter-spacing: .02em; color: var(--muted); background: var(--page); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--hair); pointer-events: none; }
 /* notes in Learn */
@@ -354,6 +368,86 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
   .statbar { position: sticky; top: 46px; z-index: 5; }
   .verdict { top: 82px; }
 }
+/* ---------- Chronicle 2: Today, Learn, Exam ---------- */
+nav.main button { font-size: 1rem; }
+.syncnote { font-size: .78rem; color: var(--muted); margin: -4px 0 0; }
+.hero2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.hero2 > div { background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; padding: 14px 18px; display: flex; flex-direction: column; gap: 2px; }
+.hero2 .big { font-family: var(--display); font-weight: 700; font-size: 2.4rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.todaycard { border-color: var(--bronze); }
+.lrow { justify-content: space-between; }
+.lrow .name { min-width: 0; }
+.lr-right { display: flex; align-items: center; gap: 10px; flex: none; }
+.bar2 { position: relative; flex: none; width: 70px; height: 6px; border-radius: 999px; background: var(--hair); overflow: hidden; }
+.bar2 i, .bar2 b { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; }
+.bar2 i { background: #c9ad7a; }
+.bar2 b { background: var(--pill); }
+.stat3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat3 > div { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; }
+.stat3 b { font-family: var(--display); font-size: 1.6rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat3 b small { font-size: .9rem; color: var(--muted); font-weight: 500; }
+.stat3 span { font-size: .78rem; color: var(--muted); }
+.notesbox { background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; padding: 12px 16px; }
+.newtag { display: inline-block; margin-left: 6px; font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; background: var(--bronze); color: #fff; border-radius: 999px; padding: 1px 7px; vertical-align: 1px; }
+.newtag.slip { background: var(--wrong); }
+.recall { display: flex; flex-direction: column; gap: 10px; }
+.youtyped { margin: 0; font-size: .92rem; }
+.youtyped .label { margin-right: 6px; }
+.answer { background: var(--page); border: 1px solid var(--hair); border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; }
+.answer b { font-weight: 600; }
+.answer span { color: var(--muted); font-size: .88rem; }
+.rates { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.rate { background: var(--surface); border: 1.5px solid var(--hair); border-radius: 10px; padding: 8px 6px; display: flex; flex-direction: column; align-items: center; gap: 1px; text-align: center; }
+.rate b { font-size: .95rem; }
+.rate small { font-size: .72rem; color: var(--muted); line-height: 1.25; }
+.rate .kbd { font-size: .68rem; color: var(--muted); }
+.rate:hover { border-color: var(--bronze); }
+.rate.sugg { border-color: var(--pill); background: var(--pill); color: var(--pill-ink); }
+.rate.sugg small, .rate.sugg .kbd { color: #d9cfbf; }
+.rate[data-g="1"]:hover { border-color: var(--wrong); }
+.kps { display: flex; flex-direction: column; gap: 6px; }
+.kp { display: flex; gap: 8px; font-size: .9rem; }
+.kp span { flex: none; width: 16px; font-weight: 700; color: var(--muted); }
+.kp.hit span { color: var(--right); }
+.kp.miss { color: var(--muted); }
+.kp.miss span { color: var(--wrong); }
+.exlist { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
+.exlist .label { margin-top: 8px; }
+.exrow { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 1px; padding: 9px 10px; border-radius: 8px; border-top: 1px solid var(--hair); }
+.exrow:hover { background: var(--page); }
+.exrow small { color: var(--muted); font-size: .8rem; display: block; }
+.exrow.two { flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
+.exrow.two:hover { background: none; }
+.exrow.two > span:first-child { font-size: .92rem; }
+.exbtns { display: flex; gap: 12px; align-items: center; flex: none; }
+.clock { font-variant-numeric: tabular-nums; font-size: .85rem; color: var(--muted); }
+.clock.over { color: var(--wrong); }
+.stim { background: var(--surface); border: 1px solid var(--hair); border-left: 3px solid var(--bronze); border-radius: 8px; padding: 12px 16px; font-family: var(--display); font-size: 1.02rem; line-height: 1.55; }
+.stim p { margin: 0; }
+.cite { font-family: var(--body); font-size: .78rem; color: var(--muted); margin-bottom: 6px; }
+.tscroll { overflow-x: auto; }
+.dtable { border-collapse: collapse; width: 100%; font-family: var(--body); font-size: .88rem; }
+.dtable th, .dtable td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--hair); }
+.dtable th { font-weight: 600; }
+.minimap { width: 100%; height: auto; border-radius: 6px; display: block; }
+.rubrow { border: 1px solid var(--hair); border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; background: var(--surface); }
+.rubrow p { margin: 0; font-size: .9rem; }
+.rubrow .rh { display: flex; justify-content: space-between; align-items: baseline; }
+.rubrow.hit { border-color: var(--right); background: var(--right-soft); }
+.rubrow.part { border-color: var(--bronze); }
+.rubrow.miss { border-color: var(--wrong); background: var(--wrong-soft); }
+.rubrow details summary { font-size: .82rem; color: var(--bronze); cursor: pointer; }
+.seg.four { grid-template-columns: repeat(4, 1fr); min-width: 200px; }
+details.settings { background: var(--surface); border: 1px solid var(--hair); border-radius: 12px; padding: 10px 16px; }
+@media (max-width: 560px) {
+  .version { position: static; display: block; width: max-content; margin: 0 auto 14px; }
+  .rates { grid-template-columns: repeat(2, 1fr); }
+  .exrow.two { flex-direction: column; align-items: flex-start; }
+  .hero2 .big { font-size: 2rem; }
+}
+#ss-after, #saq-out, #es-out, #th-out, #sd-out, #td-out { display: flex; flex-direction: column; gap: 12px; }
+#ss-after:empty, #saq-out:empty, #es-out:empty, #th-out:empty, #sd-out:empty { display: none; }
+
 </style>
 </head>
 <body>
@@ -361,20 +455,31 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
   <header class="site">
     <button class="sound-btn site-sound" aria-label="Sound on" title="Sound"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="mute" d="M17 9l5 6M22 9l-5 6"/></svg></button>
     <h1>Chronicle <span>AP Euro</span></h1>
-    <p class="sub">Put history in order, straight from your readings.</p>
-    <nav aria-label="Modes">
-      <button id="tab-mastery" aria-pressed="false">Mastery</button>
-      <button id="tab-timeline" aria-pressed="true">Timeline</button>
-      <button id="tab-etest" aria-pressed="false">Event Test</button>
-      <button id="tab-maps" aria-pressed="false">Maps</button>
-      <button id="tab-dives" aria-pressed="false">Deep Dives</button>
-      <button id="tab-people" aria-pressed="false">People</button>
-      <button id="tab-review" aria-pressed="false">Review</button>
+    <p class="sub">Understand it, remember it, write it. Straight from your readings.</p>
+    <nav class="main" aria-label="Sections">
+      <button id="nav-today" aria-pressed="true">Today</button>
+      <button id="nav-learn" aria-pressed="false">Learn</button>
+      <button id="nav-exam" aria-pressed="false">Exam</button>
+      <button id="nav-games" aria-pressed="false">Games</button>
     </nav>
+    <p class="syncnote" id="sync-note"></p>
+    <div hidden aria-hidden="true">
+      <button id="tab-mastery"></button><button id="tab-timeline"></button><button id="tab-etest"></button><button id="tab-maps"></button>
+      <button id="tab-dives"></button><button id="tab-people"></button><button id="tab-match"></button><button id="tab-review"></button>
+    </div>
   </header>
 
+  <!-- CHRONICLE 2 -->
+  <section id="v-today" class="section"><div id="today-body" class="section" style="gap:18px"></div></section>
+  <section id="v-learn" class="section" hidden><div id="learn-body" class="section" style="gap:16px"></div></section>
+  <section id="v-lact" class="section" hidden><div id="lact-body" class="section" style="gap:18px"></div></section>
+  <section id="v-sess" class="section" hidden><div id="sess-body" class="section" style="gap:14px"></div></section>
+  <section id="v-exam" class="section" hidden><div id="exam-body" class="section" style="gap:18px"></div></section>
+  <section id="v-exrun" class="section" hidden><div id="exrun-body" class="section" style="gap:16px"></div></section>
+  <section id="v-games" class="section" hidden><div id="games-body" class="section" style="gap:16px"></div></section>
+
   <!-- TIMELINE SETUP -->
-  <section id="v-setup" class="section">
+  <section id="v-setup" class="section" hidden>
     <p class="hint" style="text-align:center">Drag each event onto the timeline where it belongs. A miss costs a life, and the card still lands in its real spot so you see why.</p>
     <div id="units" class="section" style="gap:14px"></div>
     <div class="controls">
@@ -437,6 +542,9 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     <div id="dive-body" class="section" style="gap:24px"></div>
   </section>
 
+  <!-- MATCH -->
+  <section id="v-match" class="section" hidden><div id="mt-body" class="section" style="gap:18px"></div></section>
+
   <!-- PEOPLE -->
   <section id="v-people" class="section" hidden>
     <p class="hint" style="text-align:center">The key figures from your notes. Guess who from the clues, or browse them act by act. "My acts" uses the acts you picked in Timeline.</p>
@@ -482,7 +590,7 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
   </div>
 </section>
 
-<div class="version" aria-label="App version">v1.11 · Nov 18, 2026</div>
+<div class="version" aria-label="App version">v2.0 · Nov 23, 2026</div>
 
 <script src="data.js"></script>
 <script src="content.js"></script>
@@ -499,6 +607,10 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
 <script src="nq_u4a.js"></script>
 <script src="nq_u4b.js"></script>
 <script src="nq_u5.js"></script>
+<script src="und_u1u2.js"></script>
+<script src="und_u3u5.js"></script>
+<script src="exam_mcq.js"></script>
+<script src="exam_frq.js"></script>
 <script>
 (() => {
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -580,20 +692,20 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     if (b && !b.disabled) SFX.play("tap");
   }, true);
   const $ = id => document.getElementById(id);
-  const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const actTag = act => { const [u, a] = act.split("."); return `Unit ${u}, Act ${a}`; };
   const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
   const CHECK = `<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
   // ---------- views ----------
-  const views = ["setup", "game", "over", "etest", "etquiz", "maps", "dives", "dive", "people", "review", "mastery", "mact", "mquiz", "mstory"];
+  const views = ["setup", "game", "over", "etest", "etquiz", "maps", "dives", "dive", "people", "match", "review", "mastery", "mact", "mquiz", "mstory"];
   let lastTimelineView = "setup";
   function show(v) {
     views.forEach(x => $("v-" + x).hidden = x !== v);
     $("main").hidden = v === "game";
-    const tab = { etest: "etest", etquiz: "etest", maps: "maps", dives: "dives", dive: "dives", people: "people", review: "review", mastery: "mastery", mact: "mastery", mquiz: "mastery", mstory: "mastery" }[v] || "timeline";
-    ["mastery", "timeline", "etest", "maps", "dives", "people", "review"].forEach(t => $("tab-" + t).setAttribute("aria-pressed", String(t === tab)));
+    const tab = { etest: "etest", etquiz: "etest", maps: "maps", dives: "dives", dive: "dives", people: "people", match: "match", review: "review", mastery: "mastery", mact: "mastery", mquiz: "mastery", mstory: "mastery" }[v] || "timeline";
+    ["mastery", "timeline", "etest", "maps", "dives", "people", "match", "review"].forEach(t => $("tab-" + t).setAttribute("aria-pressed", String(t === tab)));
     if (["setup","over"].includes(v)) lastTimelineView = v;
   }
   $("tab-timeline").onclick = () => show(lastTimelineView);
@@ -1312,7 +1424,7 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
       return { tag, prompt: `Which describes ${p.name}?`, choices: fw.list.map(x => x.clues[0]), ans: fw.ans, explain: `${p.name}: ${p.role}. ${p.clues.join(". ")}.` };
     }
     if (f.kind === "nq") {
-      const [sec, q, right, ...wrong] = f.r, sc = shuffleChoices([right, ...wrong], 0), s = noteSection(f.act, sec);
+      const [sec, q, right, w1, w2] = f.r, sc = shuffleChoices([right, w1, w2], 0), s = noteSection(f.act, sec);
       return { tag: `Your notes: ${s ? secName(s[0]) : sec}`, prompt: q, choices: sc.list, ans: sc.ans, explain: right + "." };
     }
     if (f.kind === "nc") {
@@ -1499,7 +1611,7 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     on("r-again", startMixed);
     on("r-missed", () => runQuiz({ type: "practice", act: c.act, queue: practiceQueue(c.act, shuffle(c.missed.map(m => m.f))) }));
   }
-  const startPractice = a => runQuiz({ type: "practice", act: a, queue: practiceQueue(a) });
+  let startPractice = a => runQuiz({ type: "practice", act: a, queue: practiceQueue(a) });
   const startCheck = a => runQuiz({ type: "check", act: a, queue: stratified(factsFor(a), 10) });
   const startReview = a => runQuiz({ type: "review", act: a, queue: reviewQueue(a) });
   const startUnitTest = u => runQuiz({ type: "unit", unit: u, queue: unitQueue(u) });
@@ -1934,7 +2046,11 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
     const o = etOthers(b);
     if (type === "what") return mc("What actually happened?", b.title, b.what, o.slice(0, 3).map(x => x.what));
     if (type === "result") return mc("What did it lead to?", b.title, b.result, o.slice(0, 3).map(x => x.result));
-    if (type === "true") return mc("Which of these is true?", b.title, pickOne(b.truths), b.traps);
+    if (type === "true") { // keep "pick the longest" at chance: the true line is the longest only about a third of the time
+      const mx = Math.max(...b.traps.map(x => x.length)), lo = b.truths.filter(x => x.length > mx), hi = b.truths.filter(x => x.length <= mx);
+      const want = Math.random() < 1 / 3 ? lo : hi, pool = want.length ? want : b.truths;
+      return mc("Which of these is true?", b.title, pickOne(pool), b.traps);
+    }
     if (type === "false") return mc("Which of these is NOT true?", b.title, pickOne(b.traps), b.truths);
     if (type === "who") return mc("Who was central to it?", b.title, pickOne(whoAsk(b)), etWhoPool(b).slice(0, 3));
     if (type === "name") return mc("Name this event", etMask(b, b.what), b.title, o.slice(0, 3).map(x => x.title), true);
@@ -2053,8 +2169,880 @@ textarea:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; 
   }
   $("tab-etest").onclick = () => { renderETSetup(); show("etest"); };
 
+  // ================= match (Quizlet-style) =================
+  // Tap a person, then what they're known for. Clear the board as fast as you can.
+  const MT = { units: new Set(store.get("mtUnits", [...ET.units])), size: store.get("mtSize", 8), run: null, timer: null };
+  const mtTok = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").match(/[a-z]{4,}/g) || [];
+  const MT_SKIP = new Set(["king", "queen", "pope", "saint", "duke", "great"]);
+  const knownFor = p => { const nt = mtTok(p.name).filter(w => !MT_SKIP.has(w)); return p.clues.find(c => !mtTok(c).some(w => nt.includes(w))) || p.role; };
+  const mtPeople = () => PP.filter(p => MT.units.has(+p.act.split(".")[0]));
+  const mtKey = () => [...MT.units].sort().join("") + ":" + MT.size;
+  const fmtT = ms => (ms / 1000).toFixed(1) + "s";
+  function renderMTSetup() {
+    clearInterval(MT.timer);
+    const best = store.get("matchBest", {})[mtKey()];
+    const rows = ALL_UNITS.map(u => { const n = PP.filter(p => +p.act.split(".")[0] === u).length; return n ? `<button class="act" data-u="${u}" aria-pressed="${MT.units.has(u)}"><span class="box">${CHECK}</span><span class="name">Unit ${u} · ${esc(UNIT_NAMES[u] || "")}<small>${n} people</small></span><span class="n">${n}</span></button>` : ""; }).join("");
+    const enough = mtPeople().length >= MT.size;
+    $("mt-body").innerHTML = `<p class="hint" style="text-align:center">Tap a person, then what they're known for. Matched pairs disappear. A wrong match adds 1 second. Beat your best time.</p>
+      <div class="unit"><div class="unit-head"><span class="label">Units</span><button id="mt-all">${MT.units.size === ALL_UNITS.length ? "Clear" : "Select all"}</button></div>${rows}</div>
+      <div class="section" style="gap:8px"><div class="label">Board size</div>
+        <div class="seg" role="group" aria-label="Board size">${[[8, "16 cards"], [10, "20 cards"]].map(([k, l]) => `<button data-size="${k}" aria-pressed="${MT.size === k}">${l}</button>`).join("")}</div></div>
+      <button class="go" id="mt-start" ${enough ? "" : "disabled"}>${enough ? "Start" : "Pick at least one unit"}</button>
+      ${best != null ? `<p class="meta" style="text-align:center;margin:0">Best time for this setup: ${fmtT(best)}</p>` : ""}`;
+    document.querySelectorAll("#mt-body [data-u]").forEach(b => b.onclick = () => { const u = +b.dataset.u; MT.units.has(u) ? MT.units.delete(u) : MT.units.add(u); saveMT(); renderMTSetup(); });
+    $("mt-all").onclick = () => { if (MT.units.size === ALL_UNITS.length) MT.units.clear(); else ALL_UNITS.forEach(u => MT.units.add(u)); saveMT(); renderMTSetup(); };
+    document.querySelectorAll("#mt-body [data-size]").forEach(b => b.onclick = () => { MT.size = +b.dataset.size; saveMT(); renderMTSetup(); });
+    $("mt-start").onclick = startMT;
+  }
+  function saveMT() { store.set("mtUnits", [...MT.units]); store.set("mtSize", MT.size); }
+  function startMT() {
+    const pool = shuffle(mtPeople()), picked = [], seen = new Set();
+    for (const p of pool) { const k = knownFor(p); if (seen.has(k)) continue; seen.add(k); picked.push(p); if (picked.length >= MT.size) break; }
+    const tiles = shuffle(picked.flatMap((p, i) => [{ pair: i, side: "name", text: p.name }, { pair: i, side: "def", text: knownFor(p) }]));
+    MT.run = { picked, tiles, sel: null, done: new Set(), start: 0, penalty: 0, misses: 0, missed: new Set(), lock: false };
+    renderMTBoard(); SFX.play("deal");
+  }
+  function mtElapsed() { const R = MT.run; return R.start ? Date.now() - R.start + R.penalty : 0; }
+  function renderMTBoard() {
+    const R = MT.run;
+    $("mt-body").innerHTML = `<div class="row" style="justify-content:space-between"><button class="text-btn" id="mt-quit">&larr; Back</button><span class="mt-clock" id="mt-clock">0.0s</span></div>
+      <div class="mt-grid${MT.size >= 10 ? " wide" : ""}">${R.tiles.map((t, i) => `<button class="mt-tile ${t.side}" data-i="${i}">${esc(t.text)}</button>`).join("")}</div>`;
+    $("mt-quit").onclick = () => { clearInterval(MT.timer); renderMTSetup(); };
+    document.querySelectorAll("#mt-body .mt-tile").forEach(b => b.onclick = () => mtTap(+b.dataset.i, b));
+    clearInterval(MT.timer);
+    MT.timer = setInterval(() => { const el = $("mt-clock"); if (!el) return clearInterval(MT.timer); el.textContent = fmtT(mtElapsed()); }, 100);
+  }
+  function mtTap(i, btn) {
+    const R = MT.run; if (R.lock || R.done.has(R.tiles[i].pair)) return;
+    if (!R.start) R.start = Date.now();
+    if (R.sel === null) { R.sel = i; btn.classList.add("sel"); SFX.play("pick"); return; }
+    const a = R.tiles[R.sel], b = R.tiles[i], prev = document.querySelector(`#mt-body .mt-tile[data-i="${R.sel}"]`);
+    if (R.sel === i) { btn.classList.remove("sel"); R.sel = null; return; }
+    if (a.side === b.side) { prev.classList.remove("sel"); btn.classList.add("sel"); R.sel = i; SFX.play("pick"); return; } // switch to another tile on the same side
+    if (a.pair === b.pair) {
+      R.done.add(a.pair); R.sel = null; SFX.play("right");
+      [prev, btn].forEach(el => { el.classList.remove("sel"); el.classList.add("ok"); el.disabled = true; });
+      setTimeout(() => [prev, btn].forEach(el => el.classList.add("gone")), reduced() ? 0 : 260);
+      if (R.done.size === R.picked.length) setTimeout(finishMT, reduced() ? 0 : 320);
+    } else {
+      R.misses++; R.penalty += 1000; SFX.play("wrong");
+      [a, b].forEach(t => R.missed.add(t.pair));
+      R.lock = true; [prev, btn].forEach(el => { el.classList.remove("sel"); el.classList.add("bad"); });
+      setTimeout(() => { [prev, btn].forEach(el => el.classList.remove("bad")); R.sel = null; R.lock = false; }, 450);
+    }
+  }
+  function finishMT() {
+    clearInterval(MT.timer);
+    const R = MT.run, t = mtElapsed(), all = store.get("matchBest", {}), k = mtKey(), prev = all[k], isBest = prev == null || t < prev;
+    if (isBest) { all[k] = t; store.set("matchBest", all); }
+    const missed = [...R.missed].map(i => R.picked[i]);
+    missed.forEach(p => addPile("missedPeople", p.name));
+    $("mt-body").innerHTML = `<div class="result"><div class="label">${isBest ? (prev == null ? "First time on this setup" : "New best time") : "Board cleared"}</div><div class="big">${fmtT(t)}</div>
+      <div class="meta">${R.misses ? `${R.misses} wrong match${R.misses === 1 ? "" : "es"} (+${R.misses}s)` : "No wrong matches"}${!isBest ? ` · best ${fmtT(prev)}` : ""}</div>
+      <div class="row" style="flex-direction:column;align-items:stretch;width:min(320px,100%);margin-top:10px"><button class="go" id="mt-again">Play again</button><button class="text-btn" id="mt-setup">Change units</button></div></div>
+      <div class="label">${missed.length ? "You mixed these up · they're in your Review pile" : "All the pairs from this board"}</div>
+      <ul class="list">${(missed.length ? missed : R.picked).map(p => `<li><span class="d">${esc(actTag(p.act))}</span><span class="t">${esc(p.name)}</span><span class="b">${esc(knownFor(p))}</span></li>`).join("")}</ul>`;
+    $("mt-again").onclick = startMT; $("mt-setup").onclick = renderMTSetup;
+    SFX.play(isBest ? "win" : "streak");
+  }
+  $("tab-match").onclick = () => { renderMTSetup(); show("match"); };
+
+  // =====================================================================
+  // CHRONICLE 2: Today, Learn, Exam. Recall first, spaced repetition per item,
+  // understanding questions graded on ideas, and AP exam practice with Claude grading.
+  // =====================================================================
+  const EXAM_DAY = new Date(2027, 4, 4); // Tuesday, May 4, 2027
+  const daysToExam = () => { const t = new Date(); t.setHours(0, 0, 0, 0); return Math.max(0, Math.round((EXAM_DAY - t) / DAY)); };
+  const nowMin = () => Math.floor(Date.now() / 60000);
+  const plural = (n, w, p) => `${n} ${n === 1 ? w : (p || w + "s")}`;
+
+  // ---------- state (fresh start: separate from the old Mastery progress) ----------
+  const SR = Object.assign({ v: 1, items: {}, active: [], activeT: 0, days: [], newLog: {}, exam: [], settings: { newPerDay: 15, ai: true, setT: 0 }, t: 0 }, store.get("srs", {}));
+  SR.settings = Object.assign({ newPerDay: 15, ai: true, setT: 0 }, SR.settings);
+  // item = [due (minute), interval (days x10), ease (x100), reps, lapses, last seen (minute)]
+  const getIt = k => { const a = SR.items[k]; return a ? { due: a[0], ivl: a[1] / 10, ease: a[2] / 100, reps: a[3], lapses: a[4], last: a[5] } : null; };
+  const putIt = (k, o) => { SR.items[k] = [Math.round(o.due), Math.round(o.ivl * 10), Math.round(o.ease * 100), o.reps, o.lapses, o.last]; };
+  function saveSR() { SR.t = Date.now(); store.set("srs", SR); queueSync(); }
+  function markDay() { const d = localDay(); if (SR.days[SR.days.length - 1] !== d) { SR.days.push(d); SR.days = SR.days.slice(-400); } }
+  function srStreak() { const set = new Set(SR.days); let n = 0, t = Date.now(); if (!set.has(localDay(t))) t -= DAY; while (set.has(localDay(t))) { n++; t -= DAY; } return n; }
+  const newToday = () => SR.newLog[localDay()] || 0;
+
+  // grades: 1 Again, 2 Hard, 3 Good, 4 Easy
+  function schedule(o, g) {
+    const n = nowMin(); o = o ? { ...o } : { due: n, ivl: 0, ease: 2.5, reps: 0, lapses: 0, last: n };
+    if (g === 1) { if (o.reps > 0) o.lapses++; o.reps = 0; o.ivl = 0; o.ease = Math.max(1.3, o.ease - 0.2); o.due = n + 10; }
+    else {
+      if (g === 2) { o.ivl = o.reps === 0 ? 0.25 : Math.max(1, o.ivl * 1.2); o.ease = Math.max(1.3, o.ease - 0.15); }
+      else if (g === 3) o.ivl = o.reps === 0 ? 1 : o.reps === 1 ? 3 : Math.max(o.ivl + 1, o.ivl * o.ease);
+      else { o.ivl = o.reps === 0 ? 3 : Math.max(o.ivl + 2, o.ivl * o.ease * 1.3); o.ease += 0.15; }
+      o.ivl = Math.min(o.ivl, 180); o.reps++;
+      o.due = n + Math.round(o.ivl * 1440 * (g === 2 ? 1 : 0.95 + Math.random() * 0.1));
+    }
+    o.last = n; return o;
+  }
+  function grade(k, g) {
+    const before = getIt(k);
+    if (!before) SR.newLog[localDay()] = newToday() + 1;
+    putIt(k, schedule(before, g)); markDay(); saveSR();
+  }
+  const ivlText = o => { const m = o.due - nowMin(); if (m < 60) return "10 min"; if (m < 1200) return `${Math.round(m / 60)} hours`; const d = Math.round(m / 1440); return d <= 1 ? "1 day" : d < 31 ? `${d} days` : `${Math.round(d / 30)} mo`; };
+  // A fact the story already asked counts as a first look (only if the item is new).
+  const _record = record;
+  function storySeen(key, ok) { if (!getIt(key) && ITEMS()[key]) grade(key, ok ? 3 : 1); }
+
+  // ---------- the item bank ----------
+  let _ITEMS = null;
+  const unitOf = act => +act.split(".")[0];
+  function undFor(act) { return (UND[act] || []).map((r, i) => ({ key: `un:${act}:${i}`, kind: "un", r, act })); }
+  function unitQFor(u) { const first = ACT_ORDER.find(a => unitOf(a) === u); return (UNITQ[u] || []).map((r, i) => ({ key: `uq:${u}:${i}`, kind: "uq", r, act: first, unit: u })); }
+  // Order new facts the way you'd learn them: your notes first, then events in time order, people, terms, causes, deep dives.
+  const KIND_ORDER = { nq: 0, nc: 1, ev: 2, pp: 3, tm: 4, nw: 5, ch: 6, dq: 7 };
+  // Each kind keeps its own order (notes in note order, events by date), and the kinds are spread evenly through the act.
+  function factsOrdered(act) {
+    const by = {};
+    factsFor(act).forEach(f => (by[f.kind] = by[f.kind] || []).push(f));
+    if (by.ev) by.ev.sort((a, b) => fullKey(a.e) - fullKey(b.e));
+    return Object.entries(by).flatMap(([k, l]) => l.map((f, i) => [f, (i + 0.5) / l.length + KIND_ORDER[k] * 1e-3])).sort((a, b) => a[1] - b[1]).map(x => x[0]);
+  }
+  function ITEMS() {
+    if (_ITEMS) return _ITEMS;
+    _ITEMS = {};
+    ACT_ORDER.forEach(a => { factsFor(a).forEach(f => _ITEMS[f.key] = f); undFor(a).forEach(f => _ITEMS[f.key] = f); });
+    UNITS.forEach(u => unitQFor(u).forEach(f => _ITEMS[f.key] = f));
+    return _ITEMS;
+  }
+  const isUnd = f => f.kind === "un" || f.kind === "uq";
+  function actProgress(a) {
+    const f = factsFor(a), u = undFor(a);
+    let seen = 0, solid = 0, useen = 0, usolid = 0;
+    f.forEach(x => { const it = getIt(x.key); if (it) { seen++; if (it.ivl >= 21) solid++; } });
+    u.forEach(x => { const it = getIt(x.key); if (it) { useen++; if (it.ivl >= 7) usolid++; } });
+    return { n: f.length, seen, solid, un: u.length, useen, usolid, pct: f.length ? seen / f.length : 0 };
+  }
+  const dueItems = (filter = () => true) => { const n = nowMin(); return Object.keys(SR.items).filter(k => SR.items[k][0] <= n && ITEMS()[k] && filter(ITEMS()[k])).sort((a, b) => SR.items[a][0] - SR.items[b][0]).map(k => ITEMS()[k]); };
+  // New items for an act: facts first; understanding questions unlock once 40% of the act's facts are seen.
+  function newFor(a, opts = {}) {
+    const p = actProgress(a), out = [];
+    const facts = factsOrdered(a).filter(f => !getIt(f.key));
+    const und = p.pct >= 0.4 || opts.und ? undFor(a).filter(f => !getIt(f.key)) : [];
+    // one understanding question after every 6 new facts, so ideas and facts grow together
+    let ui = 0;
+    facts.forEach((f, i) => { out.push(f); if ((i + 1) % 6 === 0 && ui < und.length) out.push(und[ui++]); });
+    while (ui < und.length) out.push(und[ui++]);
+    return out;
+  }
+  function newUnitQ(u) {
+    const acts = ACT_ORDER.filter(a => unitOf(a) === u);
+    if (!acts.every(a => SR.active.includes(a) && actProgress(a).pct >= 0.5)) return [];
+    return unitQFor(u).filter(f => !getIt(f.key));
+  }
+  function todayQueue(extraNew = 0) {
+    const due = dueItems(f => SR.active.includes(f.act) || getIt(f.key)).slice(0, 80);
+    const budget = Math.max(0, SR.settings.newPerDay - newToday()) + extraNew;
+    const lists = SR.active.filter(a => ACTS[a]).map(a => newFor(a));
+    UNITS.forEach(u => { const l = newUnitQ(u); if (l.length) lists.push(l); });
+    const fresh = [];
+    for (let r = 0; fresh.length < budget && lists.some(l => l.length); r++) lists.forEach(l => { if (fresh.length < budget && l.length) fresh.push(l.shift()); });
+    return interleave(due, fresh);
+  }
+  function interleave(due, fresh) { const q = []; let i = 0, j = 0; while (i < due.length || j < fresh.length) { if (i < due.length) q.push(due[i++]); if (i < due.length) q.push(due[i++]); if (j < fresh.length) q.push(fresh[j++]); } return q; }
+  function activate(a) { if (!SR.active.includes(a)) { SR.active.push(a); SR.activeT = Date.now(); saveSR(); } }
+  function deactivate(a) { SR.active = SR.active.filter(x => x !== a); SR.activeT = Date.now(); saveSR(); }
+
+  // ---------- Claude (AI grading). Absent on the GitHub copy or if the viewer says no: then you grade yourself. ----------
+  const AI = { fn: null, ok: false };
+  const aiOn = () => AI.ok && SR.settings.ai !== false;
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("sample").then(f => { AI.fn = f; AI.ok = !!f; refreshChrome(); }).catch(() => {});
+  }
+  const AI_GONE = ["not_granted", "sampling_disabled", "not_declared", "capability_disabled", "capability_removed"];
+  async function askJSON(prompt, tier) {
+    if (!aiOn()) throw { code: "off" };
+    try { return await AI.fn.json(prompt, { modelTier: tier || "default" }); }
+    catch (e) { if (e && AI_GONE.includes(e.code)) { AI.ok = false; refreshChrome(); } throw e || { code: "upstream_error" }; }
+  }
+  function aiErr(e) {
+    const c = e && e.code;
+    if (c === "rate_limited") return "Claude is busy right now. Try again in a minute, or grade it yourself.";
+    if (c === "off" || AI_GONE.includes(c)) return "Claude grading isn't available here, so grade it yourself.";
+    if (c === "invalid_json") return "Claude's grade came back garbled. Try again, or grade it yourself.";
+    if (c === "session_expired") return "Your Claude session expired. Sign in again, or grade it yourself.";
+    if (c === "prompt_too_large") return "That's too long to grade in one go. Trim it, or grade it yourself.";
+    return "Couldn't reach Claude. Try again, or grade it yourself.";
+  }
+  const clip = (s, n) => { s = String(s || ""); return s.length > n ? s.slice(0, n) + "…" : s; };
+
+  // ---------- account sync (Claude-hosted copy only) ----------
+  const SYNC = { ref: null, state: "local", writing: false, pending: false, timer: null, last: "" };
+  function payload() {
+    const keep = Object.keys(SR.newLog).sort().slice(-21), nl = {}; keep.forEach(k => nl[k] = SR.newLog[k]);
+    return { v: 1, items: SR.items, active: SR.active, activeT: SR.activeT, days: SR.days.slice(-400), newLog: nl, exam: SR.exam.slice(-150), settings: SR.settings, t: SR.t };
+  }
+  function mergeRemote(r) {
+    if (!r || typeof r !== "object") return;
+    const ri = r.items || {};
+    Object.keys(ri).forEach(k => { const a = ri[k], b = SR.items[k]; if (Array.isArray(a) && a.length === 6 && (!b || a[5] > b[5] || (a[5] === b[5] && a[3] > b[3]))) SR.items[k] = a; });
+    if ((r.activeT || 0) > (SR.activeT || 0) && Array.isArray(r.active)) { SR.active = r.active.filter(a => ACTS[a]); SR.activeT = r.activeT; }
+    if (Array.isArray(r.days)) SR.days = [...new Set([...SR.days, ...r.days])].sort().slice(-400);
+    Object.entries(r.newLog || {}).forEach(([d, n]) => { SR.newLog[d] = Math.max(SR.newLog[d] || 0, +n || 0); });
+    if (Array.isArray(r.exam)) { const seen = new Set(SR.exam.map(x => x.t + x.id)); r.exam.forEach(x => { if (x && !seen.has(x.t + x.id)) SR.exam.push(x); }); SR.exam.sort((a, b) => a.t - b.t); }
+    if (r.settings && (r.settings.setT || 0) > (SR.settings.setT || 0)) SR.settings = Object.assign({}, SR.settings, r.settings);
+    store.set("srs", SR);
+  }
+  async function initSync() {
+    if (!(window.claude && typeof window.claude.use === "function")) return;
+    try {
+      const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+      if (!db || !user) return;
+      const uid = await user.id(); if (!uid) return;
+      SYNC.ref = db.collection("data/users/" + uid).doc("chronicle");
+      SYNC.state = "loading"; refreshChrome();
+      let timer; const timeout = new Promise((_, rej) => { timer = setTimeout(() => rej({ code: "timeout" }), 10000); });
+      const snap = await Promise.race([SYNC.ref.get(), timeout]); clearTimeout(timer);
+      if (snap && snap.exists) { const d = snap.data(); try { mergeRemote(JSON.parse(d.blob || "{}")); } catch {} }
+      SYNC.state = "synced"; refreshChrome(); doSync();
+      if (!$("v-today").hidden) renderToday();
+    } catch (e) { if (!(e && e.code === "timeout")) SYNC.ref = null; SYNC.state = SYNC.ref ? "error" : "local"; refreshChrome(); }
+  }
+  function queueSync() { if (!SYNC.ref) return; clearTimeout(SYNC.timer); SYNC.timer = setTimeout(doSync, 2500); }
+  async function doSync() {
+    if (!SYNC.ref) return;
+    if (SYNC.writing) { SYNC.pending = true; return; }
+    const blob = JSON.stringify(payload());
+    if (blob === SYNC.last) return;
+    if (blob.length > 250000) { SYNC.state = "full"; refreshChrome(); return; }
+    SYNC.writing = true;
+    try { await SYNC.ref.set({ blob, t: Date.now() }); SYNC.last = blob; SYNC.state = "synced"; }
+    catch (e) { SYNC.state = e && (e.code === "not_granted" || e.code === "revoked") ? "local" : "error"; if (SYNC.state === "local") SYNC.ref = null; }
+    SYNC.writing = false; refreshChrome();
+    if (SYNC.pending) { SYNC.pending = false; queueSync(); }
+  }
+  function refreshChrome() {
+    const s = $("sync-note"); if (!s) return;
+    const sync = { synced: "Progress syncs to your Claude account", loading: "Loading your progress…", error: "Couldn't reach your account just now. Saved on this device", full: "Saved on this device (too much to sync)", local: "Saved on this device" }[SYNC.state];
+    const ai = aiOn() ? "Claude grading on" : AI.ok ? "Claude grading off" : "Self-grading mode";
+    s.textContent = `${sync} · ${ai}`;
+  }
+
+  // ---------- views and navigation ----------
+  const NEWVIEWS = ["today", "learn", "lact", "sess", "exam", "exrun", "games"];
+  views.push(...NEWVIEWS);
+  const NAV_OF = v => ({ today: "today", learn: "learn", lact: "learn", sess: SS.from || "today", exam: "exam", exrun: "exam", mastery: "learn", mact: "learn", mquiz: "learn", mstory: "learn" }[v] || "games");
+  const _show = show;
+  show = function (v) {
+    _show(v);
+    if (v !== "exrun") stopTimer();
+    ["today", "learn", "exam", "games"].forEach(t => $("nav-" + t).setAttribute("aria-pressed", String(NAV_OF(v) === t)));
+  };
+  function go(v, render) { if (render) render(); show(v); window.scrollTo({ top: 0 }); }
+
+  // ================= TODAY =================
+  function renderToday() {
+    const q = todayQueue(), due = dueItems(f => SR.active.includes(f.act) || getIt(f.key)).length, fresh = q.length - Math.min(due, 80);
+    const dleft = daysToExam(), streak = srStreak(), act = SR.active.filter(a => ACTS[a]);
+    const leeches = Object.keys(SR.items).filter(k => SR.items[k][4] >= 3 && ITEMS()[k]).length;
+    let h = `<div class="hero2"><div><div class="big">${dleft}</div><div class="label">days to the AP exam</div><div class="meta" style="text-align:left">Tuesday, May 4, 2027</div></div>
+      <div><div class="big">${streak}</div><div class="label">day streak</div><div class="meta" style="text-align:left">${plural(Object.keys(SR.items).length, "thing")} in your memory</div></div></div>`;
+    if (!act.length) {
+      h += `<div class="panel-card"><div class="tagline">Start here</div><h3>Pick the act you're on</h3><p class="hint">Open Learn, choose an act, and press Study this act. From then on, Today builds your daily session: a little new material plus whatever is due for review, right when you're about to forget it.</p><button class="go small" id="td-learn">Open Learn</button></div>`;
+    } else if (q.length) {
+      const mins = Math.max(2, Math.round(q.reduce((s, f) => s + (isUnd(f) ? 1.5 : 0.25), 0)));
+      h += `<div class="panel-card todaycard"><div class="tagline">Today's session · about ${mins} min</div>
+        <h3>${due ? plural(due, "review") : "No reviews due"}${fresh > 0 ? ` + ${fresh} new` : ""}</h3>
+        <p class="hint">Answer from memory first. Type it or say it in your head, then check. Choices are there if you're stuck, for less credit.</p>
+        <button class="go" id="td-go">Start</button></div>`;
+    } else {
+      h += `<div class="panel-card todaycard"><div class="tagline">All caught up</div><h3>Nothing due right now</h3><p class="hint">Reviews come back when you're about to forget them. You can learn ahead, or practice for the exam.</p>
+        <div class="row" style="justify-content:flex-start"><button class="go small" id="td-ahead">Learn 10 more</button><button class="text-btn" id="td-exam">Exam practice</button></div></div>`;
+    }
+    if (act.length) {
+      h += `<div class="label">Your acts</div><div class="unit">${act.map(a => { const p = actProgress(a); return `<button class="act lrow" data-act="${a}"><span class="name">${esc(ACTS[a].title)}<small>${esc(actTag(a))} · ${p.seen} of ${p.n} seen · ${p.solid} solid · ${p.useen} of ${p.un} explained</small></span><span class="bar2"><i style="width:${Math.round(p.pct * 100)}%"></i><b style="width:${Math.round(p.n ? p.solid / p.n * 100 : 0)}%"></b></span></button>`; }).join("")}</div>`;
+    }
+    const tips = [["Source-based multiple choice", "A set of AP-style questions on one source.", "mcq"], ["Short answer", "Three parts, one point each, graded like the real thing.", "saq"], ["Thesis drill", "Write just a thesis for a real-format LEQ prompt.", "leq"], ["Sourcing drill", "Explain one DBQ document's point of view, purpose, situation, or audience.", "dbq"]];
+    const tip = tips[(SR.days.length + new Date().getDate()) % tips.length];
+    h += `<div class="panel-card"><div class="tagline">Exam practice idea</div><h3>${tip[0]}</h3><p class="hint">${tip[1]}</p><button class="go small" id="td-tip">Go</button></div>`;
+    if (leeches) h += `<button class="text-btn" id="td-leech" style="align-self:flex-start">Drill the ${plural(leeches, "item")} that keep slipping</button>`;
+    h += `<details class="nsec settings"><summary>Settings</summary><div class="section" style="gap:12px;padding:12px 4px">
+      <div class="row" style="justify-content:space-between"><span>New items per day</span><div class="seg four" role="group" aria-label="New per day">${[10, 15, 25, 40].map(n => `<button data-npd="${n}" aria-pressed="${SR.settings.newPerDay === n}">${n}</button>`).join("")}</div></div>
+      ${AI.ok ? `<label class="checkline"><input type="checkbox" id="set-ai" ${SR.settings.ai !== false ? "checked" : ""}> Let Claude grade my typed answers and essays</label>` : `<p class="hint">Claude grading works when you open Chronicle on Claude. Here, you compare with model answers and grade yourself.</p>`}
+      </div></details>`;
+    $("today-body").innerHTML = h;
+    const on = (id, fn) => { const b = $(id); if (b) b.onclick = fn; };
+    on("td-learn", openLearn);
+    on("td-go", () => startSession(todayQueue(), "Today's session", "today"));
+    on("td-ahead", () => startSession(todayQueue(10), "Learning ahead", "today"));
+    on("td-exam", openExam);
+    on("td-tip", () => tip[2] === "mcq" ? startMCQ(pickMCQ()) : tip[2] === "saq" ? openSAQ(pickOne(SAQ).id) : tip[2] === "leq" ? openLEQ(pickOne(LEQ).id, "thesis") : openDBQ(pickOne(DBQ).id, "source"));
+    on("td-leech", () => startSession(shuffle(Object.keys(SR.items).filter(k => SR.items[k][4] >= 3 && ITEMS()[k]).map(k => ITEMS()[k])).slice(0, 20), "Slipping items", "today"));
+    document.querySelectorAll("#today-body .lrow").forEach(b => b.onclick = () => openLearnAct(b.dataset.act));
+    document.querySelectorAll("#today-body [data-npd]").forEach(b => b.onclick = () => { SR.settings.newPerDay = +b.dataset.npd; SR.settings.setT = Date.now(); saveSR(); renderToday(); });
+    const ai = $("set-ai"); if (ai) ai.onchange = () => { SR.settings.ai = ai.checked; SR.settings.setT = Date.now(); saveSR(); refreshChrome(); };
+    refreshChrome();
+  }
+  function openToday() { go("today", renderToday); }
+
+  // ================= LEARN =================
+  function renderLearn() {
+    let h = `<p class="hint" style="text-align:center">Every act from your notes. Open one to read the story or notes, study it, and explain the big ideas in your own words.</p>`;
+    UNITS.forEach(u => {
+      const acts = ACT_ORDER.filter(a => unitOf(a) === u), uq = unitQFor(u), uqSeen = uq.filter(f => getIt(f.key)).length;
+      h += `<div class="unit"><div class="unit-head"><span class="label">Unit ${u}${typeof UNIT_NAMES !== "undefined" && UNIT_NAMES[u] ? ` · ${esc(UNIT_NAMES[u])}` : ""}</span>${uq.length ? `<button data-uq="${u}">Big questions ${uqSeen}/${uq.length}</button>` : ""}</div>
+        ${acts.map(a => { const p = actProgress(a), on = SR.active.includes(a); return `<button class="act lrow" data-act="${a}"><span class="name">${esc(ACTS[a].title)}<small>Act ${a.split(".")[1]} · ${esc(ACTS[a].pages)}${on ? " · in your daily plan" : ""}</small></span><span class="lr-right"><span class="n">${p.seen ? `${Math.round(p.pct * 100)}%` : ""}</span><span class="bar2"><i style="width:${Math.round(p.pct * 100)}%"></i><b style="width:${Math.round(p.n ? p.solid / p.n * 100 : 0)}%"></b></span></span></button>`; }).join("")}</div>`;
+    });
+    h += `<p class="meta">Light bar: seen. Dark bar: solid (you've remembered it across 3+ weeks).</p>`;
+    $("learn-body").innerHTML = h;
+    document.querySelectorAll("#learn-body .lrow").forEach(b => b.onclick = () => openLearnAct(b.dataset.act));
+    document.querySelectorAll("#learn-body [data-uq]").forEach(b => b.onclick = () => startUnitQ(+b.dataset.uq));
+  }
+  function openLearn() { go("learn", renderLearn); }
+  function startUnitQ(u) {
+    const all = unitQFor(u), n = nowMin();
+    const q = [...all.filter(f => getIt(f.key) && getIt(f.key).due <= n), ...all.filter(f => !getIt(f.key)), ...shuffle(all.filter(f => getIt(f.key) && getIt(f.key).due > n))].slice(0, 6);
+    startSession(q, `Unit ${u} big questions`, "learn", () => openLearn());
+  }
+
+  const LA = { act: null, notes: false };
+  function openLearnAct(a) { LA.act = a; go("lact", renderLearnAct); }
+  function renderLearnAct() {
+    const a = LA.act, p = actProgress(a), on = SR.active.includes(a), L = LESSONS[a], sv = store.get("story", {})[a] || {}, n = nowMin();
+    const dueHere = [...factsFor(a), ...undFor(a)].filter(f => { const it = getIt(f.key); return it && it.due <= n; }).length;
+    const newHere = factsFor(a).filter(f => !getIt(f.key)).length;
+    let h = `<button class="text-btn" id="la-back" style="align-self:flex-start">&larr; Learn</button>
+      <div><div class="tagline">${esc(actTag(a))} · ${esc(ACTS[a].pages)}</div><h2 class="dive-title">${esc(ACTS[a].title)}</h2>${L ? `<p class="lede" style="margin-top:8px">${esc(L.big)}</p>` : ""}</div>
+      <div class="stat3"><div><b>${p.seen}<small>/${p.n}</small></b><span>facts seen</span></div><div><b>${p.solid}</b><span>solid</span></div><div><b>${p.useen}<small>/${p.un}</small></b><span>ideas explained</span></div></div>
+      <div class="panel-card"><div class="tagline">Step 1 · Understand the story</div><h3>${sv.done ? "Story done" : sv.i > 0 ? "Pick up the story" : "Learn it as a story"}</h3><p class="hint">Predict what happens next, then see what really did. About 5 minutes. Read your notes below too.</p>
+        <div class="row" style="justify-content:flex-start"><button class="go small" id="la-story">${sv.i > 0 && !sv.done ? `Resume at card ${sv.i + 1}` : sv.done ? "Play it again" : "Start the story"}</button></div></div>
+      <div class="panel-card"><div class="tagline">Step 2 · Remember it</div><h3>Study this act</h3><p class="hint">${newHere ? `${plural(newHere, "fact")} you haven't seen yet. ` : "You've seen every fact. "}${dueHere ? `${dueHere} due for review. ` : ""}Recall first, then check. Spaced reviews bring each one back right before you'd forget it.</p>
+        <div class="row" style="justify-content:flex-start"><button class="go small" id="la-study">${newHere || dueHere ? "Study this act" : "Review it anyway"}</button><button class="text-btn" id="la-plan">${on ? "Remove from daily plan" : "Add to daily plan"}</button></div></div>
+      <div class="panel-card"><div class="tagline">Step 3 · Explain it</div><h3>Why, how, and so what</h3><p class="hint">${p.un} questions on causes, effects, comparisons, and change over time. Answer in your own words${aiOn() ? " and Claude grades you on the key ideas" : ", then check yourself against the key points"}. This is what the AP essays ask for.</p>
+        <div class="row" style="justify-content:flex-start"><button class="go small" id="la-und">Explain it</button></div></div>
+      <details class="nsec notesbox"${LA.notes ? " open" : ""}><summary>Your notes, key terms, events, and people</summary><div id="la-notes" class="section" style="gap:22px;padding-top:14px">${L ? learnHTML(a) : ""}</div></details>`;
+    $("lact-body").innerHTML = h;
+    const nb = $("la-notes"); const st = nb.querySelector("#ma-start"); if (st) st.remove();
+    $("la-back").onclick = openLearn;
+    $("la-story").onclick = () => startStory(a, !(sv.i > 0 && !sv.done));
+    $("la-study").onclick = () => startActStudy(a);
+    $("la-plan").onclick = () => { on ? deactivate(a) : activate(a); renderLearnAct(); };
+    $("la-und").onclick = () => startUnd(a);
+    document.querySelector("#lact-body .notesbox").ontoggle = e => { LA.notes = e.target.open; };
+    nb.querySelectorAll("[data-dive]").forEach(b => b.onclick = () => openDive(b.dataset.dive));
+    const mp = nb.querySelector("#ma-map"); if (mp) mp.onclick = () => { const ys = EV.filter(e => e.act === a).map(e => e.y).sort((x, y) => x - y); show("maps"); openMaps(); setEra(nearestEra(ys[Math.floor(ys.length / 2)] || 1500)); setMapMode("explore"); window.scrollTo({ top: 0 }); };
+  }
+  function startActStudy(a) {
+    activate(a);
+    const n = nowMin(), due = [...factsFor(a), ...undFor(a)].filter(f => { const it = getIt(f.key); return it && it.due <= n; }).sort((x, y) => getIt(x.key).due - getIt(y.key).due);
+    let fresh = newFor(a).slice(0, 15);
+    let q = interleave(due.slice(0, 40), fresh);
+    if (!q.length) q = shuffle(factsFor(a)).slice(0, 15); // nothing due or new: a quick review round
+    startSession(q, `Studying ${actTag(a)}`, "learn", () => openLearnAct(a));
+  }
+  function startUnd(a) {
+    const all = undFor(a), n = nowMin();
+    const q = [...all.filter(f => getIt(f.key) && getIt(f.key).due <= n), ...all.filter(f => !getIt(f.key)), ...shuffle(all.filter(f => getIt(f.key) && getIt(f.key).due > n))].slice(0, 6);
+    startSession(q, `Explain ${actTag(a)}`, "learn", () => openLearnAct(a));
+  }
+
+  // ================= SESSION (recall first) =================
+  const SS = { q: [], i: 0, label: "", from: "today", done: null, cur: null, phase: "ask", stats: null, retried: {} };
+  const KIND_LABEL = { cause: "Cause", effect: "Effect", compare: "Compare", change: "Continuity and change", significance: "Significance", context: "Context" };
+  function startSession(queue, label, from, done) {
+    if (!queue.length) { SFX.play("flip"); return from === "learn" && done ? done() : openToday(); }
+    Object.assign(SS, { q: queue.slice(), i: 0, label, from, done: done || null, stats: { n: 0, again: 0, hard: 0, good: 0, easy: 0, fresh: 0, und: 0, first: {} }, retried: {} });
+    markDay(); go("sess", () => nextCard());
+  }
+  // The MC builders ask "Which..."; recall asks the same thing openly.
+  function recallPrompt(q) {
+    return q.prompt.replace(/^Which describes (.+)\?$/, "Describe $1.").replace(/^Which event is this\?$/, "What event is this?").replace(/^Which term matches this definition\?$/, "What term matches this definition?").replace(/^Who am I\?$/, "Who is this?");
+  }
+  const needsChoices = q => q.choices.length <= 2 || /\b(NOT|EXCEPT)\b|first\?|^Which (of|was|were|one|two)\b|following|sequence/.test(q.prompt);
+  function nextCard() {
+    if (SS.i >= SS.q.length) return finishSession();
+    const f = SS.q[SS.i], it = getIt(f.key);
+    SS.cur = { f, it, isNew: !it, typed: "", judged: null, sugg: 0, aiBusy: false };
+    if (!isUnd(f)) { const q = makeQ(f, !!(it && it.reps >= 2)); SS.cur.q = q; SS.cur.mc = needsChoices(q); }
+    SS.phase = SS.cur.mc ? "choices" : "ask";
+    renderCard();
+  }
+  const sessHead = () => { const total = SS.q.length; return `<button class="text-btn" id="ss-quit" style="align-self:flex-start">&larr; End session</button>
+    <div class="qhead"><span class="label">${esc(SS.label)}</span><span class="meta">${Math.min(SS.i + 1, total)} of ${total}</span></div><div class="cov"><i style="width:${Math.round(SS.i / total * 100)}%"></i></div>`; };
+  function renderCard() {
+    const c = SS.cur, f = c.f;
+    let h = sessHead();
+    if (isUnd(f)) h += undCardHTML(c);
+    else {
+      const q = c.q, sub = Array.isArray(q.sub) ? `<ul class="clues">${q.sub.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : q.sub ? `<p class="qsub">${esc(q.sub)}</p>` : "";
+      const badge = c.isNew ? `<span class="newtag">New</span>` : c.it && c.it.lapses >= 3 ? `<span class="newtag slip">Keeps slipping</span>` : "";
+      h += `<div class="panel-card qcard"><div class="tagline">${esc(q.tag)} · ${esc(actTag(f.act))} ${badge}</div><p class="q">${esc(c.mc ? q.prompt : recallPrompt(q))}</p>${sub}`;
+      if (SS.phase === "ask") h += `<div class="recall"><input id="ss-in" class="etq-input" autocomplete="off" placeholder="Type your answer, or just think it" aria-label="Your answer">
+          <div class="row" style="justify-content:flex-start"><button class="go small" id="ss-check">${aiOn() ? "Check" : "Show answer"}</button><button class="text-btn" id="ss-choices">Show choices</button><button class="text-btn" id="ss-idk">I don't know</button></div></div>`;
+      if (SS.phase === "choices") h += `${c.mc ? "" : `<p class="meta" style="text-align:left">Picking from choices counts as Hard at best.</p>`}<div class="choices">${q.choices.map((ch, i) => `<button class="choice" data-i="${i}"><span class="kbd">${i + 1}</span>${esc(ch)}</button>`).join("")}</div>`;
+      h += `<div id="ss-after"></div></div>`;
+    }
+    $("sess-body").innerHTML = h;
+    $("ss-quit").onclick = finishSession;
+    if (isUnd(f)) return bindUnd(c);
+    if (SS.phase === "ask") {
+      const inp = $("ss-in"); inp.focus({ preventScroll: true });
+      inp.onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); checkTyped(); } };
+      $("ss-check").onclick = checkTyped;
+      $("ss-choices").onclick = () => { c.typed = inp.value; SS.phase = "choices"; c.usedChoices = true; renderCard(); };
+      $("ss-idk").onclick = () => reveal(null, 1);
+    }
+    if (SS.phase === "choices") document.querySelectorAll("#sess-body .choice").forEach(b => b.onclick = () => pickChoice(+b.dataset.i));
+  }
+  function localJudge(typed, ans) {
+    const A = etTokens(ans), U = etTokens(typed);
+    if (!A.length || !U.length) return null;
+    const ya = ans.match(/\b\d{3,4}\b/g) || [], yu = typed.match(/\b\d{3,4}\b/g) || [];
+    if (ya.length && A.filter(t => !/^\d+$/.test(t)).length <= 2) return ya.every(y => yu.includes(y)) ? "right" : "wrong";
+    const hit = A.filter(t => U.some(u => tokHit(u, t))).length / A.length;
+    if (A.length <= 4) return hit >= 0.75 ? "right" : hit >= 0.34 ? "close" : null;
+    return hit >= 0.6 ? "right" : hit >= 0.3 ? "close" : null;
+  }
+  async function checkTyped() {
+    const c = SS.cur, q = c.q, typed = ($("ss-in").value || "").trim(), ans = q.choices[q.ans];
+    c.typed = typed;
+    if (!typed) return reveal(null, 0);
+    if (!aiOn()) { const v = localJudge(typed, ans); return reveal(v ? { verdict: v, note: v === "right" ? "Looks right." : v === "close" ? "Partly there." : "Not a match." , local: true } : null, 0); }
+    $("ss-check").disabled = true; $("ss-check").textContent = "Checking…";
+    const prompt = `You are checking a high school student's flashcard answer for AP European History. Judge the substance: accept answers that are correct in meaning even if worded differently, misspelled, shorter, or missing minor detail. If the question allows more than one correct answer, accept any historically accurate one. A date answer needs the right year.
+Question: ${recallPrompt(q)}${q.sub ? `\nContext: ${Array.isArray(q.sub) ? q.sub.join("; ") : q.sub}` : ""}
+Expected answer: ${ans}
+Background: ${q.explain}
+Student's answer: """${clip(typed, 600)}"""
+Reply with only JSON: {"verdict": "right" | "close" | "wrong", "note": "one short, friendly sentence telling the student what was right or what was off"}`;
+    try {
+      const r = await askJSON(prompt, "quick");
+      const v = ["right", "close", "wrong"].includes(r && r.verdict) ? r.verdict : null;
+      if (SS.cur !== c) return;
+      reveal(v ? { verdict: v, note: String(r.note || "") } : null, 0);
+    } catch (e) { if (SS.cur !== c) return; const v = localJudge(typed, ans); reveal(v ? { verdict: v, note: v === "right" ? "Looks right." : "Partly there.", local: true } : null, 0, aiErr(e)); }
+  }
+  // Show the answer and the four ratings. force: 1 = counted as Again (I don't know).
+  function reveal(judged, force, warn) {
+    const c = SS.cur, q = c.q, ans = q.choices[q.ans];
+    c.judged = judged; SS.phase = "rate";
+    c.sugg = force || (judged ? { right: 3, close: 2, wrong: 1 }[judged.verdict] : 0);
+    SFX.play(judged ? (judged.verdict === "right" ? "right" : judged.verdict === "close" ? "flip" : "wrong") : "flip");
+    const area = document.querySelector("#sess-body .recall"); if (area) area.remove();
+    const vcls = judged ? { right: "ok", close: "neutral", wrong: "bad" }[judged.verdict] : "";
+    let h = c.typed ? `<p class="youtyped"><span class="label">You wrote</span> ${esc(c.typed)}</p>` : "";
+    if (judged) h += `<div class="verdict inline ${vcls}">${esc(judged.note)}${judged.local ? `<span>Quick match, not Claude. Rate it honestly.</span>` : ""}</div>`;
+    if (warn) h += `<p class="meta" style="text-align:left">${esc(warn)}</p>`;
+    h += `<div class="answer"><div class="label">Answer</div><b>${esc(ans)}</b>${q.explain && q.explain.replace(/\.$/, "") !== ans ? `<span>${esc(q.explain)}</span>` : ""}</div>`;
+    if (force === 1) h += `<button class="go small" id="ss-next">Next</button>`;
+    else h += rateHTML(c.it, c.sugg, judged ? judged.verdict : null);
+    $("ss-after").innerHTML = h;
+    bindRate(force === 1 ? 1 : 0);
+  }
+  function rateHTML(it, sugg, verdict) {
+    const opts = [[1, "Again", "I missed it"], [2, "Hard", "Got it, barely"], [3, "Good", "Got it"], [4, "Easy", "Knew it cold"]].filter(([g]) => !(verdict === "wrong" && g > 2));
+    return `<p class="meta" style="text-align:left">How well did you know it?</p><div class="rates">${opts.map(([g, l, s]) => `<button class="rate${g === sugg ? " sugg" : ""}" data-g="${g}"><span class="kbd">${g}</span><b>${l}</b><small>${s} · ${ivlText(schedule(it, g))}</small></button>`).join("")}</div>`;
+  }
+  function bindRate(forced) {
+    if (forced) { $("ss-next").onclick = () => rateAndGo(1); $("ss-next").focus({ preventScroll: true }); return; }
+    document.querySelectorAll("#sess-body .rate").forEach(b => b.onclick = () => rateAndGo(+b.dataset.g));
+    const s = document.querySelector("#sess-body .rate.sugg"); (s || document.querySelector("#sess-body .rate[data-g='3']") || document.querySelector("#sess-body .rate")).focus({ preventScroll: true });
+  }
+  function pickChoice(i) {
+    const c = SS.cur, q = c.q; if (SS.phase !== "choices") return;
+    const ok = i === q.ans; SS.phase = "picked";
+    document.querySelectorAll("#sess-body .choice").forEach((b, j) => { b.disabled = true; if (j === q.ans) b.classList.add("right"); else if (j === i) b.classList.add("wrong"); });
+    SFX.play(ok ? "right" : "wrong");
+    const g = ok ? (c.mc ? 3 : 2) : 1;
+    $("ss-after").innerHTML = `<div class="verdict inline ${ok ? "ok" : "bad"}">${ok ? (c.mc ? "Correct." : "Correct, from the choices. It'll come back sooner.") : "Not quite."} ${esc(q.explain)}</div><button class="go small" id="ss-next">Next</button>`;
+    $("ss-next").onclick = () => rateAndGo(g); $("ss-next").focus({ preventScroll: true });
+  }
+  function rateAndGo(g) {
+    const c = SS.cur, f = c.f;
+    grade(f.key, g);
+    if (!(f.key in SS.stats.first)) { SS.stats.first[f.key] = g; SS.stats.n++; SS.stats[["", "again", "hard", "good", "easy"][g]]++; if (c.isNew) SS.stats.fresh++; if (isUnd(f)) SS.stats.und++; }
+    if (f.kind === "ev" && g === 1) addPile("missed", f.e.id);
+    if (f.kind === "pp" && g === 1) addPile("missedPeople", f.p.name);
+    // Missed it: see it again in a few cards (up to twice), so you leave knowing it.
+    if (g === 1 && (SS.retried[f.key] || 0) < 2 && !isUnd(f)) { SS.retried[f.key] = (SS.retried[f.key] || 0) + 1; SS.q.splice(Math.min(SS.q.length, SS.i + 4), 0, f); }
+    SS.i++; nextCard(); window.scrollTo({ top: 0 });
+  }
+
+  // ---- understanding cards ----
+  function undCardHTML(c) {
+    const [kind, q] = c.f.r;
+    const tag = c.f.kind === "uq" ? `Unit ${c.f.unit} big question` : `${KIND_LABEL[kind] || "Explain"} · ${actTag(c.f.act)}`;
+    const draft = store.get("undDraft", {})[c.f.key] || "";
+    return `<div class="panel-card qcard"><div class="tagline">${esc(tag)}${c.isNew ? ` <span class="newtag">New</span>` : ""}</div><p class="q">${esc(q)}</p>
+      <div id="und-ask"><textarea id="und-in" rows="5" placeholder="Explain it in 2 to 4 sentences. Use specific evidence: names, events, dates.">${esc(draft)}</textarea>
+      <div class="row" style="justify-content:flex-start">${aiOn() ? `<button class="go small" id="und-ai">Grade with Claude</button><button class="text-btn" id="und-self">Grade it myself</button>` : `<button class="go small" id="und-self">Check against the key points</button>`}<button class="text-btn" id="und-idk">Show me</button></div>
+      <p class="meta" id="und-need" style="text-align:left"></p></div><div id="ss-after"></div></div>`;
+  }
+  function bindUnd(c) {
+    const ta = $("und-in"); ta.focus({ preventScroll: true });
+    ta.oninput = () => { const d = store.get("undDraft", {}); d[c.f.key] = ta.value; store.set("undDraft", d); };
+    const need = () => { if (ta.value.trim().length < 25) { $("und-need").textContent = "Write a real answer first: two sentences or more."; $("und-need").style.color = "var(--wrong)"; SFX.play("wrong"); return true; } return false; };
+    if ($("und-ai")) $("und-ai").onclick = () => { if (!need()) undAI(c, ta.value.trim()); };
+    $("und-self").onclick = () => { if (!need()) undSelf(c, ta.value.trim()); };
+    $("und-idk").onclick = () => { c.typed = ta.value.trim(); undShow(c, null, 1); };
+  }
+  function clearDraft(k) { const d = store.get("undDraft", {}); delete d[k]; store.set("undDraft", d); }
+  async function undAI(c, text) {
+    const [, q, kp, model] = c.f.r;
+    c.typed = text;
+    const b = $("und-ai"); b.disabled = true; b.textContent = "Claude is reading…";
+    const prompt = `Grade a high school student's short written answer to an AP European History question. Judge the ideas and reasoning, not the wording or grammar. Be encouraging but honest; do not give credit for vague statements.
+Question: ${q}
+Key points a strong answer includes:
+${kp.map((p, i) => `${i + 1}. ${p}`).join("\n")}
+Model answer (for reference): ${model}
+Student's answer: """${clip(text, 3000)}"""
+Reply with only JSON:
+{"points": [true or false for each key point, in order: did the student make this point in any words?],
+ "score": 0, 1, or 2 (2 = answers the question correctly with reasoning and specific support; 1 = partly right, thin, or missing the why; 0 = wrong, off topic, or no real answer),
+ "feedback": "2 or 3 sentences: what they got right, and the most important thing missing or wrong",
+ "remember": "one sentence that captures the main idea to remember"}`;
+    try {
+      const r = await askJSON(prompt, "default");
+      if (SS.cur !== c) return;
+      const pts = Array.isArray(r.points) ? kp.map((_, i) => !!r.points[i]) : null, sc = [0, 1, 2].includes(+r.score) ? +r.score : null;
+      if (sc == null) throw { code: "invalid_json" };
+      undShow(c, { pts, score: sc, feedback: String(r.feedback || ""), remember: String(r.remember || "") }, 0);
+    } catch (e) { if (SS.cur !== c) return; b.disabled = false; b.textContent = "Grade with Claude"; $("und-need").textContent = aiErr(e); $("und-need").style.color = "var(--wrong)"; }
+  }
+  function undSelf(c, text) { c.typed = text; undShow(c, null, 0, true); }
+  function undShow(c, ai, force, self) {
+    const [, , kp, model] = c.f.r;
+    $("und-ask").remove(); SS.phase = "rate"; clearDraft(c.f.key);
+    let h = c.typed ? `<p class="youtyped"><span class="label">You wrote</span> ${esc(c.typed)}</p>` : "";
+    if (ai) {
+      c.sugg = [1, 2, 3][ai.score];
+      SFX.play(ai.score === 2 ? "right" : ai.score === 1 ? "flip" : "wrong");
+      h += `<div class="verdict inline ${["bad", "neutral", "ok"][ai.score]}"><b>${["Not there yet", "Partly there", "Strong answer"][ai.score]}.</b> ${esc(ai.feedback)}</div>`;
+      h += `<div class="kps"><div class="label">Key points</div>${kp.map((p, i) => `<div class="kp ${ai.pts ? (ai.pts[i] ? "hit" : "miss") : ""}"><span>${ai.pts ? (ai.pts[i] ? "✓" : "✗") : "•"}</span>${esc(p)}</div>`).join("")}</div>`;
+      if (ai.remember) h += `<div class="answer"><div class="label">Remember</div><b>${esc(ai.remember)}</b></div>`;
+    } else {
+      SFX.play("flip");
+      h += `<div class="kps"><div class="label">${self ? "Tick each key point you made, in any words" : "Key points"}</div>${kp.map((p, i) => self ? `<label class="checkline"><input type="checkbox" data-kp="${i}"> ${esc(p)}</label>` : `<div class="kp"><span>•</span>${esc(p)}</div>`).join("")}</div>`;
+    }
+    h += `<details class="nsec"${ai || force ? "" : " open"}><summary>Model answer</summary><p style="margin:8px 0 0">${esc(model)}</p></details>`;
+    h += force === 1 ? `<p class="hint">Read the model answer and key points. This one comes back soon so you can try it yourself.</p><button class="go small" id="ss-next">Next</button>` : `<div id="und-rate">${rateHTML(c.it, c.sugg || 0, null)}</div>`;
+    $("ss-after").innerHTML = h;
+    if (self) {
+      const upd = () => { const n = document.querySelectorAll("#sess-body [data-kp]:checked").length, fr = n / kp.length; c.sugg = fr >= 0.75 ? 3 : fr >= 0.4 ? 2 : 1; $("und-rate").innerHTML = rateHTML(c.it, c.sugg, null); bindRate(0); };
+      document.querySelectorAll("#sess-body [data-kp]").forEach(cb => cb.onchange = upd);
+    }
+    bindRate(force === 1 ? 1 : 0);
+  }
+
+  function finishSession() {
+    const s = SS.stats || { n: 0 };
+    stopTimer();
+    if (!s.n) { SS.done ? SS.done() : openToday(); return; }
+    const right = s.hard + s.good + s.easy, n = nowMin();
+    const tomorrow = Object.values(SR.items).filter(a => a[0] <= n + 1440).length;
+    SFX.play(right / s.n >= 0.8 ? "win" : "streak");
+    $("sess-body").innerHTML = `<div class="result"><div class="label">${esc(SS.label)} · done</div><div class="big">${right} / ${s.n}</div><div class="meta">remembered on the first try${s.fresh ? ` · ${s.fresh} new` : ""}${s.und ? ` · ${plural(s.und, "idea")} explained` : ""}</div>
+      <p class="hint" style="margin-top:10px">${s.again ? `Misses came back a few cards later, and they'll return soon so they stick. ` : ""}About ${plural(tomorrow, "review")} due by this time tomorrow.</p>
+      <div class="row" style="flex-direction:column;align-items:stretch;width:min(320px,100%);margin-top:10px"><button class="go" id="ss-done">${SS.from === "learn" ? "Back" : "Back to Today"}</button></div></div>`;
+    $("ss-done").onclick = () => SS.done ? SS.done() : openToday();
+    $("ss-done").focus({ preventScroll: true });
+    SS.stats = null;
+  }
+  document.addEventListener("keydown", e => {
+    if ($("v-sess").hidden || !SS.cur || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.target && /^(TEXTAREA|INPUT|SELECT)$/.test(e.target.tagName)) return;
+    if (SS.phase === "choices" && /^[1-4]$/.test(e.key)) { const i = +e.key - 1; if (SS.cur.q && i < SS.cur.q.choices.length) { e.preventDefault(); pickChoice(i); } }
+    else if (SS.phase === "rate" && /^[1-4]$/.test(e.key)) { const b = document.querySelector(`#sess-body .rate[data-g="${e.key}"]`); if (b) { e.preventDefault(); b.click(); } }
+  });
+
+  // ================= EXAM =================
+  const EX = { timer: null, start: 0, target: 0, run: null };
+  function stopTimer() { clearInterval(EX.timer); EX.timer = null; }
+  const fmtClock = ms => { const s = Math.max(0, Math.floor(ms / 1000)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+  function startTimer(mins) {
+    stopTimer(); EX.start = Date.now(); EX.target = mins * 60000;
+    const tick = () => { const el = $("ex-clock"); if (!el) return stopTimer(); const t = Date.now() - EX.start; el.textContent = `${fmtClock(t)} / ${mins}:00`; el.classList.toggle("over", t > EX.target); };
+    tick(); EX.timer = setInterval(tick, 1000);
+  }
+  function logExam(type, id, score, max, how) { SR.exam.push({ t: Date.now(), type, id, score, max, how }); SR.exam = SR.exam.slice(-150); markDay(); saveSR(); }
+  const EX_NAMES = { mcq: "Multiple choice", saq: "Short answer", leq: "Long essay", dbq: "DBQ", thesis: "Thesis drill", source: "Sourcing drill" };
+  const exTitle = (type, id) => { const all = [...MCQ, ...SAQ, ...LEQ, ...DBQ]; const x = all.find(z => z.id === id); return x ? (x.title || x.prompt) : id === "block" ? "Mixed block" : id; };
+  function renderExam() {
+    const hist = SR.exam.slice(-8).reverse();
+    const byUnit = u => MCQ.filter(m => m.unit === u);
+    let h = `<p class="hint" style="text-align:center">Practice in the May 2027 format: 55 multiple choice, 3 short answers, 1 DBQ, 1 long essay. ${aiOn() ? "Claude grades your writing on the real AP rubrics." : "You grade your writing against the real AP rubrics and model answers."}</p>
+      <div class="panel-card"><div class="tagline">Section I-A · 55 questions in 55 minutes</div><h3>Source-based multiple choice</h3><p class="hint">Sets of 3 or 4 questions on one source, like the real exam. Each answer explains why and names the skill tested.</p>
+        <div class="row" style="justify-content:flex-start"><button class="go small" id="ex-block">Timed block: 3 random sets</button></div>
+        <details class="nsec"><summary>Pick a set (${MCQ.length})</summary><div class="exlist">${UNITS.map(u => byUnit(u).length ? `<div class="label">Unit ${u}</div>${byUnit(u).map(m => `<button class="exrow" data-mcq="${m.id}"><span>${esc(m.title)}</span><small>${m.qs.length} questions${bestOf("mcq", m.id)}</small></button>`).join("")}` : "").join("")}</div></details></div>
+      <div class="panel-card"><div class="tagline">Section I-B · 3 questions in 40 minutes</div><h3>Short answer (SAQ)</h3><p class="hint">Three parts, one point each. SAQ 1 uses a historian's argument, SAQ 2 a primary source, SAQ 3 a map, table, or image.</p>
+        <div class="exlist">${SAQ.map(s => `<button class="exrow" data-saq="${s.id}"><span>${esc(s.title)}</span><small>${{ secondary: "Secondary source", primary: "Primary source", nontext: "Map or data" }[s.type]} · ${esc(s.period)}${bestOf("saq", s.id)}</small></button>`).join("")}</div></div>
+      <div class="panel-card"><div class="tagline">Section II · 60 minutes</div><h3>Document-based question (DBQ)</h3><p class="hint">Seven documents, scored out of 7. Drill sourcing on one document at a time, or write the full essay.</p>
+        <div class="exlist">${DBQ.map(d => `<div class="exrow two"><span>${esc(d.title)}<small>${esc(d.period)}${bestOf("dbq", d.id)}</small></span><span class="exbtns"><button class="text-btn" data-dbqs="${d.id}">Sourcing drill</button><button class="go small" data-dbq="${d.id}">Write it</button></span></div>`).join("")}</div></div>
+      <div class="panel-card"><div class="tagline">Section II · 40 minutes</div><h3>Long essay (LEQ)</h3><p class="hint">One required prompt with an introductory statement, scored out of 6. Start with a thesis drill: it's the point most students lose.</p>
+        <div class="exlist">${LEQ.map(l => `<div class="exrow two"><span>${esc(l.prompt)}<small>${esc(l.reasoning)} · ${esc(l.period)}${bestOf("leq", l.id)}</small></span><span class="exbtns"><button class="text-btn" data-leqt="${l.id}">Thesis drill</button><button class="go small" data-leq="${l.id}">Write it</button></span></div>`).join("")}</div></div>
+      ${hist.length ? `<div class="label">Recent practice</div><ul class="list">${hist.map(x => `<li><span class="d">${new Date(x.t).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</span><span class="t">${esc(EX_NAMES[x.type] || x.type)}: ${esc(clip(exTitle(x.type, x.id), 80))}</span><span class="b">${x.score} / ${x.max}${x.how === "self" ? " · self-graded" : x.how === "ai" ? " · graded by Claude" : ""}</span></li>`).join("")}</ul>` : ""}`;
+    $("exam-body").innerHTML = h;
+    $("ex-block").onclick = () => startMCQ(pickMCQ(3));
+    document.querySelectorAll("#exam-body [data-mcq]").forEach(b => b.onclick = () => startMCQ([MCQ.find(m => m.id === b.dataset.mcq)]));
+    document.querySelectorAll("#exam-body [data-saq]").forEach(b => b.onclick = () => openSAQ(b.dataset.saq));
+    document.querySelectorAll("#exam-body [data-leq]").forEach(b => b.onclick = () => openLEQ(b.dataset.leq, "full"));
+    document.querySelectorAll("#exam-body [data-leqt]").forEach(b => b.onclick = () => openLEQ(b.dataset.leqt, "thesis"));
+    document.querySelectorAll("#exam-body [data-dbq]").forEach(b => b.onclick = () => openDBQ(b.dataset.dbq, "full"));
+    document.querySelectorAll("#exam-body [data-dbqs]").forEach(b => b.onclick = () => openDBQ(b.dataset.dbqs, "source"));
+  }
+  function bestOf(type, id) { const xs = SR.exam.filter(x => x.type === type && x.id === id); if (!xs.length) return ""; const b = xs.reduce((m, x) => x.score / x.max > m.score / m.max ? x : m); return ` · best ${b.score}/${b.max}`; }
+  function openExam() { go("exam", renderExam); }
+  const exBack = () => `<button class="text-btn" id="ex-back" style="align-self:flex-start">&larr; Exam practice</button>`;
+  const bindBackEx = () => { $("ex-back").onclick = openExam; };
+  const tableHTML = t => `<div class="tscroll"><table class="dtable"><thead><tr>${t.cols.map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${t.rows.map(r => `<tr>${r.map(x => `<td>${esc(x)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+  function stimHTML(s) {
+    const cite = c => c ? `<div class="cite">${esc(c)}</div>` : "", table = tableHTML;
+    if (s.kind === "two") return `<div class="stim">${cite(s.cite)}<p>${esc(s.text)}</p></div><div class="stim">${cite(s.cite2)}<p>${esc(s.text2)}</p></div>`;
+    if (s.kind === "table") return `<div class="stim">${cite(s.cite)}${table(s.table)}</div>`;
+    if (s.kind === "map") return `<div class="stim">${cite(s.cite)}${miniMap(s.year)}</div>`;
+    return `<div class="stim">${cite(s.cite)}${s.table ? table(s.table) : `<p>${esc(s.text)}</p>`}</div>`;
+  }
+  function miniMap(year) {
+    const era = ERA_YEARS.reduce((b, y) => Math.abs(y - year) < Math.abs(b - year) ? y : b, ERA_YEARS[0]), E2 = MD.eras[era], cur = ERAS[era].t;
+    // crop to west and central Europe
+    const vb = [MD.W * 0.08, MD.H * 0.12, MD.W * 0.62, MD.H * 0.62];
+    return `<svg class="minimap" viewBox="${vb.join(" ")}" role="img" aria-label="Map of Europe around ${year}"><rect x="-3000" y="-3000" width="7000" height="7000" fill="#dfe7ea"/><path d="${E2.land}" fill="#efe6d4"/>${E2.t.map(([k, d]) => `<path d="${d}" fill="${PAL[hash(k) % PAL.length]}" stroke="#a8977a" stroke-width="0.8"/>`).join("")}${E2.t.filter(([k]) => cur[k]).map(([k, , x, y]) => `<text x="${x}" y="${y}" font-size="13" text-anchor="middle" fill="#2b2219" font-family="Instrument Sans, sans-serif">${esc(cur[k][0])}</text>`).join("")}</svg>`;
+  }
+
+  // ---- MCQ ----
+  function pickMCQ(n = 1) { const used = new Set(SR.exam.filter(x => x.type === "mcq").map(x => x.id)); const fresh = shuffle(MCQ.filter(m => !used.has(m.id))); return [...fresh, ...shuffle(MCQ.filter(m => used.has(m.id)))].slice(0, n); }
+  function startMCQ(sets) {
+    const items = sets.flatMap(s => s.qs.map(([q, right, w1, w2, w3, why, skill]) => { const sc = shuffleChoices([right, w1, w2, w3], 0); return { set: s, q, choices: sc.list, ans: sc.ans, why, skill }; }));
+    EX.run = { kind: "mcq", sets, items, i: 0, right: 0, picked: [], id: sets.length === 1 ? sets[0].id : "block" };
+    go("exrun", renderMCQ); startTimer(items.length);
+  }
+  function renderMCQ() {
+    const R = EX.run, it = R.items[R.i];
+    if (!it) return finishMCQ();
+    const s = it.set;
+    $("exrun-body").innerHTML = `${exBack()}<div class="qhead"><span class="label">Multiple choice · ${esc(s.title)}</span><span class="clock" id="ex-clock"></span></div>
+      <div class="cov"><i style="width:${Math.round(R.i / R.items.length * 100)}%"></i></div>
+      <p class="meta" style="text-align:left">Question ${R.i + 1} of ${R.items.length}. Questions ${R.items.findIndex(x => x.set === s) + 1}–${R.items.findIndex(x => x.set === s) + s.qs.length} refer to the source below.</p>
+      ${stimHTML({ kind: s.kind, cite: s.cite, text: s.text, table: s.table })}
+      <div class="panel-card qcard"><p class="q">${esc(it.q)}</p><div class="choices">${it.choices.map((c, i) => `<button class="choice" data-i="${i}"><span class="kbd">${"ABCD"[i]}</span>${esc(c)}</button>`).join("")}</div><div id="mc-after"></div></div>`;
+    bindBackEx();
+    if (EX.start && $("ex-clock")) { const t = Date.now() - EX.start; $("ex-clock").textContent = `${fmtClock(t)} / ${R.items.length}:00`; }
+    document.querySelectorAll("#exrun-body .choice").forEach(b => b.onclick = () => {
+      if (R.picked[R.i] != null) return;
+      const i = +b.dataset.i, ok = i === it.ans; R.picked[R.i] = i; if (ok) R.right++;
+      document.querySelectorAll("#exrun-body .choice").forEach((x, j) => { x.disabled = true; if (j === it.ans) x.classList.add("right"); else if (j === i) x.classList.add("wrong"); });
+      SFX.play(ok ? "right" : "wrong");
+      $("mc-after").innerHTML = `<div class="verdict inline ${ok ? "ok" : "bad"}">${ok ? "Correct." : `The answer is ${"ABCD"[it.ans]}.`} ${esc(it.why)}<span>Skill: ${esc(it.skill)}</span></div><button class="go small" id="mc-next">${R.i + 1 < R.items.length ? "Next" : "See results"}</button>`;
+      $("mc-next").onclick = () => { R.i++; renderMCQ(); window.scrollTo({ top: 0 }); }; $("mc-next").focus({ preventScroll: true });
+    });
+  }
+  function finishMCQ() {
+    const R = EX.run, t = Date.now() - EX.start; stopTimer();
+    logExam("mcq", R.id, R.right, R.items.length, "auto");
+    const missed = R.items.filter((x, i) => R.picked[i] !== x.ans);
+    const skills = {}; R.items.forEach((x, i) => { const k = x.skill; skills[k] = skills[k] || [0, 0]; skills[k][1]++; if (R.picked[i] === x.ans) skills[k][0]++; });
+    SFX.play(R.right / R.items.length >= 0.8 ? "win" : "streak");
+    $("exrun-body").innerHTML = `${exBack()}<div class="result"><div class="label">Multiple choice</div><div class="big">${R.right} / ${R.items.length}</div><div class="meta">${fmtClock(t)} for ${R.items.length} questions (target ${R.items.length}:00)</div></div>
+      <div class="label">By skill</div><ul class="list">${Object.entries(skills).map(([k, [a, b]]) => `<li><span class="t">${esc(k)}</span><span class="b">${a} of ${b}</span></li>`).join("")}</ul>
+      ${missed.length ? `<div class="label">Go over these</div><ul class="list">${missed.map(x => `<li><span class="d">${esc(x.set.title)}</span><span class="t">${esc(x.q)}</span><span class="b">Answer: ${esc(x.choices[x.ans])}</span><span class="m">${esc(x.why)}</span></li>`).join("")}</ul>` : ""}
+      <div class="row" style="flex-direction:column;align-items:stretch"><button class="go" id="mc-again">Another block</button></div>`;
+    bindBackEx(); $("mc-again").onclick = () => startMCQ(pickMCQ(3));
+  }
+
+  // ---- SAQ ----
+  function openSAQ(id) {
+    const s = SAQ.find(x => x.id === id), d = store.get("draft-" + id, ["", "", ""]);
+    EX.run = { kind: "saq", s };
+    go("exrun", () => {
+      $("exrun-body").innerHTML = `${exBack()}<div class="qhead"><span class="label">Short answer · ${esc(s.period)}</span><span class="clock" id="ex-clock"></span></div>
+        <h2 class="dive-title" style="font-size:1.4rem">${esc(s.title)}</h2>${stimHTML(s.stim)}
+        ${s.parts.map(([l, p], i) => `<div class="dsec"><div class="label">Part ${l}</div><p class="qsub" style="margin:0">${esc(p)}</p><textarea id="saq-in-${i}" rows="4" placeholder="Two or three sentences. Be specific.">${esc(d[i] || "")}</textarea></div>`).join("")}
+        <div class="row" style="justify-content:flex-start">${aiOn() ? `<button class="go small" id="saq-ai">Grade with Claude</button><button class="text-btn" id="saq-self">Grade it myself</button>` : `<button class="go small" id="saq-self">Grade it myself</button>`}</div><p class="meta" id="saq-need" style="text-align:left"></p><div id="saq-out"></div>`;
+      bindBackEx(); startTimer(13);
+      const vals = () => [0, 1, 2].map(i => $("saq-in-" + i).value);
+      [0, 1, 2].forEach(i => $("saq-in-" + i).oninput = () => store.set("draft-" + id, vals()));
+      const need = () => { if (vals().some(v => v.trim().length < 15)) { $("saq-need").textContent = "Answer every part first (a sentence or more each)."; $("saq-need").style.color = "var(--wrong)"; SFX.play("wrong"); return true; } return false; };
+      if ($("saq-ai")) $("saq-ai").onclick = () => { if (!need()) saqAI(s, vals()); };
+      $("saq-self").onclick = () => { if (!need()) saqSelf(s, vals()); };
+    });
+  }
+  function stimText(st) {
+    if (st.kind === "two") return `${st.cite}: ${st.text}\n${st.cite2}: ${st.text2}`;
+    if (st.kind === "table") return `${st.cite}\n${st.table.cols.join(" | ")}\n${st.table.rows.map(r => r.join(" | ")).join("\n")}`;
+    if (st.kind === "map") return `${st.cite} (a political map of Europe in ${st.year})`;
+    return `${st.cite}: ${st.text}`;
+  }
+  async function saqAI(s, ans) {
+    const b = $("saq-ai"); b.disabled = true; b.textContent = "Claude is grading…"; $("saq-need").textContent = "";
+    const prompt = `You are an AP European History reader grading a short-answer question (SAQ) with the College Board rules. Each part is worth exactly 1 point. "Identify" needs a correct, specific answer. "Describe" needs a relevant, specific description that goes beyond restating the prompt. "Explain" needs specific evidence plus how or why it answers the question. Accept any historically accurate answer that fits the task, not only the sample answers. Ignore grammar and spelling. Be strict about vague answers with no specific evidence.
+Source: ${stimText(s.stim)}
+${s.parts.map(([l, p, ex], i) => `Part ${l}: ${p}\nSample acceptable answers: ${ex.join("; ")}\nStudent's answer to part ${l}: """${clip(ans[i], 1500)}"""`).join("\n\n")}
+Reply with only JSON: {"parts": [{"point": 0 or 1, "why": "one or two sentences explaining the decision"} for parts a, b, c in order], "tip": "one sentence on how to earn more points on SAQs"}`;
+    try {
+      const r = await askJSON(prompt, "default");
+      if (!Array.isArray(r.parts) || r.parts.length < 3) throw { code: "invalid_json" };
+      const pts = r.parts.slice(0, 3).map(p => ({ point: +p.point === 1 ? 1 : 0, why: String(p.why || "") }));
+      const total = pts.reduce((a, p) => a + p.point, 0);
+      logExam("saq", s.id, total, 3, "ai"); store.set("draft-" + s.id, ["", "", ""]);
+      SFX.play(total === 3 ? "win" : total ? "streak" : "wrong");
+      $("saq-out").innerHTML = `<div class="result"><div class="label">Claude's score</div><div class="big">${total} / 3</div></div>
+        ${s.parts.map(([l, , ex], i) => `<div class="rubrow ${pts[i].point ? "hit" : "miss"}"><div class="rh"><b>Part ${l}</b><span>${pts[i].point} / 1</span></div><p>${esc(pts[i].why)}</p><details><summary>Answers that earn the point</summary><ul class="bul">${ex.map(x => `<li>${esc(x)}</li>`).join("")}</ul></details></div>`).join("")}
+        ${r.tip ? `<div class="answer"><div class="label">Tip</div><b>${esc(String(r.tip))}</b></div>` : ""}`;
+      b.textContent = "Graded"; stopTimer();
+    } catch (e) { b.disabled = false; b.textContent = "Grade with Claude"; $("saq-need").textContent = aiErr(e); $("saq-need").style.color = "var(--wrong)"; }
+  }
+  function saqSelf(s, ans) {
+    stopTimer();
+    $("saq-out").innerHTML = `<div class="panel-card"><h3>Grade yourself</h3><p class="hint">A part earns its point only if it does the task (describe or explain) with specific evidence. Restating the prompt doesn't count.</p>
+      ${s.parts.map(([l, p, ex], i) => `<div class="rubrow"><div class="rh"><b>Part ${l}</b></div><p class="meta" style="text-align:left">Answers that earn the point:</p><ul class="bul">${ex.map(x => `<li>${esc(x)}</li>`).join("")}</ul><label class="checkline"><input type="checkbox" data-sp="${i}"> My answer does this task with specific evidence</label></div>`).join("")}
+      <button class="go small" id="saq-save">Save my score</button></div>`;
+    $("saq-save").onclick = () => { const t = document.querySelectorAll("#saq-out [data-sp]:checked").length; logExam("saq", s.id, t, 3, "self"); store.set("draft-" + s.id, ["", "", ""]); SFX.play(t === 3 ? "win" : "streak"); $("saq-save").outerHTML = `<div class="verdict inline ok">Saved: ${t} / 3.</div>`; };
+  }
+
+  // ---- LEQ and DBQ ----
+  const LEQ_RUBRIC = [
+    ["Thesis/Claim", 1, "A historically defensible claim that answers the prompt and sets up a line of reasoning, in the intro or conclusion."],
+    ["Contextualization", 1, "Describes the broader historical context before, during, or after the period, relevant to the prompt. More than a phrase."],
+    ["Evidence", 2, "1 point: at least two specific, relevant pieces of evidence. 2 points: those pieces actually support an argument that answers the prompt."],
+    ["Analysis and Reasoning", 2, "1 point: uses historical reasoning (causation, comparison, or continuity and change) to frame the argument. 2 points: shows complex understanding, such as weighing multiple causes, explaining both similarity and difference, or corroborating with several pieces of evidence."]];
+  const DBQ_RUBRIC = [
+    ["Thesis/Claim", 1, "A historically defensible claim that answers the prompt and sets up a line of reasoning."],
+    ["Contextualization", 1, "Describes the broader historical context relevant to the prompt."],
+    ["Evidence from the documents", 2, "1 point: accurately describes the content of at least three documents. 2 points: uses at least four documents to support an argument."],
+    ["Evidence beyond the documents", 1, "Uses at least one additional specific piece of evidence, not found in the documents, relevant to the argument."],
+    ["Sourcing", 1, "For at least two documents, explains how or why the author's point of view, purpose, historical situation, or audience is relevant to the argument."],
+    ["Complexity", 1, "Shows complex understanding: for example, weighing causes, explaining nuance, or using all seven documents, sourcing four, or connecting documents with outside evidence."]];
+  function essayShell(kind, x, mode) {
+    const isD = kind === "dbq";
+    const docs = isD ? `<div class="label">Documents</div>${x.docs.map((d, i) => `<details class="nsec doc"${mode === "source" ? "" : " open"}><summary>Document ${i + 1} · ${esc(d.cite)}</summary><div class="stim" style="margin-top:8px">${d.table ? tableHTML(d.table) : `<p>${esc(d.text)}</p>`}</div></details>`).join("")}` : "";
+    return `${exBack()}<div class="qhead"><span class="label">${isD ? "Document-based question" : "Long essay"} · ${esc(x.period)}</span><span class="clock" id="ex-clock"></span></div>
+      ${x.intro ? `<p class="hint" style="margin:0">${esc(x.intro)}</p>` : ""}<div class="panel-card"><p class="q" style="margin:0">${esc(x.prompt)}</p></div>${docs}`;
+  }
+  function openLEQ(id, mode) { const x = LEQ.find(l => l.id === id); EX.run = { kind: "leq", x, mode }; go("exrun", () => mode === "thesis" ? thesisDrill("leq", x) : fullEssay("leq", x)); }
+  function openDBQ(id, mode) { const x = DBQ.find(d => d.id === id); EX.run = { kind: "dbq", x, mode }; go("exrun", () => mode === "source" ? sourceDrill(x) : fullEssay("dbq", x)); }
+  function thesisDrill(kind, x) {
+    $("exrun-body").innerHTML = essayShell(kind, x, "thesis") + `<div class="dsec"><div class="label">Your thesis</div><p class="hint" style="margin:0">One or two sentences: make a claim that answers the prompt and gives your reasons (a line of reasoning). Don't just restate the prompt.</p>
+      <textarea id="th-in" rows="3" placeholder="Although…, the most significant… was… because…"></textarea></div>
+      <div class="row" style="justify-content:flex-start">${aiOn() ? `<button class="go small" id="th-ai">Check with Claude</button>` : ""}<button class="${aiOn() ? "text-btn" : "go small"}" id="th-self">Compare with a model thesis</button></div><p class="meta" id="th-need" style="text-align:left"></p><div id="th-out"></div>`;
+    bindBackEx(); startTimer(5);
+    const need = () => { if ($("th-in").value.trim().length < 30) { $("th-need").textContent = "Write a full sentence first."; $("th-need").style.color = "var(--wrong)"; return true; } return false; };
+    if ($("th-ai")) $("th-ai").onclick = async () => {
+      if (need()) return; const b = $("th-ai"); b.disabled = true; b.textContent = "Checking…";
+      const prompt = `You are an AP European History reader. Decide whether this thesis earns the Thesis/Claim point on the AP rubric: it must be historically defensible, respond directly to the prompt (not restate it), and establish a line of reasoning (a claim with reasons). Be strict but fair.
+Prompt: ${x.prompt}
+Student's thesis: """${clip($("th-in").value, 1200)}"""
+Reply with only JSON: {"point": 0 or 1, "why": "one or two sentences", "stronger": "a rewrite of the student's own thesis that keeps their idea but would clearly earn the point"}`;
+      try {
+        const r = await askJSON(prompt, "default"), p = +r.point === 1 ? 1 : 0; stopTimer();
+        logExam("thesis", x.id, p, 1, "ai"); SFX.play(p ? "right" : "wrong");
+        $("th-out").innerHTML = `<div class="verdict inline ${p ? "ok" : "bad"}"><b>${p ? "Earns the point." : "Doesn't earn the point yet."}</b> ${esc(String(r.why || ""))}</div>${r.stronger ? `<div class="answer"><div class="label">Stronger version</div><b>${esc(String(r.stronger))}</b></div>` : ""}<details class="nsec"><summary>A model thesis</summary><p style="margin:8px 0 0">${esc(x.thesis)}</p></details>`;
+        b.textContent = "Checked";
+      } catch (e) { b.disabled = false; b.textContent = "Check with Claude"; $("th-need").textContent = aiErr(e); $("th-need").style.color = "var(--wrong)"; }
+    };
+    $("th-self").onclick = () => {
+      if (need()) return; stopTimer();
+      $("th-out").innerHTML = `<div class="answer"><div class="label">Model thesis</div><b>${esc(x.thesis)}</b></div><p class="hint">Does yours make a defensible claim that answers the prompt and gives reasons, like the model? It doesn't have to agree with it.</p>
+        <div class="row" style="justify-content:flex-start"><button class="go small" id="th-yes">Mine earns the point</button><button class="text-btn" id="th-no">Not yet</button></div>`;
+      $("th-yes").onclick = () => { logExam("thesis", x.id, 1, 1, "self"); $("th-out").insertAdjacentHTML("beforeend", `<div class="verdict inline ok">Saved.</div>`); $("th-yes").disabled = $("th-no").disabled = true; };
+      $("th-no").onclick = () => { logExam("thesis", x.id, 0, 1, "self"); $("th-out").insertAdjacentHTML("beforeend", `<div class="verdict inline neutral">Saved. Try rewriting it using the model's structure.</div>`); $("th-yes").disabled = $("th-no").disabled = true; };
+    };
+  }
+  function sourceDrill(x) {
+    const i = Math.floor(Math.random() * x.docs.length), d = x.docs[i];
+    $("exrun-body").innerHTML = essayShell("dbq", x, "source") + `<div class="panel-card"><div class="tagline">Sourcing drill · Document ${i + 1}</div><div class="cite">${esc(d.cite)}</div>${d.table ? tableHTML(d.table) : `<p style="margin:0">${esc(d.text)}</p>`}
+      <p class="hint" style="margin:6px 0 0">Explain how one of these shapes the document and why that matters for the prompt: the author's <b>point of view</b>, <b>purpose</b>, the <b>historical situation</b>, or the <b>audience</b>.</p>
+      <textarea id="sd-in" rows="4" placeholder="Because the author was…, the document…, which shows…"></textarea>
+      <div class="row" style="justify-content:flex-start">${aiOn() ? `<button class="go small" id="sd-ai">Check with Claude</button>` : ""}<button class="${aiOn() ? "text-btn" : "go small"}" id="sd-self">See a model</button><button class="text-btn" id="sd-new">Another document</button></div><p class="meta" id="sd-need" style="text-align:left"></p><div id="sd-out"></div></div>`;
+    bindBackEx();
+    $("sd-new").onclick = () => sourceDrill(x);
+    const need = () => { if ($("sd-in").value.trim().length < 30) { $("sd-need").textContent = "Write a sentence or two first."; $("sd-need").style.color = "var(--wrong)"; return true; } return false; };
+    if ($("sd-ai")) $("sd-ai").onclick = async () => {
+      if (need()) return; const b = $("sd-ai"); b.disabled = true; b.textContent = "Checking…";
+      const prompt = `You are an AP European History reader. Does this student's sourcing earn credit? To earn it, the student must explain HOW or WHY the document's point of view, purpose, historical situation, or audience is relevant to an argument about the prompt. Just naming the author or saying "it is biased" is not enough.
+Prompt: ${x.prompt}
+Document: ${d.cite}: ${d.table ? d.table.rows.map(r => r.join(" ")).join("; ") : d.text}
+Student's sourcing: """${clip($("sd-in").value, 1200)}"""
+Reply with only JSON: {"point": 0 or 1, "why": "one or two sentences", "example": "a model sourcing sentence for this document"}`;
+      try {
+        const r = await askJSON(prompt, "default"), p = +r.point === 1 ? 1 : 0;
+        logExam("source", x.id, p, 1, "ai"); SFX.play(p ? "right" : "wrong");
+        $("sd-out").innerHTML = `<div class="verdict inline ${p ? "ok" : "bad"}"><b>${p ? "That's sourcing." : "Not sourcing yet."}</b> ${esc(String(r.why || ""))}</div><div class="answer"><div class="label">Model</div><b>${esc(String(r.example || d.hipp))}</b></div>`;
+        b.textContent = "Checked";
+      } catch (e) { b.disabled = false; b.textContent = "Check with Claude"; $("sd-need").textContent = aiErr(e); $("sd-need").style.color = "var(--wrong)"; }
+    };
+    $("sd-self").onclick = () => { if (need()) return; $("sd-out").innerHTML = `<div class="answer"><div class="label">Model sourcing</div><b>${esc(d.hipp)}</b></div><p class="hint">Did yours explain why the source's perspective matters for the argument, not just who wrote it?</p>`; };
+  }
+  function fullEssay(kind, x) {
+    const key = "draft-" + x.id, mins = kind === "dbq" ? 60 : 40;
+    $("exrun-body").innerHTML = essayShell(kind, x, "full") + `<div class="dsec"><div class="label">Your essay</div><textarea id="es-in" rows="16" placeholder="Intro with contextualization and thesis, body paragraphs with evidence and analysis, conclusion.">${esc(store.get(key, ""))}</textarea><p class="meta" id="es-count" style="text-align:left"></p></div>
+      <div class="row" style="justify-content:flex-start">${aiOn() ? `<button class="go small" id="es-ai">Grade with Claude</button><button class="text-btn" id="es-self">Grade it myself</button>` : `<button class="go small" id="es-self">Grade it myself</button>`}</div><p class="meta" id="es-need" style="text-align:left"></p><div id="es-out"></div>`;
+    bindBackEx(); startTimer(mins);
+    const ta = $("es-in"), cnt = () => { const w = (ta.value.match(/\S+/g) || []).length; $("es-count").textContent = `${w} words · draft saved on this device`; };
+    ta.oninput = () => { store.set(key, ta.value); cnt(); }; cnt();
+    const need = () => { if ((ta.value.match(/\S+/g) || []).length < 120) { $("es-need").textContent = "Write more first: a real essay is usually 400+ words."; $("es-need").style.color = "var(--wrong)"; SFX.play("wrong"); return true; } return false; };
+    if ($("es-ai")) $("es-ai").onclick = () => { if (!need()) essayAI(kind, x, ta.value); };
+    $("es-self").onclick = () => { if (!need()) essaySelf(kind, x); };
+  }
+  async function essayAI(kind, x, text) {
+    const R = kind === "dbq" ? DBQ_RUBRIC : LEQ_RUBRIC, max = R.reduce((a, r) => a + r[1], 0), b = $("es-ai");
+    b.disabled = true; b.textContent = "Claude is grading… (up to a minute)"; $("es-need").textContent = "";
+    const docs = kind === "dbq" ? `\nDocuments:\n${x.docs.map((d, i) => `Document ${i + 1}: ${d.cite}: ${d.table ? d.table.rows.map(r => r.join(" ")).join("; ") : d.text}`).join("\n")}` : "";
+    const prompt = `You are an experienced AP European History reader. Score this student ${kind === "dbq" ? "DBQ" : "long essay (LEQ)"} with the College Board rubric below, exactly as an AP reader would: award each point only when the essay clearly meets it, ignore grammar and spelling, and credit any historically accurate argument, not only the one in the notes.
+Prompt: ${x.prompt}${x.intro ? `\nIntroductory statement: ${x.intro}` : ""}${docs}
+Rubric (${max} points):
+${R.map(([n, p, d]) => `- ${n} (0 to ${p}): ${d}`).join("\n")}
+Reader notes (examples, not requirements): context could include ${x.context.join("; ")}. ${kind === "dbq" ? `Outside evidence could include ${x.outside.join("; ")}.` : `Evidence could include ${x.evidence.join("; ")}.`} Complexity could come from ${x.complexity.join("; ")}.
+Student essay: """${clip(text, 12000)}"""
+Reply with only JSON: {"rows": [{"name": rubric row name, "earned": number, "max": number, "why": "one or two sentences quoting or pointing to the essay"} for every rubric row in order], "strengths": "one or two sentences", "next": "the single most useful change to earn more points"}`;
+    try {
+      const r = await askJSON(prompt, "complex");
+      if (!Array.isArray(r.rows) || r.rows.length < R.length) throw { code: "invalid_json" };
+      const rows = R.map(([n, p], i) => ({ n, p, e: Math.max(0, Math.min(p, Math.round(+r.rows[i].earned || 0))), why: String(r.rows[i].why || "") }));
+      const total = rows.reduce((a, x2) => a + x2.e, 0); stopTimer();
+      logExam(kind, x.id, total, max, "ai"); store.set("draft-" + x.id, "");
+      SFX.play(total / max >= 0.7 ? "win" : "streak");
+      $("es-out").innerHTML = `<div class="result"><div class="label">Claude's score</div><div class="big">${total} / ${max}</div></div>
+        ${rows.map(x2 => `<div class="rubrow ${x2.e === x2.p ? "hit" : x2.e ? "part" : "miss"}"><div class="rh"><b>${esc(x2.n)}</b><span>${x2.e} / ${x2.p}</span></div><p>${esc(x2.why)}</p></div>`).join("")}
+        ${r.strengths ? `<div class="answer"><div class="label">What worked</div><b>${esc(String(r.strengths))}</b></div>` : ""}${r.next ? `<div class="answer"><div class="label">Next time</div><b>${esc(String(r.next))}</b></div>` : ""}
+        ${modelNotes(kind, x)}<p class="meta" style="text-align:left">AI scores are a strong estimate, not an official score. Your teacher's grading wins.</p>`;
+      b.textContent = "Graded";
+    } catch (e) { b.disabled = false; b.textContent = "Grade with Claude"; $("es-need").textContent = aiErr(e); $("es-need").style.color = "var(--wrong)"; }
+  }
+  function modelNotes(kind, x) {
+    return `<details class="nsec"><summary>What a strong essay could use</summary><div class="section" style="gap:10px;padding-top:10px">
+      <div><div class="label">A model thesis</div><p style="margin:4px 0 0">${esc(x.thesis)}</p></div>
+      <div><div class="label">Context</div><ul class="bul">${x.context.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>
+      <div><div class="label">${kind === "dbq" ? "Evidence beyond the documents" : "Evidence"}</div><ul class="bul">${(kind === "dbq" ? x.outside : x.evidence).map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>
+      ${kind === "dbq" ? `<div><div class="label">Sourcing ideas</div><ul class="bul">${x.docs.map((d, i) => `<li><b>Doc ${i + 1}:</b> ${esc(d.hipp)}</li>`).join("")}</ul></div>` : ""}
+      <div><div class="label">Complexity</div><ul class="bul">${x.complexity.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div></div></details>`;
+  }
+  function essaySelf(kind, x) {
+    stopTimer();
+    const R = kind === "dbq" ? DBQ_RUBRIC : LEQ_RUBRIC, max = R.reduce((a, r) => a + r[1], 0);
+    $("es-out").innerHTML = `<div class="panel-card"><h3>Grade yourself on the AP rubric</h3><p class="hint">Be strict: check a box only if a reader could point to the sentence that earns it.</p>
+      ${R.map(([n, p, d], i) => `<div class="rubrow"><div class="rh"><b>${esc(n)}</b><span>${p} pt${p > 1 ? "s" : ""}</span></div><p>${esc(d)}</p>${Array.from({ length: p }, (_, j) => `<label class="checkline"><input type="checkbox" data-rb="${i}-${j}"> ${p > 1 ? (j ? "Second point" : "First point") : "Earned"}</label>`).join("")}</div>`).join("")}
+      ${modelNotes(kind, x)}<button class="go small" id="es-save">Save my score</button></div>`;
+    $("es-save").onclick = () => { const t = document.querySelectorAll("#es-out [data-rb]:checked").length; logExam(kind, x.id, t, max, "self"); store.set("draft-" + x.id, ""); SFX.play(t / max >= 0.7 ? "win" : "streak"); $("es-save").outerHTML = `<div class="verdict inline ok">Saved: ${t} / ${max}.</div>`; };
+  }
+
+  // ================= GAMES hub =================
+  const GAMES = [["timeline", "Timeline", "Drag events into order on a timeline. Three lives."], ["etest", "Event Test", "Match the big events to what happened and what they caused."], ["match", "Match", "Race to pair people with what they're known for."], ["maps", "Maps", "Five snapshots of Europe. Find states and pin events."], ["dives", "Deep Dives", "The big, complicated events broken down, each with a quiz."], ["people", "People", "Guess who from the clues, or browse by act."], ["review", "Review pile", "Everything you missed in the games, with page numbers."]];
+  function renderGames() {
+    $("games-body").innerHTML = `<p class="hint" style="text-align:center">Quick ways to mix it up. Your daily session in Today does the heavy lifting; these are extra practice.</p><div class="unit">${GAMES.map(([k, n, d]) => `<button class="act lrow" data-g="${k}"><span class="name">${n}<small>${d}</small></span><span class="n">&rarr;</span></button>`).join("")}</div>`;
+    document.querySelectorAll("#games-body [data-g]").forEach(b => b.onclick = () => { $("tab-" + b.dataset.g).click(); window.scrollTo({ top: 0 }); });
+  }
+  function openGames() { go("games", renderGames); }
+
+  // ---------- wiring ----------
+  $("nav-today").onclick = openToday;
+  $("nav-learn").onclick = openLearn;
+  $("nav-exam").onclick = openExam;
+  $("nav-games").onclick = openGames;
+  openAct = a => openLearnAct(a);           // old Mastery links now open the new act page
+  openMasteryHome = () => openLearn();
+  record = (key, ok) => { _record(key, ok); storySeen(key, ok); };
+  startPractice = a => startActStudy(a);
+  initSync();
+
   syncSetup();
-  show("setup");
+  openToday();
 })();
 </script>
 </body>
