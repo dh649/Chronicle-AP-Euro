@@ -452,6 +452,71 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
 .gicon { flex: none; width: 38px; height: 38px; border-radius: 10px; background: var(--page); border: 1px solid var(--hair); color: var(--bronze); display: grid; place-items: center; }
 .gicon svg { width: 22px; height: 22px; }
 .grow:hover .gicon { border-color: var(--bronze); }
+/* ---------- v2.2: steps, skeleton, checkpoints, tutor ---------- */
+.col12 { display: flex; flex-direction: column; gap: 12px; }
+.nextcard { border-color: var(--pill); }
+.nextup { text-align: left; display: flex; flex-direction: column; gap: 2px; border-color: var(--bronze); cursor: pointer; }
+.nextup b { font-family: var(--display); font-size: 1.2rem; }
+.uh-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.chip-st { font-size: .7rem; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--hair); color: var(--muted); white-space: nowrap; }
+.chip-st.going { border-color: var(--bronze); color: var(--bronze); }
+.chip-st.ready { background: var(--right); border-color: var(--right); color: #fff; }
+.lsteps { display: flex; flex-direction: column; border: 1px solid var(--hair); border-radius: 12px; background: var(--surface); overflow: hidden; }
+.lstep { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-top: 1px solid var(--hair); }
+.lstep:first-child { border-top: none; }
+.lstep .sn { flex: none; width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--hair); display: grid; place-items: center; font-weight: 700; font-size: .85rem; color: var(--muted); }
+.lstep.done .sn { background: var(--right); border-color: var(--right); color: #fff; }
+.lstep.now { background: var(--page); }
+.lstep.now .sn { border-color: var(--pill); color: var(--ink); }
+.lstep .sb { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; align-items: flex-start; }
+.lstep .sb p { margin: 0; font-size: .88rem; color: var(--muted); }
+.lstep .sb small { font-size: .76rem; color: var(--bronze); }
+.lstep > button { flex: none; align-self: center; }
+.bigq { background: var(--pill); color: var(--pill-ink); border-radius: 12px; padding: 14px 18px; }
+.bigq .label { color: #d9cfbf; }
+.bigq p { margin: 4px 0 0; font-family: var(--display); font-size: 1.15rem; line-height: 1.4; }
+.tline { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
+.tline li { display: flex; gap: 14px; padding: 10px 0; border-top: 1px solid var(--hair); }
+.tline li:first-child { border-top: none; }
+.tline .ty { flex: none; width: 46px; font-family: var(--display); font-weight: 700; font-size: 1.05rem; color: var(--bronze); font-variant-numeric: tabular-nums; }
+.tline p { margin: 3px 0 0; font-size: .92rem; }
+.so span { font-weight: 600; color: var(--bronze); }
+.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin-top: 6px; }
+.pcard { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column; gap: 3px; }
+.pcard .role { font-size: .78rem; color: var(--muted); }
+.pcard p { margin: 0; font-size: .88rem; }
+.pcard small { font-size: .74rem; color: var(--muted); }
+.conn { margin: 4px 0 0; font-size: .92rem; }
+.conn span { display: inline-block; min-width: 52px; font-weight: 600; color: var(--bronze); }
+.ord { display: flex; flex-direction: column; gap: 10px; }
+.ord-ans { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; min-height: 8px; }
+.ord-ans li.ok { color: var(--right); }
+.ord-ans li.bad { color: var(--wrong); }
+.ord-pool { display: flex; flex-wrap: wrap; gap: 8px; }
+.ord-item { background: var(--page); border: 1.5px solid var(--hair); border-radius: 8px; padding: 7px 11px; font-size: .9rem; text-align: left; }
+.ord-item:hover { border-color: var(--bronze); }
+.ord-item.placed { background: var(--surface); width: 100%; }
+.match-sel { display: flex; flex-direction: column; gap: 10px; }
+.msel { display: flex; flex-direction: column; gap: 5px; font-size: .9rem; padding: 8px 10px; border: 1px solid var(--hair); border-radius: 8px; }
+.msel select { font: inherit; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--hair); background: var(--surface); color: var(--ink); }
+.msel.ok { border-color: var(--right); background: var(--right-soft); }
+.msel.bad { border-color: var(--wrong); background: var(--wrong-soft); }
+.msel small { color: var(--right); font-weight: 600; }
+.chat { display: flex; flex-direction: column; gap: 10px; }
+.msg { max-width: 88%; padding: 10px 14px; border-radius: 14px; white-space: pre-wrap; line-height: 1.5; font-size: .95rem; }
+.msg.cl { align-self: flex-start; background: var(--surface); border: 1px solid var(--hair); }
+.msg.me { align-self: flex-end; background: var(--pill); color: var(--pill-ink); }
+.msg.wait { color: var(--muted); font-style: italic; }
+.chatbox { display: flex; gap: 8px; align-items: flex-end; position: sticky; bottom: 10px; background: var(--page); padding: 6px 0; }
+.chatbox textarea { flex: 1; }
+.rubric { display: flex; flex-direction: column; gap: 8px; }
+.lstep .sb b { font-weight: 600; }
+.lstep .sb p { font-family: var(--body); font-weight: 400; }
+.misslist { display: flex; flex-direction: column; gap: 8px; }
+.misslist > div { background: var(--surface); border: 1px solid var(--hair); border-radius: 10px; padding: 10px 14px; }
+.misslist b { font-weight: 600; }
+.misslist small { color: var(--muted); }
+.misslist p { margin: 4px 0 0; color: var(--right); font-size: .92rem; }
 
 </style>
 </head>
@@ -482,6 +547,10 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   <section id="v-exam" class="section" hidden><div id="exam-body" class="section" style="gap:18px"></div></section>
   <section id="v-exrun" class="section" hidden><div id="exrun-body" class="section" style="gap:16px"></div></section>
   <section id="v-games" class="section" hidden><div id="games-body" class="section" style="gap:16px"></div></section>
+  <section id="v-skel" class="section" hidden><div id="skel-body" class="section" style="gap:20px"></div></section>
+  <section id="v-skchk" class="section" hidden><div id="skchk-body" class="section" style="gap:18px"></div></section>
+  <section id="v-ckpt" class="section" hidden><div id="ckpt-body" class="section" style="gap:16px"></div></section>
+  <section id="v-tutor" class="section" hidden><div id="tutor-body" class="section" style="gap:14px"></div></section>
 
   <!-- TIMELINE SETUP -->
   <section id="v-setup" class="section" hidden>
@@ -595,8 +664,12 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   </div>
 </section>
 
-<div class="version" aria-label="App version">v2.1 · Nov 23, 2026</div>
+<div class="version" aria-label="App version">v2.2 · Nov 23, 2026</div>
 
+<script src="skel_u2.js"></script>
+<script src="skel_u3.js"></script>
+<script src="skel_u4.js"></script>
+<script src="skel_u15.js"></script>
 <script src="data.js"></script>
 <script src="content.js"></script>
 <script src="maps.js"></script>
@@ -2262,7 +2335,10 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   const plural = (n, w, p) => `${n} ${n === 1 ? w : (p || w + "s")}`;
 
   // ---------- state (fresh start: separate from the old Mastery progress) ----------
-  const SR = Object.assign({ v: 1, items: {}, active: [], activeT: 0, days: [], newLog: {}, exam: [], settings: { newPerDay: 15, ai: true, setT: 0 }, t: 0 }, store.get("srs", {}));
+  const SR = Object.assign({ v: 1, items: {}, active: [], activeT: 0, days: [], newLog: {}, exam: [], acts: {}, units: {}, settings: { newPerDay: 15, ai: true, setT: 0 }, t: 0 }, store.get("srs", {}));
+  SR.acts = SR.acts || {}; SR.units = SR.units || {};
+  // per act: {read: time, skel: best skeleton-check score 0-100, skelT, ck: {t, pass, score}}; per unit: {t, pass, score}
+  const actSt = a => (SR.acts[a] = SR.acts[a] || {});
   SR.settings = Object.assign({ newPerDay: 15, ai: true, setT: 0 }, SR.settings);
   // item = [due (minute), interval (days x10), ease (x100), reps, lapses, last seen (minute)]
   const getIt = k => { const a = SR.items[k]; return a ? { due: a[0], ivl: a[1] / 10, ease: a[2] / 100, reps: a[3], lapses: a[4], last: a[5] } : null; };
@@ -2288,7 +2364,9 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   function grade(k, g) {
     const before = getIt(k);
     if (!before) SR.newLog[localDay()] = newToday() + 1;
-    putIt(k, schedule(before, g)); markDay(); saveSR();
+    const o = schedule(before, g);
+    if (g > 1 && isCore(k)) { const n = nowMin(), cut = (o.due - n) * 0.15; o.due -= cut; } // main points come back a bit sooner
+    putIt(k, o); markDay(); saveSR();
   }
   const ivlText = o => { const m = o.due - nowMin(); if (m < 60) return "10 min"; if (m < 1200) return `${Math.round(m / 60)} hours`; const d = Math.round(m / 1440); return d <= 1 ? "1 day" : d < 31 ? `${d} days` : `${Math.round(d / 30)} mo`; };
   // A fact the story already asked counts as a first look (only if the item is new).
@@ -2298,7 +2376,29 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   // ---------- the item bank ----------
   let _ITEMS = null;
   const unitOf = act => +act.split(".")[0];
-  function undFor(act) { return (UND[act] || []).map((r, i) => ({ key: `un:${act}:${i}`, kind: "un", r, act })); }
+  // Explain questions: the hand-written ones, plus one per turning point ("why did it matter?") and one per key person.
+  function undFor(act) {
+    const out = (UND[act] || []).map((r, i) => ({ key: `un:${act}:${i}`, kind: "un", r, act }));
+    const S = SKEL[act];
+    if (S) {
+      S.turns.forEach(([y, t, what, so], i) => out.push({ key: `sk:${act}:${i}`, kind: "un", act, r: ["significance", `What happened in ${t} (${y}), and why did it matter?`, [what, so], `${what} ${so}`] }));
+      S.people.forEach(([n, role, did, why], i) => out.push({ key: `pe:${act}:${i}`, kind: "un", act, r: ["person", `Who was ${n}, what did they do, and why do they matter?`, [`${role}`, did, why], `${n} (${role}). ${did} ${why}`] }));
+    }
+    return out;
+  }
+  // Main points: the skeleton's events and people, key terms, the cause-and-effect chain, and "what changed" lines.
+  let _CORE = null;
+  function isCore(k) {
+    if (!_CORE) {
+      _CORE = new Set();
+      ACT_ORDER.forEach(a => { const S = SKEL[a]; factsFor(a).forEach(f => {
+        if (f.kind === "tm" || f.kind === "ch" || f.kind === "nw") _CORE.add(f.key);
+        else if (f.kind === "ev" && S && S.turns.some(t => t[1] === f.e.title)) _CORE.add(f.key);
+        else if (f.kind === "pp" && S && S.people.some(p => p[0] === f.p.name)) _CORE.add(f.key);
+      }); undFor(a).forEach(f => _CORE.add(f.key)); });
+    }
+    return _CORE.has(k);
+  }
   function unitQFor(u) { const first = ACT_ORDER.find(a => unitOf(a) === u); return (UNITQ[u] || []).map((r, i) => ({ key: `uq:${u}:${i}`, kind: "uq", r, act: first, unit: u })); }
   // Order new facts the way you'd learn them: your notes first, then events in time order, people, terms, causes, deep dives.
   const KIND_ORDER = { nq: 0, nc: 1, ev: 2, pp: 3, tm: 4, nw: 5, ch: 6, dq: 7 };
@@ -2328,11 +2428,11 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   // New items for an act: facts first; understanding questions unlock once 40% of the act's facts are seen.
   function newFor(a, opts = {}) {
     const p = actProgress(a), out = [];
-    const facts = factsOrdered(a).filter(f => !getIt(f.key));
-    const und = p.pct >= 0.4 || opts.und ? undFor(a).filter(f => !getIt(f.key)) : [];
-    // one understanding question after every 6 new facts, so ideas and facts grow together
+    const fo = factsOrdered(a).filter(f => !getIt(f.key)), facts = [...fo.filter(f => isCore(f.key)), ...fo.filter(f => !isCore(f.key))];
+    const und = actSt(a).read || p.pct >= 0.4 || opts.und ? undFor(a).filter(f => !getIt(f.key)) : [];
+    // one explain question after every 4 new facts, so ideas and facts grow together
     let ui = 0;
-    facts.forEach((f, i) => { out.push(f); if ((i + 1) % 6 === 0 && ui < und.length) out.push(und[ui++]); });
+    facts.forEach((f, i) => { out.push(f); if ((i + 1) % 4 === 0 && ui < und.length) out.push(und[ui++]); });
     while (ui < und.length) out.push(und[ui++]);
     return out;
   }
@@ -2381,7 +2481,7 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   const SYNC = { ref: null, state: "local", writing: false, pending: false, timer: null, last: "" };
   function payload() {
     const keep = Object.keys(SR.newLog).sort().slice(-21), nl = {}; keep.forEach(k => nl[k] = SR.newLog[k]);
-    return { v: 1, items: SR.items, active: SR.active, activeT: SR.activeT, days: SR.days.slice(-400), newLog: nl, exam: SR.exam.slice(-150), settings: SR.settings, t: SR.t };
+    return { v: 1, items: SR.items, active: SR.active, activeT: SR.activeT, days: SR.days.slice(-400), newLog: nl, exam: SR.exam.slice(-150), acts: SR.acts, units: SR.units, settings: SR.settings, t: SR.t };
   }
   function mergeRemote(r) {
     if (!r || typeof r !== "object") return;
@@ -2391,6 +2491,10 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
     if (Array.isArray(r.days)) SR.days = [...new Set([...SR.days, ...r.days])].sort().slice(-400);
     Object.entries(r.newLog || {}).forEach(([d, n]) => { SR.newLog[d] = Math.max(SR.newLog[d] || 0, +n || 0); });
     if (Array.isArray(r.exam)) { const seen = new Set(SR.exam.map(x => x.t + x.id)); r.exam.forEach(x => { if (x && !seen.has(x.t + x.id)) SR.exam.push(x); }); SR.exam.sort((a, b) => a.t - b.t); }
+    Object.entries(r.acts || {}).forEach(([a, x]) => { if (!ACTS[a] || !x) return; const m = actSt(a);
+      m.read = Math.max(m.read || 0, x.read || 0) || undefined; if ((x.skel || 0) > (m.skel || 0)) { m.skel = x.skel; m.skelT = x.skelT; }
+      if (x.ck && (!m.ck || (x.ck.pass && !m.ck.pass) || (x.ck.pass === m.ck.pass && x.ck.t > m.ck.t))) m.ck = x.ck; });
+    Object.entries(r.units || {}).forEach(([u, x]) => { const m = SR.units[u]; if (x && (!m || (x.pass && !m.pass) || (x.pass === m.pass && x.t > m.t))) SR.units[u] = x; });
     if (r.settings && (r.settings.setT || 0) > (SR.settings.setT || 0)) SR.settings = Object.assign({}, SR.settings, r.settings);
     store.set("srs", SR);
   }
@@ -2430,9 +2534,9 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   }
 
   // ---------- views and navigation ----------
-  const NEWVIEWS = ["today", "learn", "lact", "sess", "exam", "exrun", "games"];
+  const NEWVIEWS = ["today", "learn", "lact", "sess", "exam", "exrun", "games", "skel", "skchk", "ckpt", "tutor"];
   views.push(...NEWVIEWS);
-  const NAV_OF = v => ({ today: "today", learn: "learn", lact: "learn", sess: SS.from || "today", exam: "exam", exrun: "exam", mastery: "learn", mact: "learn", mquiz: "learn", mstory: "learn" }[v] || "games");
+  const NAV_OF = v => ({ today: "today", learn: "learn", lact: "learn", skel: "learn", skchk: "learn", ckpt: "learn", tutor: "learn", sess: SS.from || "today", exam: "exam", exrun: "exam", mastery: "learn", mact: "learn", mquiz: "learn", mstory: "learn" }[v] || "games");
   const _show = show;
   show = function (v) {
     _show(v);
@@ -2448,6 +2552,7 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
     const leeches = Object.keys(SR.items).filter(k => SR.items[k][4] >= 3 && ITEMS()[k]).length;
     let h = `<div class="hero2"><div><div class="big">${dleft}</div><div class="label">days to the AP exam</div><div class="meta" style="text-align:left">Tuesday, May 4, 2027</div></div>
       <div><div class="big">${streak}</div><div class="label">day streak</div><div class="meta" style="text-align:left">${plural(Object.keys(SR.items).length, "thing")} in your memory</div></div></div>`;
+    h += nextStepHTML();
     if (!act.length) {
       h += `<div class="panel-card"><div class="tagline">Start here</div><h3>Pick the act you're on</h3><p class="hint">Open Learn, choose an act, and press Study this act. From then on, Today builds your daily session: a little new material plus whatever is due for review, right when you're about to forget it.</p><button class="go small" id="td-learn">Open Learn</button></div>`;
     } else if (q.length) {
@@ -2473,7 +2578,7 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
       </div></details>`;
     $("today-body").innerHTML = h;
     const on = (id, fn) => { const b = $(id); if (b) b.onclick = fn; };
-    on("td-learn", openLearn);
+    on("td-learn", openLearn); bindNextStep();
     on("td-go", () => startSession(todayQueue(), "Today's session", "today"));
     on("td-ahead", () => startSession(todayQueue(10), "Learning ahead", "today"));
     on("td-exam", openExam);
@@ -2487,52 +2592,12 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   function openToday() { go("today", renderToday); }
 
   // ================= LEARN =================
-  function renderLearn() {
-    let h = `<p class="hint" style="text-align:center">Every act from your notes. Open one to read the story or notes, study it, and explain the big ideas in your own words.</p>`;
-    UNITS.forEach(u => {
-      const acts = ACT_ORDER.filter(a => unitOf(a) === u), uq = unitQFor(u), uqSeen = uq.filter(f => getIt(f.key)).length;
-      h += `<div class="unit"><div class="unit-head"><span class="label">Unit ${u}${typeof UNIT_NAMES !== "undefined" && UNIT_NAMES[u] ? ` · ${esc(UNIT_NAMES[u])}` : ""}</span>${uq.length ? `<button data-uq="${u}">Big questions ${uqSeen}/${uq.length}</button>` : ""}</div>
-        ${acts.map(a => { const p = actProgress(a), on = SR.active.includes(a); return `<button class="act lrow" data-act="${a}"><span class="name">${esc(ACTS[a].title)}<small>Act ${a.split(".")[1]} · ${esc(ACTS[a].pages)}${on ? " · in your daily plan" : ""}</small></span><span class="lr-right"><span class="n">${p.seen ? `${Math.round(p.pct * 100)}%` : ""}</span><span class="bar2"><i style="width:${Math.round(p.pct * 100)}%"></i><b style="width:${Math.round(p.n ? p.solid / p.n * 100 : 0)}%"></b></span></span></button>`; }).join("")}</div>`;
-    });
-    h += `<p class="meta">Light bar: seen. Dark bar: solid (you've remembered it across 3+ weeks).</p>`;
-    $("learn-body").innerHTML = h;
-    document.querySelectorAll("#learn-body .lrow").forEach(b => b.onclick = () => openLearnAct(b.dataset.act));
-    document.querySelectorAll("#learn-body [data-uq]").forEach(b => b.onclick = () => startUnitQ(+b.dataset.uq));
-  }
-  function openLearn() { go("learn", renderLearn); }
   function startUnitQ(u) {
     const all = unitQFor(u), n = nowMin();
     const q = [...all.filter(f => getIt(f.key) && getIt(f.key).due <= n), ...all.filter(f => !getIt(f.key)), ...shuffle(all.filter(f => getIt(f.key) && getIt(f.key).due > n))].slice(0, 6);
     startSession(q, `Unit ${u} big questions`, "learn", () => openLearn());
   }
 
-  const LA = { act: null, notes: false };
-  function openLearnAct(a) { LA.act = a; go("lact", renderLearnAct); }
-  function renderLearnAct() {
-    const a = LA.act, p = actProgress(a), on = SR.active.includes(a), L = LESSONS[a], sv = store.get("story", {})[a] || {}, n = nowMin();
-    const dueHere = [...factsFor(a), ...undFor(a)].filter(f => { const it = getIt(f.key); return it && it.due <= n; }).length;
-    const newHere = factsFor(a).filter(f => !getIt(f.key)).length;
-    let h = `<button class="text-btn" id="la-back" style="align-self:flex-start">&larr; Learn</button>
-      <div><div class="tagline">${esc(actTag(a))} · ${esc(ACTS[a].pages)}</div><h2 class="dive-title">${esc(ACTS[a].title)}</h2>${L ? `<p class="lede" style="margin-top:8px">${esc(L.big)}</p>` : ""}</div>
-      <div class="stat3"><div><b>${p.seen}<small>/${p.n}</small></b><span>facts seen</span></div><div><b>${p.solid}</b><span>solid</span></div><div><b>${p.useen}<small>/${p.un}</small></b><span>ideas explained</span></div></div>
-      <div class="panel-card"><div class="tagline">Step 1 · Understand the story</div><h3>${sv.done ? "Story done" : sv.i > 0 ? "Pick up the story" : "Learn it as a story"}</h3><p class="hint">Predict what happens next, then see what really did. About 5 minutes. Read your notes below too.</p>
-        <div class="row" style="justify-content:flex-start"><button class="go small" id="la-story">${sv.i > 0 && !sv.done ? `Resume at card ${sv.i + 1}` : sv.done ? "Play it again" : "Start the story"}</button></div></div>
-      <div class="panel-card"><div class="tagline">Step 2 · Remember it</div><h3>Study this act</h3><p class="hint">${newHere ? `${plural(newHere, "fact")} you haven't seen yet. ` : "You've seen every fact. "}${dueHere ? `${dueHere} due for review. ` : ""}Recall first, then check. Spaced reviews bring each one back right before you'd forget it.</p>
-        <div class="row" style="justify-content:flex-start"><button class="go small" id="la-study">${newHere || dueHere ? "Study this act" : "Review it anyway"}</button><button class="text-btn" id="la-plan">${on ? "Remove from daily plan" : "Add to daily plan"}</button></div></div>
-      <div class="panel-card"><div class="tagline">Step 3 · Explain it</div><h3>Why, how, and so what</h3><p class="hint">${p.un} questions on causes, effects, comparisons, and change over time. Answer in your own words${aiOn() ? " and Claude grades you on the key ideas" : ", then check yourself against the key points"}. This is what the AP essays ask for.</p>
-        <div class="row" style="justify-content:flex-start"><button class="go small" id="la-und">Explain it</button></div></div>
-      <details class="nsec notesbox"${LA.notes ? " open" : ""}><summary>Your notes, key terms, events, and people</summary><div id="la-notes" class="section" style="gap:22px;padding-top:14px">${L ? learnHTML(a) : ""}</div></details>`;
-    $("lact-body").innerHTML = h;
-    const nb = $("la-notes"); const st = nb.querySelector("#ma-start"); if (st) st.remove();
-    $("la-back").onclick = openLearn;
-    $("la-story").onclick = () => startStory(a, !(sv.i > 0 && !sv.done));
-    $("la-study").onclick = () => startActStudy(a);
-    $("la-plan").onclick = () => { on ? deactivate(a) : activate(a); renderLearnAct(); };
-    $("la-und").onclick = () => startUnd(a);
-    document.querySelector("#lact-body .notesbox").ontoggle = e => { LA.notes = e.target.open; };
-    nb.querySelectorAll("[data-dive]").forEach(b => b.onclick = () => openDive(b.dataset.dive));
-    const mp = nb.querySelector("#ma-map"); if (mp) mp.onclick = () => { const ys = EV.filter(e => e.act === a).map(e => e.y).sort((x, y) => x - y); show("maps"); openMaps(); setEra(nearestEra(ys[Math.floor(ys.length / 2)] || 1500)); setMapMode("explore"); window.scrollTo({ top: 0 }); };
-  }
   function startActStudy(a) {
     activate(a);
     const n = nowMin(), due = [...factsFor(a), ...undFor(a)].filter(f => { const it = getIt(f.key); return it && it.due <= n; }).sort((x, y) => getIt(x.key).due - getIt(y.key).due);
@@ -2549,7 +2614,7 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
 
   // ================= SESSION (recall first) =================
   const SS = { q: [], i: 0, label: "", from: "today", done: null, cur: null, phase: "ask", stats: null, retried: {} };
-  const KIND_LABEL = { cause: "Cause", effect: "Effect", compare: "Compare", change: "Continuity and change", significance: "Significance", context: "Context" };
+  const KIND_LABEL = { cause: "Cause", effect: "Effect", compare: "Compare", change: "Continuity and change", significance: "Significance", context: "Context", person: "Key person" };
   function startSession(queue, label, from, done) {
     if (!queue.length) { SFX.play("flip"); return from === "learn" && done ? done() : openToday(); }
     Object.assign(SS, { q: queue.slice(), i: 0, label, from, done: done || null, stats: { n: 0, again: 0, hard: 0, good: 0, easy: 0, fresh: 0, und: 0, first: {} }, retried: {} });
@@ -2722,6 +2787,7 @@ Reply with only JSON:
       h += `<div class="verdict inline ${["bad", "neutral", "ok"][ai.score]}"><b>${["Not there yet", "Partly there", "Strong answer"][ai.score]}.</b> ${esc(ai.feedback)}</div>`;
       h += `<div class="kps"><div class="label">Key points</div>${kp.map((p, i) => `<div class="kp ${ai.pts ? (ai.pts[i] ? "hit" : "miss") : ""}"><span>${ai.pts ? (ai.pts[i] ? "✓" : "✗") : "•"}</span>${esc(p)}</div>`).join("")}</div>`;
       if (ai.remember) h += `<div class="answer"><div class="label">Remember</div><b>${esc(ai.remember)}</b></div>`;
+      if (ai.score < 2) h += `<button class="text-btn" id="und-tutor" style="align-self:flex-start">Work through it with Claude</button>`;
     } else {
       SFX.play("flip");
       h += `<div class="kps"><div class="label">${self ? "Tick each key point you made, in any words" : "Key points"}</div>${kp.map((p, i) => self ? `<label class="checkline"><input type="checkbox" data-kp="${i}"> ${esc(p)}</label>` : `<div class="kp"><span>•</span>${esc(p)}</div>`).join("")}</div>`;
@@ -2733,6 +2799,7 @@ Reply with only JSON:
       const upd = () => { const n = document.querySelectorAll("#sess-body [data-kp]:checked").length, fr = n / kp.length; c.sugg = fr >= 0.75 ? 3 : fr >= 0.4 ? 2 : 1; $("und-rate").innerHTML = rateHTML(c.it, c.sugg, null); bindRate(0); };
       document.querySelectorAll("#sess-body [data-kp]").forEach(cb => cb.onchange = upd);
     }
+    if ($("und-tutor")) $("und-tutor").onclick = () => openCoach(c, ai);
     bindRate(force === 1 ? 1 : 0);
   }
 
@@ -2874,22 +2941,24 @@ Reply with only JSON:
     if (st.kind === "map") return `${st.cite} (a political map of Europe in ${st.year})`;
     return `${st.cite}: ${st.text}`;
   }
-  async function saqAI(s, ans) {
-    const b = $("saq-ai"); b.disabled = true; b.textContent = "Claude is grading…"; $("saq-need").textContent = "";
+  async function gradeSAQ(s, ans) {
     const prompt = `You are an AP European History reader grading a short-answer question (SAQ) with the College Board rules. Each part is worth exactly 1 point. "Identify" needs a correct, specific answer. "Describe" needs a relevant, specific description that goes beyond restating the prompt. "Explain" needs specific evidence plus how or why it answers the question. Accept any historically accurate answer that fits the task, not only the sample answers. Ignore grammar and spelling. Be strict about vague answers with no specific evidence.
 Source: ${stimText(s.stim)}
 ${s.parts.map(([l, p, ex], i) => `Part ${l}: ${p}\nSample acceptable answers: ${ex.join("; ")}\nStudent's answer to part ${l}: """${clip(ans[i], 1500)}"""`).join("\n\n")}
 Reply with only JSON: {"parts": [{"point": 0 or 1, "why": "one or two sentences explaining the decision"} for parts a, b, c in order], "tip": "one sentence on how to earn more points on SAQs"}`;
+    const r = await askJSON(prompt, "default");
+    if (!r || !Array.isArray(r.parts) || r.parts.length < 3) throw { code: "invalid_json" };
+    const pts = r.parts.slice(0, 3).map(p => ({ point: +p.point === 1 ? 1 : 0, why: String(p.why || "") }));
+    return { pts, total: pts.reduce((a, p) => a + p.point, 0), tip: String(r.tip || "") };
+  }
+  const saqResultHTML = (s, g) => `${s.parts.map(([l, , ex], i) => `<div class="rubrow ${g.pts[i].point ? "hit" : "miss"}"><div class="rh"><b>Part ${l}</b><span>${g.pts[i].point} / 1</span></div><p>${esc(g.pts[i].why)}</p><details><summary>Answers that earn the point</summary><ul class="bul">${ex.map(x => `<li>${esc(x)}</li>`).join("")}</ul></details></div>`).join("")}${g.tip ? `<div class="answer"><div class="label">Tip</div><b>${esc(g.tip)}</b></div>` : ""}`;
+  async function saqAI(s, ans) {
+    const b = $("saq-ai"); b.disabled = true; b.textContent = "Claude is grading…"; $("saq-need").textContent = "";
     try {
-      const r = await askJSON(prompt, "default");
-      if (!Array.isArray(r.parts) || r.parts.length < 3) throw { code: "invalid_json" };
-      const pts = r.parts.slice(0, 3).map(p => ({ point: +p.point === 1 ? 1 : 0, why: String(p.why || "") }));
-      const total = pts.reduce((a, p) => a + p.point, 0);
+      const g = await gradeSAQ(s, ans), total = g.total;
       logExam("saq", s.id, total, 3, "ai"); store.set("draft-" + s.id, ["", "", ""]);
       SFX.play(total === 3 ? "win" : total ? "streak" : "wrong");
-      $("saq-out").innerHTML = `<div class="result"><div class="label">Claude's score</div><div class="big">${total} / 3</div></div>
-        ${s.parts.map(([l, , ex], i) => `<div class="rubrow ${pts[i].point ? "hit" : "miss"}"><div class="rh"><b>Part ${l}</b><span>${pts[i].point} / 1</span></div><p>${esc(pts[i].why)}</p><details><summary>Answers that earn the point</summary><ul class="bul">${ex.map(x => `<li>${esc(x)}</li>`).join("")}</ul></details></div>`).join("")}
-        ${r.tip ? `<div class="answer"><div class="label">Tip</div><b>${esc(String(r.tip))}</b></div>` : ""}`;
+      $("saq-out").innerHTML = `<div class="result"><div class="label">Claude's score</div><div class="big">${total} / 3</div></div>${saqResultHTML(s, g)}`;
       b.textContent = "Graded"; stopTimer();
     } catch (e) { b.disabled = false; b.textContent = "Grade with Claude"; $("saq-need").textContent = aiErr(e); $("saq-need").style.color = "var(--wrong)"; }
   }
@@ -2930,12 +2999,8 @@ Reply with only JSON: {"parts": [{"point": 0 or 1, "why": "one or two sentences 
     const need = () => { if ($("th-in").value.trim().length < 30) { $("th-need").textContent = "Write a full sentence first."; $("th-need").style.color = "var(--wrong)"; return true; } return false; };
     if ($("th-ai")) $("th-ai").onclick = async () => {
       if (need()) return; const b = $("th-ai"); b.disabled = true; b.textContent = "Checking…";
-      const prompt = `You are an AP European History reader. Decide whether this thesis earns the Thesis/Claim point on the AP rubric: it must be historically defensible, respond directly to the prompt (not restate it), and establish a line of reasoning (a claim with reasons). Be strict but fair.
-Prompt: ${x.prompt}
-Student's thesis: """${clip($("th-in").value, 1200)}"""
-Reply with only JSON: {"point": 0 or 1, "why": "one or two sentences", "stronger": "a rewrite of the student's own thesis that keeps their idea but would clearly earn the point"}`;
       try {
-        const r = await askJSON(prompt, "default"), p = +r.point === 1 ? 1 : 0; stopTimer();
+        const r = await gradeThesis(x, $("th-in").value), p = r.point; stopTimer();
         logExam("thesis", x.id, p, 1, "ai"); SFX.play(p ? "right" : "wrong");
         $("th-out").innerHTML = `<div class="verdict inline ${p ? "ok" : "bad"}"><b>${p ? "Earns the point." : "Doesn't earn the point yet."}</b> ${esc(String(r.why || ""))}</div>${r.stronger ? `<div class="answer"><div class="label">Stronger version</div><b>${esc(String(r.stronger))}</b></div>` : ""}<details class="nsec"><summary>A model thesis</summary><p style="margin:8px 0 0">${esc(x.thesis)}</p></details>`;
         b.textContent = "Checked";
@@ -2948,6 +3013,15 @@ Reply with only JSON: {"point": 0 or 1, "why": "one or two sentences", "stronger
       $("th-yes").onclick = () => { logExam("thesis", x.id, 1, 1, "self"); $("th-out").insertAdjacentHTML("beforeend", `<div class="verdict inline ok">Saved.</div>`); $("th-yes").disabled = $("th-no").disabled = true; };
       $("th-no").onclick = () => { logExam("thesis", x.id, 0, 1, "self"); $("th-out").insertAdjacentHTML("beforeend", `<div class="verdict inline neutral">Saved. Try rewriting it using the model's structure.</div>`); $("th-yes").disabled = $("th-no").disabled = true; };
     };
+  }
+  async function gradeThesis(x, text) {
+    const prompt = `You are an AP European History reader. Decide whether this thesis earns the Thesis/Claim point on the AP rubric: it must be historically defensible, respond directly to the prompt (not restate it), and establish a line of reasoning (a claim with reasons). Be strict but fair.
+Prompt: ${x.prompt}
+Student's thesis: """${clip(text, 1200)}"""
+Reply with only JSON: {"point": 0 or 1, "why": "one or two sentences", "stronger": "a rewrite of the student's own thesis that keeps their idea but would clearly earn the point"}`;
+    const r = await askJSON(prompt, "default");
+    if (!r || r.point == null) throw { code: "invalid_json" };
+    return { point: +r.point === 1 ? 1 : 0, why: String(r.why || ""), stronger: String(r.stronger || "") };
   }
   function sourceDrill(x) {
     const i = Math.floor(Math.random() * x.docs.length), d = x.docs[i];
@@ -3056,6 +3130,418 @@ Reply with only JSON: {"rows": [{"name": rubric row name, "earned": number, "max
   record = (key, ok) => { _record(key, ok); storySeen(key, ok); };
   startPractice = a => startActStudy(a);
   initSync();
+  // =====================================================================
+  // CHRONICLE 2.2: teach first, then prove it. Act skeletons, a rebuild-it check,
+  // act and unit checkpoints, readiness, and Claude as a tutor.
+  // =====================================================================
+  const SKEL_PASS = 80;
+  const dateStr = t => new Date(t).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  const lis = seq => { const d = []; seq.forEach(x => { let i = d.findIndex(v => v >= x); if (i < 0) d.push(x); else d[i] = x; }); return d.length; };
+  const notesText = a => (NOTES[a] || []).map(([h, lines]) => `## ${h}\n${lines.map(([i, t]) => (i < 0 ? "" : "  ".repeat(i) + "- ") + t).join("\n")}`).join("\n");
+  const skelText = a => { const S = SKEL[a]; if (!S) return ""; return `Big question: ${S.q}\nTurning points:\n${S.turns.map(([y, t, w, so]) => `- ${y} ${t}: ${w} So what: ${so}`).join("\n")}\nKey people:\n${S.people.map(([n, r, d, w]) => `- ${n} (${r}): ${d} ${w}`).join("\n")}\nResults: ${S.results.join(" ")}\nMain idea: ${S.takeaway}`; };
+
+  // ---------- steps and readiness ----------
+  function actSteps(a) {
+    const st = actSt(a), core = factsFor(a).filter(f => isCore(f.key)), coreSeen = core.filter(f => getIt(f.key)).length;
+    const und = undFor(a), undSeen = und.filter(f => getIt(f.key)).length, need = Math.min(8, und.length);
+    return [
+      { k: "read", n: "Understand it", d: "The act in one page: the big question, turning points and why they mattered, key people, results.", done: !!st.read, info: st.read ? "Read" : "About 5 minutes" },
+      { k: "skel", n: "Rebuild it from memory", d: "Put the turning points in order, match the people, and answer the big question.", done: (st.skel || 0) >= SKEL_PASS, info: st.skel != null ? `Best ${st.skel}% (pass ${SKEL_PASS}%)` : `Pass with ${SKEL_PASS}%` },
+      { k: "study", n: "Remember the main points", d: "Recall cards, main points first. Spaced reviews keep them fresh.", done: core.length ? coreSeen / core.length >= 0.9 : true, info: `${coreSeen} of ${core.length} main points seen` },
+      { k: "explain", n: "Explain it", d: "Why, how, and so what, in your own words.", done: undSeen >= need, info: `${undSeen} of ${need} explained` },
+      { k: "check", n: "Pass the checkpoint", d: "15 questions, the turning points in order, and 2 explanations. Pass it and the act is Ready.", done: !!(st.ck && st.ck.pass), info: st.ck ? (st.ck.pass ? `Passed ${dateStr(st.ck.t)} · ${st.ck.score}%` : `Last try ${st.ck.score}%`) : "Facts, order, and explaining" }
+    ];
+  }
+  const isReady = a => !!(actSt(a).ck && actSt(a).ck.pass);
+  function actStatus(a) {
+    if (isReady(a)) return { label: "Ready", cls: "ready" };
+    const s = actSteps(a), i = s.findIndex(x => !x.done), started = s.some(x => x.done) || actProgress(a).seen > 0;
+    return started ? { label: `Step ${i + 1} of 5`, cls: "going" } : { label: "Not started", cls: "" };
+  }
+  function runStep(a, k) { activate(a); ({ read: openSkel, skel: startSkelCheck, study: startActStudy, explain: startUnd, check: startCheckpoint })[k](a); }
+  const prevAct = a => { const i = ACT_ORDER.indexOf(a), p = ACT_ORDER[i - 1]; return p && unitOf(p) === unitOf(a) ? p : null; };
+  const nextAct = a => { const i = ACT_ORDER.indexOf(a), n = ACT_ORDER[i + 1]; return n && unitOf(n) === unitOf(a) ? n : null; };
+  const unitActs = u => ACT_ORDER.filter(a => unitOf(a) === u);
+  const unitReady = u => unitActs(u).every(isReady);
+  function focusAct() { const act = SR.active.filter(a => ACTS[a] && !isReady(a)); return act.length ? act[act.length - 1] : null; }
+  function nextStepHTML() {
+    const u = UNITS.find(u => unitReady(u) && !(SR.units[u] && SR.units[u].pass) && unitActs(u).some(a => SR.active.includes(a)));
+    if (u != null) return `<div class="panel-card nextcard"><div class="tagline">Next step · Unit ${u}</div><h3>Take the unit checkpoint</h3><p class="hint">Every act in Unit ${u} is Ready. Prove you can connect them: a mixed test, the big turning points in order, a short answer, and a thesis.</p><button class="go small" id="ns-go" data-unit="${u}">Start</button></div>`;
+    const a = focusAct(); if (!a) return "";
+    const st = actSteps(a).find(x => !x.done);
+    return `<div class="panel-card nextcard"><div class="tagline">Next step · ${esc(actTag(a))}</div><h3>${esc(st.n)}</h3><p class="hint">${esc(ACTS[a].title)}. ${esc(st.d)}</p><div class="row" style="justify-content:flex-start"><button class="go small" id="ns-go" data-act="${a}" data-k="${st.k}">Go</button><button class="text-btn" id="ns-act" data-act="${a}">See all steps</button></div></div>`;
+  }
+  function bindNextStep() {
+    const b = $("ns-go"); if (!b) return;
+    b.onclick = () => b.dataset.unit ? startUnitCheck(+b.dataset.unit) : runStep(b.dataset.act, b.dataset.k);
+    const s = $("ns-act"); if (s) s.onclick = () => openLearnAct(s.dataset.act);
+  }
+
+  // ================= LEARN =================
+  function renderLearn() {
+    const fa = focusAct();
+    let h = `<p class="hint" style="text-align:center">Each act has five steps: understand it, rebuild it from memory, remember the main points, explain it, then pass the checkpoint. A Ready act keeps coming back in your reviews.</p>`;
+    if (fa) h += `<button class="panel-card nextup" data-act="${fa}"><span class="tagline">Up next</span><b>${esc(ACTS[fa].title)}</b><span class="meta" style="text-align:left">${esc(actTag(fa))} · ${esc(actSteps(fa).find(x => !x.done).n)}</span></button>`;
+    UNITS.forEach(u => {
+      const acts = unitActs(u), us = SR.units[u], nReady = acts.filter(isReady).length;
+      h += `<div class="unit"><div class="unit-head"><span class="label">Unit ${u}${typeof UNIT_NAMES !== "undefined" && UNIT_NAMES[u] ? ` · ${esc(UNIT_NAMES[u])}` : ""}</span><span class="uh-btns"><button data-uq="${u}">Big questions</button><button data-uc="${u}">${us && us.pass ? "Unit checkpoint ✓" : `Unit checkpoint ${nReady}/${acts.length}`}</button></span></div>
+        ${acts.map(a => { const p = actProgress(a), s = actStatus(a); return `<button class="act lrow" data-act="${a}"><span class="name">${esc(ACTS[a].title)}<small>Act ${a.split(".")[1]} · ${esc(ACTS[a].pages)}</small></span><span class="lr-right"><span class="chip-st ${s.cls}">${s.label}</span><span class="bar2"><i style="width:${Math.round(p.pct * 100)}%"></i><b style="width:${Math.round(p.n ? p.solid / p.n * 100 : 0)}%"></b></span></span></button>`; }).join("")}</div>`;
+    });
+    h += `<p class="meta">Light bar: facts seen. Dark bar: solid (remembered across 3+ weeks).</p>`;
+    $("learn-body").innerHTML = h;
+    document.querySelectorAll("#learn-body [data-act]").forEach(b => b.onclick = () => openLearnAct(b.dataset.act));
+    document.querySelectorAll("#learn-body [data-uq]").forEach(b => b.onclick = () => startUnitQ(+b.dataset.uq));
+    document.querySelectorAll("#learn-body [data-uc]").forEach(b => b.onclick = () => startUnitCheck(+b.dataset.uc));
+  }
+  function openLearn() { go("learn", renderLearn); }
+
+  const LA = { act: null, notes: false };
+  function openLearnAct(a) { LA.act = a; go("lact", renderLearnAct); }
+  function renderLearnAct() {
+    const a = LA.act, p = actProgress(a), on = SR.active.includes(a), S = SKEL[a], sv = store.get("story", {})[a] || {}, steps = actSteps(a), nx = steps.findIndex(x => !x.done), pv = prevAct(a), na = nextAct(a);
+    let h = `<button class="text-btn" id="la-back" style="align-self:flex-start">&larr; Learn</button>
+      <div><div class="tagline">${esc(actTag(a))} · ${esc(ACTS[a].pages)}</div><h2 class="dive-title">${esc(ACTS[a].title)}</h2>${S ? `<p class="lede" style="margin-top:8px">${esc(S.q)}</p>` : ""}</div>`;
+    if (pv && !isReady(pv) && nx === 0) h += `<div class="verdict inline neutral">Recommended: finish <b>${esc(actTag(pv))}</b> first. Each act builds on the one before. <button class="text-btn" id="la-prev">Go to ${esc(actTag(pv))}</button></div>`;
+    if (isReady(a)) h += `<div class="verdict inline ok"><b>Ready.</b> You passed the checkpoint. It keeps coming back in your daily reviews so it stays solid.${na ? ` <button class="text-btn" id="la-next">Next: ${esc(actTag(na))}</button>` : ""}</div>`;
+    h += `<div class="stat3"><div><b>${p.seen}<small>/${p.n}</small></b><span>facts seen</span></div><div><b>${p.solid}</b><span>solid</span></div><div><b>${p.useen}<small>/${p.un}</small></b><span>ideas explained</span></div></div>
+      <div class="lsteps">${steps.map((s, i) => `<div class="lstep ${s.done ? "done" : i === nx ? "now" : ""}"><span class="sn">${s.done ? "✓" : i + 1}</span><div class="sb"><b>${esc(s.n)}</b><p>${esc(s.d)}</p><small>${esc(s.info)}</small>
+        ${i === 0 ? `<button class="text-btn" id="la-story">${sv.i > 0 && !sv.done ? `Or resume the story (card ${sv.i + 1})` : "Or learn it as a story"}</button>` : ""}</div>
+        <button class="${i === nx ? "go small" : "text-btn"}" data-step="${s.k}">${s.done ? (s.k === "read" ? "Reread" : "Again") : i === nx ? "Start" : "Go"}</button></div>`).join("")}</div>
+      <div class="row" style="justify-content:flex-start;gap:16px"><button class="text-btn" id="la-plan">${on ? "Remove from daily plan" : "Add to daily plan"}</button>${aiOn() ? `<button class="text-btn" id="la-ask">Ask Claude about this act</button>` : ""}</div>
+      <details class="nsec notesbox"${LA.notes ? " open" : ""}><summary>Your notes, key terms, events, and people</summary><div id="la-notes" class="section" style="gap:22px;padding-top:14px">${LESSONS[a] ? learnHTML(a) : ""}</div></details>`;
+    $("lact-body").innerHTML = h;
+    const nb = $("la-notes"); const st0 = nb.querySelector("#ma-start"); if (st0) st0.remove();
+    $("la-back").onclick = openLearn;
+    if ($("la-prev")) $("la-prev").onclick = () => openLearnAct(pv);
+    if ($("la-next")) $("la-next").onclick = () => openLearnAct(na);
+    $("la-story").onclick = () => { activate(a); startStory(a, !(sv.i > 0 && !sv.done)); };
+    document.querySelectorAll("#lact-body [data-step]").forEach(b => b.onclick = () => runStep(a, b.dataset.step));
+    $("la-plan").onclick = () => { on ? deactivate(a) : activate(a); renderLearnAct(); };
+    if ($("la-ask")) $("la-ask").onclick = () => openAsk(a);
+    document.querySelector("#lact-body .notesbox").ontoggle = e => { LA.notes = e.target.open; };
+    nb.querySelectorAll("[data-dive]").forEach(b => b.onclick = () => openDive(b.dataset.dive));
+    const mp = nb.querySelector("#ma-map"); if (mp) mp.onclick = () => { const ys = EV.filter(e => e.act === a).map(e => e.y).sort((x, y) => x - y); show("maps"); openMaps(); setEra(nearestEra(ys[Math.floor(ys.length / 2)] || 1500)); setMapMode("explore"); window.scrollTo({ top: 0 }); };
+  }
+
+  // ================= STEP 1: the act in one page =================
+  function openSkel(a) { LA.act = a; go("skel", renderSkel); }
+  function renderSkel() {
+    const a = LA.act, S = SKEL[a];
+    $("skel-body").innerHTML = `<button class="text-btn" id="sk-back" style="align-self:flex-start">&larr; ${esc(actTag(a))}</button>
+      <div><div class="tagline">${esc(actTag(a))} · ${esc(ACTS[a].pages)} · Step 1</div><h2 class="dive-title">${esc(ACTS[a].title)}</h2></div>
+      <div class="bigq"><div class="label">The big question</div><p>${esc(S.q)}</p></div>
+      <div class="dsec"><div class="label">Going in</div><ul class="bul">${S.setup.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+      <div class="dsec"><div class="label">Turning points</div><ol class="tline">${S.turns.map(([y, t, w, so]) => `<li><span class="ty">${esc(y)}</span><div><b>${esc(t)}</b><p>${esc(w)}</p><p class="so"><span>So what:</span> ${esc(so)}</p></div></li>`).join("")}</ol></div>
+      <div class="dsec"><div class="label">Key people</div><div class="pgrid">${S.people.map(([n, r, d, w, links]) => `<div class="pcard"><b>${esc(n)}</b><span class="role">${esc(r)}</span><p>${esc(d)}</p><p class="so"><span>Why it matters:</span> ${esc(w)}</p>${links && links.length ? `<small>Connected to ${links.map(esc).join(", ")}</small>` : ""}</div>`).join("")}</div></div>
+      <div class="dsec"><div class="label">How it ended up</div><ul class="bul">${S.results.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>
+      <div class="dsec"><div class="label">Connections</div><p class="conn"><span>Before</span> ${esc(S.before)}</p><p class="conn"><span>After</span> ${esc(S.after)}</p></div>
+      <div class="answer"><div class="label">If you remember one thing</div><b>${esc(S.takeaway)}</b></div>
+      <div class="row" style="flex-direction:column;align-items:stretch;width:min(360px,100%);align-self:center"><button class="go" id="sk-check">I've got it: rebuild it from memory</button><button class="text-btn" id="sk-done">Done reading for now</button></div>`;
+    const mark = () => { activate(a); if (!actSt(a).read) { actSt(a).read = Date.now(); saveSR(); } };
+    $("sk-back").onclick = () => { mark(); openLearnAct(a); };
+    $("sk-check").onclick = () => { mark(); startSkelCheck(a); };
+    $("sk-done").onclick = () => { mark(); openLearnAct(a); };
+  }
+
+  // ---------- shared pieces: ordering, matching, big-picture answers ----------
+  function orderHTML(id, items) {
+    return `<div class="ord" id="${id}"><p class="hint" style="margin:0">Tap them in the order they happened, earliest first. Tap a placed one to take it back.</p><ol class="ord-ans"></ol><div class="ord-pool">${items.map((t, i) => `<button class="ord-item" data-i="${i}">${esc(t)}</button>`).join("")}</div><button class="go small" disabled data-ord-check>Check order</button><div class="ord-out"></div></div>`;
+  }
+  // items: titles in shuffled order; truth: same titles in the right order. onDone(score 0..1)
+  function bindOrder(id, items, truth, years, onDone) {
+    const root = $(id), ans = root.querySelector(".ord-ans"), pool = root.querySelector(".ord-pool"), btn = root.querySelector("[data-ord-check]"), picked = [];
+    const draw = () => {
+      ans.innerHTML = picked.map((i, n) => `<li><button class="ord-item placed" data-p="${n}">${esc(items[i])}</button></li>`).join("");
+      pool.querySelectorAll(".ord-item").forEach(b => b.hidden = picked.includes(+b.dataset.i));
+      btn.disabled = picked.length !== items.length;
+      ans.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { picked.splice(+b.dataset.p, 1); draw(); });
+    };
+    pool.querySelectorAll(".ord-item").forEach(b => b.onclick = () => { picked.push(+b.dataset.i); SFX.play("flip"); draw(); });
+    btn.onclick = () => {
+      const pos = picked.map(i => truth.indexOf(items[i])), score = lis(pos) / items.length;
+      btn.remove(); pool.remove();
+      ans.innerHTML = picked.map((i, n) => `<li class="${pos[n] === n ? "ok" : "bad"}">${esc(items[i])}</li>`).join("");
+      SFX.play(score === 1 ? "right" : score >= 0.8 ? "flip" : "wrong");
+      root.querySelector(".ord-out").innerHTML = `<div class="verdict inline ${score === 1 ? "ok" : score >= 0.8 ? "neutral" : "bad"}"><b>${Math.round(score * 100)}% in order.</b>${score < 1 ? ` The right order: ${truth.map((t, j) => `${esc(t)} (${esc(years[j])})`).join(" → ")}` : " Every one in the right place."}</div>`;
+      onDone(score);
+    };
+    draw();
+  }
+  function bigAnswerHTML(id, label, placeholder) {
+    return `<div class="dsec" id="${id}"><div class="label">${esc(label)}</div><textarea rows="5" placeholder="${esc(placeholder)}"></textarea><div class="row" style="justify-content:flex-start">${aiOn() ? `<button class="go small" data-big-ai>Grade with Claude</button><button class="text-btn" data-big-self>Grade it myself</button>` : `<button class="go small" data-big-self>Check against the key points</button>`}</div><p class="meta" data-need style="text-align:left"></p><div class="big-out"></div></div>`;
+  }
+  // Grade a written answer against key points. onDone(score 0..1, detail)
+  function bindBigAnswer(id, q, kp, model, onDone) {
+    const root = $(id), ta = root.querySelector("textarea"), need = root.querySelector("[data-need]"), out = root.querySelector(".big-out");
+    const tooShort = () => { if (ta.value.trim().length < 40) { need.textContent = "Write a real answer first: a few sentences."; need.style.color = "var(--wrong)"; SFX.play("wrong"); return true; } return false; };
+    const lock = () => { ta.readOnly = true; root.querySelectorAll("[data-big-ai],[data-big-self]").forEach(b => b.remove()); need.textContent = ""; };
+    const aiB = root.querySelector("[data-big-ai]");
+    if (aiB) aiB.onclick = async () => {
+      if (tooShort()) return; aiB.disabled = true; aiB.textContent = "Claude is reading…";
+      try {
+        const r = await gradeIdeas(q, kp, model, ta.value);
+        lock(); SFX.play(r.score === 2 ? "right" : r.score === 1 ? "flip" : "wrong");
+        out.innerHTML = `<div class="verdict inline ${["bad", "neutral", "ok"][r.score]}"><b>${["Not there yet", "Partly there", "Strong answer"][r.score]}.</b> ${esc(r.feedback)}</div><div class="kps">${kp.map((p, i) => `<div class="kp ${r.pts ? (r.pts[i] ? "hit" : "miss") : ""}"><span>${r.pts ? (r.pts[i] ? "✓" : "✗") : "•"}</span>${esc(p)}</div>`).join("")}</div><details class="nsec"><summary>Model answer</summary><p style="margin:8px 0 0">${esc(model)}</p></details>`;
+        onDone(r.score / 2, { how: "ai", score: r.score, text: ta.value, feedback: r.feedback });
+      } catch (e) { aiB.disabled = false; aiB.textContent = "Grade with Claude"; need.textContent = aiErr(e); need.style.color = "var(--wrong)"; }
+    };
+    root.querySelector("[data-big-self]").onclick = () => {
+      if (tooShort()) return; lock();
+      out.innerHTML = `<div class="kps"><div class="label">Tick each key point you made, in any words</div>${kp.map((p, i) => `<label class="checkline"><input type="checkbox" data-kp="${i}"> ${esc(p)}</label>`).join("")}</div><details class="nsec" open><summary>Model answer</summary><p style="margin:8px 0 0">${esc(model)}</p></details><button class="go small" data-big-save>That's my score</button>`;
+      out.querySelector("[data-big-save]").onclick = e => { const n = out.querySelectorAll("[data-kp]:checked").length; e.target.remove(); out.querySelectorAll("[data-kp]").forEach(c => c.disabled = true); const fr = n / kp.length; onDone(fr, { how: "self", score: fr >= 0.75 ? 2 : fr >= 0.4 ? 1 : 0, text: ta.value }); };
+    };
+  }
+  async function gradeIdeas(q, kp, model, text) {
+    const prompt = `Grade a high school student's written answer to an AP European History question. Judge the ideas and reasoning, not the wording or grammar. Be encouraging but honest; don't give credit for vague statements.
+Question: ${q}
+Key points a strong answer includes:
+${kp.map((p, i) => `${i + 1}. ${p}`).join("\n")}
+Model answer (for reference): ${model}
+Student's answer: """${clip(text, 3500)}"""
+Reply with only JSON:
+{"points": [true or false for each key point, in order: did the student make this point in any words?],
+ "score": 0, 1, or 2 (2 = answers the question correctly with reasoning and specific support; 1 = partly right, thin, or missing the why; 0 = wrong, off topic, or no real answer),
+ "feedback": "2 or 3 sentences: what they got right, and the most important thing missing or wrong"}`;
+    const r = await askJSON(prompt, "default");
+    const sc = [0, 1, 2].includes(+r.score) ? +r.score : null;
+    if (sc == null) throw { code: "invalid_json" };
+    return { score: sc, pts: Array.isArray(r.points) ? kp.map((_, i) => !!r.points[i]) : null, feedback: String(r.feedback || "") };
+  }
+  const bigKP = S => [
+    `Answers the big question directly: ${S.takeaway}`,
+    `Names major turning points in the right order, such as ${S.turns.slice(0, 4).map(t => t[1]).join(", ")}`,
+    "Explains cause and effect: how one development led to the next",
+    `Says how it ended up: ${S.results[0]}`
+  ];
+  const bigModel = S => `${S.takeaway} ${S.turns.map(([y, t, , so]) => `${t} (${y}): ${so}`).join(" ")}`;
+
+  // ================= STEP 2: rebuild it from memory =================
+  const SK = { a: null, order: null, people: null, big: null };
+  function startSkelCheck(a) { LA.act = a; activate(a); Object.assign(SK, { a, order: null, people: null, big: null }); go("skchk", renderSkelCheck); }
+  function renderSkelCheck() {
+    const a = SK.a, S = SKEL[a], titles = S.turns.map(t => t[1]), sh = shuffle(titles.slice());
+    const ppl = shuffle(S.people.map((p, i) => i)), names = shuffle(S.people.map(p => p[0]));
+    $("skchk-body").innerHTML = `<button class="text-btn" id="sc-back" style="align-self:flex-start">&larr; ${esc(actTag(a))}</button>
+      <div><div class="tagline">${esc(actTag(a))} · Step 2 · Rebuild it from memory</div><h2 class="dive-title">${esc(ACTS[a].title)}</h2><p class="hint" style="margin-top:6px">No peeking. Pass with ${SKEL_PASS}%.</p></div>
+      <div class="panel-card"><div class="tagline">1 · Turning points</div>${orderHTML("sc-ord", sh)}</div>
+      <div class="panel-card"><div class="tagline">2 · Who did what?</div><div class="match-sel">${ppl.map(i => `<label class="msel"><span>${esc(S.people[i][2])}</span><select data-pi="${i}"><option value="">Choose…</option>${names.map(n => `<option>${esc(n)}</option>`).join("")}</select></label>`).join("")}</div><button class="go small" id="sc-ppl">Check</button><div id="sc-ppl-out"></div></div>
+      <div class="panel-card"><div class="tagline">3 · The big picture</div><p class="q" style="margin:0">${esc(S.q)}</p>${bigAnswerHTML("sc-big", "Your answer", "Answer in 3 to 5 sentences. Name the turning points in order and explain how one led to the next.")}</div>
+      <div id="sc-total"></div>`;
+    $("sc-back").onclick = () => openLearnAct(a);
+    bindOrder("sc-ord", sh, titles, S.turns.map(t => t[0]), sc => { SK.order = sc; skelTotal(); });
+    $("sc-ppl").onclick = () => {
+      const sels = [...document.querySelectorAll("#skchk-body [data-pi]")];
+      if (sels.some(s => !s.value)) { $("sc-ppl-out").innerHTML = `<p class="meta" style="text-align:left;color:var(--wrong)">Match every one first.</p>`; return; }
+      let ok = 0;
+      sels.forEach(s => { const right = S.people[+s.dataset.pi][0], good = s.value === right; if (good) ok++; s.disabled = true; s.closest(".msel").classList.add(good ? "ok" : "bad"); if (!good) s.closest(".msel").insertAdjacentHTML("beforeend", `<small>${esc(right)}</small>`); });
+      SK.people = ok / sels.length; $("sc-ppl").remove(); SFX.play(ok === sels.length ? "right" : "flip");
+      $("sc-ppl-out").innerHTML = `<div class="verdict inline ${ok === sels.length ? "ok" : "neutral"}"><b>${ok} of ${sels.length} right.</b></div>`;
+      skelTotal();
+    };
+    bindBigAnswer("sc-big", S.q, bigKP(S), bigModel(S), sc => { SK.big = sc; skelTotal(); });
+  }
+  function skelTotal() {
+    if (SK.order == null || SK.people == null || SK.big == null) return;
+    const a = SK.a, score = Math.round(100 * (SK.order * 0.35 + SK.people * 0.25 + SK.big * 0.4)), pass = score >= SKEL_PASS, st = actSt(a);
+    if (score > (st.skel || 0)) { st.skel = score; st.skelT = Date.now(); }
+    saveSR(); SFX.play(pass ? "win" : "streak");
+    $("sc-total").innerHTML = `<div class="result"><div class="label">Rebuild score</div><div class="big">${score}%</div><div class="meta">Order ${Math.round(SK.order * 100)}% · People ${Math.round(SK.people * 100)}% · Big picture ${Math.round(SK.big * 100)}%</div>
+      <p class="hint" style="margin-top:8px">${pass ? "You've got the skeleton. Now lock in the details." : `Not yet (${SKEL_PASS}% to pass). Reread the one-page lesson, then try again.`}</p>
+      <div class="row" style="flex-direction:column;align-items:stretch;width:min(320px,100%)">${pass ? `<button class="go" id="sc-next">Next: remember the main points</button>` : `<button class="go" id="sc-reread">Reread the lesson</button><button class="text-btn" id="sc-again">Try again</button>`}<button class="text-btn" id="sc-act">Back to the act</button></div></div>`;
+    const on = (id, fn) => { if ($(id)) $(id).onclick = fn; };
+    on("sc-next", () => startActStudy(a)); on("sc-reread", () => openSkel(a)); on("sc-again", () => startSkelCheck(a)); on("sc-act", () => openLearnAct(a));
+    $("sc-total").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // ================= STEP 5: checkpoints =================
+  const CK = { mode: "act", a: null, u: null, parts: [], pi: 0, res: {}, missed: [] };
+  const UNIT_LEQ = { 1: "l-authority", 2: "l-statepower", 3: "l-enlightenment", 4: "l-revolution", 5: "l-women" };
+  function pickFacts(pool, nCore, nDetail) {
+    const core = shuffle(pool.filter(f => isCore(f.key))), det = shuffle(pool.filter(f => !isCore(f.key)));
+    const out = [...core.slice(0, nCore), ...det.slice(0, nDetail)];
+    if (out.length < nCore + nDetail) out.push(...[...core.slice(nCore), ...det.slice(nDetail)].slice(0, nCore + nDetail - out.length));
+    return shuffle(out);
+  }
+  function startCheckpoint(a) {
+    activate(a); const S = SKEL[a], und = undFor(a);
+    const hand = und.filter(f => f.key.startsWith("un:")), other = und.filter(f => !f.key.startsWith("un:"));
+    const ex = [pickOne(hand.length ? hand : und), pickOne(other.length ? other : und)].filter((f, i, arr) => arr.indexOf(f) === i);
+    Object.assign(CK, { mode: "act", a, u: null, pi: 0, res: {}, missed: [], parts: [
+      { t: "facts", items: pickFacts(factsFor(a), 10, 5) },
+      { t: "order", titles: S.turns.map(x => x[1]), years: S.turns.map(x => x[0]) },
+      { t: "explain", items: ex }] });
+    go("ckpt", renderCK);
+  }
+  function startUnitCheck(u) {
+    const acts = unitActs(u), pool = acts.flatMap(a => factsFor(a));
+    const turns = acts.length > 1 ? acts.map(a => pickOne(SKEL[a].turns)) : SKEL[acts[0]].turns.slice();
+    turns.sort((x, y) => +x[0] - +y[0]);
+    const saqs = SAQ.filter(s => s.unit === u), leq = LEQ.find(l => l.id === UNIT_LEQ[u]);
+    Object.assign(CK, { mode: "unit", a: null, u, pi: 0, res: {}, missed: [], parts: [
+      { t: "facts", items: pickFacts(pool, 14, 6) },
+      { t: "order", titles: turns.map(x => x[1]), years: turns.map(x => x[0]) },
+      ...(saqs.length ? [{ t: "saq", s: pickOne(saqs) }] : []),
+      ...(leq ? [{ t: "thesis", x: leq }] : [])] });
+    go("ckpt", renderCK);
+  }
+  const ckTitle = () => CK.mode === "act" ? `${actTag(CK.a)} checkpoint` : `Unit ${CK.u} checkpoint`;
+  const ckBack = () => CK.mode === "act" ? openLearnAct(CK.a) : openLearn();
+  function renderCK() {
+    const P = CK.parts[CK.pi];
+    if (!P) return finishCK();
+    const head = `<button class="text-btn" id="ck-quit" style="align-self:flex-start">&larr; Leave the checkpoint</button>
+      <div class="qhead"><span class="label">${esc(ckTitle())}</span><span class="meta">Part ${CK.pi + 1} of ${CK.parts.length}</span></div><div class="cov"><i style="width:${Math.round(CK.pi / CK.parts.length * 100)}%"></i></div>`;
+    if (P.t === "facts") { P.i = 0; P.right = 0; return ckFact(head); }
+    let h = head;
+    if (P.t === "order") { P.sh = shuffle(P.titles.slice()); h += `<div class="panel-card"><div class="tagline">Turning points</div><h3>Put them in order</h3>${orderHTML("ck-ord", P.sh)}</div>`; }
+    if (P.t === "explain") h += `<p class="hint" style="margin:0">Explain in your own words. ${aiOn() ? "Claude grades the ideas, not the wording." : "Then tick the key points you made."}</p>${P.items.map((f, i) => `<div class="panel-card"><div class="tagline">${esc(KIND_LABEL[f.r[0]] || "Explain")}</div><p class="q" style="margin:0">${esc(f.r[1])}</p>${bigAnswerHTML("ck-ex-" + i, "Your answer", "2 to 4 sentences with specific evidence.")}</div>`).join("")}`;
+    if (P.t === "saq") h += `<div class="panel-card"><div class="tagline">Short answer · ${esc(P.s.period)}</div><h3>${esc(P.s.title)}</h3></div>${stimHTML(P.s.stim)}${P.s.parts.map(([l, p], i) => `<div class="dsec"><div class="label">Part ${l}</div><p class="qsub" style="margin:0">${esc(p)}</p><textarea id="ck-saq-${i}" rows="3"></textarea></div>`).join("")}<div class="row" style="justify-content:flex-start">${aiOn() ? `<button class="go small" id="ck-saq-ai">Grade with Claude</button><button class="text-btn" id="ck-saq-self">Grade it myself</button>` : `<button class="go small" id="ck-saq-self">Grade it myself</button>`}</div><p class="meta" id="ck-need" style="text-align:left"></p><div id="ck-saq-out" class="col12"></div>`;
+    if (P.t === "thesis") h += `<div class="panel-card"><div class="tagline">Thesis · ${esc(P.x.period)}</div><p class="hint" style="margin:0">${esc(P.x.intro)}</p><p class="q" style="margin:6px 0 0">${esc(P.x.prompt)}</p></div><div class="dsec"><div class="label">Your thesis</div><textarea id="ck-th" rows="3" placeholder="A claim that answers the prompt, with your reasons."></textarea></div><div class="row" style="justify-content:flex-start">${aiOn() ? `<button class="go small" id="ck-th-ai">Check with Claude</button>` : ""}<button class="${aiOn() ? "text-btn" : "go small"}" id="ck-th-self">Compare with a model thesis</button></div><p class="meta" id="ck-need" style="text-align:left"></p><div id="ck-th-out" class="col12"></div>`;
+    h += `<div id="ck-next-wrap"></div>`;
+    $("ckpt-body").innerHTML = h; $("ck-quit").onclick = ckBack;
+    const done = (score, extra) => { CK.res[P.t] = Object.assign({ score }, extra || {}); $("ck-next-wrap").innerHTML = `<button class="go" id="ck-next">${CK.pi + 1 < CK.parts.length ? "Next part" : "See my result"}</button>`; $("ck-next").onclick = () => { CK.pi++; renderCK(); window.scrollTo({ top: 0 }); }; };
+    if (P.t === "order") bindOrder("ck-ord", P.sh, P.titles, P.years, sc => done(sc));
+    if (P.t === "explain") { const got = []; P.items.forEach((f, i) => bindBigAnswer("ck-ex-" + i, f.r[1], f.r[2], f.r[3], (sc, d) => { got[i] = { sc, d }; grade(f.key, [1, 2, 3][d.score]); if (got.filter(Boolean).length === P.items.length) done(got.reduce((s, x) => s + x.sc, 0) / P.items.length, { pts: got.reduce((s, x) => s + x.d.score, 0), max: P.items.length * 2 }); })); }
+    if (P.t === "saq") bindCkSAQ(P, done);
+    if (P.t === "thesis") bindCkThesis(P, done);
+  }
+  function ckFact(head) {
+    const P = CK.parts[CK.pi], f = P.items[P.i];
+    if (!f) { CK.res.facts = { score: P.right / P.items.length, right: P.right, n: P.items.length }; CK.pi++; return renderCK(); }
+    const q = makeQ(f, true); CK.q = q;
+    $("ckpt-body").innerHTML = `${head}<div class="panel-card qcard"><div class="tagline">${esc(q.tag)} · question ${P.i + 1} of ${P.items.length}</div><p class="q">${esc(q.prompt)}</p>${Array.isArray(q.sub) ? `<ul class="clues">${q.sub.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : q.sub ? `<p class="qsub">${esc(q.sub)}</p>` : ""}<div class="choices">${q.choices.map((c, i) => `<button class="choice" data-i="${i}"><span class="kbd">${i + 1}</span>${esc(c)}</button>`).join("")}</div><div id="ck-after"></div></div>`;
+    $("ck-quit").onclick = ckBack;
+    document.querySelectorAll("#ckpt-body .choice").forEach(b => b.onclick = () => {
+      const i = +b.dataset.i, ok = i === q.ans;
+      document.querySelectorAll("#ckpt-body .choice").forEach((x, j) => { x.disabled = true; if (j === q.ans) x.classList.add("right"); else if (j === i) x.classList.add("wrong"); });
+      SFX.play(ok ? "right" : "wrong");
+      if (ok) { P.right++; if (!getIt(f.key)) grade(f.key, 3); } else { CK.missed.push({ f, q }); grade(f.key, 1); }
+      $("ck-after").innerHTML = `<div class="verdict inline ${ok ? "ok" : "bad"}">${ok ? "Correct." : "Not quite."} ${esc(q.explain)}</div><button class="go small" id="ck-fnext">Next</button>`;
+      $("ck-fnext").onclick = () => { P.i++; ckFact(head); window.scrollTo({ top: 0 }); }; $("ck-fnext").focus({ preventScroll: true });
+    });
+  }
+  function bindCkSAQ(P, done) {
+    const vals = () => [0, 1, 2].map(i => $("ck-saq-" + i).value), need = () => { if (vals().some(v => v.trim().length < 15)) { $("ck-need").textContent = "Answer every part first."; $("ck-need").style.color = "var(--wrong)"; return true; } return false; };
+    const lock = () => { [0, 1, 2].forEach(i => $("ck-saq-" + i).readOnly = true); ["ck-saq-ai", "ck-saq-self"].forEach(id => $(id) && $(id).remove()); $("ck-need").textContent = ""; };
+    if ($("ck-saq-ai")) $("ck-saq-ai").onclick = async () => {
+      if (need()) return; const b = $("ck-saq-ai"); b.disabled = true; b.textContent = "Claude is grading…";
+      try { const g = await gradeSAQ(P.s, vals()); lock(); logExam("saq", P.s.id, g.total, 3, "ai"); $("ck-saq-out").innerHTML = `<div class="verdict inline ${g.total >= 2 ? "ok" : "bad"}"><b>${g.total} / 3</b></div>${saqResultHTML(P.s, g)}`; done(g.total / 3, { pts: g.total }); }
+      catch (e) { b.disabled = false; b.textContent = "Grade with Claude"; $("ck-need").textContent = aiErr(e); $("ck-need").style.color = "var(--wrong)"; }
+    };
+    $("ck-saq-self").onclick = () => {
+      if (need()) return; lock();
+      $("ck-saq-out").innerHTML = `${P.s.parts.map(([l, , ex], i) => `<div class="rubrow"><div class="rh"><b>Part ${l}</b></div><ul class="bul">${ex.map(x => `<li>${esc(x)}</li>`).join("")}</ul><label class="checkline"><input type="checkbox" data-sp="${i}"> My answer does this task with specific evidence</label></div>`).join("")}<button class="go small" id="ck-saq-save">That's my score</button>`;
+      $("ck-saq-save").onclick = () => { const t = document.querySelectorAll("#ck-saq-out [data-sp]:checked").length; $("ck-saq-save").remove(); logExam("saq", P.s.id, t, 3, "self"); done(t / 3, { pts: t }); };
+    };
+  }
+  function bindCkThesis(P, done) {
+    const need = () => { if ($("ck-th").value.trim().length < 30) { $("ck-need").textContent = "Write a full sentence first."; $("ck-need").style.color = "var(--wrong)"; return true; } return false; };
+    const lock = () => { $("ck-th").readOnly = true; ["ck-th-ai", "ck-th-self"].forEach(id => $(id) && $(id).remove()); $("ck-need").textContent = ""; };
+    if ($("ck-th-ai")) $("ck-th-ai").onclick = async () => {
+      if (need()) return; const b = $("ck-th-ai"); b.disabled = true; b.textContent = "Checking…";
+      try { const r = await gradeThesis(P.x, $("ck-th").value); lock(); logExam("thesis", P.x.id, r.point, 1, "ai"); $("ck-th-out").innerHTML = `<div class="verdict inline ${r.point ? "ok" : "bad"}"><b>${r.point ? "Earns the point." : "Doesn't earn the point yet."}</b> ${esc(r.why)}</div>${r.stronger ? `<div class="answer"><div class="label">Stronger version</div><b>${esc(r.stronger)}</b></div>` : ""}`; done(r.point); }
+      catch (e) { b.disabled = false; b.textContent = "Check with Claude"; $("ck-need").textContent = aiErr(e); $("ck-need").style.color = "var(--wrong)"; }
+    };
+    $("ck-th-self").onclick = () => {
+      if (need()) return; lock();
+      $("ck-th-out").innerHTML = `<div class="answer"><div class="label">Model thesis</div><b>${esc(P.x.thesis)}</b></div><p class="hint">Does yours make a defensible claim that answers the prompt and gives reasons?</p><div class="row" style="justify-content:flex-start"><button class="go small" id="ck-th-y">Mine earns the point</button><button class="text-btn" id="ck-th-n">Not yet</button></div>`;
+      $("ck-th-y").onclick = () => { $("ck-th-y").parentNode.remove(); logExam("thesis", P.x.id, 1, 1, "self"); done(1); };
+      $("ck-th-n").onclick = () => { $("ck-th-n").parentNode.remove(); logExam("thesis", P.x.id, 0, 1, "self"); done(0); };
+    };
+  }
+  function finishCK() {
+    const R = CK.res, f = R.facts || { score: 0 }, o = R.order || { score: 0 };
+    const rows = [["Facts", f.score, 0.8, f.n ? `${f.right} of ${f.n}` : ""], ["Turning points in order", o.score, 0.8, `${Math.round(o.score * 100)}%`]];
+    if (R.explain) rows.push(["Explaining", R.explain.score, 0.75, `${R.explain.pts} of ${R.explain.max} points`]);
+    if (R.saq) rows.push(["Short answer", R.saq.score, 0.66, `${R.saq.pts} of 3`]);
+    if (R.thesis) rows.push(["Thesis", R.thesis.score, 1, R.thesis.score ? "Earned" : "Not yet"]);
+    const pass = rows.every(r => r[1] >= r[2] - 1e-9), score = Math.round(100 * rows.reduce((s, r) => s + r[1], 0) / rows.length);
+    const rec = { t: Date.now(), pass, score };
+    if (CK.mode === "act") { const st = actSt(CK.a); if (!(st.ck && st.ck.pass && !pass)) st.ck = rec; else st.ck.lastTry = rec; }
+    else { const m = SR.units[CK.u]; if (!(m && m.pass && !pass)) SR.units[CK.u] = rec; }
+    saveSR(); SFX.play(pass ? "win" : "streak");
+    const na = CK.mode === "act" ? nextAct(CK.a) : null, unitDone = CK.mode === "act" && unitReady(unitOf(CK.a));
+    $("ckpt-body").innerHTML = `<div class="result"><div class="label">${esc(ckTitle())}</div><div class="big">${pass ? (CK.mode === "act" ? "Ready" : "Passed") : "Not yet"}</div><div class="meta">${score}% overall</div></div>
+      <div class="rubric">${rows.map(([n, sc, need, d]) => `<div class="rubrow ${sc >= need - 1e-9 ? "hit" : "miss"}"><div class="rh"><b>${esc(n)}</b><span>${esc(d)}</span></div><p>${sc >= need - 1e-9 ? "Passed" : `Needs ${Math.round(need * 100)}%`}</p></div>`).join("")}</div>
+      <p class="hint">${pass ? (CK.mode === "act" ? "This act is Ready. It stays in your daily reviews so it doesn't fade." : `Unit ${CK.u} is done. You can connect its acts, not just recall them.`) : "Fix the parts that didn't pass, then try again. Your misses are already in your reviews."}</p>
+      ${CK.missed.length ? `<div class="label">Questions you missed</div><div class="misslist">${CK.missed.map(({ q }) => `<div><b>${esc(q.prompt)}</b>${q.sub && !Array.isArray(q.sub) ? ` <small>${esc(q.sub)}</small>` : ""}<p>${esc(q.choices[q.ans])}</p></div>`).join("")}</div>` : ""}
+      <div class="row" style="flex-direction:column;align-items:stretch;width:min(340px,100%);align-self:center">
+        ${CK.missed.length ? `<button class="${pass ? "text-btn" : "go"}" id="ck-drill">Study what I missed</button>` : ""}
+        ${pass && unitDone && !(SR.units[unitOf(CK.a)] && SR.units[unitOf(CK.a)].pass) ? `<button class="go" id="ck-unit">Take the Unit ${unitOf(CK.a)} checkpoint</button>` : pass && na ? `<button class="go" id="ck-na">Next: ${esc(actTag(na))}</button>` : ""}
+        ${!pass && CK.mode === "act" ? `<button class="text-btn" id="ck-skel">Reread the one-page lesson</button>` : ""}
+        <button class="text-btn" id="ck-back">${CK.mode === "act" ? "Back to the act" : "Back to Learn"}</button></div>`;
+    const on = (id, fn) => { if ($(id)) $(id).onclick = fn; };
+    on("ck-drill", () => startSession(CK.missed.map(x => x.f), "Checkpoint misses", "learn", () => CK.mode === "act" ? openLearnAct(CK.a) : openLearn()));
+    on("ck-unit", () => startUnitCheck(unitOf(CK.a))); on("ck-na", () => openLearnAct(na)); on("ck-skel", () => openSkel(CK.a)); on("ck-back", ckBack);
+  }
+
+  // ================= CLAUDE AS A TUTOR =================
+  const TU = { mode: "ask", a: null, turns: [], rules: "", busy: false, ctl: null, back: null, title: "" };
+  function openAsk(a) {
+    Object.assign(TU, { mode: "ask", a, turns: [], busy: false, back: () => openLearnAct(a), title: `Ask about ${actTag(a)}`,
+      rules: `You are a friendly, sharp AP European History tutor helping a high school student understand one part of the course: ${actTag(a)}, "${ACTS[a].title}". Use the student's own class notes and the lesson summary below as your main source; if a question goes beyond them, answer from solid AP Euro knowledge and say so briefly. Keep each reply to 2 to 5 sentences of plain text (no markdown, no lists, no headings). Explain causes and connections, not just facts. Now and then, end with one quick question that checks their understanding. If they ask about something unrelated to history, gently steer back.
+
+LESSON SUMMARY
+${skelText(a)}
+
+CLASS NOTES
+${clip(notesText(a), 14000)}` });
+    go("tutor", renderTutor);
+  }
+  function openCoach(c, ai) {
+    const [, q, kp, model] = c.f.r, a = c.f.act;
+    Object.assign(TU, { mode: "coach", a, turns: [], busy: false, back: () => { show("sess"); window.scrollTo({ top: 0 }); }, title: "Work through it",
+      rules: `You are a patient AP European History tutor. A high school student just answered a question and missed some key ideas. Help them reach the missing ideas themselves.
+How to coach:
+- Ask ONE short guiding question at a time (1 or 2 sentences). Don't lecture and don't give the full answer right away.
+- Build on what they already got right.
+- If they're stuck after two tries on the same idea, give a clear hint; if still stuck, explain it simply and ask them to say it back in their own words.
+- When they have explained the key points in their own words, tell them so in one sentence and finish with a two-sentence summary that starts with "Got it:".
+- Plain text only: no markdown, no lists.
+
+Question: ${q}
+Key points: ${kp.map((p, i) => `${i + 1}. ${p}`).join(" ")}
+Model answer: ${model}
+Student's first answer: """${clip(c.typed, 2000)}"""
+Grader's feedback: ${ai ? ai.feedback : ""}
+${SKEL[a] ? `\nBackground on this act:\n${skelText(a)}` : ""}
+
+Start now: briefly say what they got right (one sentence), then ask your first guiding question.` });
+    go("tutor", renderTutor); tutorSend(null);
+  }
+  function renderTutor() {
+    $("tutor-body").innerHTML = `<button class="text-btn" id="tu-back" style="align-self:flex-start">&larr; ${TU.mode === "coach" ? "Back to the session" : esc(actTag(TU.a))}</button>
+      <div><div class="tagline">Claude · ${esc(actTag(TU.a))}</div><h2 class="dive-title" style="font-size:1.5rem">${esc(TU.title)}</h2>${TU.mode === "ask" ? `<p class="hint" style="margin-top:6px">Ask anything about this act. Claude answers from your notes. Try "Why did France join the war?" or "Quiz me on the main people."</p>` : ""}</div>
+      <div class="chat" id="tu-chat"></div>
+      <div class="chatbox"><textarea id="tu-in" rows="2" placeholder="${TU.mode === "coach" ? "Your answer…" : "Ask a question…"}"></textarea><button class="go small" id="tu-send">Send</button></div>
+      <p class="meta" id="tu-note" style="text-align:left"></p>`;
+    $("tu-back").onclick = () => { if (TU.ctl) TU.ctl.abort(); TU.back(); };
+    TU.turns.forEach(t => addBubble(t.role, t.content));
+    const send = () => { const v = $("tu-in").value.trim(); if (!v || TU.busy) return; $("tu-in").value = ""; tutorSend(v); };
+    $("tu-send").onclick = send;
+    $("tu-in").onkeydown = e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } };
+    $("tu-in").focus({ preventScroll: true });
+  }
+  function addBubble(role, text) { const d = document.createElement("div"); d.className = "msg " + (role === "user" ? "me" : "cl"); d.textContent = text; $("tu-chat").appendChild(d); return d; }
+  async function tutorSend(text) {
+    if (TU.busy || !AI.fn) return;
+    if (text) { TU.turns.push({ role: "user", content: text }); addBubble("user", text); }
+    TU.turns = TU.turns.slice(-16); while (TU.turns.length && TU.turns[0].role !== "user") TU.turns.shift();
+    const bubble = addBubble("assistant", "Thinking…"); bubble.classList.add("wait");
+    TU.busy = true; $("tu-send").disabled = true; $("tu-send").textContent = "…"; $("tu-note").textContent = "";
+    TU.ctl = new AbortController(); const ctl = TU.ctl;
+    try {
+      const { text: out } = await AI.fn([{ role: "user", content: TU.rules }, ...TU.turns], { cache: false, signal: ctl.signal, modelTier: "default", onText: ({ text: t }) => { bubble.classList.remove("wait"); bubble.textContent = t; bubble.scrollIntoView({ block: "nearest" }); } });
+      bubble.classList.remove("wait"); bubble.textContent = out;
+      TU.turns.push({ role: "assistant", content: out });
+      if (TU.mode === "coach" && /Got it:/i.test(out)) $("tu-note").textContent = "Nice work. Head back to the session and rate yourself.";
+    } catch (e) {
+      if (e && e.code === "cancelled") return;
+      bubble.classList.remove("wait"); if (e && e.text) { bubble.textContent = e.text; TU.turns.push({ role: "assistant", content: e.text }); } else bubble.remove();
+      if (e && AI_GONE.includes(e.code)) { AI.ok = false; refreshChrome(); }
+      const n = $("tu-note"); if (n) { n.textContent = aiErr(e); n.style.color = "var(--wrong)"; }
+    } finally { TU.busy = false; const b = $("tu-send"); if (b) { b.disabled = false; b.textContent = "Send"; } }
+  }
 
   syncSetup();
   openToday();

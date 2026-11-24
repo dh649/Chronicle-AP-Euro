@@ -2,16 +2,23 @@
 
 A study game for AP European History, built from my Units 2–5 textbook readings, act by act. Unit 1 (Renaissance and Reformation) is written from standard AP Euro coverage and marked "Not from your notes."
 
-## How it works (v2.0)
+## How it works (v2.2)
 
-Chronicle is built around understanding the units, not just recognizing facts:
+Chronicle is built so you understand each act, not just recognize facts. Every act has five steps:
 
-- **Today:** a daily session built for you. It mixes reviews that are due (spaced repetition per item: each fact comes back right before you'd forget it) with a little new material from the acts you're studying, plus a countdown to the AP exam (Tuesday, May 4, 2027) and your streak.
-- **Recall first:** every card asks you to answer from memory. Type it or think it, then check. Multiple choice only appears if you ask for it, and a right pick from the choices counts as "Hard" so it comes back sooner. Questions that need choices (like "Which was NOT…") show them right away. Answer choices are length-balanced so the longest answer isn't a tell.
-- **Learn:** every act, with three steps: the interactive story, studying the act (recall cards from your notes, events, people, terms, and causes), and **Explain it**: why, how, compare, and change-over-time questions answered in your own words and checked against key points. Each unit also has big questions that connect its acts. Your notes, key terms, events, and people are on each act page.
-- **Exam:** practice in the May 2027 format: source-based multiple choice sets (with explanations and the skill tested), short answers (secondary source, primary source, and map or data), long essays with a thesis drill, and DBQs with a sourcing drill. Writing is scored on the real AP rubrics (SAQ 3 points, LEQ 6, DBQ 7).
-- **Claude grading:** on the Claude-hosted version, Claude checks typed answers and grades explanations, SAQs, theses, sourcing, and full essays. Here on GitHub there's no Claude, so you compare with model answers and rubric checklists and grade yourself. Progress syncs to your Claude account on the Claude-hosted version; here it's saved in your browser.
-- **Games:** the original modes below, kept as extra practice.
+1. **Understand it:** the act in one page. The big question, what you need to know going in, the turning points in order with the "so what" for each, key people (what they did, why they matter, who they're connected to), how it ended up, and links to the acts before and after.
+2. **Rebuild it from memory:** put the turning points in order, match people to what they did, and answer the big question in a few sentences. Pass with 80%.
+3. **Remember the main points:** recall-first cards with spaced repetition. Main points (the skeleton's events and people, key terms, the cause-and-effect chain) come first and come back a little more often than details.
+4. **Explain it:** why, how, compare, and change-over-time questions, plus "why did this matter?" for every turning point and "who was this?" for every key person, answered in your own words.
+5. **Pass the checkpoint:** 15 questions (mostly main points), the turning points in order, and 2 explanations. Pass all three parts and the act is **Ready**. Ready acts keep coming back in your reviews.
+
+Each unit also has a **unit checkpoint**: a 20-question mixed test, turning points from across the unit in order, a short answer, and a thesis.
+
+- **Today:** your next step, plus a daily session of reviews that are due and a little new material, an exam countdown (May 4, 2027), and your streak.
+- **Learn:** every act with its status (Not started, Step 2 of 5, Ready), the unit checkpoints, and each unit's big questions. It recommends finishing an act before moving to the next.
+- **Exam:** practice in the May 2027 format: source-based multiple choice, short answers, long essays with a thesis drill, and DBQs with a sourcing drill, scored on the real AP rubrics.
+- **Claude:** on the Claude-hosted version, Claude grades typed answers, explanations, SAQs, theses, sourcing, and essays. When an explanation misses, Claude coaches you through it one question at a time, and you can ask Claude questions about any act (it answers from your notes). Progress syncs to your Claude account.
+- **On GitHub:** there's no Claude here, so you check yourself against key points, model answers, and rubric checklists, and progress is saved in your browser.
 
 ## Games
 
@@ -40,6 +47,7 @@ Chronicle is built around understanding the units, not just recognizing facts:
 - `bigevents.js`: Event Test profiles for the big events (`BIG`): what happened, key people, what it led to, true details, and false traps. Titles must match an event in `data.js`.
 - `notesdata.js`: the Khare + Harris notes parsed act by act (`NOTES`) and each act's Main Characters (`NCHAR`).
 - `nq_u2a.js` … `nq_u5.js`: questions written from the notes (`NQ`), one row per question: `[section, question, right answer, wrong 1, wrong 2, spare wrong]`. Choices show the right answer plus wrong 1 and 2.
+- `skel_u2.js`, `skel_u3.js`, `skel_u4.js`, `skel_u15.js`: the one-page lesson for every act (`SKEL`): big question, setup, turning points `[year, event title, what happened, so what]`, key people `[name, role, what they did, why it matters, connections]`, results, links to other acts, and the main takeaway. Event titles match `data.js`.
 - `und_u1u2.js`, `und_u3u5.js`: understanding questions for every act (`UND`) and each unit's big questions (`UNITQ`): `[kind, question, [key points], model answer]`.
 - `exam_mcq.js`: AP-style source-based multiple choice sets (`MCQ`).
 - `exam_frq.js`: short answers (`SAQ`), long essays (`LEQ`), and DBQs (`DBQ`) with rubric notes and model theses. Secondary-source passages marked "practice passage" were written for Chronicle; they aren't quotes from real historians.
