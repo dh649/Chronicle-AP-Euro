@@ -447,6 +447,11 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
 }
 #ss-after, #saq-out, #es-out, #th-out, #sd-out, #td-out { display: flex; flex-direction: column; gap: 12px; }
 #ss-after:empty, #saq-out:empty, #es-out:empty, #th-out:empty, #sd-out:empty { display: none; }
+.grow { justify-content: flex-start; gap: 14px; }
+.grow .name { flex: 1; }
+.gicon { flex: none; width: 38px; height: 38px; border-radius: 10px; background: var(--page); border: 1px solid var(--hair); color: var(--bronze); display: grid; place-items: center; }
+.gicon svg { width: 22px; height: 22px; }
+.grow:hover .gicon { border-color: var(--bronze); }
 
 </style>
 </head>
@@ -590,7 +595,7 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   </div>
 </section>
 
-<div class="version" aria-label="App version">v2.0 · Nov 23, 2026</div>
+<div class="version" aria-label="App version">v2.1 · Nov 23, 2026</div>
 
 <script src="data.js"></script>
 <script src="content.js"></script>
@@ -3023,9 +3028,20 @@ Reply with only JSON: {"rows": [{"name": rubric row name, "earned": number, "max
   }
 
   // ================= GAMES hub =================
+  // Small line icons that show what you do in each game
+  const GI = {
+    timeline: '<path d="M3 12h18"/><circle cx="6" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><path d="M12 4v4M9.5 6.5 12 9l2.5-2.5"/>',
+    etest: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="m8.5 12 1.5 1.5 3-3M8.5 17.5h7"/>',
+    match: '<rect x="3" y="6" width="7" height="12" rx="1.5"/><rect x="14" y="6" width="7" height="12" rx="1.5"/><path d="M10 12h4"/>',
+    maps: '<path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/>',
+    dives: '<circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 5.5 5.5M8 10.5h5M10.5 8v5"/>',
+    people: '<circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.8 3.6-6 7-6s6.2 2.2 7 6"/>',
+    review: '<path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/><path d="M12 8v4l3 2"/>'
+  };
+  const gicon = k => `<span class="gicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${GI[k]}</svg></span>`;
   const GAMES = [["timeline", "Timeline", "Drag events into order on a timeline. Three lives."], ["etest", "Event Test", "Match the big events to what happened and what they caused."], ["match", "Match", "Race to pair people with what they're known for."], ["maps", "Maps", "Five snapshots of Europe. Find states and pin events."], ["dives", "Deep Dives", "The big, complicated events broken down, each with a quiz."], ["people", "People", "Guess who from the clues, or browse by act."], ["review", "Review pile", "Everything you missed in the games, with page numbers."]];
   function renderGames() {
-    $("games-body").innerHTML = `<p class="hint" style="text-align:center">Quick ways to mix it up. Your daily session in Today does the heavy lifting; these are extra practice.</p><div class="unit">${GAMES.map(([k, n, d]) => `<button class="act lrow" data-g="${k}"><span class="name">${n}<small>${d}</small></span><span class="n">&rarr;</span></button>`).join("")}</div>`;
+    $("games-body").innerHTML = `<p class="hint" style="text-align:center">Quick ways to mix it up. Your daily session in Today does the heavy lifting; these are extra practice.</p><div class="unit">${GAMES.map(([k, n, d]) => `<button class="act lrow grow" data-g="${k}">${gicon(k)}<span class="name">${n}<small>${d}</small></span><span class="n">&rarr;</span></button>`).join("")}</div>`;
     document.querySelectorAll("#games-body [data-g]").forEach(b => b.onclick = () => { $("tab-" + b.dataset.g).click(); window.scrollTo({ top: 0 }); });
   }
   function openGames() { go("games", renderGames); }
