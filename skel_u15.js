@@ -228,3 +228,39 @@ SKEL["1.6"] = {
   after: "Act 2.2: religious wars between a confident Catholic Church and Protestants.",
   takeaway: "The Catholic Reformation fixed abuses, reaffirmed Catholic teaching at Trent, and used the Jesuits, the Inquisition, and the Index to win back ground and halt Protestantism."
 };
+
+SKEL["5.2"] = {
+  q: "How did a general take over the French Revolution and end it, and how did the revolution's ideas spark a slave revolution in Haiti?",
+  setup: [
+    "The Directory has little support: royalists win elections, radicals hate it, and the war goes on.",
+    "Each time it's threatened, the army saves it (13 Vendémiaire in 1795, 18 Fructidor in 1797).",
+    "In France's richest colony, Saint-Domingue (Haiti), enslaved Africans grow sugar for white planters, and free people of color have few rights."
+  ],
+  turns: [
+    ["1791", "Haitian slave revolt begins", "The Assembly gives rights to free people of color; planters resist, and a huge slave rebellion breaks out.", "The French Revolution's ideas of rights spread to the colonies and turn against slavery."],
+    ["1797", "Treaty of Campo Formio", "Napoleon beats Austria in Italy and makes peace on his own, without orders from Paris.", "He returns a hero who acts on his own, the general the Directory can't control."],
+    ["1798", "Battle of the Nile", "Nelson destroys the French fleet in Egypt; a Second Coalition forms.", "War and crisis return, making France want strong leadership."],
+    ["1799", "Constitution of the Year VIII", "After the Brumaire coup, Napoleon pushes Sieyès aside and becomes First Consul.", "Democratic on paper, one-man rule in reality: the revolution is over."],
+    ["1801", "Concordat with Pope Pius VII", "The state names and pays bishops; the church gives up its seized lands.", "Ends the revolution's biggest fight at home, on the state's terms."],
+    ["1804", "Napoleonic Code issued", "One law for all of France: no birth privilege, protected property, but fathers and husbands in charge.", "Locks in the middle class's gains, while rolling back women's rights."],
+    ["1804", "Napoleon crowns himself emperor", "Approved by plebiscite, Napoleon crowns himself at Notre Dame as the pope watches.", "A new dynasty whose power comes from no one but Napoleon."],
+    ["1804", "Haiti declares independence", "After Napoleon's army captures L'Ouverture, Dessalines fights on and Haiti wins independence.", "The first successful slave revolt in modern history terrifies slaveholders across the Americas."]
+  ],
+  people: [
+    ["Napoleon I", "First Consul, then Emperor of the French", "Took power in 1799, made the Concordat and the Civil Code, and crowned himself in 1804.", "Ended the revolution but kept many of its gains, and spread them by conquest.", ["Pope Pius VII", "Talleyrand", "Toussaint L'Ouverture"]],
+    ["Pope Pius VII", "Pope (r. 1800–1823)", "Signed the Concordat of 1801 and watched Napoleon crown himself.", "Shows the Church regaining a place in France, but under state control.", ["Napoleon I"]],
+    ["Talleyrand", "Napoleon's foreign minister", "Called the duke of Enghien's execution 'worse than a crime, a blunder.'", "A survivor who served every regime, and a sharp judge of Napoleon's mistakes.", ["Napoleon I", "Duke of Enghien"]],
+    ["Horatio Nelson", "British admiral", "Destroyed the French fleet at Abukir in 1798.", "His victory stranded Napoleon in Egypt and showed British control of the seas.", ["Napoleon I"]],
+    ["Toussaint L'Ouverture", "Former slave who led the Haitian Revolution", "Led the revolt, beat Spain and Britain, and ruled Hispaniola until Napoleon's army captured him.", "The face of the first successful slave revolt in modern history.", ["Jean-Jacques Dessalines", "Napoleon I"]],
+    ["Jean-Jacques Dessalines", "Haitian military leader", "Kept fighting after L'Ouverture's capture and led Haiti to independence in 1804.", "Finished the revolution L'Ouverture started.", ["Toussaint L'Ouverture"]]
+  ],
+  results: [
+    "The revolution ends: the middle class keeps equality before the law and safe property, and peasants keep their land.",
+    "Liberty shrinks: one man rules through plebiscites, prefects, censorship, and secret police.",
+    "Women lose ground again under the Napoleonic Code.",
+    "Haiti becomes independent, and Napoleon sells Louisiana and gives up his American empire."
+  ],
+  before: "Act 4.4: the weak Directory depended on the army, and 18 Brumaire put Napoleon in power. Act 5.1: women's place had already been narrowed by separate spheres.",
+  after: "Next: Napoleon conquers an empire across Europe, which spreads the revolution's reforms but also sparks nationalism against France.",
+  takeaway: "Napoleon used the army and plebiscites to end the revolution, keeping its equality and property rights for the middle class while ending its liberty, and the revolution's ideas of rights inspired Haiti's slaves to win their freedom."
+};

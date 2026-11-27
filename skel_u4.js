@@ -127,6 +127,6 @@ SKEL["4.4"] = {
     "The weak Directory depends on the army, setting up Napoleon."
   ],
   before: "Act 4.3: war, the republic, and the Committee of Public Safety.",
-  after: "Next: Napoleon's rule spreads the revolution's reforms across Europe.",
+  after: "Act 5.2: Napoleon becomes First Consul, ends the revolution, and crowns himself emperor.",
   takeaway: "The Terror defended itself as virtue but turned on women, religion, and its own leaders, and after Thermidor France swung back to a property-based republic that came to depend on the army."
 };

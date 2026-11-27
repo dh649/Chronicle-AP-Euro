@@ -52,6 +52,8 @@ Each unit also has a **unit checkpoint**: a 20-question mixed test, turning poin
 - `exam_mcq.js`: AP-style source-based multiple choice sets (`MCQ`).
 - `exam_frq.js`: short answers (`SAQ`), long essays (`LEQ`), and DBQs (`DBQ`) with rubric notes and model theses. Secondary-source passages marked "practice passage" were written for Chronicle; they aren't quotes from real historians.
 - `unit5.js`: Unit 5, Act 1 (Women & Family in Early Modern Europe): its events, people, lesson, story cards, deep dives, and Event Test themes. This act is a theme, so only its key dates (1486, 1762, 1792) get date questions.
+- `unit5b.js`: Unit 5, Act 2 (Napoleon's Rise & the Haitian Revolution, pp. 392–399): events, people, lesson, story cards, two deep dives, and Event Test profiles. Written from the textbook pages, since there are no class notes for this act yet.
+- `nq_u5b.js`, `und_u5b.js`, `exam_u5b.js`: Act 5.2's questions, explain questions (plus two new Unit 5 big questions), and exam practice (a multiple choice set on Napoleon's 1799 proclamation and an SAQ).
 
 Open `index.html` in a browser to play. It also works on GitHub Pages with no build step.
 

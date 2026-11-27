@@ -665,7 +665,7 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
   </div>
 </section>
 
-<div class="version" aria-label="App version">v2.3 · Nov 24, 2026</div>
+<div class="version" aria-label="App version">v2.4 · Nov 27, 2026</div>
 
 <script src="skel_u2.js"></script>
 <script src="skel_u3.js"></script>
@@ -678,6 +678,7 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
 <script src="story.js"></script>
 <script src="bigevents.js"></script>
 <script src="unit5.js"></script>
+<script src="unit5b.js"></script>
 <script src="notesdata.js"></script>
 <script src="nq_u2a.js"></script>
 <script src="nq_u2b.js"></script>
@@ -686,10 +687,13 @@ details.settings { background: var(--surface); border: 1px solid var(--hair); bo
 <script src="nq_u4a.js"></script>
 <script src="nq_u4b.js"></script>
 <script src="nq_u5.js"></script>
+<script src="nq_u5b.js"></script>
 <script src="und_u1u2.js"></script>
 <script src="und_u3u5.js"></script>
+<script src="und_u5b.js"></script>
 <script src="exam_mcq.js"></script>
 <script src="exam_frq.js"></script>
+<script src="exam_u5b.js"></script>
 <script>
 (() => {
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -3375,7 +3379,7 @@ Reply with only JSON:
   }
   function startUnitCheck(u) {
     const acts = unitActs(u), pool = acts.flatMap(a => factsFor(a));
-    const turns = acts.length > 1 ? acts.map(a => pickOne(SKEL[a].turns)) : SKEL[acts[0]].turns.slice();
+    const per = Math.max(1, Math.ceil(6 / acts.length)), turns = acts.flatMap(a => shuffle(SKEL[a].turns.slice()).slice(0, per)).filter((t, i, arr) => arr.findIndex(x => x[0] === t[0]) === i).slice(0, 7);
     turns.sort((x, y) => +x[0] - +y[0]);
     const saqs = SAQ.filter(s => s.unit === u), leq = LEQ.find(l => l.id === UNIT_LEQ[u]);
     Object.assign(CK, { mode: "unit", a: null, u, pi: 0, res: {}, missed: [], parts: [
